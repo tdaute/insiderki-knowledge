@@ -104,28 +104,39 @@ body{
 .media:not(.tall):not(.wide){height:80px;}
 
 /* ---- Quiz-Folie ---- */
-.quiz{display:flex;flex-direction:column;gap:1rem;}
-.quiz-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.quiz{display:flex;flex-direction:column;gap:1rem;align-items:center;width:100%;}
+.quiz-cols{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1.6rem;width:100%;
+}
+.quiz-block{min-width:0;}
+.quiz-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
 .quiz-lbl{
   font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--orange);margin-bottom:.6rem;text-align:center;
+  color:var(--orange);margin-bottom:.55rem;text-align:center;
 }
 .qcard{
   position:relative;background:rgba(255,255,255,.026);
-  border:1px solid var(--line);border-radius:13px;
-  padding:.85rem;cursor:pointer;
+  border:1px solid var(--line);border-radius:12px;
+  padding:.6rem;cursor:pointer;
   transition:border-color .25s,background .25s,transform .18s;
 }
 .qcard:hover{border-color:var(--line-2);transform:translateY(-2px);}
 .qcard:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
 .qcard .tag{
-  position:absolute;top:1.35rem;left:1.35rem;z-index:3;
+  position:absolute;top:1rem;left:1rem;z-index:3;
   background:rgba(10,14,26,.85);backdrop-filter:blur(6px);
-  border:1px solid var(--line-2);border-radius:6px;
-  font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;
-  padding:.22rem .55rem;color:var(--white);letter-spacing:.08em;
+  border:1px solid var(--line-2);border-radius:5px;
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;
+  padding:.16rem .45rem;color:var(--white);letter-spacing:.08em;
 }
-.qcard .ph,.qcard .media{min-height:190px;height:190px;}
+.qcard .ph,.qcard .media{
+  width:100%;height:auto;min-height:0;
+  aspect-ratio:4/3;object-fit:cover;
+  border-radius:8px;
+}
+/* Videos im Quiz: gleiches Fenster, aber ganz zeigen statt beschneiden */
+.qcard video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .qcard .verdict{
   margin-top:.7rem;text-align:center;font-size:.82rem;font-weight:700;
   min-height:1.3em;opacity:0;transition:opacity .3s;letter-spacing:.01em;
@@ -368,6 +379,7 @@ body{
   .chain{grid-template-columns:1fr !important;gap:.6rem;}
   .chain .arw{display:none;}
   .tv,.fine{grid-template-columns:1fr;}
+  .quiz-cols{grid-template-columns:1fr;gap:1rem;}
 }
 @media (prefers-reduced-motion:reduce){.slide{transition:none;}}
 </style>
@@ -587,18 +599,20 @@ slides.push(S({
   lead:'Was ist Deepfake und was ist real? Schauen Sie sich jedes Paar kurz an und entscheiden Sie sich — <b>bevor</b> Sie aufdecken.',
   body:`
     <div class="quiz" id="quiz">
-      <div>
-        <div class="quiz-lbl">Zwei Bilder</div>
-        <div class="quiz-row">
-          ${qcard('A','Bild A','quizImageA', QUIZ_ANSWERS.image==='A')}
-          ${qcard('B','Bild B','quizImageB', QUIZ_ANSWERS.image==='B')}
+      <div class="quiz-cols">
+        <div class="quiz-block">
+          <div class="quiz-lbl">Zwei Bilder</div>
+          <div class="quiz-row">
+            ${qcard('A','Bild A','quizImageA', QUIZ_ANSWERS.image==='A')}
+            ${qcard('B','Bild B','quizImageB', QUIZ_ANSWERS.image==='B')}
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="quiz-lbl">Zwei Videos · je 4 Sekunden</div>
-        <div class="quiz-row">
-          ${qcard('C','Video A','quizVideoA', QUIZ_ANSWERS.video==='A')}
-          ${qcard('D','Video B','quizVideoB', QUIZ_ANSWERS.video==='B')}
+        <div class="quiz-block">
+          <div class="quiz-lbl">Zwei Videos · je 4 Sekunden</div>
+          <div class="quiz-row">
+            ${qcard('C','Video A','quizVideoA', QUIZ_ANSWERS.video==='A')}
+            ${qcard('D','Video B','quizVideoB', QUIZ_ANSWERS.video==='B')}
+          </div>
         </div>
       </div>
       <div class="quiz-bar">
