@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOWLEDGE · Präsentationen</title>
+<meta name="description" content="Präsentationen und Workshop-Unterlagen von INSIDER.KI">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%230a0e1a'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23f59e42'/%3E%3Ccircle cx='32' cy='10' r='3' fill='%23e8863c'/%3E%3Ccircle cx='52' cy='40' r='3' fill='%23e8863c'/%3E%3Ccircle cx='14' cy='42' r='3' fill='%23e8863c'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0a0e1a; --panel:#111a2c;
+  --orange:#e8863c; --orange-br:#f59e42;
+  --white:#fff; --grey:#9aa3b2; --grey2:#6b7280;
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.16);
+  --green:#3fb27f;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--white);min-height:100vh;}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 100vw 70vh at 50% -10%,rgba(232,134,60,.16) 0%,transparent 62%),
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:auto,110px 110px,110px 110px;
+}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:4rem 1.5rem 6rem;}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:4rem;}
+.hero .mark{display:inline-flex;flex-direction:column;align-items:center;gap:.6rem;margin-bottom:2.2rem;}
+.hero svg{overflow:visible;}
+.mark .n{font-size:1rem;font-weight:600;letter-spacing:.26em;}
+.mark .s{font-size:.58rem;font-weight:500;letter-spacing:.42em;color:var(--orange);margin-top:-.3rem;}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;}
+.hero p{margin-top:1.1rem;font-size:clamp(.95rem,1.6vw,1.15rem);color:var(--grey);}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.1rem;}
+.card{
+  background:rgba(255,255,255,.028);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;
+  transition:border-color .22s,transform .22s,background .22s;
+}
+.card:hover{border-color:rgba(232,134,60,.5);transform:translateY(-3px);background:rgba(232,134,60,.05);}
+.card:focus-visible{outline:2px solid var(--orange);outline-offset:3px;}
+.card .cover{
+  height:154px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 40%,rgba(232,134,60,.24) 0%,transparent 65%),
+    linear-gradient(140deg,#111a2c,#0a0e1a);
+  display:flex;align-items:center;justify-content:center;
+}
+.card .cover img{width:100%;height:100%;object-fit:cover;}
+.card .cover .glyph{opacity:.5;}
+.card .body{padding:1.15rem 1.2rem 1.3rem;display:flex;flex-direction:column;flex:1;}
+.card .eye{
+  font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:.5rem;
+}
+.card h2{font-size:1.02rem;font-weight:700;letter-spacing:-.02em;line-height:1.28;}
+.card .desc{margin-top:.5rem;font-size:.82rem;color:var(--grey);line-height:1.5;flex:1;}
+.card .meta{
+  margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--line);
+  display:flex;gap:.9rem;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--grey2);
+}
+.card .go{margin-left:auto;color:var(--orange);font-weight:600;font-family:'Inter';font-size:.76rem;}
+
+.state{text-align:center;padding:5rem 1rem;color:var(--grey2);}
+.state .ic{font-size:2rem;opacity:.4;margin-bottom:.8rem;}
+
+footer{
+  margin-top:5rem;padding-top:1.6rem;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.73rem;color:var(--grey2);
+}
+footer a{color:var(--grey);text-decoration:none;}
+footer a:hover{color:var(--orange);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="mark">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+        <g stroke="#e8863c" stroke-width="1" opacity=".5">
+          <line x1="32" y1="32" x2="32" y2="10"/><line x1="32" y1="32" x2="50" y2="19"/>
+          <line x1="32" y1="32" x2="54" y2="38"/><line x1="32" y1="32" x2="41" y2="53"/>
+          <line x1="32" y1="32" x2="20" y2="52"/><line x1="32" y1="32" x2="10" y2="36"/>
+          <line x1="32" y1="32" x2="15" y2="18"/>
+        </g>
+        <g stroke="#e8863c" stroke-width=".7" opacity=".26">
+          <line x1="32" y1="10" x2="50" y2="19"/><line x1="50" y1="19" x2="54" y2="38"/>
+          <line x1="54" y1="38" x2="41" y2="53"/><line x1="20" y1="52" x2="10" y2="36"/>
+          <line x1="10" y1="36" x2="15" y2="18"/><line x1="15" y1="18" x2="32" y2="10"/>
+          <line x1="41" y1="53" x2="20" y2="52"/>
+        </g>
+        <g fill="#e8863c">
+          <circle cx="32" cy="10" r="3"/><circle cx="50" cy="19" r="2.2"/>
+          <circle cx="54" cy="38" r="2.8"/><circle cx="41" cy="53" r="2"/>
+          <circle cx="20" cy="52" r="2.6"/><circle cx="10" cy="36" r="2.2"/>
+          <circle cx="15" cy="18" r="2.4"/>
+        </g>
+        <g fill="#f59e42" opacity=".55">
+          <circle cx="44" cy="10" r="1.3"/><circle cx="58" cy="27" r="1.1"/>
+          <circle cx="8" cy="24" r="1.2"/><circle cx="30" cy="57" r="1.1"/>
+        </g>
+        <circle cx="32" cy="32" r="10" fill="#e8863c" opacity=".2"/>
+        <circle cx="32" cy="32" r="6.4" fill="#f59e42"/>
+        <circle cx="32" cy="32" r="2.7" fill="#0a0e1a"/>
+      </svg>
+      <div><div class="n">KNOWLEDGE</div><div class="s">AI</div></div>
+    </div>
+    <h1>Präsentationen</h1>
+    <p>Workshop-Unterlagen und Vorträge von INSIDER.KI</p>
+  </div>
+
+  <div id="list"><div class="state"><div class="ic">◌</div>Lade …</div></div>
+
+  <footer>
+    <span>INSIDER.KI · IMB.Berlin GmbH</span>
+    <span><a href="https://insiderki.ai">insiderki.ai</a></span>
+  </footer>
+</div>
+
+<script>
+const SB_URL = 'https://nblyvxnahkbvtatathbh.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ibHl2eG5haGtidnRhdGF0aGJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NzA5MTUsImV4cCI6MjA5NjE0NjkxNX0.o9-lp1ILDPFNcLOr_C3RMFsIFxVDkSCA0Zob1X__rB0';
+
+const GLYPH = `<svg class="glyph" width="54" height="54" viewBox="0 0 64 64" fill="none">
+  <g stroke="#e8863c" stroke-width="1" opacity=".45">
+    <line x1="32" y1="32" x2="32" y2="12"/><line x1="32" y1="32" x2="50" y2="21"/>
+    <line x1="32" y1="32" x2="20" y2="50"/><line x1="32" y1="32" x2="12" y2="34"/>
+  </g>
+  <g fill="#e8863c"><circle cx="32" cy="12" r="2.6"/><circle cx="50" cy="21" r="2"/>
+  <circle cx="20" cy="50" r="2.3"/><circle cx="12" cy="34" r="2"/></g>
+  <circle cx="32" cy="32" r="5.6" fill="#f59e42"/><circle cx="32" cy="32" r="2.3" fill="#0a0e1a"/>
+</svg>`;
+
+const esc = s => String(s||'').replace(/[&<>"]/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function load(){
+  const el = document.getElementById('list');
+  try{
+    const r = await fetch(
+      `${SB_URL}/rest/v1/presentations` +
+      `?select=slug,title,description,client,event_date,slide_count,cover_url,html_path` +
+      `&status=eq.published&order=created_at.desc`,
+      { headers:{ apikey:SB_KEY, Authorization:'Bearer '+SB_KEY } });
+
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const rows = await r.json();
+
+    if(!rows.length){
+      el.innerHTML = '<div class="state"><div class="ic">▣</div>Noch keine Präsentation veröffentlicht.</div>';
+      return;
+    }
+
+    el.innerHTML = '<div class="grid">' + rows.map(p=>{
+      const href = p.html_path ? '/'+p.html_path.replace(/\/index\.html$/,'/') : '/'+p.slug+'/';
+      const date = p.event_date
+        ? new Date(p.event_date).toLocaleDateString('de-DE',{month:'short',year:'numeric'})
+        : '';
+      const bits = [date, p.slide_count ? p.slide_count+' Folien' : ''].filter(Boolean);
+      return `<a class="card" href="${esc(href)}">
+        <div class="cover">${ p.cover_url
+            ? `<img src="${esc(p.cover_url)}" alt="">`
+            : GLYPH }</div>
+        <div class="body">
+          ${p.client ? `<div class="eye">${esc(p.client)}</div>` : ''}
+          <h2>${esc(p.title)}</h2>
+          ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ''}
+          <div class="meta">
+            ${bits.map(b=>`<span>${esc(b)}</span>`).join('')}
+            <span class="go">Öffnen →</span>
+          </div>
+        </div>
+      </a>`;
+    }).join('') + '</div>';
+
+  }catch(e){
+    el.innerHTML = '<div class="state"><div class="ic">!</div>Konnte nicht laden. Bitte neu versuchen.</div>';
+  }
+}
+load();
+</script>
+</body>
+</html>

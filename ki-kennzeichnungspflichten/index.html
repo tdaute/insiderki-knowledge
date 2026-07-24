@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Kennzeichnungspflichten — Art. 50 AI Act | KNOWLEDGE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a;
+  --bg-2:#0d1424;
+  --panel:#111a2c;
+  --panel-2:#0f1729;
+  --orange:#e8863c;
+  --orange-br:#f59e42;
+  --white:#ffffff;
+  --grey:#9aa3b2;
+  --grey-2:#6b7280;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --green:#3fb27f;
+  --red:#e05252;
+  --amber:#e0a83c;
+  --blue:#5b8def;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  background:#05070d;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--white);
+  overflow:hidden;
+}
+
+/* ============ DECK ============ */
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{
+  position:absolute;inset:0;
+  opacity:0;visibility:hidden;
+  transition:opacity .4s ease;
+  background:var(--bg);
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible;}
+
+/* Atmosphere */
+.atmos{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.atmos::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:110px 110px;
+}
+.atmos::after{
+  content:'';position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:120vw;height:90vh;
+  background:radial-gradient(ellipse at center,rgba(232,134,60,.20) 0%,rgba(232,134,60,.06) 34%,transparent 62%);
+}
+.atmos.soft::after{opacity:.4;}
+
+/* ============ LOGO (Obsidian-Graph-Stil) ============ */
+.logo{display:flex;flex-direction:column;align-items:center;gap:.45rem;}
+.logo svg{display:block;overflow:visible;}
+.logo-word{font-size:.72rem;font-weight:600;letter-spacing:.26em;color:var(--white);white-space:nowrap;}
+.logo-sub{font-size:.46rem;font-weight:500;letter-spacing:.4em;color:var(--orange);margin-top:-.2rem;}
+.logo-corner{position:absolute;top:1.6rem;right:2.2rem;z-index:6;transform:scale(.75);transform-origin:top right;}
+
+/* ============ CHROME (Sidebar + Header) ============ */
+.chrome{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:230px 1fr;}
+.sidebar{
+  background:rgba(255,255,255,.022);
+  border-right:1px solid var(--line);
+  padding:1.9rem 1.1rem;
+  display:flex;flex-direction:column;
+  backdrop-filter:blur(6px);
+}
+.sb-brand{display:flex;flex-direction:column;align-items:center;gap:.4rem;margin-bottom:2.6rem;}
+.sb-brand .logo-word{font-size:.68rem;}
+.sb-nav{display:flex;flex-direction:column;gap:.15rem;}
+.sb-item{
+  font-size:.76rem;font-weight:400;color:var(--grey-2);
+  padding:.42rem .6rem;border-radius:6px;
+  line-height:1.3;text-align:center;
+  transition:color .2s,background .2s;
+  cursor:default;
+}
+.sb-item{
+  font-family:inherit;border:none;background:none;width:100%;
+  cursor:pointer;
+}
+.sb-item:hover{color:#c3cad6;background:rgba(255,255,255,.04);}
+.sb-item:focus-visible{outline:2px solid var(--orange);outline-offset:-2px;}
+.sb-item.on{color:var(--orange);font-weight:600;background:rgba(232,134,60,.09);}
+.sb-item.on:hover{color:var(--orange-br);}
+
+/* Echte Medien (ersetzen Platzhalter, wenn konfiguriert) */
+.media{width:100%;border-radius:10px;object-fit:cover;display:block;background:rgba(255,255,255,.03);}
+.media.tall{height:180px;}
+.media.wide{height:130px;}
+.media:not(.tall):not(.wide){height:80px;}
+
+/* ---- Quiz-Folie ---- */
+.quiz{display:flex;flex-direction:column;gap:1rem;}
+.quiz-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.quiz-lbl{
+  font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:.6rem;text-align:center;
+}
+.qcard{
+  position:relative;background:rgba(255,255,255,.026);
+  border:1px solid var(--line);border-radius:13px;
+  padding:.85rem;cursor:pointer;
+  transition:border-color .25s,background .25s,transform .18s;
+}
+.qcard:hover{border-color:var(--line-2);transform:translateY(-2px);}
+.qcard:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+.qcard .tag{
+  position:absolute;top:1.35rem;left:1.35rem;z-index:3;
+  background:rgba(10,14,26,.85);backdrop-filter:blur(6px);
+  border:1px solid var(--line-2);border-radius:6px;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;
+  padding:.22rem .55rem;color:var(--white);letter-spacing:.08em;
+}
+.qcard .ph,.qcard .media{min-height:190px;height:190px;}
+.qcard .verdict{
+  margin-top:.7rem;text-align:center;font-size:.82rem;font-weight:700;
+  min-height:1.3em;opacity:0;transition:opacity .3s;letter-spacing:.01em;
+}
+.quiz.revealed .qcard .verdict{opacity:1;}
+.quiz.revealed .qcard[data-ai="1"]{border-color:rgba(224,82,82,.55);background:rgba(224,82,82,.07);}
+.quiz.revealed .qcard[data-ai="0"]{border-color:rgba(63,178,127,.5);background:rgba(63,178,127,.06);}
+.qcard[data-ai="1"] .verdict{color:#f08b8b;}
+.qcard[data-ai="0"] .verdict{color:#6cd3a4;}
+.quiz-bar{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:.2rem;}
+.quiz-btn{
+  font-family:inherit;font-size:.82rem;font-weight:600;
+  background:rgba(232,134,60,.13);color:var(--orange-br);
+  border:1px solid rgba(232,134,60,.42);border-radius:8px;
+  padding:.55rem 1.6rem;cursor:pointer;transition:background .2s;
+}
+.quiz-btn:hover{background:rgba(232,134,60,.22);}
+.quiz-btn:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+.quiz-hint{font-size:.78rem;color:var(--grey-2);font-style:italic;}
+.sb-foot{margin-top:auto;font-size:.6rem;color:rgba(255,255,255,.2);letter-spacing:.1em;text-align:center;}
+
+.stage{padding:2.1rem 2.6rem 1.6rem;display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.2em;color:var(--orange);text-transform:uppercase;margin-bottom:.5rem;}
+.h1{font-size:clamp(1.6rem,2.9vw,2.5rem);font-weight:700;letter-spacing:-.028em;line-height:1.08;}
+.rule{width:56px;height:3px;background:var(--orange);border-radius:2px;margin:.75rem 0 1.1rem;}
+.lead{font-size:.92rem;color:#c3cad6;line-height:1.55;max-width:74ch;margin-bottom:1.3rem;}
+.lead b{color:var(--orange-br);font-weight:600;}
+.lead u{text-decoration-color:var(--orange);text-underline-offset:3px;}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;}
+.foot{margin-top:1rem;font-size:.72rem;color:var(--grey-2);font-style:italic;}
+
+/* Role badge */
+.badge{
+  position:absolute;top:2.1rem;right:2.6rem;z-index:4;
+  font-size:.7rem;font-weight:600;letter-spacing:.05em;
+  padding:.4rem 1.1rem;border-radius:999px;
+}
+.badge.anbieter{background:rgba(91,141,239,.16);color:#8fb2f7;border:1px solid rgba(91,141,239,.4);}
+.badge.betreiber{background:rgba(63,178,127,.14);color:#6cd3a4;border:1px solid rgba(63,178,127,.38);}
+.badge.beide{background:rgba(232,134,60,.14);color:var(--orange-br);border:1px solid rgba(232,134,60,.4);}
+
+/* ============ TITLE SLIDES ============ */
+.title-wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6vw;}
+.t-eyebrow{font-size:clamp(.8rem,1.2vw,1.05rem);font-weight:500;letter-spacing:.42em;color:var(--orange);text-transform:uppercase;margin-bottom:1.5rem;padding-left:.42em;}
+.t-head{font-size:clamp(2.6rem,7vw,6rem);font-weight:800;line-height:.98;letter-spacing:-.038em;}
+.t-sub{margin-top:1.6rem;font-size:clamp(.95rem,1.6vw,1.4rem);color:var(--grey);font-weight:400;}
+.t-meta{margin-top:3.2rem;display:flex;flex-direction:column;gap:.3rem;align-items:center;}
+.t-meta .nm{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;}
+.t-meta .rl{font-size:.82rem;color:var(--grey);line-height:1.6;}
+.counter{
+  position:absolute;bottom:2.6rem;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  color:rgba(255,255,255,.28);letter-spacing:.24em;
+}
+
+/* Section divider slides */
+.sec-wrap{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:230px 1fr;}
+.sec-body{display:flex;flex-direction:column;justify-content:center;padding:0 5vw;}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.28em;color:var(--orange);margin-bottom:1.1rem;}
+.sec-title{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:800;letter-spacing:-.032em;line-height:1.05;}
+.sec-art{font-size:.95rem;color:var(--grey);margin-top:.9rem;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
+
+/* ============ COMPONENTS ============ */
+.grid{display:grid;gap:.85rem;}
+.g2{grid-template-columns:repeat(2,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g5{grid-template-columns:repeat(5,1fr);}
+
+.card{
+  background:rgba(255,255,255,.026);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:1.1rem 1.1rem 1.2rem;
+  display:flex;flex-direction:column;
+}
+.card.ok{border-color:rgba(63,178,127,.34);background:rgba(63,178,127,.05);}
+.card.no{border-color:rgba(224,82,82,.34);background:rgba(224,82,82,.05);}
+.card.warn{border-color:rgba(224,168,60,.34);background:rgba(224,168,60,.05);}
+.card.acc{border-color:rgba(232,134,60,.32);background:rgba(232,134,60,.05);}
+.card h3{font-size:.95rem;font-weight:700;letter-spacing:-.012em;margin-bottom:.35rem;}
+.card .sub{font-size:.72rem;color:var(--orange);font-family:'JetBrains Mono',monospace;margin-bottom:.6rem;}
+.card p{font-size:.79rem;color:var(--grey);line-height:1.5;}
+.card ul{list-style:none;margin-top:.6rem;display:flex;flex-direction:column;gap:.34rem;}
+.card li{font-size:.76rem;color:#b6bdc9;display:flex;gap:.5rem;align-items:flex-start;line-height:1.4;}
+.card li::before{content:'—';color:var(--orange);flex-shrink:0;}
+
+.num{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--orange);color:#0a0e1a;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:800;margin-bottom:.7rem;flex-shrink:0;
+}
+.tick{color:var(--green);font-weight:700;}
+.cross{color:var(--red);font-weight:700;}
+
+/* Placeholder image */
+.ph{
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.028) 0 10px,rgba(255,255,255,.012) 10px 20px);
+  border:1px dashed rgba(255,255,255,.16);
+  border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.3rem;color:rgba(255,255,255,.3);
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  min-height:80px;
+}
+.ph .ico{font-size:1.1rem;opacity:.6;}
+.ph.tall{min-height:180px;}
+.ph.wide{min-height:130px;}
+
+/* Flow chain */
+.chain{display:grid;align-items:stretch;gap:0;}
+.chain .arw{display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:1.35rem;padding:0 .7rem;}
+
+/* Callout */
+.callout{
+  margin-top:1.1rem;
+  background:linear-gradient(90deg,rgba(232,134,60,.15) 0%,rgba(232,134,60,.04) 68%,transparent 100%);
+  border-left:4px solid var(--orange);
+  border-radius:0 9px 9px 0;
+  padding:.9rem 1.3rem;
+  font-size:.84rem;color:#dfe4ec;line-height:1.5;
+}
+.callout strong{color:var(--orange-br);font-weight:700;}
+.callout.green{background:linear-gradient(90deg,rgba(63,178,127,.14) 0%,transparent 70%);border-left-color:var(--green);}
+.callout.green strong{color:#6cd3a4;}
+.callout.red{background:linear-gradient(90deg,rgba(224,82,82,.14) 0%,transparent 70%);border-left-color:var(--red);}
+.callout.red strong{color:#f08b8b;}
+
+/* Split heads */
+.split-head{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.92rem;font-weight:700;margin-bottom:.7rem;
+}
+.dot-i{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;flex-shrink:0;}
+.dot-i.g{background:var(--green);color:#06180f;}
+.dot-i.r{background:var(--red);color:#210606;}
+.dot-i.a{background:var(--amber);color:#1e1503;}
+
+/* Timeline */
+.tl{position:relative;padding:1.6rem 0 .6rem;}
+.tl-line{height:2px;background:linear-gradient(90deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.16) 48%,var(--orange) 52%,var(--orange) 100%);border-radius:2px;}
+.tl-marks{display:flex;justify-content:space-between;margin-top:-6px;}
+.tl-m{display:flex;flex-direction:column;align-items:center;gap:.5rem;flex:1;}
+.tl-m .pt{width:11px;height:11px;border-radius:50%;background:var(--grey-2);border:2px solid var(--bg);}
+.tl-m.hot .pt{background:var(--orange);box-shadow:0 0 0 4px rgba(232,134,60,.2);}
+.tl-m .dt{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;color:var(--white);}
+.tl-m.hot .dt{color:var(--orange);}
+.tl-m .lb{font-size:.7rem;color:var(--grey);text-align:center;max-width:15ch;line-height:1.35;}
+
+/* Decision tree */
+.tree{display:flex;flex-direction:column;gap:.42rem;align-items:center;}
+.tree-row{display:grid;grid-template-columns:1fr 90px 130px;align-items:center;gap:.7rem;width:100%;max-width:900px;}
+.tree-q{
+  background:rgba(255,255,255,.035);border:1px solid var(--line);
+  border-radius:8px;padding:.62rem .9rem;
+  font-size:.78rem;line-height:1.35;text-align:center;
+}
+.tree-q b{color:var(--orange-br);}
+.tree-y,.tree-n{
+  font-size:.7rem;font-weight:700;padding:.3rem .55rem;border-radius:6px;text-align:center;
+}
+.tree-y{background:rgba(63,178,127,.14);color:#6cd3a4;border:1px solid rgba(63,178,127,.36);}
+.tree-n{background:rgba(224,82,82,.14);color:#f08b8b;border:1px solid rgba(224,82,82,.36);}
+.tree-end{display:flex;gap:1.1rem;margin-top:.7rem;}
+.pill{padding:.6rem 1.5rem;border-radius:8px;font-size:.82rem;font-weight:700;}
+.pill.red{background:rgba(224,82,82,.18);color:#f08b8b;border:1px solid rgba(224,82,82,.42);}
+.pill.green{background:rgba(63,178,127,.16);color:#6cd3a4;border:1px solid rgba(63,178,127,.42);}
+
+/* Fine boxes */
+.fine{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;}
+.fine-box{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:13px;padding:1.4rem;text-align:center;}
+.fine-box.hi{border-color:rgba(232,134,60,.4);background:rgba(232,134,60,.06);}
+.fine-amt{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:800;letter-spacing:-.03em;color:var(--orange-br);line-height:1.15;}
+.fine-box:not(.hi) .fine-amt{color:var(--white);}
+.fine-or{font-size:.82rem;color:var(--grey);margin:.4rem 0;}
+.fine-src{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--grey-2);margin-top:.8rem;}
+.fine-lbl{font-size:.82rem;font-weight:600;margin-bottom:.9rem;color:#c3cad6;}
+
+/* AI Icons */
+.aiicons{display:flex;gap:2.2rem;justify-content:center;align-items:center;flex-wrap:wrap;}
+.aii{display:flex;flex-direction:column;align-items:center;gap:.8rem;}
+.aii .chip{
+  background:#0a0e1a;border:2px solid var(--white);border-radius:999px;
+  padding:.6rem 1.5rem;font-weight:800;letter-spacing:.06em;font-size:1.05rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.aii .chip.round{border-radius:50%;width:64px;height:64px;padding:0;justify-content:center;}
+.aii .cap{font-size:.76rem;color:var(--grey);text-align:center;line-height:1.4;}
+.chip .sm{font-size:.72rem;letter-spacing:.14em;font-weight:600;}
+
+/* Checklist */
+.check{display:flex;flex-direction:column;gap:.5rem;}
+.check-i{
+  display:flex;gap:.8rem;align-items:flex-start;
+  background:rgba(255,255,255,.025);border:1px solid var(--line);
+  border-radius:9px;padding:.7rem .95rem;
+}
+.check-i .k{
+  width:22px;height:22px;border-radius:5px;background:rgba(232,134,60,.16);
+  color:var(--orange);font-size:.7rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.check-i .t{font-size:.8rem;line-height:1.45;color:#c3cad6;}
+.check-i .t b{color:var(--white);font-weight:600;}
+
+/* Two-col text+visual */
+.tv{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:center;}
+
+/* Stat row */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;}
+.stat-top{display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem;}
+.stat-pct{
+  background:var(--green);color:#06180f;font-weight:800;font-size:.82rem;
+  padding:.24rem .62rem;border-radius:999px;
+}
+.stat-pct.mid{background:var(--amber);color:#1e1503;}
+.stat-pct.low{background:rgba(255,255,255,.16);color:var(--white);}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;bottom:1.1rem;left:50%;transform:translateX(-50%);
+  z-index:60;display:flex;align-items:center;gap:.9rem;
+  background:rgba(10,14,26,.82);backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem;
+  opacity:.28;transition:opacity .25s;
+}
+.nav:hover{opacity:1;}
+.nav button{background:none;border:none;color:var(--grey);cursor:pointer;font-size:.95rem;padding:.2rem .35rem;transition:color .2s;}
+.nav button:hover{color:var(--orange);}
+.nav button:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px;}
+.nav .pos{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--grey);min-width:52px;text-align:center;}
+
+@media (max-width:1100px){
+  .chrome,.sec-wrap{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .stage{padding:1.4rem 1.4rem 1rem;}
+  .g4,.g5{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:1fr;}
+  .chain{grid-template-columns:1fr !important;gap:.6rem;}
+  .chain .arw{display:none;}
+  .tv,.fine{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){.slide{transition:none;}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck"></div>
+
+<nav class="nav" aria-label="Foliennavigation">
+  <button id="prev" aria-label="Vorherige Folie">←</button>
+  <span class="pos" id="pos">1 / 1</span>
+  <button id="next" aria-label="Nächste Folie">→</button>
+</nav>
+
+<script>
+/* =====================================================================
+   MEDIEN
+   ---------------------------------------------------------------------
+   Bilder und Videos werden im Media Manager hochgeladen und von dort
+   automatisch geladen. Hier ist nichts einzutragen.
+   Fallback: MEDIA_FALLBACK unten kann manuell befuellt werden, falls
+   die Praesentation einmal offline laufen soll.
+   ===================================================================== */
+const SB_URL = 'https://nblyvxnahkbvtatathbh.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ibHl2eG5haGtidnRhdGF0aGJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NzA5MTUsImV4cCI6MjA5NjE0NjkxNX0.o9-lp1ILDPFNcLOr_C3RMFsIFxVDkSCA0Zob1X__rB0';
+const PRES_SLUG = 'ki-kennzeichnungspflichten';
+
+const MEDIA_FALLBACK = {};
+
+/* Quiz-Aufloesung: welches Asset ist KI-generiert? 'A' oder 'B' */
+const QUIZ_ANSWERS = { image: 'B', video: 'A' };
+
+const MEDIA = Object.assign({}, MEDIA_FALLBACK);
+
+function assetUrl(key){
+  const v = MEDIA[key];
+  return v || null;
+}
+
+/* Medien aus Supabase nachladen und Platzhalter ersetzen */
+async function hydrateMedia(){
+  try{
+    const r = await fetch(
+      `${SB_URL}/rest/v1/presentation_slots` +
+      `?select=slot_key,public_url,presentations!inner(slug)` +
+      `&presentations.slug=eq.${PRES_SLUG}` +
+      `&public_url=not.is.null`,
+      { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } }
+    );
+    if(!r.ok) return;
+    const rows = await r.json();
+    if(!Array.isArray(rows) || !rows.length) return;
+
+    rows.forEach(row=>{
+      MEDIA[row.slot_key] = row.public_url;
+      document.querySelectorAll(`[data-slot="${row.slot_key}"]`).forEach(el=>{
+        const label = el.getAttribute('data-label') || '';
+        const cls   = el.className.replace('ph','').trim();
+        const vid   = /\.(mp4|webm|mov)(\?|$)/i.test(row.public_url);
+        const node  = document.createElement(vid ? 'video' : 'img');
+        node.className = ('media ' + cls).trim();
+        node.src = row.public_url;
+        if(vid){ node.muted = true; node.loop = true; node.playsInline = true; }
+        else   { node.alt = label; node.loading = 'lazy'; }
+        el.replaceWith(node);
+      });
+    });
+    if(typeof syncVideos === 'function') syncVideos();
+  }catch(e){ /* offline: Platzhalter bleiben stehen */ }
+}
+
+/* ===================== LOGO (Obsidian-Graph-Stil) ===================== */
+function logo(size, word){
+  const s = size || 52;
+  return `
+  <div class="logo">
+    <svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="none">
+      <g stroke="#e8863c" stroke-width="1" opacity=".5">
+        <line x1="32" y1="32" x2="32" y2="10"/>
+        <line x1="32" y1="32" x2="50" y2="19"/>
+        <line x1="32" y1="32" x2="54" y2="38"/>
+        <line x1="32" y1="32" x2="41" y2="53"/>
+        <line x1="32" y1="32" x2="20" y2="52"/>
+        <line x1="32" y1="32" x2="10" y2="36"/>
+        <line x1="32" y1="32" x2="15" y2="18"/>
+      </g>
+      <g stroke="#e8863c" stroke-width=".7" opacity=".26">
+        <line x1="32" y1="10" x2="50" y2="19"/>
+        <line x1="50" y1="19" x2="54" y2="38"/>
+        <line x1="54" y1="38" x2="41" y2="53"/>
+        <line x1="20" y1="52" x2="10" y2="36"/>
+        <line x1="10" y1="36" x2="15" y2="18"/>
+        <line x1="15" y1="18" x2="32" y2="10"/>
+        <line x1="41" y1="53" x2="20" y2="52"/>
+      </g>
+      <g fill="#e8863c">
+        <circle cx="32" cy="10" r="3"/>
+        <circle cx="50" cy="19" r="2.2"/>
+        <circle cx="54" cy="38" r="2.8"/>
+        <circle cx="41" cy="53" r="2"/>
+        <circle cx="20" cy="52" r="2.6"/>
+        <circle cx="10" cy="36" r="2.2"/>
+        <circle cx="15" cy="18" r="2.4"/>
+      </g>
+      <g fill="#f59e42" opacity=".55">
+        <circle cx="44" cy="10" r="1.3"/>
+        <circle cx="58" cy="27" r="1.1"/>
+        <circle cx="8" cy="24" r="1.2"/>
+        <circle cx="30" cy="57" r="1.1"/>
+      </g>
+      <circle cx="32" cy="32" r="10" fill="#e8863c" opacity=".2"/>
+      <circle cx="32" cy="32" r="6.4" fill="#f59e42"/>
+      <circle cx="32" cy="32" r="2.7" fill="#0a0e1a"/>
+    </svg>
+    <div class="logo-word">${word || 'KNOWLEDGE'}</div>
+    <div class="logo-sub">AI</div>
+  </div>`;
+}
+
+/* ===================== NAV STRUCTURE ===================== */
+const NAV = [
+  'Einstieg','Grundlagen','Interaktion mit KI','Maschinenlesbarkeit',
+  'Emotionserkennung','Deepfakes','KI-Texte','Haftung','Umsetzung'
+];
+
+function sidebar(active){
+  return `<aside class="sidebar">
+    <div class="sb-brand">${logo(40)}</div>
+    <nav class="sb-nav">
+      ${NAV.map(n=>`<button class="sb-item${n===active?' on':''}" data-jump="${n}">${n}</button>`).join('')}
+    </nav>
+    <div class="sb-foot">ART. 50 AI ACT</div>
+  </aside>`;
+}
+
+/* Platzhalter ODER echtes Asset, je nach MEDIA-Konfiguration */
+function ph(label, cls, key){
+  const url = key ? assetUrl(key) : null;
+  if(url){
+    const isVid = /\.(mp4|webm)(\?|$)/i.test(url);
+    if(isVid){
+      return `<video class="media ${cls||''}" src="${url}" muted loop playsinline autoplay
+                     aria-label="${label}"></video>`;
+    }
+    return `<img class="media ${cls||''}" src="${url}" alt="${label}" loading="lazy">`;
+  }
+  return `<div class="ph ${cls||''}"${key?` data-slot="${key}" data-label="${label}"`:''}><div class="ico">▣</div><div>${label}</div></div>`;
+}
+
+/* Content slide */
+function S(o){
+  return `
+  <section class="slide">
+    <div class="atmos soft"></div>
+    ${o.badge ? `<div class="badge ${o.badge.t}">Betrifft: ${o.badge.l}</div>` : ''}
+    <div class="chrome">
+      ${sidebar(o.nav)}
+      <div class="stage">
+        <div class="eyebrow">${o.eyebrow}</div>
+        <h2 class="h1">${o.title}</h2>
+        <div class="rule"></div>
+        ${o.lead ? `<p class="lead">${o.lead}</p>` : ''}
+        <div class="body">${o.body}</div>
+        ${o.foot ? `<div class="foot">${o.foot}</div>` : ''}
+      </div>
+    </div>
+  </section>`;
+}
+
+/* Section divider */
+function SEC(o){
+  return `
+  <section class="slide">
+    <div class="atmos"></div>
+    <div class="sec-wrap">
+      ${sidebar(o.nav)}
+      <div class="sec-body">
+        <div class="sec-num">${o.num}</div>
+        <h2 class="sec-title">${o.title}</h2>
+        <div class="sec-art">${o.art}</div>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ===================== SLIDES ===================== */
+const slides = [];
+
+/* --- 01 TITLE --- */
+slides.push(`
+<section class="slide">
+  <div class="atmos"></div>
+  <div class="logo-corner">${logo(52)}</div>
+  <div class="title-wrap">
+    <div class="t-eyebrow">Art. 50 AI Act</div>
+    <h1 class="t-head">KI-Kennzeichnungs&shy;pflichten</h1>
+    <p class="t-sub">Was ab dem 2. August 2026 für Unternehmen gilt</p>
+    <div class="t-meta">
+      <div class="nm">Workshop · KNOWLEDGE AI</div>
+      <div class="rl">Transparenzpflichten der EU-KI-Verordnung<br>Anbieter · Betreiber · Praxis</div>
+    </div>
+  </div>
+  <div class="counter">WORKSHOP 2026</div>
+</section>`);
+
+/* --- 02 QUIZ: Erkennen Sie den Unterschied? --- */
+function qcard(tag, label, key, isAi){
+  return `<div class="qcard" data-ai="${isAi?1:0}" tabindex="0" role="button" aria-label="${tag} aufdecken">
+    <span class="tag">${tag}</span>
+    ${ph(label,'',key)}
+    <div class="verdict">${isAi?'KI-generiert':'Echte Aufnahme'}</div>
+  </div>`;
+}
+
+slides.push(S({
+  nav:'Einstieg', eyebrow:'Der Realitätstest',
+  title:'Erkennen Sie den Unterschied?',
+  lead:'Was ist Deepfake und was ist real? Schauen Sie sich jedes Paar kurz an und entscheiden Sie sich — <b>bevor</b> Sie aufdecken.',
+  body:`
+    <div class="quiz" id="quiz">
+      <div>
+        <div class="quiz-lbl">Zwei Bilder</div>
+        <div class="quiz-row">
+          ${qcard('A','Bild A','quizImageA', QUIZ_ANSWERS.image==='A')}
+          ${qcard('B','Bild B','quizImageB', QUIZ_ANSWERS.image==='B')}
+        </div>
+      </div>
+      <div>
+        <div class="quiz-lbl">Zwei Videos · je 4 Sekunden</div>
+        <div class="quiz-row">
+          ${qcard('C','Video A','quizVideoA', QUIZ_ANSWERS.video==='A')}
+          ${qcard('D','Video B','quizVideoB', QUIZ_ANSWERS.video==='B')}
+        </div>
+      </div>
+      <div class="quiz-bar">
+        <button class="quiz-btn" id="quizReveal">Auflösen</button>
+        <span class="quiz-hint">Taste <b>R</b> oder Klick auf eine Kachel</span>
+      </div>
+    </div>`,
+  foot:'Genau hier setzt Art. 50 an: Wenn das Auge nicht mehr unterscheiden kann, muss die Kennzeichnung es tun.'
+}));
+
+/* --- 03 Fluch und Segen --- */
+slides.push(S({
+  nav:'Einstieg', eyebrow:'Fluch und Segen',
+  title:'KI wird immer besser — und weniger erkennbar',
+  lead:'Es droht <b>Täuschungsgefahr</b> und Vertrauensverlust. Synthetische Inhalte sind in fast jedem Kanal angekommen — und mit bloßem Auge kaum noch von echten zu unterscheiden.',
+  body:`
+    <div class="grid g3">
+      ${ph('Bilder','tall', 'einstiegBilder')}${ph('Videos','tall', 'einstiegVideos')}${ph('Audio','tall', 'einstiegAudio')}
+    </div>
+    <div class="grid g3" style="margin-top:.85rem">
+      ${ph('Interaktion mit KI','wide', 'einstiegInteraktion')}${ph('Texte','wide', 'einstiegTexte')}${ph('Emotionserkennung','wide', 'einstiegEmotion')}
+    </div>`
+}));
+
+/* --- 03 Transparenz --- */
+slides.push(S({
+  nav:'Einstieg', eyebrow:'Das Leitmotiv der Verordnung',
+  title:'Transparenz',
+  lead:'Der Grundgedanke hinter Art. 50 lässt sich in einem Satz zusammenfassen.',
+  body:`
+    <div class="callout" style="font-size:1.15rem;padding:1.5rem 1.8rem;line-height:1.45">
+      <strong>Der Mensch soll wissen,</strong> wenn er es mit künstlicher Intelligenz zu tun hat — zumindest in bestimmten, klar definierten Bereichen.
+    </div>
+    <div class="grid g3" style="margin-top:1.2rem">
+      <div class="card"><h3>Kein Generalverdacht</h3><p>Art. 50 führt <b style="color:#f59e42">keine</b> pauschale Kennzeichnungspflicht für jeden KI-Output ein.</p></div>
+      <div class="card"><h3>Situationsbezogen</h3><p>Die Verordnung regelt vier klar umrissene Situationen — nicht „KI allgemein“.</p></div>
+      <div class="card"><h3>Rollenabhängig</h3><p>Wen welche Pflicht trifft, hängt davon ab, ob Sie Anbieter oder Betreiber sind.</p></div>
+    </div>`,
+  foot:'* Die Pflichten greifen nur in den in Art. 50 Abs. 1–4 genannten Konstellationen.'
+}));
+
+/* --- 04 Fünf Pflichten Überblick --- */
+slides.push(S({
+  nav:'Einstieg', eyebrow:'Art. 50 AI Act',
+  title:'Die neuen KI-Kennzeichnungspflichten',
+  lead:'Die Kennzeichnungspflichten beginnen ab dem <b>2. August 2026</b>. Ausnahme: die maschinenlesbare Kennzeichnung nach Art. 50 Abs. 2 gilt für Systeme, die vor dem Stichtag bereits in Verkehr waren, erst ab dem <b>2. Dezember 2026</b>.',
+  body:`
+    <div style="display:flex;gap:.6rem;margin-bottom:.7rem">
+      <div style="flex:2;text-align:center"><span class="badge anbieter" style="position:static;display:inline-block">Anbieter</span></div>
+      <div style="flex:3;text-align:center"><span class="badge betreiber" style="position:static;display:inline-block">Betreiber</span></div>
+    </div>
+    <div class="grid g5">
+      <div class="card"><div class="num">1</div><h3>Direkte Interaktion mit KI</h3><div class="sub">Art. 50 Abs. 1</div><ul><li>Chatbot</li><li>Voicebot</li><li>KI-Assistent</li></ul></div>
+      <div class="card"><div class="num">2</div><h3>Maschinenlesbarkeit von KI-Content</h3><div class="sub">Art. 50 Abs. 2</div><ul><li>Bild · Video</li><li>Audio · Text</li></ul></div>
+      <div class="card"><div class="num">3</div><h3>Emotionserkennung &amp; Biometrie</h3><div class="sub">Art. 50 Abs. 3</div><ul><li>Betroffene informieren</li></ul></div>
+      <div class="card"><div class="num">4</div><h3>Deepfakes</h3><div class="sub">Art. 50 Abs. 4 S. 1–3</div><ul><li>Bild</li><li>Audio (Ton)</li><li>Video</li></ul></div>
+      <div class="card"><div class="num">5</div><h3>KI-Texte</h3><div class="sub">Art. 50 Abs. 4 S. 4–5</div><ul><li>Öffentliches Interesse</li></ul></div>
+    </div>`
+}));
+
+/* --- 05 Fristen-Timeline (NEU) --- */
+slides.push(S({
+  nav:'Einstieg', eyebrow:'Stand nach dem Digital Omnibus',
+  title:'Die Fristen im Überblick',
+  lead:'Der Digital Omnibus (final angenommen am 29. Juni 2026) hat die Hochrisiko-Fristen verschoben — die <b>Transparenzpflichten aus Art. 50 bleiben beim 2. August 2026</b>. Verschoben wurde nur die technische Watermarking-Pflicht für Bestandssysteme.',
+  body:`
+    <div class="tl">
+      <div class="tl-line"></div>
+      <div class="tl-marks">
+        <div class="tl-m"><div class="pt"></div><div class="dt">02.02.2025</div><div class="lb">Art. 4 KI-Kompetenz &amp; Art. 5 Verbote</div></div>
+        <div class="tl-m hot"><div class="pt"></div><div class="dt">02.08.2026</div><div class="lb">Art. 50 Abs. 1, 3, 4 — Kennzeichnung</div></div>
+        <div class="tl-m hot"><div class="pt"></div><div class="dt">02.12.2026</div><div class="lb">Art. 50 Abs. 2 für Bestandssysteme</div></div>
+        <div class="tl-m"><div class="pt"></div><div class="dt">02.12.2027</div><div class="lb">Hochrisiko Anhang III</div></div>
+        <div class="tl-m"><div class="pt"></div><div class="dt">02.08.2028</div><div class="lb">Hochrisiko Anhang I</div></div>
+      </div>
+    </div>
+    <div class="callout"><strong>Wichtig für den Workshop:</strong> Der 2. August 2026 steht fest. Wer heute plant, plant gegen dieses Datum — nicht gegen eine mögliche weitere Verschiebung.</div>`
+}));
+
+/* --- 06 SEC Grundlagen --- */
+slides.push(SEC({nav:'Grundlagen', num:'TEIL 01', title:'Grundlagen', art:'Begriffe · Rollen · Anwendungsbereich'}));
+
+/* --- 07 Was ist ein KI-System --- */
+slides.push(S({
+  nav:'Grundlagen', eyebrow:'Art. 3 Nr. 1 AI Act',
+  title:'Was ist ein KI-System?',
+  lead:'Ein KI-System ist eine <b>Software</b>, die aus Eingaben <b><u>eigenständig</u></b> Ergebnisse ableitet — z.&nbsp;B. Texte, Bilder, Videos, Ton, aber auch Empfehlungen oder Entscheidungen.',
+  body:`
+    <div class="grid g2">
+      <div class="card ok">
+        ${ph('Generative KI (ChatGPT, Claude, Gemini)','tall', 'kiSystemJa')}
+        <div style="text-align:center;margin-top:.9rem">
+          <div style="font-size:.8rem;color:#9aa3b2;margin-bottom:.4rem">ChatGPT, Gemini, Claude &amp; Co.</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#6cd3a4">KI-System ✓</div>
+        </div>
+      </div>
+      <div class="card no">
+        ${ph('Klassische Software (z.B. Paint)','tall', 'kiSystemNein')}
+        <div style="text-align:center;margin-top:.9rem">
+          <div style="font-size:.8rem;color:#9aa3b2;margin-bottom:.4rem">Microsoft Paint, Taschenrechner, Excel-Formel</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#f08b8b">Kein KI-System ✕</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout"><strong>Abgrenzungskriterium:</strong> Entscheidend ist die <em>Ableitungsfähigkeit</em> — ein System, das nur feste Regeln abarbeitet, ist kein KI-System im Sinne der Verordnung.</div>`
+}));
+
+/* --- 08 Für wen gilt es --- */
+slides.push(S({
+  nav:'Grundlagen', eyebrow:'Persönlicher Anwendungsbereich',
+  title:'Für wen gelten die Kennzeichnungspflichten?',
+  lead:'Vom Solo-Selbstständigen bis zum Konzern: entscheidend ist die <b>berufliche Tätigkeit</b> — auf die Größe kommt es nicht an.',
+  body:`
+    <div class="grid g2" style="grid-template-columns:2.4fr 1fr">
+      <div class="card ok">
+        <div class="split-head"><span class="dot-i g">✓</span> Kennzeichnungspflichten gelten für</div>
+        <div class="grid g4">
+          ${ph('Unternehmen', '', 'zielUnternehmen')}${ph('Behörden', '', 'zielBehoerden')}${ph('Selbstständige', '', 'zielSelbststaendige')}${ph('Sonstige berufl. Nutzer', '', 'zielSonstige')}
+        </div>
+      </div>
+      <div class="card no">
+        <div class="split-head"><span class="dot-i r">✕</span> Gilt nicht für Privatpersonen</div>
+        ${ph('Private Nutzung','tall', 'zielPrivat')}
+      </div>
+    </div>`,
+  foot:'* Aber Vorsicht: Nur bei <u>ausschließlich</u> persönlicher und nicht beruflicher Tätigkeit (Art. 2 Nr. 10 AI Act). Beispiel: KI-generierte Geburtstagseinladung.'
+}));
+
+/* --- 09 Anbieter vs Betreiber --- */
+slides.push(S({
+  nav:'Grundlagen', eyebrow:'Die eigene Rolle kennen',
+  title:'Anbieter oder Betreiber des KI-Systems?',
+  lead:'Die Rollenzuordnung entscheidet darüber, welche der fünf Pflichten Sie überhaupt treffen. Nach <b>Art. 25 AI Act</b> kann ein Betreiber zum Anbieter werden — etwa beim Rebranding unter eigener Marke.',
+  body:`
+    <div class="grid g2">
+      <div class="card">
+        <div class="split-head"><span class="badge anbieter" style="position:static;padding:.22rem .8rem;font-size:.68rem">Anbieter</span></div>
+        <div class="sub">Art. 3 Nr. 3 AI Act</div>
+        <ul>
+          <li>Entwickelt ein KI-System selbst oder lässt es entwickeln</li>
+          <li>Bringt es unter eigenem Namen oder eigener Marke auf den Markt oder nimmt es selbst in Betrieb</li>
+        </ul>
+        <div style="margin-top:.9rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:.76rem;color:#8fb2f7;font-weight:700;margin-bottom:.45rem">Typische Beispiele</div>
+          <ul><li>OpenAI (ChatGPT), Anthropic (Claude)</li><li>Unternehmen mit eigener KI-Lösung auf Basis eines fremden Basismodells</li><li>Website-Chatbot eines Drittanbieters, gebrandet unter eigener Marke *</li></ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="split-head"><span class="badge betreiber" style="position:static;padding:.22rem .8rem;font-size:.68rem">Betreiber</span></div>
+        <div class="sub">Art. 3 Nr. 4 AI Act</div>
+        <ul>
+          <li>Verwendet ein KI-System in eigener Verantwortung</li>
+          <li>Rein private Nutzung fällt nicht unter den Betreiberbegriff</li>
+        </ul>
+        <div style="margin-top:.9rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:.76rem;color:#6cd3a4;font-weight:700;margin-bottom:.45rem">Typische Beispiele</div>
+          <ul><li>Unternehmen, das KI für Bilder, Videos und Texte nutzt</li><li>Onlineshop, der einen erkennbar fremden Chatbot einbindet</li><li>Agentur, die KI-Assets für Kunden produziert</li></ul>
+        </div>
+      </div>
+    </div>`,
+  foot:'* Die Einordnung hängt von der konkreten technischen und gestalterischen Umsetzung ab. Die meisten KMU sind Betreiber.'
+}));
+
+/* --- 10 Relevanz-Check --- */
+slides.push(S({
+  nav:'Grundlagen', eyebrow:'Relevanz-Check',
+  title:'Was betrifft Sie konkret?',
+  lead:'Nicht jede Kennzeichnungspflicht ist für alle Unternehmen gleich relevant. Diese Einschätzung hilft bei der Priorisierung im Workshop.',
+  body:`
+    <div class="stats">
+      <div class="card">
+        <div class="stat-top"><span class="stat-pct">95 %</span><h3 style="margin:0">Die meisten Teilnehmer</h3></div>
+        ${ph('Content-Produktion','wide', 'relevanzHoch')}
+        <ul style="margin-top:.8rem"><li><b style="color:#fff">Deepfakes</b> (Art. 50 Abs. 4 S. 1–3)</li><li><b style="color:#fff">KI-Texte</b> (Art. 50 Abs. 4 S. 4–5)</li></ul>
+      </div>
+      <div class="card">
+        <div class="stat-top"><span class="stat-pct mid">25 %</span><h3 style="margin:0">Manche Teilnehmer</h3></div>
+        ${ph('Eigene KI-Lösung','wide', 'relevanzMittel')}
+        <ul style="margin-top:.8rem"><li><b style="color:#fff">Interaktion mit KI</b> (Art. 50 Abs. 1)</li><li><b style="color:#fff">Maschinenlesbarkeit</b> (Art. 50 Abs. 2)</li></ul>
+      </div>
+      <div class="card">
+        <div class="stat-top"><span class="stat-pct low">5 %</span><h3 style="margin:0">Nur wenige Teilnehmer</h3></div>
+        ${ph('Biometrie / Kamera','wide', 'relevanzNiedrig')}
+        <ul style="margin-top:.8rem"><li><b style="color:#fff">Emotionserkennung &amp; biometrische Kategorisierung</b> (Art. 50 Abs. 3)</li></ul>
+      </div>
+    </div>`
+}));
+
+/* --- 11 SEC Interaktion --- */
+slides.push(SEC({nav:'Interaktion mit KI', num:'TEIL 02 · 1 VON 5', title:'Direkte Interaktion mit KI', art:'Art. 50 Abs. 1 AI Act'}));
+
+/* --- 12 Interaktion Grundsatz --- */
+slides.push(S({
+  nav:'Interaktion mit KI', eyebrow:'Art. 50 Abs. 1 AI Act', badge:{t:'anbieter',l:'Anbieter'},
+  title:'Direkte Interaktion mit KI',
+  lead:'<b>Grundsatz:</b> Wenn Menschen ohne es zu merken direkt mit einem KI-System interagieren, soll ihnen das bewusst gemacht werden.',
+  body:`
+    <div class="tv">
+      ${ph('Chatbot-Interaktion','tall', 'interaktionChat')}
+      <div class="check">
+        <div class="check-i"><div class="k">1</div><div class="t"><b>KI-System</b> — Ein KI-System ist im Einsatz.</div></div>
+        <div class="check-i"><div class="k">2</div><div class="t"><b>Direkte Interaktion</b> — Eine natürliche Person interagiert unmittelbar mit dem KI-System.</div></div>
+        <div class="check-i"><div class="k">3</div><div class="t"><b>Keine Ausnahme einschlägig</b> — KI ist weder zur Strafverfolgung zugelassen noch offensichtlich als KI erkennbar.</div></div>
+        <div class="check-i" style="border-color:rgba(63,178,127,.36);background:rgba(63,178,127,.06)"><div class="k" style="background:rgba(63,178,127,.2);color:#6cd3a4">✓</div><div class="t"><b style="color:#6cd3a4">Transparenzpflicht</b> — Informationspflicht nach Art. 50 Abs. 1 AI Act.</div></div>
+      </div>
+    </div>`
+}));
+
+/* --- 13 Wann und wie kennzeichnen --- */
+slides.push(S({
+  nav:'Interaktion mit KI', eyebrow:'Art. 50 Abs. 1, 5 AI Act', badge:{t:'anbieter',l:'Anbieter'},
+  title:'Wann und wie kennzeichnet man richtig?',
+  lead:'Nutzer müssen <b>spätestens zum Zeitpunkt der <u>ersten Interaktion</u></b> barrierefrei sowie in klarer und eindeutiger Weise informiert werden. Feste Textvorgaben gibt es nicht.',
+  body:`
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-bottom:.8rem">Beispiel: KI-Chatbot</h3>
+        ${ph('Chat-Widget mit Hinweis','tall', 'chatbotBeispiel')}
+        <ul style="margin-top:.8rem">
+          <li>Der Hinweis ist sofort sichtbar</li>
+          <li>Klar und allgemeinverständlich formuliert</li>
+          <li>Gute Lesbarkeit durch Schriftgröße, Farbe und Kontrast</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:.8rem">Beispiel: Voice-KI (z.&nbsp;B. Kundenhotline)</h3>
+        ${ph('Telefon mit Audio-Hinweis','tall', 'voiceBeispiel')}
+        <ul style="margin-top:.8rem">
+          <li>Der Hinweis erfolgt zu Beginn des Gesprächs</li>
+          <li>Klar und allgemeinverständlich formuliert</li>
+          <li>Deutlich verständlich gesprochen</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><strong>Formulierungsbeispiel:</strong> „Sie sprechen mit einem KI-gestützten Sprachassistenten. Antworten können Fehler enthalten.“</div>`
+}));
+
+/* --- 14 Ausnahme offensichtlich --- */
+slides.push(S({
+  nav:'Interaktion mit KI', eyebrow:'Art. 50 Abs. 1 AI Act', badge:{t:'anbieter',l:'Anbieter'},
+  title:'Ausnahme: KI ist „offensichtlich“',
+  lead:'Wenn für Nutzer <b>offensichtlich erkennbar</b> ist, dass sie es mit einem KI-System zu tun haben, muss nicht gekennzeichnet werden (Klassiker-Beispiel: humanoider Roboter).',
+  body:`
+    <div class="grid g3">
+      <div class="card ok">
+        <div class="split-head"><span class="dot-i g">✓</span> Offensichtlich KI</div>
+        ${ph('Chat: "KI-Chatbot"','wide', 'offensichtlichJa')}
+        <ul style="margin-top:.7rem"><li>Klare Bezeichnung („KI-Chatbot“)</li><li>Bot-Icon / KI-Symbol</li><li>Begrüßung mit Hinweis auf KI</li></ul>
+      </div>
+      <div class="card warn">
+        <div class="split-head"><span class="dot-i a">?</span> Grenzfall</div>
+        ${ph('Chat: "Support"','wide', 'offensichtlichGrenz')}
+        <ul style="margin-top:.7rem"><li>Bezeichnung eher neutral („Support“)</li><li>Bot-Icon vorhanden</li><li>Kein ausdrücklicher Hinweis auf KI</li></ul>
+        <div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#e0a83c">Reicht das aus? → Wohl nicht.</div>
+      </div>
+      <div class="card no">
+        <div class="split-head"><span class="dot-i r">✕</span> Nicht offensichtlich</div>
+        ${ph('Chat mit Person "Lisa"','wide', 'offensichtlichNein')}
+        <ul style="margin-top:.7rem"><li>Menschlicher Name und Foto</li><li>Kein Hinweis auf KI</li><li>Für den Nutzer nicht erkennbar, dass KI im Spiel ist</li></ul>
+      </div>
+    </div>
+    <div class="callout green"><strong>Compliance-Empfehlung:</strong> KI-Chatbots und KI-Voicebots sollten grundsätzlich als solche gekennzeichnet werden. Das schafft Transparenz, erfüllt die Pflicht sicher und vermeidet rechtliche Unsicherheiten.</div>`
+}));
+
+/* --- 15 SEC Maschinenlesbarkeit --- */
+slides.push(SEC({nav:'Maschinenlesbarkeit', num:'TEIL 03 · 2 VON 5', title:'Maschinenlesbarkeit von KI-Inhalten', art:'Art. 50 Abs. 2 AI Act'}));
+
+/* --- 16 Maschinenlesbarkeit --- */
+slides.push(S({
+  nav:'Maschinenlesbarkeit', eyebrow:'Art. 50 Abs. 2 AI Act', badge:{t:'anbieter',l:'Anbieter'},
+  title:'Maschinenlesbarkeit von KI-Content',
+  lead:'Anbieter von KI-Systemen müssen <b>technisch</b> sicherstellen, dass KI-generierte sowie KI-manipulierte Inhalte nach aktuellem Stand der Technik <b>maschinenlesbar gekennzeichnet</b> werden.',
+  body:`
+    <div class="chain" style="grid-template-columns:1fr auto 1fr auto 1fr auto 1fr">
+      <div class="card"><h3>KI-System</h3><p>z.&nbsp;B. ChatGPT, Claude, Gemini</p>${ph('System','wide', 'mlSystem')}</div>
+      <div class="arw">→</div>
+      <div class="card"><h3>Generiert oder manipuliert Inhalte</h3><div class="grid g2" style="margin-top:.6rem">${ph('Bild', '', 'mlBild')}${ph('Video', '', 'mlVideo')}${ph('Audio', '', 'mlAudio')}${ph('Text', '', 'mlText')}</div></div>
+      <div class="arw">→</div>
+      <div class="card acc"><h3>Maschinenlesbare Kennzeichnung</h3><p>Das KI-System muss die Inhalte bei Generierung maschinenlesbar kennzeichnen.</p>${ph('Metadaten / Watermark','wide', 'mlKennzeichnung')}</div>
+      <div class="arw">→</div>
+      <div class="card"><h3>Dritte erkennen technisch</h3><p>„KI-generiert“ — z.&nbsp;B. Plattformen, Suchmaschinen, CMS</p>${ph('Erkennung','wide', 'mlErkennung')}</div>
+    </div>
+    <div class="grid g2" style="margin-top:.85rem">
+      <div class="card"><h3>Ausnahme: Unterstützende Standardbearbeitung</h3><p>z.&nbsp;B. Helligkeit, Kontrast, Farbkorrektur, Zuschnitt.</p></div>
+      <div class="card"><h3>Ausnahme: Strafverfolgung</h3><p>Wenn gesetzlich zur Aufdeckung, Verhütung, Ermittlung oder Verfolgung von Straftaten zugelassen.</p></div>
+    </div>`
+}));
+
+/* --- 17 Wie maschinenlesbar --- */
+slides.push(S({
+  nav:'Maschinenlesbarkeit', eyebrow:'Art. 50 Abs. 2, 5 AI Act', badge:{t:'anbieter',l:'Anbieter'},
+  title:'Wie kennzeichnet man maschinenlesbar?',
+  lead:'Ziel ist eine möglichst feste Verbindung zwischen Content und Kennzeichnung. Auf <b>visuelle Sichtbarkeit</b> der Kennzeichnung für die Nutzer kommt es dabei nicht an.',
+  body:`
+    <div class="grid g2">
+      <div class="card">
+        <div class="num">1</div>
+        <h3>In Metadaten</h3>
+        <p>Die Kennzeichnung wird in den Metadaten des Inhalts hinterlegt und kann von Systemen ausgelesen werden.</p>
+        ${ph('Bild + Metadaten-JSON','wide', 'mlMetadaten')}
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h3>Wasserzeichen oder vergleichbare technische Informationen</h3>
+        <p>Die Kennzeichnung ist im Inhalt selbst eingebettet und kann automatisch erkannt werden.</p>
+        ${ph('Bild + eingebettetes Wasserzeichen','wide', 'mlWatermark')}
+      </div>
+    </div>
+    <div class="grid g4" style="margin-top:.85rem">
+      <div class="card"><h3>Wirksam</h3><p>Für Computer automatisch erkennbar.</p></div>
+      <div class="card"><h3>Interoperabel</h3><p>Breit nutzbar über verschiedene Systeme und Dienste.</p></div>
+      <div class="card"><h3>Belastbar</h3><p>Schwer entfernbar oder manipulierbar.</p></div>
+      <div class="card"><h3>Zuverlässig</h3><p>Genau und verlässlich in der Erkennung.</p></div>
+    </div>`,
+  foot:'Etablierte Standards: C2PA / Content Credentials, IPTC-Metadaten, SynthID und vergleichbare Verfahren.'
+}));
+
+/* --- 18 Ist das relevant für mich --- */
+slides.push(S({
+  nav:'Maschinenlesbarkeit', eyebrow:'„Ich bin doch nicht OpenAI“', badge:{t:'anbieter',l:'Anbieter'},
+  title:'Ist all das relevant für mich?',
+  lead:'Für „Basisnutzer“ weniger, wohl aber für KI-Fortgeschrittene — speziell bei der <b>Entwicklung einer eigenen KI-Lösung, die ein fremdes KI-Basismodell nutzt</b>.',
+  body:`
+    <div class="tv">
+      ${ph('Vibe Coding / eigene KI-Lösung','tall', 'vibeCoding')}
+      <div>
+        <div class="check">
+          <div class="check-i"><div class="k">✓</div><div class="t"><b>Sie nutzen ChatGPT im Browser</b> — Sie sind Betreiber. Abs. 2 trifft Sie nicht.</div></div>
+          <div class="check-i"><div class="k">!</div><div class="t"><b>Sie bauen einen eigenen Assistenten</b> auf API-Basis, gebrandet unter eigener Marke — die Anbieterrolle rückt näher.</div></div>
+          <div class="check-i"><div class="k">!</div><div class="t"><b>Automatisierungen mit n8n, Make &amp; Co.</b> die eigenständig Content generieren und veröffentlichen — Rolle sauber prüfen.</div></div>
+        </div>
+        <div class="callout"><strong>Merksatz:</strong> Je mehr eigenes Branding und eigene Verantwortung, desto eher rutschen Sie in die Anbieterrolle nach Art. 25 AI Act.</div>
+      </div>
+    </div>`
+}));
+
+/* --- 19 SEC Emotionserkennung --- */
+slides.push(SEC({nav:'Emotionserkennung', num:'TEIL 04 · 3 VON 5', title:'Emotionserkennung &amp; Biometrie', art:'Art. 50 Abs. 3 AI Act'}));
+
+/* --- 20 Emotionserkennung --- */
+slides.push(S({
+  nav:'Emotionserkennung', eyebrow:'Art. 50 Abs. 3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Emotionserkennung &amp; Biometrie',
+  lead:'Betreiber von KI-Systemen, die <b>Emotionen erkennen</b> oder <b>Personen biometrisch kategorisieren</b>, müssen Betroffene über den Einsatz informieren. Am <b>Arbeitsplatz</b> und in <b>Bildungseinrichtungen</b> sind solche Systeme grundsätzlich verboten (Art. 5 Abs. 1 f AI Act).',
+  body:`
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-bottom:.8rem">Emotionserkennung</h3>
+        ${ph('Gesicht → KI → Emotionen','tall', 'emotionErkennung')}
+        <p style="margin-top:.8rem;text-align:center">z.&nbsp;B. Freude, Zufriedenheit, Ärger, Traurigkeit</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:.8rem">Biometrische Kategorisierung</h3>
+        ${ph('Kamera → Merkmalszuordnung','tall', 'emotionBiometrie')}
+        <ul style="margin-top:.8rem"><li>Alter</li><li>Geschlecht</li><li>Hautfarbe</li><li>Weitere biometrische Merkmale</li></ul>
+      </div>
+    </div>
+    <div class="callout red"><strong>Doppelte Hürde:</strong> Neben Art. 50 Abs. 3 greift regelmäßig auch die DSGVO — biometrische Daten sind besondere Kategorien personenbezogener Daten nach Art. 9 DSGVO.</div>`,
+  foot:'* Ausnahme: gesetzlich zugelassene Strafverfolgung.'
+}));
+
+/* --- 21 Praxisbeispiel --- */
+slides.push(S({
+  nav:'Emotionserkennung', eyebrow:'Art. 50 Abs. 3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Praxisbeispiel',
+  lead:'Vor einem Einkaufszentrum wird ein digitales Werbedisplay mit Kamera aufgestellt. Eine KI erkennt die Emotionen von Passanten, die das Display betrachten, und passt die Werbung entsprechend an.',
+  body:`
+    <div class="tv">
+      ${ph('Digital-Signage mit Kamera','tall', 'emotionDisplay')}
+      <div>
+        <div class="callout red" style="margin-top:0;font-size:.95rem;padding:1.2rem 1.4rem">
+          <strong>Ergebnis:</strong> Die Passanten müssen über den Betrieb des Emotionserkennungssystems informiert werden.
+        </div>
+        <div class="check" style="margin-top:1rem">
+          <div class="check-i"><div class="k">1</div><div class="t">Hinweis <b>vor</b> dem Erfassungsbereich anbringen — nicht erst daneben.</div></div>
+          <div class="check-i"><div class="k">2</div><div class="t">Klar, verständlich, gut lesbar — kein Kleingedrucktes.</div></div>
+          <div class="check-i"><div class="k">3</div><div class="t">Parallel DSGVO-Informationspflichten nach Art. 13 erfüllen.</div></div>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* --- 22 SEC Deepfakes --- */
+slides.push(SEC({nav:'Deepfakes', num:'TEIL 05 · 4 VON 5', title:'Deepfakes', art:'Art. 50 Abs. 4 S. 1–3 AI Act'}));
+
+/* --- 23 Das sind Deepfakes --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Art. 50 Abs. 4 S. 1–3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Das sind Deepfakes',
+  lead:'Ein Deepfake ist ein durch KI erzeugter oder manipulierter Bild-, Ton- oder Videoinhalt, der <b>wirklichen Personen, Gegenständen, Orten, Einrichtungen oder Ereignissen ähnelt</b> und einer Person fälschlicherweise als echt oder wahrheitsgemäß erscheinen könnte (Art. 3 Nr. 60 AI Act).',
+  body:`
+    <div class="grid g5">
+      <div class="card"><h3 style="text-align:center;font-size:.85rem">Person</h3>${ph('Person','tall', 'dfPerson')}</div>
+      <div class="card"><h3 style="text-align:center;font-size:.85rem">Gegenstand</h3>${ph('Gegenstand','tall', 'dfGegenstand')}</div>
+      <div class="card"><h3 style="text-align:center;font-size:.85rem">Ort</h3>${ph('Ort','tall', 'dfOrt')}</div>
+      <div class="card"><h3 style="text-align:center;font-size:.85rem">Einrichtung</h3>${ph('Einrichtung','tall', 'dfEinrichtung')}</div>
+      <div class="card"><h3 style="text-align:center;font-size:.85rem">Ereignis</h3>${ph('Ereignis','tall', 'dfEreignis')}</div>
+    </div>
+    <div class="callout"><strong>Wichtig:</strong> Der Begriff ist deutlich weiter als der Alltagsgebrauch — es geht nicht nur um gefälschte Gesichter von Prominenten.</div>`
+}));
+
+/* --- 24 Formate --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Art. 50 Abs. 4 S. 1–3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Welche Formate können Deepfakes sein?',
+  lead:'Für <b>Texte</b> gelten Spezialregeln (dazu gleich mehr) — sie fallen nicht unter den Deepfake-Begriff.',
+  body:`
+    <div class="grid g3">
+      <div class="card"><h3 style="text-align:center">Bild</h3>${ph('Bild-Deepfake','tall', 'dfBild')}<p style="margin-top:.8rem;text-align:center">z.&nbsp;B. für Social-Media-Posts, Newsletter oder eine Printzeitung</p></div>
+      <div class="card"><h3 style="text-align:center">Audio</h3>${ph('Audio-Deepfake','tall', 'dfAudio')}<p style="margin-top:.8rem;text-align:center">z.&nbsp;B. für Podcast-Stimmen, Nachrichtensprecher</p></div>
+      <div class="card"><h3 style="text-align:center">Video</h3>${ph('Video-Deepfake','tall', 'dfVideo')}<p style="margin-top:.8rem;text-align:center">z.&nbsp;B. Katastrophenvideos, Newsvideos</p></div>
+    </div>`
+}));
+
+/* --- 25 Wann liegt (k)ein Deepfake vor --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Art. 50 Abs. 4 S. 1–3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Wann liegt (k)ein Deepfake vor?',
+  lead:'Entscheidend ist die <b>Ähnlichkeit zur Wirklichkeit</b>.',
+  body:`
+    <div class="grid g2">
+      <div class="card no">
+        <div class="split-head"><span class="dot-i r">✕</span> Kein Deepfake</div>
+        <div class="grid g2">${ph('Katze im All', '', 'dfKeinKatze')}${ph('Comic-Held', '', 'dfKeinComic')}</div>
+        <div style="margin-top:.9rem">
+          <h3>Kein Bezug zur Wirklichkeit</h3>
+          <p>Keine Ähnlichkeit zu Personen, Gegenständen, Orten, Einrichtungen oder Ereignissen.</p>
+        </div>
+      </div>
+      <div class="card ok">
+        <div class="split-head"><span class="dot-i g">✓</span> Deepfake</div>
+        <div class="grid g3">${ph('Person', '', 'dfJaPerson')}${ph('Gebäude', '', 'dfJaGebaeude')}${ph('Voice-Scam', '', 'dfJaScam')}</div>
+        <div style="margin-top:.9rem">
+          <h3>Ähnelt einer wirklichen Person, einem Gegenstand, Ort, einer Einrichtung oder einem Ereignis</h3>
+          <p>… und würde einer Person fälschlicherweise als echt oder wahrheitsgemäß erscheinen.</p>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* --- 26 KI-generierte Produktbilder --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Check: Wirkt das KI-Bild wie ein echtes Foto?', badge:{t:'betreiber',l:'Betreiber'},
+  title:'KI-generierte Produktbilder',
+  lead:'Der praxisrelevanteste Fall im E-Commerce und Marketing. Maßgeblich ist, ob beim Betrachter ein <b>Authentizitätseindruck</b> entsteht.',
+  body:`
+    <div class="grid g4">
+      <div class="card ok">${ph('Originalfoto','wide', 'prodOriginal')}<h3 style="margin-top:.8rem">Originalfoto</h3><p>Echtes Foto des konkreten Produkts.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#6cd3a4">Keine Kennzeichnung erforderlich</div></div>
+      <div class="card no">${ph('KI-Bild wie Foto','wide', 'prodKiFoto')}<h3 style="margin-top:.8rem">KI-Bild wie Foto</h3><p>Wirkt wie eine echte Produktfotografie in realer Umgebung.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#f08b8b">Kennzeichnung erforderlich</div></div>
+      <div class="card ok">${ph('Technische Zeichnung','wide', 'prodTechnisch')}<h3 style="margin-top:.8rem">Technische Visualisierung</h3><p>Offensichtlich eine Visualisierung, kein Foto.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#6cd3a4">Keine Kennzeichnung erforderlich</div></div>
+      <div class="card ok">${ph('Illustration','wide', 'prodIllustration')}<h3 style="margin-top:.8rem">Illustration / Fantasie</h3><p>Stilisiert und erkennbar nicht realistisch.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#6cd3a4">Keine Kennzeichnung erforderlich</div></div>
+    </div>
+    <div class="callout"><strong>Skala:</strong> Kein Authentizitätseindruck → keine Kennzeichnung &nbsp;·&nbsp; Authentizitätseindruck → Kennzeichnung erforderlich.</div>`
+}));
+
+/* --- 27 So kennzeichnen --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Wann, wie, wo?', badge:{t:'betreiber',l:'Betreiber'},
+  title:'So sollten Sie Deepfakes kennzeichnen',
+  lead:'<b>Spätestens bei erster Interaktion</b> müssen Texthinweise oder die <b>EU-AI-Icons</b> klar, verständlich, sichtbar und barrierefrei gezeigt werden. Der rechtlich sicherste Weg: Kennzeichnung <b>direkt im Content</b>.',
+  body:`
+    <div class="grid g3">
+      <div class="card">
+        <h3 style="text-align:center;margin-bottom:.7rem">Bilder</h3>
+        ${ph('Bild mit AI-GENERATED-Label','wide', 'kennzBild')}
+        <ul style="margin-top:.7rem"><li><span class="tick">✓</span> Direkt im Bild — EU-Icon oder Textlabel</li><li><span class="cross">✕</span> Nicht in der Bildunterschrift oder daneben</li></ul>
+      </div>
+      <div class="card">
+        <h3 style="text-align:center;margin-bottom:.7rem">Videos</h3>
+        ${ph('Video mit AI-MODIFIED-Label','wide', 'kennzVideo')}
+        <ul style="margin-top:.7rem"><li><span class="tick">✓</span> Im Video sichtbar platziert</li><li><span class="tick">✓</span> Wiederholung nach Unterbrechungen (z.&nbsp;B. Werbung)</li><li><span class="cross">✕</span> Nicht nur in Beschreibung / Captions</li></ul>
+      </div>
+      <div class="card">
+        <h3 style="text-align:center;margin-bottom:.7rem">Audio</h3>
+        ${ph('Waveform mit Audiohinweis','wide', 'kennzAudio')}
+        <ul style="margin-top:.7rem"><li><span class="tick">✓</span> Hörbarer Hinweis statt visuellem Icon</li><li><span class="tick">✓</span> Zu Beginn der Aufnahme und nach Unterbrechungen</li></ul>
+      </div>
+    </div>
+    <div class="callout"><strong>Beispielformulierung Audio:</strong> „Diese Aufnahme wurde mit KI erzeugt.“</div>`
+}));
+
+/* --- 28 AI Icons --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Code of Practice on Transparency of AI-Generated Content', badge:{t:'betreiber',l:'Betreiber'},
+  title:'AI-Icons der EU',
+  lead:'Die Verwendung der AI-Icons der EU ist <b>freiwillig</b>. Man kann auch <b>eigene KI-Kennzeichnungsicons</b> nutzen oder <b>reine Texthinweise</b> wie „KI-manipuliert“ (bzw. entsprechende sprachliche Hinweise bei Audioinhalten).',
+  body:`
+    <div class="aiicons">
+      <div class="aii"><div class="chip round">AI</div><div class="cap">Grundlegendes<br>Icon</div></div>
+      <div class="aii"><div class="chip">AI <span class="sm">GENERATED</span></div><div class="cap">Icon für vollständig<br>KI-generierte Inhalte</div></div>
+      <div class="aii"><div class="chip">AI <span class="sm">MODIFIED</span></div><div class="cap">Icon für<br>KI-manipulierte Inhalte</div></div>
+    </div>
+    <div class="callout" style="margin-top:2rem"><strong>Hinweis:</strong> Der Code of Practice ist freiwillig — die Pflichten aus Art. 50 AI Act selbst sind verbindlich.</div>`,
+  foot:'Download: digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content'
+}));
+
+/* --- 29 Ausnahmen Deepfakes --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Art. 50 Abs. 4 S. 2–3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Ausnahmen',
+  lead:'Zwei Konstellationen lockern die Deepfake-Kennzeichnung — eine vollständig, eine nur in der Ausgestaltung.',
+  body:`
+    <div class="grid g2">
+      <div class="card">
+        <h3>Ausnahme: Strafverfolgung</h3>
+        <div class="sub">Art. 50 Abs. 4 S. 2 AI Act</div>
+        ${ph('Ermittlungsarbeit','wide', 'ausnahmePolizei')}
+        <ul style="margin-top:.8rem"><li>Deepfakes, die zur Aufdeckung, Verhütung, Ermittlung oder Verfolgung von Straftaten eingesetzt werden</li></ul>
+        <div style="margin-top:.8rem;font-size:.82rem;font-weight:700;color:#6cd3a4">→ Keine Kennzeichnungspflicht</div>
+      </div>
+      <div class="card">
+        <h3>Eingeschränkte Kennzeichnung</h3>
+        <div class="sub">Art. 50 Abs. 4 S. 3 AI Act</div>
+        <div class="grid g4">${ph('Künstlerisch', '', 'ausnahmeKuenstlerisch')}${ph('Kreativ', '', 'ausnahmeKreativ')}${ph('Satirisch', '', 'ausnahmeSatirisch')}${ph('Fiktional', '', 'ausnahmeFiktional')}</div>
+        <ul style="margin-top:.8rem"><li>Teil eines offensichtlich künstlerischen, kreativen, satirischen, fiktionalen oder analogen Werks</li><li>Kennzeichnung nur in geeigneter Weise, die den Genuss des Werks nicht beeinträchtigt</li><li>z.&nbsp;B. dezent im Abspann, in der Beschreibung oder in den Credits</li></ul>
+      </div>
+    </div>`
+}));
+
+/* --- 30 Rückwirkende Kennzeichnung --- */
+slides.push(S({
+  nav:'Deepfakes', eyebrow:'Social-Media-Posts, Blogbeiträge & Co.', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Rückwirkende Kennzeichnung?',
+  lead:'Grundsätzlich gibt es <b>keine rückwirkende Kennzeichnungspflicht</b>. Bei Bild-, Ton- und Videoinhalten kommt es auf den Zeitpunkt der <b><u>Erzeugung</u></b> an; bei Texten zusätzlich auf die Veröffentlichung.',
+  body:`
+    <div class="grid g2">
+      <div class="card ok">
+        <div class="split-head"><span class="dot-i g">✓</span> Bloß weiter öffentlich abrufbar</div>
+        ${ph('Bestehender Post','wide', 'rueckwirkendAlt')}
+        <p style="margin-top:.8rem">Vor dem Stichtag erzeugt und veröffentlicht, bleibt einfach online.</p>
+        <div style="margin-top:.7rem;font-size:.8rem;font-weight:700;color:#6cd3a4">Keine nachträgliche Kennzeichnung erforderlich</div>
+      </div>
+      <div class="card no">
+        <div class="split-head"><span class="dot-i r">!</span> Erneut veröffentlicht / gepostet / im Newsletter versendet</div>
+        <div class="grid g3">${ph('Erneut gepostet', '', 'rueckwirkendPost')}${ph('Newsletter', '', 'rueckwirkendNewsletter')}${ph('Neu publiziert', '', 'rueckwirkendNeu')}</div>
+        <p style="margin-top:.8rem">Nach dem Stichtag erneut in den Verkehr gebracht.</p>
+        <div style="margin-top:.7rem;font-size:.8rem;font-weight:700;color:#f08b8b">Kennzeichnung erforderlich</div>
+      </div>
+    </div>
+    <div class="callout"><strong>Stichtag:</strong> 02.08.2026 — davor liegt der Altbestand, danach greift die Pflicht bei jeder Neuveröffentlichung.</div>`
+}));
+
+/* --- 31 SEC KI-Texte --- */
+slides.push(SEC({nav:'KI-Texte', num:'TEIL 06 · 5 VON 5', title:'KI-Texte', art:'Art. 50 Abs. 4 S. 4–5 AI Act'}));
+
+/* --- 32 Einstiegsbeispiel --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Content, Content, Content', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Einstiegsbeispiel',
+  lead:'Ein Unternehmen möchte auf seiner <b>Website</b> täglich einen <b>KI-generierten Blogbeitrag</b> zu aktuellen Wirtschaftsnews veröffentlichen — inkl. Kommentierung und Meinung. Bei Veröffentlichung soll automatisch ein <b>Social-Media-Post</b> generiert und veröffentlicht werden, z.&nbsp;B. bei LinkedIn.',
+  body:`
+    <div class="chain" style="grid-template-columns:1fr auto 1fr auto 1fr auto 1fr">
+      <div class="card"><h3>Täglich: Branchennews</h3>${ph('News-Quelle','wide', 'textNews')}</div>
+      <div class="arw">→</div>
+      <div class="card"><h3>KI generiert Blogbeitrag</h3>${ph('KI-Generierung','wide', 'textKiGen')}</div>
+      <div class="arw">→</div>
+      <div class="card"><h3>Automatisch im Blog veröffentlicht</h3>${ph('CMS / WordPress','wide', 'textCms')}</div>
+      <div class="arw">→</div>
+      <div class="card"><h3>Automatisch auf Social Media</h3>${ph('LinkedIn-Post','wide', 'textLinkedin')}</div>
+    </div>
+    <div class="callout"><strong>Die Frage für den Workshop:</strong> Muss dieser Beitrag gekennzeichnet werden? Die nächste Folie liefert den Entscheidungspfad.</div>`
+}));
+
+/* --- 33 Entscheidungsbaum --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Ziel: Sicherung von Authentizität', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Wann muss man KI-Texte kennzeichnen?',
+  body:`
+    <div class="tree">
+      <div class="tree-row"><div class="tree-q">Erzeugen oder manipulieren Sie Text mit einem <b>KI-System</b>?</div><div class="tree-y">✓ Ja ↓</div><div class="tree-n">✕ Nein → keine Pflicht</div></div>
+      <div class="tree-row"><div class="tree-q">Ist das KI-System für die <b>Strafverfolgung</b> zugelassen?</div><div class="tree-n">✕ Nein ↓</div><div class="tree-y">✓ Ja → keine Pflicht</div></div>
+      <div class="tree-row"><div class="tree-q">Wird der KI-Text im Internet oder offline <b>veröffentlicht</b>?</div><div class="tree-y">✓ Ja ↓</div><div class="tree-n">✕ Nein → keine Pflicht</div></div>
+      <div class="tree-row"><div class="tree-q">Betrifft der KI-Text eine <b>Angelegenheit von öffentlichem Interesse</b>?</div><div class="tree-y">✓ Ja ↓</div><div class="tree-n">✕ Nein → keine Pflicht</div></div>
+      <div class="tree-row"><div class="tree-q">Wurde der Text vorher <b>menschlich überprüft</b> UND übernimmt jemand die <b>inhaltliche Verantwortung</b>?</div><div class="tree-n">✕ Nein ↓</div><div class="tree-y">✓ Ja → keine Pflicht</div></div>
+      <div class="tree-end">
+        <div class="pill red">Kennzeichnungspflicht</div>
+        <div class="pill green">Keine Kennzeichnungspflicht</div>
+      </div>
+    </div>`
+}));
+
+/* --- 34 Was ist Veröffentlichung --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Art. 50 Abs. 4 S. 4 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Was ist eine Veröffentlichung?',
+  lead:'Der Abdruck in <b>Printmedien</b> (Zeitung, Magazin) stellt stets eine Veröffentlichung dar. Bei Internetbeispielen muss man genauer hinsehen.',
+  body:`
+    <div class="tv">
+      ${ph('Stufen: DM → kleine Gruppe → große Gruppe → öffentlich','tall', 'veroeffStufen')}
+      <div class="check">
+        <div class="check-i" style="border-left:3px solid #3fb27f"><div class="k" style="background:rgba(63,178,127,.18);color:#6cd3a4">✓</div><div class="t"><b>Private Direktnachricht</b> — keine Veröffentlichung.</div></div>
+        <div class="check-i" style="border-left:3px solid #3fb27f"><div class="k" style="background:rgba(63,178,127,.18);color:#6cd3a4">✓</div><div class="t"><b>Kleine Freundesgruppe</b> (5–10 Personen) — regelmäßig keine Veröffentlichung.</div></div>
+        <div class="check-i" style="border-left:3px solid #e0a83c"><div class="k" style="background:rgba(224,168,60,.18);color:#e0a83c">!</div><div class="t"><b>Große geschlossene Gruppe</b> — Veröffentlichung möglich. Keine feste Grenze, ab ca. 10 Personen denkbar.</div></div>
+        <div class="check-i" style="border-left:3px solid #e05252"><div class="k" style="background:rgba(224,82,82,.18);color:#f08b8b">●</div><div class="t"><b>Öffentliche Posts</b> — Veröffentlichung. Social Media, Onlineforen, auch hinter Paywalls.</div></div>
+      </div>
+    </div>`
+}));
+
+/* --- 35 Öffentliches Interesse --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Art. 50 Abs. 4 S. 4 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Angelegenheit von öffentlichem Interesse',
+  lead:'Entscheidend ist die <b>Veröffentlichungsintention</b> — nicht das Thema allein.',
+  body:`
+    <div class="grid g2">
+      <div class="card ok">
+        <div class="split-head"><span class="dot-i g">✓</span> Fällt darunter</div>
+        <p>Texte zu Themen, die für die Öffentlichkeit relevant sind und darauf abzielen, am <b style="color:#6cd3a4">Meinungsbildungsprozess</b> mitzuwirken.</p>
+        <div class="grid g4" style="margin-top:.8rem">${ph('Politik', '', 'interessePolitik')}${ph('Gesellschaft', '', 'interesseGesellschaft')}${ph('Wirtschaft', '', 'interesseWirtschaft')}${ph('Kultur', '', 'interesseKultur')}</div>
+        <div style="margin-top:.8rem">${ph('Beispiel: Nachrichtenbeitrag','wide', 'interesseBeispiel')}</div>
+      </div>
+      <div class="card no">
+        <div class="split-head"><span class="dot-i r">✕</span> Fällt nicht darunter</div>
+        <p>Texte, die primär werben, verkaufen oder rein produktbezogen informieren.</p>
+        <div class="grid g4" style="margin-top:.8rem">${ph('Produkttexte', '', 'werbungProdukt')}${ph('Werbetexte', '', 'werbungWerbe')}${ph('Social Posts', '', 'werbungSocial')}${ph('Newsletter', '', 'werbungNews')}</div>
+        <div style="margin-top:.8rem">${ph('Beispiel: Werbeanzeige','wide', 'werbungBeispiel')}</div>
+      </div>
+    </div>`
+}));
+
+/* --- 36 Menschliche Prüfung --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Art. 50 Abs. 4 S. 5 AI Act', badge:{t:'betreiber',l:'Betreiber'},
+  title:'Menschliche Prüfung + Verantwortung',
+  lead:'Wenn der KI-Text vor der Veröffentlichung menschlich überprüft oder redaktionell kontrolliert wird <b>UND</b> ein Mensch oder Unternehmen die inhaltliche Verantwortung übernimmt, fällt die Kennzeichnungspflicht weg. <em>Empfehlung: Dokumentation.</em>',
+  body:`
+    <div class="grid g2">
+      <div class="card">
+        <h3>Menschliche Überprüfung / redaktionelle Kontrolle</h3>
+        ${ph('Person prüft Text am Bildschirm','wide', 'pruefungMensch')}
+        <div class="grid g3" style="margin-top:.9rem">
+          <div style="text-align:center;font-size:.74rem;color:#9aa3b2">Inhalt gelesen und verstanden</div>
+          <div style="text-align:center;font-size:.74rem;color:#9aa3b2">Inhalt bewertet und Freigabe erteilt</div>
+          <div style="text-align:center;font-size:.74rem;color:#9aa3b2">Änderungen möglich, aber <b style="color:#fff">nicht erforderlich</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Redaktionelle Verantwortung</h3>
+        ${ph('Verantwortungsübernahme','wide', 'pruefungVerantwortung')}
+        <p style="margin-top:.9rem">Eine natürliche oder juristische Person trägt die redaktionelle Verantwortung für die Veröffentlichung.</p>
+      </div>
+    </div>
+    <div class="callout red"><strong>Achtung:</strong> Reine Rechtschreib- oder Formalprüfung genügt nicht. Verlangt ist eine bewusste inhaltliche Prüfung auf Richtigkeit, Plausibilität und Quellen — mit echter Möglichkeit, den Text zu ändern oder abzulehnen.</div>`
+}));
+
+/* --- 37 So KI-Texte kennzeichnen --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Wann, wie, wo?', badge:{t:'betreiber',l:'Betreiber'},
+  title:'So sollten Sie KI-Texte kennzeichnen',
+  lead:'<b>Direkt zu Beginn des Textes</b> müssen Texthinweise oder die EU-AI-Icons angebracht werden, z.&nbsp;B.: <em>„KI-Hinweis: Dieser Beitrag wurde ganz / teilweise mit Hilfe künstlicher Intelligenz erstellt.“</em>',
+  body:`
+    <div class="card ok" style="margin-bottom:.85rem">
+      <div class="split-head"><span class="dot-i g">✓</span> Vertretbare Platzierungen (bei erster Wahrnehmung sichtbar)</div>
+      <div class="grid g3">${ph('Banner oberhalb des Artikels', '', 'platzOk1')}${ph('Hinweis über der Überschrift', '', 'platzOk2')}${ph('Sichtbarer Hinweis im Social Post', '', 'platzOk3')}</div>
+    </div>
+    <div class="card no">
+      <div class="split-head"><span class="dot-i r">✕</span> Problematische Platzierungen</div>
+      <div class="grid g4">${ph('Am Ende des Textes', '', 'platzNo1')}${ph('Im Impressum / AGB', '', 'platzNo2')}${ph('Hinter „Mehr anzeigen“', '', 'platzNo3')}${ph('Nur in Metadaten / Code', '', 'platzNo4')}</div>
+    </div>`
+}));
+
+/* --- 38 SEC Haftung --- */
+slides.push(SEC({nav:'Haftung', num:'TEIL 07', title:'Haftung', art:'Bußgelder · Abmahnungen · Plattformrisiken'}));
+
+/* --- 39 Bußgelder --- */
+slides.push(S({
+  nav:'Haftung', eyebrow:'Verstöße gegen die Kennzeichnungspflichten', badge:{t:'beide',l:'Anbieter + Betreiber'},
+  title:'Bußgelder: Ein Fass ohne Boden',
+  lead:'Wer sich nicht an die neuen Vorgaben hält, riskiert Bußgelder. Die Durchsetzung erfolgt durch die nationalen Marktaufsichtsbehörden — in Deutschland u.&nbsp;a. die Bundesnetzagentur.',
+  body:`
+    <div class="fine">
+      <div class="fine-box hi">
+        <div class="fine-lbl">Verstöße gegen Art. 50</div>
+        <div class="fine-amt">bis zu 15 Mio. €</div>
+        <div class="fine-or">oder bis zu</div>
+        <div class="fine-amt">3 % Weltjahresumsatz *</div>
+        <div class="fine-src">Art. 99 Abs. 4 lit. g AI Act</div>
+      </div>
+      <div class="fine-box">
+        <div class="fine-lbl">Falschauskünfte gegenüber Behörden</div>
+        <div class="fine-amt">bis zu 7,5 Mio. €</div>
+        <div class="fine-or">oder bis zu</div>
+        <div class="fine-amt">1 % Weltjahresumsatz *</div>
+        <div class="fine-src">Art. 99 Abs. 5 AI Act</div>
+      </div>
+    </div>
+    <div class="callout"><strong>Größenvergleich:</strong> Bei einem Konzernumsatz von rund 400 Mrd. USD entsprächen 3 % etwa 12 Mrd. USD — die Prozentgrenze ist bei Großkonzernen der maßgebliche Wert.</div>`,
+  foot:'* Je nachdem, was höher ist. Für KMU und Start-ups gilt nach Art. 99 Abs. 6 AI Act der jeweils <u>niedrigere</u> Betrag.'
+}));
+
+/* --- 40 Abmahnungen --- */
+slides.push(S({
+  nav:'Haftung', eyebrow:'Verstöße gegen die Kennzeichnungspflichten', badge:{t:'beide',l:'Anbieter + Betreiber'},
+  title:'Abmahnungen, Strafbarkeit, Sperren',
+  lead:'Das Bußgeld ist nur eine von mehreren Risikoebenen. In der Praxis treffen Unternehmen die anderen drei oft schneller.',
+  body:`
+    <div class="check">
+      <div class="check-i" style="padding:1.1rem"><div class="k">§</div><div class="t"><b>UWG:</b> Ob die Kennzeichnungspflichten nach Art. 50 AI Act <b style="color:#f59e42">Wettbewerbsrechtsverletzungen</b> darstellen (so z.&nbsp;B. die Wettbewerbszentrale), die von Konkurrenten und Verbänden abgemahnt werden können, ist noch nicht abschließend geklärt, aber denkbar.</div></div>
+      <div class="check-i" style="padding:1.1rem"><div class="k">!</div><div class="t"><b>Deepfakes fremder Personen</b> können <b style="color:#f59e42">Persönlichkeitsrechtsverletzungen</b> und gleichzeitig <b style="color:#f59e42">Datenschutzverletzungen</b> darstellen und abgemahnt werden. Ggf. ist die Veröffentlichung sogar strafbar — dann hilft auch keine korrekte KI-Kennzeichnung.</div></div>
+      <div class="check-i" style="padding:1.1rem"><div class="k">▣</div><div class="t"><b>Social Media:</b> Erfolgen die Rechtsverletzungen auf Plattformen, droht nicht nur eine <b style="color:#f59e42">Löschung des jeweiligen Posts</b>, sondern eine <b style="color:#f59e42">Sperrung des Accounts</b> — jeweils durch die Plattform selbst.</div></div>
+      <div class="check-i" style="padding:1.1rem"><div class="k">◆</div><div class="t"><b>Vertragliche Ebene:</b> Kunden- und Agenturverträge enthalten zunehmend eigene KI-Klauseln. Ein Verstoß kann Gewährleistungs- und Schadensersatzansprüche auslösen, unabhängig vom AI Act.</div></div>
+    </div>`
+}));
+
+/* --- 41 SEC Umsetzung --- */
+slides.push(SEC({nav:'Umsetzung', num:'TEIL 08', title:'Umsetzung im Unternehmen', art:'Vom Wissen zur Compliance'}));
+
+/* --- 42 Umsetzungsplan --- */
+slides.push(S({
+  nav:'Umsetzung', eyebrow:'Bis zum 2. August 2026', badge:{t:'beide',l:'Anbieter + Betreiber'},
+  title:'Was jetzt konkret zu tun ist',
+  lead:'Ein pragmatischer Fahrplan für die verbleibende Zeit — geeignet als Arbeitsgrundlage für den Workshop-Teil.',
+  body:`
+    <div class="grid g2">
+      <div class="check">
+        <div class="check-i"><div class="k">1</div><div class="t"><b>KI-Inventar anlegen</b> — Welche Systeme sind im Einsatz? Wer nutzt sie? Welche Inhalte entstehen daraus?</div></div>
+        <div class="check-i"><div class="k">2</div><div class="t"><b>Rolle je System bestimmen</b> — Anbieter oder Betreiber? Rebranding-Fälle nach Art. 25 gesondert prüfen.</div></div>
+        <div class="check-i"><div class="k">3</div><div class="t"><b>Betroffene Pflichten zuordnen</b> — Welche der fünf Konstellationen trifft welches System?</div></div>
+        <div class="check-i"><div class="k">4</div><div class="t"><b>Kennzeichnungsstandard festlegen</b> — Einheitliche Formulierungen und Icons pro Kanal und Format.</div></div>
+      </div>
+      <div class="check">
+        <div class="check-i"><div class="k">5</div><div class="t"><b>Redaktionsprozess dokumentieren</b> — Wer prüft, wer gibt frei, wer trägt die Verantwortung? Nachweisbar festhalten.</div></div>
+        <div class="check-i"><div class="k">6</div><div class="t"><b>Verträge und Workflows anpassen</b> — Freelancer- und Agenturklauseln, CMS-Felder, Freigabe-Workflows.</div></div>
+        <div class="check-i"><div class="k">7</div><div class="t"><b>Schulung nachweisen</b> — Art. 4 KI-Kompetenz gilt bereits seit Februar 2025. Datum, Inhalt, Teilnehmer dokumentieren.</div></div>
+        <div class="check-i"><div class="k">8</div><div class="t"><b>Verantwortlichkeit benennen</b> — Eine Person, die den Prozess pflegt und bei Änderungen nachsteuert.</div></div>
+      </div>
+    </div>
+    <div class="callout green"><strong>Faustregel:</strong> Wer im Zweifel kennzeichnet, macht selten etwas falsch. Die Kennzeichnung kostet wenig — ihr Fehlen kann teuer werden.</div>`
+}));
+
+/* --- 43 Häufige Irrtümer (NEU) --- */
+slides.push(S({
+  nav:'Umsetzung', eyebrow:'Mythen-Check',
+  title:'Fünf häufige Irrtümer',
+  lead:'Diese Aussagen kursieren derzeit in Newslettern und sozialen Netzwerken — und sind so nicht richtig.',
+  body:`
+    <div class="grid g2">
+      <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ab August muss jeder KI-Text gekennzeichnet werden.“</div><p>Falsch. Nur veröffentlichte Texte zu Angelegenheiten von öffentlichem Interesse — und auch die nur ohne menschliche Prüfung.</p></div>
+      <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ein Hinweis im Impressum reicht.“</div><p>Falsch. Der Hinweis muss bei erster Wahrnehmung sichtbar sein — direkt am Inhalt, nicht versteckt.</p></div>
+      <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ich bin nur Nutzer, mich betrifft das nicht.“</div><p>Falsch. Als Betreiber treffen Sie die praktisch häufigsten Pflichten: Deepfakes und KI-Texte.</p></div>
+      <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Alte Posts muss ich nachkennzeichnen.“</div><p>Falsch. Keine Rückwirkung — aber bei jeder Neuveröffentlichung nach dem Stichtag gilt die Pflicht.</p></div>
+      <div class="card no" style="grid-column:span 2"><div class="split-head"><span class="dot-i r">✕</span> „Der Digital Omnibus hat alles verschoben.“</div><p>Falsch. Verschoben wurden die Hochrisiko-Fristen und — für Bestandssysteme — die technische Watermarking-Pflicht nach Art. 50 Abs. 2. Die Kennzeichnungspflichten aus Art. 50 Abs. 1, 3 und 4 bleiben beim 2. August 2026.</p></div>
+    </div>`
+}));
+
+/* --- 44 Abschluss --- */
+slides.push(`
+<section class="slide">
+  <div class="atmos"></div>
+  <div class="logo-corner">${logo(52)}</div>
+  <div class="title-wrap">
+    <div class="t-eyebrow">Abschluss</div>
+    <h1 class="t-head" style="font-size:clamp(2rem,5vw,4rem)">Fragen &amp; Diskussion</h1>
+    <p class="t-sub">Jetzt gemeinsam: Ihr KI-Inventar und Ihre Pflichten</p>
+    <div class="t-meta">
+      <div class="nm">KNOWLEDGE AI</div>
+      <div class="rl">Diese Präsentation ersetzt keine Rechtsberatung.<br>Stand: Juli 2026 · Art. 50 EU-KI-Verordnung (EU) 2024/1689</div>
+    </div>
+  </div>
+  <div class="counter">ENDE</div>
+</section>`);
+
+/* ===================== RENDER + NAV ===================== */
+document.getElementById('deck').innerHTML = slides.join('');
+const els = Array.from(document.querySelectorAll('.slide'));
+let idx = 0;
+const pos = document.getElementById('pos');
+
+function go(n){
+  idx = Math.max(0, Math.min(els.length-1, n));
+  els.forEach((s,i)=>s.classList.toggle('active', i===idx));
+  pos.textContent = (idx+1) + ' / ' + els.length;
+  if(typeof syncVideos === 'function') syncVideos();
+}
+document.getElementById('next').onclick = ()=>go(idx+1);
+document.getElementById('prev').onclick = ()=>go(idx-1);
+
+/* ---- Agenda: erste Folie je Kapitel finden ---- */
+const chapterStart = {};
+els.forEach((el,i)=>{
+  const on = el.querySelector('.sb-item.on');
+  if(on){
+    const name = on.dataset.jump;
+    if(chapterStart[name] === undefined) chapterStart[name] = i;
+  }
+});
+
+/* ---- Klick auf Menuepunkt springt zum Kapitel ---- */
+document.querySelectorAll('.sb-item').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const t = chapterStart[btn.dataset.jump];
+    if(t !== undefined) go(t);
+  });
+});
+
+/* ---- Quiz ---- */
+function revealQuiz(){
+  const q = document.getElementById('quiz');
+  if(q) q.classList.add('revealed');
+}
+document.addEventListener('click', e=>{
+  if(e.target.closest('#quizReveal') || e.target.closest('.qcard')) revealQuiz();
+});
+document.addEventListener('keydown', e=>{
+  if((e.key==='Enter'||e.key===' ') && document.activeElement?.classList.contains('qcard')){
+    e.preventDefault(); revealQuiz();
+  }
+});
+
+/* ---- Videos nur auf der aktiven Folie laufen lassen ---- */
+function syncVideos(){
+  els.forEach((el,i)=>{
+    el.querySelectorAll('video').forEach(v=>{
+      if(i===idx){ v.play().catch(()=>{}); } else { v.pause(); v.currentTime = 0; }
+    });
+  });
+}
+
+document.addEventListener('keydown', e=>{
+  if(e.target.classList?.contains('qcard')) return;
+  if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();go(idx+1);}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(idx-1);}
+  if(e.key==='Home'){e.preventDefault();go(0);}
+  if(e.key==='End'){e.preventDefault();go(els.length-1);}
+  if(e.key==='r'||e.key==='R'){revealQuiz();}
+});
+
+go(0);
+hydrateMedia();
+</script>
+</body>
+</html>
