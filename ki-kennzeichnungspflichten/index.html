@@ -98,10 +98,9 @@ body{
 .sb-item.on:hover{color:var(--orange-br);}
 
 /* Echte Medien (ersetzen Platzhalter, wenn konfiguriert) */
-.media{width:100%;border-radius:10px;object-fit:cover;display:block;background:rgba(255,255,255,.03);}
-.media.tall{height:180px;}
-.media.wide{height:130px;}
-.media:not(.tall):not(.wide){height:80px;}
+.media{width:100%;aspect-ratio:1/1;border-radius:10px;object-fit:cover;display:block;background:rgba(255,255,255,.03);}
+.media.tall,.media.wide{aspect-ratio:1/1;}
+video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 
 /* ---- Quiz-Folie ---- */
 .quiz{display:flex;flex-direction:column;gap:1rem;align-items:center;width:100%;}
@@ -248,12 +247,19 @@ body{
   border-radius:10px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:.3rem;color:rgba(255,255,255,.3);
-  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
-  min-height:80px;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:.4rem;
+  aspect-ratio:1/1;
 }
 .ph .ico{font-size:1.1rem;opacity:.6;}
-.ph.tall{min-height:180px;}
-.ph.wide{min-height:130px;}
+.ph.tall,.ph.wide{aspect-ratio:1/1;}
+/* In dichten Rastern die Quadrate zentriert begrenzen, damit die Folie nicht ueberlaeuft.
+   Begrenzung ueber die Breite, damit das 1:1-Verhaeltnis erhalten bleibt. */
+.g4 .ph,.g4 .media,.g5 .ph,.g5 .media,
+.g3 .ph,.g3 .media{margin-left:auto;margin-right:auto;}
+.g5 .ph,.g5 .media{max-width:22vh;}
+.g4 .ph,.g4 .media{max-width:26vh;}
+.g3 .ph,.g3 .media{max-width:30vh;}
+.g2 .ph,.g2 .media{max-width:38vh;margin-left:auto;margin-right:auto;}
 
 /* Flow chain */
 .chain{display:grid;align-items:stretch;gap:0;}
