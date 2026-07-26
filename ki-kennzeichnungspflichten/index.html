@@ -130,13 +130,21 @@ body{
   font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;
   padding:.16rem .45rem;color:var(--white);letter-spacing:.08em;
 }
-.qcard .ph,.qcard .media{
-  width:100%;height:auto;min-height:0;
-  aspect-ratio:4/3;object-fit:cover;
-  border-radius:8px;
+/* Quadratisches Medienfenster (1:1), erzwungen */
+.qcard .qmedia{
+  display:block;width:100%;height:auto;min-height:0;
+  aspect-ratio:1/1;object-fit:cover;
+  border-radius:8px;overflow:hidden;
 }
-/* Videos im Quiz: gleiches Fenster, aber ganz zeigen statt beschneiden */
-.qcard video.media{object-fit:contain;background:rgba(0,0,0,.35);}
+.qcard .qmedia.ph{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.3rem;color:rgba(255,255,255,.3);
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.028) 0 10px,rgba(255,255,255,.012) 10px 20px);
+  border:1px dashed rgba(255,255,255,.16);
+}
+/* Videos: ganzen Frame zeigen statt beschneiden */
+.qcard video.qmedia{object-fit:contain;background:rgba(0,0,0,.35);}
 .qcard .verdict{
   margin-top:.7rem;text-align:center;font-size:.82rem;font-weight:700;
   min-height:1.3em;opacity:0;transition:opacity .3s;letter-spacing:.01em;
@@ -435,14 +443,23 @@ async function hydrateMedia(){
     rows.forEach(row=>{
       MEDIA[row.slot_key] = row.public_url;
       document.querySelectorAll(`[data-slot="${row.slot_key}"]`).forEach(el=>{
-        const label = el.getAttribute('data-label') || '';
-        const cls   = el.className.replace('ph','').trim();
-        const vid   = /\.(mp4|webm|mov)(\?|$)/i.test(row.public_url);
-        const node  = document.createElement(vid ? 'video' : 'img');
-        node.className = ('media ' + cls).trim();
+        const label   = el.getAttribute('data-label') || '';
+        const isQuiz  = el.hasAttribute('data-quiz') || el.classList.contains('qmedia');
+        const baseCls = isQuiz ? 'qmedia' : 'media';
+        // Groessenklassen (tall/wide) vom Platzhalter uebernehmen
+        const sizeCls = ['tall','wide'].filter(c=>el.classList.contains(c)).join(' ');
+        const vid     = /\.(mp4|webm|mov)(\?|$)/i.test(row.public_url);
+        const node    = document.createElement(vid ? 'video' : 'img');
+        node.className = [baseCls, sizeCls].filter(Boolean).join(' ');
+        node.setAttribute('data-slot', row.slot_key);
         node.src = row.public_url;
-        if(vid){ node.muted = true; node.loop = true; node.playsInline = true; }
-        else   { node.alt = label; node.loading = 'lazy'; }
+        if(vid){
+          node.muted = true; node.loop = true; node.playsInline = true;
+          node.preload = 'metadata';
+          node.setAttribute('playsinline','');
+        } else {
+          node.alt = label; node.loading = 'lazy';
+        }
         el.replaceWith(node);
       });
     });
@@ -586,9 +603,19 @@ slides.push(`
 
 /* --- 02 QUIZ: Erkennen Sie den Unterschied? --- */
 function qcard(tag, label, key, isAi){
+  const url = assetUrl(key);
+  let inner;
+  if(url){
+    const vid = /\.(mp4|webm|mov)(\?|$)/i.test(url);
+    inner = vid
+      ? `<video class="qmedia" data-slot="${key}" src="${url}" muted loop playsinline></video>`
+      : `<img class="qmedia" data-slot="${key}" src="${url}" alt="${label}">`;
+  } else {
+    inner = `<div class="qmedia ph" data-slot="${key}" data-label="${label}" data-quiz="1"><div class="ico">▣</div><div>${label}</div></div>`;
+  }
   return `<div class="qcard" data-ai="${isAi?1:0}" tabindex="0" role="button" aria-label="${tag} aufdecken">
     <span class="tag">${tag}</span>
-    ${ph(label,'',key)}
+    ${inner}
     <div class="verdict">${isAi?'KI-generiert':'Echte Aufnahme'}</div>
   </div>`;
 }
