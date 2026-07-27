@@ -15,3 +15,9 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Vorlage nicht indexieren lassen
+[[headers]]
+  for = "/_vorlage/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
