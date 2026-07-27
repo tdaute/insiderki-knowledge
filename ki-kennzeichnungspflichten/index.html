@@ -24,6 +24,8 @@
   --red:#e05252;
   --amber:#e0a83c;
   --blue:#5b8def;
+  --sig:#C21D1A;
+  --sig-br:#e04340;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;}
@@ -65,8 +67,7 @@ body{
 /* ============ LOGO (Obsidian-Graph-Stil) ============ */
 .logo{display:flex;flex-direction:column;align-items:center;gap:.45rem;}
 .logo svg{display:block;overflow:visible;}
-.logo-word{font-size:.72rem;font-weight:600;letter-spacing:.26em;color:var(--white);white-space:nowrap;}
-.logo-sub{font-size:.46rem;font-weight:500;letter-spacing:.4em;color:var(--orange);margin-top:-.2rem;}
+.logo-word{font-size:.72rem;font-weight:700;letter-spacing:.26em;color:var(--sig);white-space:nowrap;}
 .logo-corner{position:absolute;top:1.6rem;right:2.2rem;z-index:6;transform:scale(.75);transform-origin:top right;}
 
 /* ============ CHROME (Sidebar + Header) ============ */
@@ -165,10 +166,15 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .quiz-hint{font-size:.78rem;color:var(--grey-2);font-style:italic;}
 .sb-foot{margin-top:auto;font-size:.6rem;color:rgba(255,255,255,.2);letter-spacing:.1em;text-align:center;}
 
-.stage{padding:2.1rem 2.6rem 1.6rem;display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+.stage{padding:3.4rem 2.6rem 1.6rem;display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+/* Header-Block: vertikaler Signalrot-Strich links, Eyebrow + Titel eingerueckt */
+.head{position:relative;padding-left:1.15rem;margin-bottom:1.15rem;}
+.head::before{
+  content:'';position:absolute;left:0;top:.12em;bottom:.12em;
+  width:4px;border-radius:2px;background:var(--sig);
+}
 .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.2em;color:var(--orange);text-transform:uppercase;margin-bottom:.5rem;}
 .h1{font-size:clamp(1.6rem,2.9vw,2.5rem);font-weight:700;letter-spacing:-.028em;line-height:1.08;}
-.rule{width:56px;height:3px;background:var(--orange);border-radius:2px;margin:.75rem 0 1.1rem;}
 .lead{font-size:.92rem;color:#c3cad6;line-height:1.55;max-width:74ch;margin-bottom:1.3rem;}
 .lead b{color:var(--orange-br);font-weight:600;}
 .lead u{text-decoration-color:var(--orange);text-underline-offset:3px;}
@@ -177,13 +183,15 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 
 /* Role badge */
 .badge{
-  position:absolute;top:2.1rem;right:2.6rem;z-index:4;
-  font-size:.7rem;font-weight:600;letter-spacing:.05em;
-  padding:.4rem 1.1rem;border-radius:999px;
+  position:absolute;top:2.4rem;right:2.6rem;z-index:4;
+  font-size:.86rem;font-weight:700;letter-spacing:.03em;
+  padding:.55rem 1.5rem;border-radius:999px;
 }
-.badge.anbieter{background:rgba(91,141,239,.16);color:#8fb2f7;border:1px solid rgba(91,141,239,.4);}
-.badge.betreiber{background:rgba(63,178,127,.14);color:#6cd3a4;border:1px solid rgba(63,178,127,.38);}
-.badge.beide{background:rgba(232,134,60,.14);color:var(--orange-br);border:1px solid rgba(232,134,60,.4);}
+.badge.anbieter{background:rgba(91,141,239,.26);color:#bcd0fb;border:2px solid rgba(91,141,239,.72);}
+.badge.betreiber{background:rgba(63,178,127,.24);color:#9ce6c3;border:2px solid rgba(63,178,127,.7);}
+.badge.beide{background:rgba(232,134,60,.24);color:#f7bd8a;border:2px solid rgba(232,134,60,.72);}
+/* Inline-Varianten (in Karten) behalten die kompakte Groesse */
+.badge.inline{position:static;display:inline-block;font-size:.72rem;padding:.26rem .85rem;border-width:1px;}
 
 /* ============ TITLE SLIDES ============ */
 .title-wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6vw;}
@@ -202,7 +210,19 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 /* Section divider slides */
 .sec-wrap{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:230px 1fr;}
 .sec-body{display:flex;flex-direction:column;justify-content:center;padding:0 5vw;}
-.sec-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.28em;color:var(--orange);margin-bottom:1.1rem;}
+.sec-num{
+  align-self:flex-start;
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500;
+  letter-spacing:.22em;color:#fff;text-transform:uppercase;
+  background:var(--sig);border-radius:999px;padding:.42rem 1.25rem;
+  margin-bottom:1.5rem;
+}
+/* Titel + Untertitel gemeinsam hinter vertikalem Signalrot-Strich */
+.sec-main{position:relative;padding-left:1.6rem;}
+.sec-main::before{
+  content:'';position:absolute;left:0;top:.1em;bottom:.1em;
+  width:5px;border-radius:3px;background:var(--sig);
+}
 .sec-title{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:800;letter-spacing:-.032em;line-height:1.05;}
 .sec-art{font-size:.95rem;color:var(--grey);margin-top:.9rem;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
 
@@ -217,19 +237,22 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
   background:rgba(255,255,255,.026);
   border:1px solid var(--line);
   border-radius:13px;
-  padding:1.1rem 1.1rem 1.2rem;
+  padding:1.35rem 1.35rem 1.45rem;
   display:flex;flex-direction:column;
 }
 .card.ok{border-color:rgba(63,178,127,.34);background:rgba(63,178,127,.05);}
 .card.no{border-color:rgba(224,82,82,.34);background:rgba(224,82,82,.05);}
 .card.warn{border-color:rgba(224,168,60,.34);background:rgba(224,168,60,.05);}
 .card.acc{border-color:rgba(232,134,60,.32);background:rgba(232,134,60,.05);}
-.card h3{font-size:.95rem;font-weight:700;letter-spacing:-.012em;margin-bottom:.35rem;}
-.card .sub{font-size:.72rem;color:var(--orange);font-family:'JetBrains Mono',monospace;margin-bottom:.6rem;}
-.card p{font-size:.79rem;color:var(--grey);line-height:1.5;}
-.card ul{list-style:none;margin-top:.6rem;display:flex;flex-direction:column;gap:.34rem;}
-.card li{font-size:.76rem;color:#b6bdc9;display:flex;gap:.5rem;align-items:flex-start;line-height:1.4;}
+.card h3{font-size:1rem;font-weight:700;letter-spacing:-.012em;margin-bottom:.45rem;line-height:1.3;}
+.card .sub{font-size:.74rem;color:var(--orange);font-family:'JetBrains Mono',monospace;margin-bottom:.7rem;}
+.card p{font-size:.84rem;color:var(--grey);line-height:1.62;}
+.card ul{list-style:none;margin-top:.8rem;display:flex;flex-direction:column;gap:.6rem;}
+.card li{font-size:.82rem;color:#b6bdc9;display:flex;gap:.55rem;align-items:flex-start;line-height:1.6;}
 .card li::before{content:'—';color:var(--orange);flex-shrink:0;}
+/* Aufzaehlung ohne Listen-Icon */
+.card ul.bare li::before{content:none;}
+.card ul.bare li{gap:0;}
 
 .num{
   width:26px;height:26px;border-radius:50%;
@@ -331,7 +354,7 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .fine-lbl{font-size:.82rem;font-weight:600;margin-bottom:.9rem;color:#c3cad6;}
 
 /* AI Icons */
-.aiicons{display:flex;gap:2.2rem;justify-content:center;align-items:center;flex-wrap:wrap;}
+.aiicons{display:flex;gap:6rem;justify-content:center;align-items:center;flex-wrap:wrap;}
 .aii{display:flex;flex-direction:column;align-items:center;gap:.8rem;}
 .aii .chip{
   background:#0a0e1a;border:2px solid var(--white);border-radius:999px;
@@ -383,6 +406,219 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .nav button:hover{color:var(--orange);}
 .nav button:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px;}
 .nav .pos{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--grey);min-width:52px;text-align:center;}
+
+/* ============ SEITENVERHAELTNISSE ============ */
+.ph.r169,.media.r169{aspect-ratio:16/9;max-width:none;}
+.ph.r34,.media.r34{aspect-ratio:3/4;max-width:none;}
+.ph.r11,.media.r11{aspect-ratio:1/1;}
+.hero-wrap{width:100%;max-width:112vh;margin:0 auto;}
+
+/* ============ ICONS ============ */
+.ic{display:block;flex-shrink:0;}
+.ic-top{display:flex;justify-content:center;margin-bottom:.85rem;}
+
+/* ============ GESTAPELTE KARTENZEILEN (Folie 4) ============ */
+.stack{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:.9rem;}
+.stack-row{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:240px 1fr;gap:1.6rem;align-items:center;
+  background:rgba(255,255,255,.028);border:1px solid var(--line);
+  border-radius:13px;padding:1.25rem 1.5rem 1.25rem 1.7rem;
+}
+.stack-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sig);}
+.stack-row h3{font-size:1.08rem;font-weight:700;letter-spacing:-.012em;line-height:1.25;}
+.stack-row p{font-size:.9rem;color:var(--grey);line-height:1.65;}
+
+/* ============ KLAMMERN (Folie 5) ============ */
+.brk{display:grid;grid-template-columns:repeat(5,1fr);gap:.85rem;margin-bottom:.55rem;}
+.brk-i{display:flex;flex-direction:column;align-items:center;gap:.45rem;}
+.brk-i.a2{grid-column:span 2;}
+.brk-i.a3{grid-column:span 3;}
+.brk-lbl{font-size:.78rem;font-weight:700;letter-spacing:.03em;padding:.3rem 1.1rem;border-radius:999px;}
+.brk-line{width:88%;height:11px;border:2px solid currentColor;border-bottom:none;border-radius:9px 9px 0 0;opacity:.75;}
+.brk-i.anb{color:#8fb2f7;}
+.brk-i.anb .brk-lbl{background:rgba(91,141,239,.22);color:#bcd0fb;border:1px solid rgba(91,141,239,.6);}
+.brk-i.btr{color:#9ce6c3;}
+.brk-i.btr .brk-lbl{background:rgba(63,178,127,.2);color:#9ce6c3;border:1px solid rgba(63,178,127,.58);}
+
+/* ============ TIMELINE V2 (Folie 6) ============ */
+.tl2{display:flex;flex-direction:column;gap:1.5rem;}
+.tl2-row{position:relative;}
+.tl2-line{position:absolute;left:0;right:0;top:7px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.2) 100%);}
+.tl2-row.hot .tl2-line{background:linear-gradient(90deg,rgba(232,134,60,.45) 0%,var(--orange) 100%);}
+.tl2-cells{position:relative;display:grid;align-items:start;column-gap:.5rem;}
+.tl2-year{
+  align-self:start;margin-top:-9px;justify-self:center;
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:600;letter-spacing:.06em;
+  background:var(--panel);border:1px solid var(--line-2);color:#c3cad6;
+  border-radius:999px;padding:.28rem .8rem;
+}
+.tl2-pt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.5rem;}
+.tl2-pt .d{width:14px;height:14px;border-radius:50%;background:var(--grey-2);border:3px solid var(--bg);flex-shrink:0;}
+.tl2-pt .dt{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:600;color:var(--white);}
+.tl2-pt .lb{font-size:.72rem;color:var(--grey);line-height:1.4;max-width:19ch;}
+.tl2-pt.hot .d{background:var(--sig);box-shadow:0 0 0 5px rgba(194,29,26,.22);}
+.tl2-pt.hot .dt{color:var(--sig-br);}
+.tl2-pt.hot .lb{color:#d8b3b2;}
+.tl2-pt.dim .d{background:rgba(255,255,255,.22);}
+.tl2-pt.dim .dt,.tl2-pt.dim .lb{opacity:.72;}
+.tl2-brk{display:flex;align-items:center;gap:.7rem;padding-left:.2rem;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--grey-2);}
+.tl2-brk::after{content:'';flex:1;border-top:1px dashed rgba(255,255,255,.16);}
+
+/* ============ TECHNIK-BLOCK (Folie 18) ============ */
+.tech{
+  display:grid;grid-template-columns:auto 1fr;gap:1.8rem;align-items:center;
+  background:rgba(255,255,255,.04);border:1px solid var(--line-2);
+  border-radius:14px;padding:1.35rem 1.6rem;
+}
+.tech-lbl{font-size:.92rem;font-weight:700;color:#c3cad6;max-width:13ch;line-height:1.4;}
+.tech-items{display:grid;grid-template-columns:repeat(4,1fr);}
+.tech-i{display:flex;flex-direction:column;align-items:center;gap:.6rem;text-align:center;
+  padding:.2rem 1rem;border-left:1px solid var(--line);}
+.tech-i:first-child{border-left:none;}
+.tech-i h4{font-size:.9rem;font-weight:700;}
+.tech-i p{font-size:.76rem;color:var(--grey);line-height:1.5;}
+
+/* ============ SKALA (Folien 27 + 35) ============ */
+.scale{display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;margin-top:1.1rem;}
+.scale-end{display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:600;line-height:1.3;max-width:22ch;}
+.scale-end.g{color:#6cd3a4;}
+.scale-end.r{color:#f08b8b;text-align:right;}
+.scale-end.r{flex-direction:row-reverse;}
+.scale-bar{position:relative;height:11px;border-radius:999px;
+  background:linear-gradient(90deg,#3fb27f 0%,#e0a83c 52%,#e05252 100%);}
+.scale-bar::after{content:'';position:absolute;right:-9px;top:50%;transform:translateY(-50%);
+  border-left:12px solid #e05252;border-top:8px solid transparent;border-bottom:8px solid transparent;}
+
+/* ============ MOCKUPS (Folien 28, 31, 38) ============ */
+.mk{background:rgba(255,255,255,.05);border:1px solid var(--line-2);border-radius:8px;
+  padding:.6rem;display:flex;flex-direction:column;gap:.42rem;}
+.mk.ok{border-color:rgba(63,178,127,.5);background:rgba(63,178,127,.06);}
+.mk.no{border-color:rgba(224,82,82,.5);background:rgba(224,82,82,.06);}
+.mk-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.18);}
+.mk-bar.h{height:9px;background:rgba(255,255,255,.34);}
+.mk-prof{display:flex;align-items:center;gap:.45rem;}
+.mk-av{width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.22);flex-shrink:0;}
+.mk-act{display:flex;gap:.7rem;margin-top:.1rem;}
+.mk-act span{font-size:.6rem;color:rgba(255,255,255,.34);}
+.mk-lbl{align-self:flex-start;font-size:.56rem;font-weight:800;letter-spacing:.09em;
+  padding:.18rem .42rem;border-radius:4px;line-height:1.2;}
+.mk-lbl.g{background:rgba(63,178,127,.24);color:#9ce6c3;border:1px solid rgba(63,178,127,.55);}
+.mk-lbl.r{background:rgba(224,82,82,.24);color:#f5a6a6;border:1px solid rgba(224,82,82,.6);}
+.mk-lbl.w{background:rgba(255,255,255,.9);color:#0a0e1a;}
+.mk-cap{font-size:.72rem;color:var(--grey);text-align:center;line-height:1.4;margin-top:.5rem;}
+.mk-img{position:relative;border-radius:5px;overflow:hidden;background:rgba(255,255,255,.05);}
+.mk-img .ph,.mk-img .media{border-radius:5px;border-style:solid;border-color:rgba(255,255,255,.1);}
+.mk-tag{position:absolute;left:.3rem;bottom:.3rem;z-index:2;font-size:.52rem;font-weight:800;
+  letter-spacing:.08em;padding:.14rem .34rem;border-radius:3px;}
+.mk-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.6);font-size:1.3rem;}
+.mk-grid{display:grid;gap:.7rem;}
+
+/* ============ ENTSCHEIDUNGSBAUM V2 (Folie 34) ============ */
+.t2{display:grid;grid-template-columns:1fr 190px;gap:0;align-items:stretch;width:100%;max-width:1080px;margin:0 auto;}
+.t2-main{display:flex;flex-direction:column;align-items:stretch;}
+.t2-row{display:grid;grid-template-columns:1fr 120px;align-items:center;}
+.t2-q{background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:9px;
+  padding:.62rem 1rem;font-size:.82rem;line-height:1.4;text-align:center;}
+.t2-q b{color:var(--orange-br);}
+.t2-out{display:flex;align-items:center;}
+.t2-dash{flex:1;border-top:1px dashed rgba(255,255,255,.26);}
+.t2-bdg{font-size:.66rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap;}
+.t2-bdg.g{background:rgba(63,178,127,.18);color:#6cd3a4;border:1px solid rgba(63,178,127,.42);}
+.t2-bdg.r{background:rgba(224,82,82,.18);color:#f08b8b;border:1px solid rgba(224,82,82,.44);}
+.t2-conn{display:flex;flex-direction:column;align-items:center;gap:.12rem;padding:.22rem 0;}
+.t2-conn .ln{width:0;height:9px;border-left:1px dashed rgba(255,255,255,.3);}
+.t2-side{display:flex;align-items:center;padding-left:.2rem;}
+.t2-end{width:100%;border-radius:10px;padding:.85rem .7rem;text-align:center;
+  font-size:.82rem;font-weight:700;line-height:1.3;
+  background:rgba(63,178,127,.15);color:#6cd3a4;border:1px solid rgba(63,178,127,.45);}
+.t2-final{margin-top:.5rem;border-radius:10px;padding:.75rem 1rem;text-align:center;
+  font-size:.92rem;font-weight:800;
+  background:rgba(224,82,82,.18);color:#f08b8b;border:1px solid rgba(224,82,82,.48);}
+
+/* ============ RUECKWIRKEND-TIMELINE (Folie 31) ============ */
+.rw-tl{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.9rem;margin-bottom:1rem;}
+.rw-seg{display:flex;align-items:center;gap:.7rem;font-size:.74rem;font-weight:700;letter-spacing:.1em;}
+.rw-seg .ln{flex:1;height:3px;border-radius:2px;}
+.rw-seg.pre{color:var(--grey-2);}
+.rw-seg.pre .ln{background:rgba(255,255,255,.18);}
+.rw-seg.post{color:var(--sig-br);flex-direction:row-reverse;}
+.rw-seg.post .ln{position:relative;background:var(--sig);}
+.rw-seg.post .ln::after{content:'';position:absolute;right:-8px;top:50%;transform:translateY(-50%);
+  border-left:11px solid var(--sig);border-top:7px solid transparent;border-bottom:7px solid transparent;}
+.rw-mark{display:flex;flex-direction:column;align-items:center;gap:.3rem;
+  background:#05070d;border:2px solid var(--white);border-radius:8px;padding:.4rem .9rem;}
+.rw-mark .d{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:700;}
+.rw-mark .s{font-size:.6rem;letter-spacing:.14em;color:var(--grey);}
+.rw-cal{display:flex;align-items:center;gap:.55rem;font-size:.76rem;font-weight:600;margin-top:.8rem;}
+.rw-cal.g{color:#6cd3a4;}
+.rw-cal.r{color:#f08b8b;}
+
+/* ============ AUDIO-SPRECHBLASE (Folie 28) ============ */
+.bub{position:relative;background:rgba(255,255,255,.08);border:1px solid var(--line-2);
+  border-radius:10px;padding:.5rem .7rem;font-size:.68rem;color:#dfe4ec;line-height:1.35;margin-top:.5rem;}
+.bub::after{content:'';position:absolute;left:1.1rem;bottom:-7px;
+  border-top:7px solid rgba(255,255,255,.08);border-left:7px solid transparent;border-right:7px solid transparent;}
+.wave{display:flex;align-items:center;justify-content:center;gap:2px;height:34px;}
+.wave i{width:3px;border-radius:2px;background:var(--orange);opacity:.75;}
+
+/* ============ AI-KETTE (Folie 28) ============ */
+.chn{display:flex;align-items:center;justify-content:center;gap:.4rem;margin-top:.5rem;}
+.chn .b{font-size:.56rem;font-weight:800;letter-spacing:.08em;padding:.2rem .4rem;border-radius:4px;
+  background:rgba(255,255,255,.9);color:#0a0e1a;}
+.chn .b.ad{background:rgba(255,255,255,.12);color:var(--grey);}
+.chn .ar{color:var(--grey-2);font-size:.7rem;}
+
+/* ============ HILFSKLASSEN (Feinschliff) ============ */
+.split-head.ctr{justify-content:center;font-size:1.12rem;margin-bottom:1.1rem;text-align:center;}
+.card.tall-c{min-height:42vh;}
+.tiles-lg .ph,.tiles-lg .media{max-width:30vh;}
+.lg-list .card li{font-size:.9rem;line-height:1.68;}
+.lg-list .card p{font-size:.9rem;line-height:1.68;}
+.media-lg .ph,.media-lg .media{max-width:34vh;}
+.roomy .card{padding:1.75rem 1.75rem 1.85rem;}
+.roomy .card li{font-size:.86rem;line-height:1.62;}
+.arw-v{display:flex;justify-content:center;color:var(--orange);font-size:1.2rem;line-height:1;padding:.2rem 0;}
+.check.lg .check-i{padding:.95rem 1.15rem;}
+.check.lg .check-i .t{font-size:.92rem;line-height:1.58;}
+.check.lg .check-i .k{width:26px;height:26px;font-size:.8rem;}
+/* Deepfake-Kategorien (Folie 24) */
+.dfcat .card{align-items:stretch;}
+.cat-lbl{align-self:center;font-size:.72rem;font-weight:700;letter-spacing:.04em;
+  padding:.26rem .85rem;border-radius:999px;margin-bottom:.85rem;
+  background:rgba(232,134,60,.16);color:var(--orange-br);border:1px solid rgba(232,134,60,.42);}
+/* Produktbilder (Folie 27) */
+.prod .ph,.prod .media{max-width:30vh;}
+.prod .card{text-align:center;}
+.prod .card.ok{background:rgba(63,178,127,.08);}
+.prod .card.no{background:rgba(224,82,82,.09);}
+.prod-st{margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--line);
+  font-size:.8rem;font-weight:700;text-align:center;}
+.prod-st.g{color:#6cd3a4;}
+.prod-st.r{color:#f08b8b;}
+/* Bussgelder (Folie 40) */
+.fine-box.lg{padding:2.3rem 1.8rem;}
+.fine-box.lg .fine-amt{font-size:clamp(1.8rem,3.4vw,2.7rem);}
+.fine-box.lg .fine-lbl{font-size:.95rem;margin-bottom:1.2rem;}
+.fine-box.lg .fine-or{font-size:.9rem;margin:.6rem 0;}
+.fine-box.lg .fine-src{font-size:.74rem;margin-top:1.1rem;}
+/* Irrtuemer (Folie 44) */
+.myth{gap:1.1rem;}
+.myth .card{padding:1.6rem 1.7rem;justify-content:center;}
+.myth .split-head{font-size:1.02rem;line-height:1.35;align-items:flex-start;margin-bottom:.85rem;}
+.myth .card p{font-size:.92rem;line-height:1.65;}
+/* Ausnahmen (Folie 30) */
+.exc-i{display:flex;flex-direction:column;align-items:center;gap:.5rem;}
+.exc-lbl{font-size:.66rem;font-weight:700;letter-spacing:.03em;padding:.2rem .6rem;border-radius:999px;
+  background:rgba(63,178,127,.18);color:#9ce6c3;border:1px solid rgba(63,178,127,.5);white-space:nowrap;}
+.exc .ph,.exc .media{max-width:none;}
+/* Abmahnungen (Folie 41) */
+.risk .check-i .ik{width:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.risk .check-i{padding:1.15rem 1.3rem;gap:1.1rem;align-items:center;}
+.risk .check-i .t{font-size:.88rem;line-height:1.62;}
 
 @media (max-width:1100px){
   .chrome,.sec-wrap{grid-template-columns:1fr;}
@@ -453,7 +689,7 @@ async function hydrateMedia(){
         const isQuiz  = el.hasAttribute('data-quiz') || el.classList.contains('qmedia');
         const baseCls = isQuiz ? 'qmedia' : 'media';
         // Groessenklassen (tall/wide) vom Platzhalter uebernehmen
-        const sizeCls = ['tall','wide'].filter(c=>el.classList.contains(c)).join(' ');
+        const sizeCls = ['tall','wide','r169','r34','r11'].filter(c=>el.classList.contains(c)).join(' ');
         const vid     = /\.(mp4|webm|mov)(\?|$)/i.test(row.public_url);
         const node    = document.createElement(vid ? 'video' : 'img');
         node.className = [baseCls, sizeCls].filter(Boolean).join(' ');
@@ -478,46 +714,10 @@ function logo(size, word){
   const s = size || 52;
   return `
   <div class="logo">
-    <svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="none">
-      <g stroke="#e8863c" stroke-width="1" opacity=".5">
-        <line x1="32" y1="32" x2="32" y2="10"/>
-        <line x1="32" y1="32" x2="50" y2="19"/>
-        <line x1="32" y1="32" x2="54" y2="38"/>
-        <line x1="32" y1="32" x2="41" y2="53"/>
-        <line x1="32" y1="32" x2="20" y2="52"/>
-        <line x1="32" y1="32" x2="10" y2="36"/>
-        <line x1="32" y1="32" x2="15" y2="18"/>
-      </g>
-      <g stroke="#e8863c" stroke-width=".7" opacity=".26">
-        <line x1="32" y1="10" x2="50" y2="19"/>
-        <line x1="50" y1="19" x2="54" y2="38"/>
-        <line x1="54" y1="38" x2="41" y2="53"/>
-        <line x1="20" y1="52" x2="10" y2="36"/>
-        <line x1="10" y1="36" x2="15" y2="18"/>
-        <line x1="15" y1="18" x2="32" y2="10"/>
-        <line x1="41" y1="53" x2="20" y2="52"/>
-      </g>
-      <g fill="#e8863c">
-        <circle cx="32" cy="10" r="3"/>
-        <circle cx="50" cy="19" r="2.2"/>
-        <circle cx="54" cy="38" r="2.8"/>
-        <circle cx="41" cy="53" r="2"/>
-        <circle cx="20" cy="52" r="2.6"/>
-        <circle cx="10" cy="36" r="2.2"/>
-        <circle cx="15" cy="18" r="2.4"/>
-      </g>
-      <g fill="#f59e42" opacity=".55">
-        <circle cx="44" cy="10" r="1.3"/>
-        <circle cx="58" cy="27" r="1.1"/>
-        <circle cx="8" cy="24" r="1.2"/>
-        <circle cx="30" cy="57" r="1.1"/>
-      </g>
-      <circle cx="32" cy="32" r="10" fill="#e8863c" opacity=".2"/>
-      <circle cx="32" cy="32" r="6.4" fill="#f59e42"/>
-      <circle cx="32" cy="32" r="2.7" fill="#0a0e1a"/>
+    <svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <g stroke="#e8863c" stroke-width=".62" opacity=".4"><line x1="31.4" y1="30.0" x2="27.4" y2="24.8"/><line x1="31.4" y1="30.0" x2="30.5" y2="34.3"/><line x1="31.4" y1="30.0" x2="36.3" y2="34.6"/><line x1="27.4" y1="24.8" x2="22.9" y2="26.7"/><line x1="27.4" y1="24.8" x2="26.5" y2="20.6"/><line x1="24.7" y1="31.9" x2="22.9" y2="26.7"/><line x1="24.7" y1="31.9" x2="30.5" y2="34.3"/><line x1="24.7" y1="31.9" x2="19.2" y2="29.0"/><line x1="22.9" y1="26.7" x2="20.7" y2="20.5"/><line x1="22.9" y1="26.7" x2="26.5" y2="20.6"/><line x1="22.9" y1="26.7" x2="19.2" y2="29.0"/><line x1="29.0" y1="13.4" x2="26.5" y2="20.6"/><line x1="29.0" y1="13.4" x2="37.1" y2="9.9"/><line x1="30.5" y1="34.3" x2="36.3" y2="34.6"/><line x1="20.7" y1="20.5" x2="26.5" y2="20.6"/><line x1="20.7" y1="20.5" x2="16.7" y2="24.7"/><line x1="39.8" y1="17.8" x2="43.6" y2="20.7"/><line x1="39.8" y1="17.8" x2="37.1" y2="9.9"/><line x1="39.8" y1="17.8" x2="43.8" y2="14.5"/><line x1="39.8" y1="17.8" x2="47.3" y2="18.1"/><line x1="9.5" y1="32.6" x2="15.0" y2="30.7"/><line x1="9.5" y1="32.6" x2="12.6" y2="26.7"/><line x1="41.8" y1="40.0" x2="43.5" y2="35.6"/><line x1="41.8" y1="40.0" x2="37.2" y2="38.7"/><line x1="41.8" y1="40.0" x2="38.8" y2="43.5"/><line x1="41.8" y1="40.0" x2="50.4" y2="42.6"/><line x1="43.5" y1="35.6" x2="38.8" y2="43.5"/><line x1="43.5" y1="35.6" x2="52.0" y2="38.5"/><line x1="43.5" y1="35.6" x2="41.7" y2="31.0"/><line x1="43.5" y1="35.6" x2="49.4" y2="35.1"/><line x1="37.2" y1="38.7" x2="38.8" y2="43.5"/><line x1="37.2" y1="38.7" x2="36.3" y2="34.6"/><line x1="36.3" y1="34.6" x2="41.7" y2="31.0"/><line x1="52.0" y1="38.5" x2="50.4" y2="42.6"/><line x1="52.0" y1="38.5" x2="49.4" y2="35.1"/><line x1="50.4" y1="42.6" x2="49.4" y2="35.1"/><line x1="14.2" y1="43.0" x2="13.9" y2="38.5"/><line x1="14.2" y1="43.0" x2="16.2" y2="47.1"/><line x1="20.9" y1="39.4" x2="13.9" y2="38.5"/><line x1="20.9" y1="39.4" x2="24.6" y2="41.8"/><line x1="19.5" y1="51.3" x2="22.9" y2="46.7"/><line x1="19.5" y1="51.3" x2="16.2" y2="47.1"/><line x1="22.9" y1="46.7" x2="24.6" y2="41.8"/><line x1="22.9" y1="46.7" x2="16.2" y2="47.1"/><line x1="43.6" y1="20.7" x2="43.8" y2="14.5"/><line x1="43.6" y1="20.7" x2="47.3" y2="18.1"/><line x1="43.6" y1="20.7" x2="48.0" y2="23.0"/><line x1="37.1" y1="9.9" x2="43.8" y2="14.5"/><line x1="43.8" y1="14.5" x2="47.3" y2="18.1"/><line x1="47.3" y1="18.1" x2="48.0" y2="23.0"/><line x1="15.0" y1="30.7" x2="12.6" y2="26.7"/><line x1="15.0" y1="30.7" x2="19.2" y2="29.0"/><line x1="16.7" y1="24.7" x2="12.6" y2="26.7"/><line x1="16.7" y1="24.7" x2="19.2" y2="29.0"/></g><g fill="#e8863c"><circle cx="31.4" cy="30.0" r="1.8"/><circle cx="24.7" cy="31.9" r="1.8"/><circle cx="30.5" cy="34.3" r="1.8"/><circle cx="20.7" cy="20.5" r="1.8"/><circle cx="39.8" cy="17.8" r="1.8"/><circle cx="26.5" cy="20.6" r="2.5"/><circle cx="43.5" cy="35.6" r="3.0"/><circle cx="37.2" cy="38.7" r="1.8"/><circle cx="38.8" cy="43.5" r="2.2"/><circle cx="36.3" cy="34.6" r="1.8"/><circle cx="52.0" cy="38.5" r="3.0"/><circle cx="50.4" cy="42.6" r="2.2"/><circle cx="22.9" cy="46.7" r="2.2"/><circle cx="16.2" cy="47.1" r="3.0"/><circle cx="37.1" cy="9.9" r="3.0"/><circle cx="43.8" cy="14.5" r="2.5"/><circle cx="47.3" cy="18.1" r="2.5"/><circle cx="16.7" cy="24.7" r="3.0"/><circle cx="12.6" cy="26.7" r="1.8"/><circle cx="19.2" cy="29.0" r="1.8"/></g><g fill="#f59e42" opacity=".8"><circle cx="27.4" cy="24.8" r="1.1"/><circle cx="22.9" cy="26.7" r="1.3"/><circle cx="29.0" cy="13.4" r="1.5"/><circle cx="9.5" cy="32.6" r="1.1"/><circle cx="41.8" cy="40.0" r="1.5"/><circle cx="41.7" cy="31.0" r="1.3"/><circle cx="49.4" cy="35.1" r="1.1"/><circle cx="14.2" cy="43.0" r="1.1"/><circle cx="20.9" cy="39.4" r="1.5"/><circle cx="19.5" cy="51.3" r="1.5"/><circle cx="13.9" cy="38.5" r="1.1"/><circle cx="24.6" cy="41.8" r="1.5"/><circle cx="43.6" cy="20.7" r="1.5"/><circle cx="48.0" cy="23.0" r="1.5"/><circle cx="15.0" cy="30.7" r="1.5"/></g>
     </svg>
     <div class="logo-word">${word || 'KNOWLEDGE'}</div>
-    <div class="logo-sub">AI</div>
   </div>`;
 }
 
@@ -551,6 +751,39 @@ function ph(label, cls, key){
   return `<div class="ph ${cls||''}"${key?` data-slot="${key}" data-label="${label}"`:''}><div class="ico">▣</div><div>${label}</div></div>`;
 }
 
+/* ===================== ICONS (Outline, KNOWLEDGE-Stil) ===================== */
+const ICONS = {
+  /* Folie 5 */
+  speech:'<path d="M4 7a3 3 0 0 1 3-3h13a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-6l-5 4v-4H7a3 3 0 0 1-3-3z"/><path d="M9 9h9M9 12.5h6"/>',
+  imgnote:'<rect x="3" y="5" width="17" height="14" rx="2.5"/><path d="M3 15.5l4.5-4 4 3.5 3.5-3 5 4.5"/><circle cx="9" cy="9.5" r="1.4"/><path d="M20.5 3.5v5.5"/><circle cx="19" cy="9.5" r="1.6"/>',
+  facescan:'<path d="M3 8V5.5A2.5 2.5 0 0 1 5.5 3H8M16 3h2.5A2.5 2.5 0 0 1 21 5.5V8M21 16v2.5a2.5 2.5 0 0 1-2.5 2.5H16M8 21H5.5A2.5 2.5 0 0 1 3 18.5V16"/><circle cx="12" cy="11" r="3.2"/><path d="M7 18c1-2.2 2.9-3.3 5-3.3S16 15.8 17 18"/>',
+  videowave:'<rect x="2.5" y="5.5" width="14" height="13" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3z"/><path d="M6 11v2M8.5 9v6M11 10.5v3M13.5 11.8v.4"/>',
+  doc:'<path d="M6 2.5h7.5L19 8v13.5H6z"/><path d="M13.5 2.5V8H19"/><path d="M9 12.5h7M9 15.5h7M9 18h4.5"/>',
+  /* Folie 18 */
+  shield:'<path d="M12 2.5l8 3v6.2c0 4.7-3.2 8.9-8 10.3-4.8-1.4-8-5.6-8-10.3V5.5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  puzzle:'<path d="M10 3.5h4v2.2a1.8 1.8 0 1 0 3.6 0V3.5h2.9v4.2h-2.2a1.8 1.8 0 1 0 0 3.6h2.2v4.2h-4.2v-2.2a1.8 1.8 0 1 0-3.6 0v2.2H10v-4.2H7.8a1.8 1.8 0 1 1 0-3.6H10z"/>',
+  chain:'<path d="M9.5 14.5l5-5"/><path d="M11.5 6.5l1.8-1.8a3.9 3.9 0 0 1 5.5 5.5L17 12"/><path d="M12.5 17.5l-1.8 1.8a3.9 3.9 0 0 1-5.5-5.5L7 12"/>',
+  checkc:'<circle cx="12" cy="12" r="9"/><path d="M7.8 12.2l3 3 5.4-6"/>',
+  /* Skalen */
+  lock:'<rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.4"/>',
+  eye:'<path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 3.9 5.7 3.9 9S14.6 18.4 12 21c-2.6-2.6-3.9-5.7-3.9-9S9.4 5.6 12 3z"/>',
+  /* Folie 41 */
+  scaleico:'<path d="M12 3.5v17"/><path d="M6.5 20.5h11"/><path d="M12 6.5l-6.5 1.8 6.5 1.6 6.5-1.6z"/><path d="M2.5 15c0 1.7 1.3 3 3 3s3-1.3 3-3l-3-6.2z"/><path d="M15.5 15c0 1.7 1.3 3 3 3s3-1.3 3-3l-3-6.2z"/>',
+  mask:'<path d="M3.5 6.5c3-1.2 5.7-1.8 8.5-1.8s5.5.6 8.5 1.8c0 6.5-1.4 10.2-4 12.1-1.6 1.2-3 1.7-4.5 1.7s-2.9-.5-4.5-1.7c-2.6-1.9-4-5.6-4-12.1z"/><path d="M8 10.5c.9-.7 1.9-.7 2.8 0M13.2 10.5c.9-.7 1.9-.7 2.8 0"/><path d="M9.5 15.2c1.7.9 3.3.9 5 0"/>',
+  block:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+  contract:'<path d="M5.5 2.5h9L19 7v14.5H5.5z"/><path d="M14.5 2.5V7H19"/><path d="M8.5 11.5h7M8.5 14.5h7"/><path d="M8.5 18l1.6-1.6a1.4 1.4 0 0 1 2 2L10.5 20"/>',
+  /* Sonstiges */
+  cal:'<rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  police:'<path d="M12 2.5l8 3v6.2c0 4.7-3.2 8.9-8 10.3-4.8-1.4-8-5.6-8-10.3V5.5z"/><path d="M12 8v7M8.5 11.5h7"/>'
+};
+function ico(name, size, color, sw){
+  const s = size || 30;
+  return `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"
+    stroke="${color||'#e8863c'}" stroke-width="${sw||1.5}" stroke-linecap="round"
+    stroke-linejoin="round" aria-hidden="true">${ICONS[name]||''}</svg>`;
+}
+
 /* Content slide */
 function S(o){
   return `
@@ -560,9 +793,10 @@ function S(o){
     <div class="chrome">
       ${sidebar(o.nav)}
       <div class="stage">
-        <div class="eyebrow">${o.eyebrow}</div>
-        <h2 class="h1">${o.title}</h2>
-        <div class="rule"></div>
+        <div class="head">
+          <div class="eyebrow">${o.eyebrow}</div>
+          <h2 class="h1">${o.title}</h2>
+        </div>
         ${o.lead ? `<p class="lead">${o.lead}</p>` : ''}
         <div class="body">${o.body}</div>
         ${o.foot ? `<div class="foot">${o.foot}</div>` : ''}
@@ -579,9 +813,11 @@ function SEC(o){
     <div class="sec-wrap">
       ${sidebar(o.nav)}
       <div class="sec-body">
-        <div class="sec-num">${o.num}</div>
-        <h2 class="sec-title">${o.title}</h2>
-        <div class="sec-art">${o.art}</div>
+        <div class="sec-num">Kapitel ${o.k}</div>
+        <div class="sec-main">
+          <h2 class="sec-title">${o.title}</h2>
+          <div class="sec-art">${o.art}</div>
+        </div>
       </div>
     </div>
   </section>`;
@@ -600,7 +836,7 @@ slides.push(`
     <h1 class="t-head">KI-Kennzeichnungs&shy;pflichten</h1>
     <p class="t-sub">Was ab dem 2. August 2026 für Unternehmen gilt</p>
     <div class="t-meta">
-      <div class="nm">Workshop · KNOWLEDGE AI</div>
+      <div class="nm">Workshop · KNOWLEDGE</div>
       <div class="rl">Transparenzpflichten der EU-KI-Verordnung<br>Anbieter · Betreiber · Praxis</div>
     </div>
   </div>
@@ -662,11 +898,8 @@ slides.push(S({
   title:'KI wird immer besser — und weniger erkennbar',
   lead:'Es droht <b>Täuschungsgefahr</b> und Vertrauensverlust. Synthetische Inhalte sind in fast jedem Kanal angekommen — und mit bloßem Auge kaum noch von echten zu unterscheiden.',
   body:`
-    <div class="grid g3">
-      ${ph('Bilder','tall', 'einstiegBilder')}${ph('Videos','tall', 'einstiegVideos')}${ph('Audio','tall', 'einstiegAudio')}
-    </div>
-    <div class="grid g3" style="margin-top:.85rem">
-      ${ph('Interaktion mit KI','wide', 'einstiegInteraktion')}${ph('Texte','wide', 'einstiegTexte')}${ph('Emotionserkennung','wide', 'einstiegEmotion')}
+    <div class="hero-wrap">
+      ${ph('Synthetische Inhalte im Alltag','r169', 'einstiegHero')}
     </div>`
 }));
 
@@ -676,13 +909,24 @@ slides.push(S({
   title:'Transparenz',
   lead:'Der Grundgedanke hinter Art. 50 lässt sich in einem Satz zusammenfassen.',
   body:`
-    <div class="callout" style="font-size:1.15rem;padding:1.5rem 1.8rem;line-height:1.45">
-      <strong>Der Mensch soll wissen,</strong> wenn er es mit künstlicher Intelligenz zu tun hat — zumindest in bestimmten, klar definierten Bereichen.
-    </div>
-    <div class="grid g3" style="margin-top:1.2rem">
-      <div class="card"><h3>Kein Generalverdacht</h3><p>Art. 50 führt <b style="color:#f59e42">keine</b> pauschale Kennzeichnungspflicht für jeden KI-Output ein.</p></div>
-      <div class="card"><h3>Situationsbezogen</h3><p>Die Verordnung regelt vier klar umrissene Situationen — nicht „KI allgemein“.</p></div>
-      <div class="card"><h3>Rollenabhängig</h3><p>Wen welche Pflicht trifft, hängt davon ab, ob Sie Anbieter oder Betreiber sind.</p></div>
+    <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+      <div class="callout" style="margin-top:0;font-size:1.15rem;padding:1.5rem 1.8rem;line-height:1.45;flex-shrink:0">
+        <strong>Der Mensch soll wissen,</strong> wenn er es mit künstlicher Intelligenz zu tun hat — zumindest in bestimmten, klar definierten Bereichen.
+      </div>
+      <div class="stack" style="margin-top:1.1rem">
+        <div class="stack-row">
+          <h3>Kein Generalverdacht</h3>
+          <p>Art. 50 führt <b style="color:#f59e42">keine</b> pauschale Kennzeichnungspflicht für jeden KI-Output ein.</p>
+        </div>
+        <div class="stack-row">
+          <h3>Situationsbezogen</h3>
+          <p>Die Verordnung regelt vier klar umrissene Situationen — nicht „KI allgemein“.</p>
+        </div>
+        <div class="stack-row">
+          <h3>Rollenabhängig</h3>
+          <p>Wen welche Pflicht trifft, hängt davon ab, ob Sie Anbieter oder Betreiber sind.</p>
+        </div>
+      </div>
     </div>`,
   foot:'* Die Pflichten greifen nur in den in Art. 50 Abs. 1–4 genannten Konstellationen.'
 }));
@@ -693,16 +937,16 @@ slides.push(S({
   title:'Die neuen KI-Kennzeichnungspflichten',
   lead:'Die Kennzeichnungspflichten beginnen ab dem <b>2. August 2026</b>. Ausnahme: die maschinenlesbare Kennzeichnung nach Art. 50 Abs. 2 gilt für Systeme, die vor dem Stichtag bereits in Verkehr waren, erst ab dem <b>2. Dezember 2026</b>.',
   body:`
-    <div style="display:flex;gap:.6rem;margin-bottom:.7rem">
-      <div style="flex:2;text-align:center"><span class="badge anbieter" style="position:static;display:inline-block">Anbieter</span></div>
-      <div style="flex:3;text-align:center"><span class="badge betreiber" style="position:static;display:inline-block">Betreiber</span></div>
+    <div class="brk">
+      <div class="brk-i anb a2"><span class="brk-lbl">Anbieter</span><div class="brk-line"></div></div>
+      <div class="brk-i btr a3"><span class="brk-lbl">Betreiber</span><div class="brk-line"></div></div>
     </div>
     <div class="grid g5">
-      <div class="card"><div class="num">1</div><h3>Direkte Interaktion mit KI</h3><div class="sub">Art. 50 Abs. 1</div><ul><li>Chatbot</li><li>Voicebot</li><li>KI-Assistent</li></ul></div>
-      <div class="card"><div class="num">2</div><h3>Maschinenlesbarkeit von KI-Content</h3><div class="sub">Art. 50 Abs. 2</div><ul><li>Bild · Video</li><li>Audio · Text</li></ul></div>
-      <div class="card"><div class="num">3</div><h3>Emotionserkennung &amp; Biometrie</h3><div class="sub">Art. 50 Abs. 3</div><ul><li>Betroffene informieren</li></ul></div>
-      <div class="card"><div class="num">4</div><h3>Deepfakes</h3><div class="sub">Art. 50 Abs. 4 S. 1–3</div><ul><li>Bild</li><li>Audio (Ton)</li><li>Video</li></ul></div>
-      <div class="card"><div class="num">5</div><h3>KI-Texte</h3><div class="sub">Art. 50 Abs. 4 S. 4–5</div><ul><li>Öffentliches Interesse</li></ul></div>
+      <div class="card"><div class="num">1</div><div class="ic-top">${ico('speech',38)}</div><h3>Direkte Interaktion mit KI</h3><div class="sub">Art. 50 Abs. 1</div><ul class="bare"><li>Chatbot</li><li>Voicebot</li><li>KI-Assistent</li></ul></div>
+      <div class="card"><div class="num">2</div><div class="ic-top">${ico('imgnote',38)}</div><h3>Maschinenlesbarkeit von KI-Content</h3><div class="sub">Art. 50 Abs. 2</div><ul class="bare"><li>Bild · Video</li><li>Audio · Text</li></ul></div>
+      <div class="card"><div class="num">3</div><div class="ic-top">${ico('facescan',38)}</div><h3>Emotionserkennung &amp; Biometrie</h3><div class="sub">Art. 50 Abs. 3</div><ul class="bare"><li>Betroffene informieren</li></ul></div>
+      <div class="card"><div class="num">4</div><div class="ic-top">${ico('videowave',38)}</div><h3>Deepfakes</h3><div class="sub">Art. 50 Abs. 4 S. 1–3</div><ul class="bare"><li>Bild</li><li>Audio (Ton)</li><li>Video</li></ul></div>
+      <div class="card"><div class="num">5</div><div class="ic-top">${ico('doc',38)}</div><h3>KI-Texte</h3><div class="sub">Art. 50 Abs. 4 S. 4–5</div><ul class="bare"><li>Öffentliches Interesse</li></ul></div>
     </div>`
 }));
 
@@ -712,21 +956,36 @@ slides.push(S({
   title:'Die Fristen im Überblick',
   lead:'Der Digital Omnibus (final angenommen am 29. Juni 2026) hat die Hochrisiko-Fristen verschoben — die <b>Transparenzpflichten aus Art. 50 bleiben beim 2. August 2026</b>. Verschoben wurde nur die technische Watermarking-Pflicht für Bestandssysteme.',
   body:`
-    <div class="tl">
-      <div class="tl-line"></div>
-      <div class="tl-marks">
-        <div class="tl-m"><div class="pt"></div><div class="dt">02.02.2025</div><div class="lb">Art. 4 KI-Kompetenz &amp; Art. 5 Verbote</div></div>
-        <div class="tl-m hot"><div class="pt"></div><div class="dt">02.08.2026</div><div class="lb">Art. 50 Abs. 1, 3, 4 — Kennzeichnung</div></div>
-        <div class="tl-m hot"><div class="pt"></div><div class="dt">02.12.2026</div><div class="lb">Art. 50 Abs. 2 für Bestandssysteme</div></div>
-        <div class="tl-m"><div class="pt"></div><div class="dt">02.12.2027</div><div class="lb">Hochrisiko Anhang III</div></div>
-        <div class="tl-m"><div class="pt"></div><div class="dt">02.08.2028</div><div class="lb">Hochrisiko Anhang I</div></div>
+    <div class="tl2">
+      <div class="tl2-row">
+        <div class="tl2-line"></div>
+        <div class="tl2-cells" style="grid-template-columns:auto 1fr auto 1fr 1fr">
+          <div class="tl2-year">2024</div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">01.08.2024</div><div class="lb">AI Act tritt in Kraft</div></div>
+          <div class="tl2-year">2025</div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.02.2025</div><div class="lb">Art. 5 Verbote &amp; Art. 4 KI-Kompetenz</div></div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.08.2025</div><div class="lb">GPAI, Governance &amp; Sanktionen</div></div>
+        </div>
+      </div>
+      <div class="tl2-brk">↳ WEITER</div>
+      <div class="tl2-row hot">
+        <div class="tl2-line"></div>
+        <div class="tl2-cells" style="grid-template-columns:auto 1fr 1fr auto 1fr auto 1fr">
+          <div class="tl2-year">2026</div>
+          <div class="tl2-pt hot"><span class="d"></span><div class="dt">02.08.2026</div><div class="lb">Art. 50 Kennzeichnung + Hochrisiko Anhang III</div></div>
+          <div class="tl2-pt hot"><span class="d"></span><div class="dt">02.12.2026</div><div class="lb">Art. 50 Abs. 2 für Bestandssysteme</div></div>
+          <div class="tl2-year">2027</div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.08.2027</div><div class="lb">Hochrisiko Anhang I</div></div>
+          <div class="tl2-year">2030</div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">31.12.2030</div><div class="lb">Bestandssysteme von Behörden</div></div>
+        </div>
       </div>
     </div>
-    <div class="callout"><strong>Wichtig für den Workshop:</strong> Der 2. August 2026 steht fest. Wer heute plant, plant gegen dieses Datum — nicht gegen eine mögliche weitere Verschiebung.</div>`
+    <div class="callout" style="margin-top:1.5rem"><strong>Wichtig für den Workshop:</strong> Der 2. August 2026 steht fest. Wer heute plant, plant gegen dieses Datum — nicht gegen eine mögliche weitere Verschiebung.</div>`
 }));
 
 /* --- 06 SEC Grundlagen --- */
-slides.push(SEC({nav:'Grundlagen', num:'TEIL 01', title:'Grundlagen', art:'Begriffe · Rollen · Anwendungsbereich'}));
+slides.push(SEC({nav:'Grundlagen', k:1, title:'Grundlagen', art:'Begriffe · Rollen · Anwendungsbereich'}));
 
 /* --- 07 Was ist ein KI-System --- */
 slides.push(S({
@@ -759,16 +1018,16 @@ slides.push(S({
   title:'Für wen gelten die Kennzeichnungspflichten?',
   lead:'Vom Solo-Selbstständigen bis zum Konzern: entscheidend ist die <b>berufliche Tätigkeit</b> — auf die Größe kommt es nicht an.',
   body:`
-    <div class="grid g2" style="grid-template-columns:2.4fr 1fr">
-      <div class="card ok">
-        <div class="split-head"><span class="dot-i g">✓</span> Kennzeichnungspflichten gelten für</div>
-        <div class="grid g4">
+    <div class="grid g2 tiles-lg" style="grid-template-columns:2.4fr 1fr;align-items:stretch">
+      <div class="card ok tall-c">
+        <div class="split-head ctr"><span class="dot-i g">✓</span> Kennzeichnungspflichten gelten für</div>
+        <div class="grid g4" style="align-items:center;flex:1">
           ${ph('Unternehmen', '', 'zielUnternehmen')}${ph('Behörden', '', 'zielBehoerden')}${ph('Selbstständige', '', 'zielSelbststaendige')}${ph('Sonstige berufl. Nutzer', '', 'zielSonstige')}
         </div>
       </div>
-      <div class="card no">
-        <div class="split-head"><span class="dot-i r">✕</span> Gilt nicht für Privatpersonen</div>
-        ${ph('Private Nutzung','tall', 'zielPrivat')}
+      <div class="card no tall-c">
+        <div class="split-head ctr"><span class="dot-i r">✕</span> Gilt nicht für Privatpersonen</div>
+        <div style="flex:1;display:flex;align-items:center">${ph('Private Nutzung','', 'zielPrivat')}</div>
       </div>
     </div>`,
   foot:'* Aber Vorsicht: Nur bei <u>ausschließlich</u> persönlicher und nicht beruflicher Tätigkeit (Art. 2 Nr. 10 AI Act). Beispiel: KI-generierte Geburtstagseinladung.'
@@ -780,9 +1039,9 @@ slides.push(S({
   title:'Anbieter oder Betreiber des KI-Systems?',
   lead:'Die Rollenzuordnung entscheidet darüber, welche der fünf Pflichten Sie überhaupt treffen. Nach <b>Art. 25 AI Act</b> kann ein Betreiber zum Anbieter werden — etwa beim Rebranding unter eigener Marke.',
   body:`
-    <div class="grid g2">
+    <div class="grid g2 roomy">
       <div class="card">
-        <div class="split-head"><span class="badge anbieter" style="position:static;padding:.22rem .8rem;font-size:.68rem">Anbieter</span></div>
+        <div class="split-head"><span class="badge anbieter inline">Anbieter</span></div>
         <div class="sub">Art. 3 Nr. 3 AI Act</div>
         <ul>
           <li>Entwickelt ein KI-System selbst oder lässt es entwickeln</li>
@@ -794,7 +1053,7 @@ slides.push(S({
         </div>
       </div>
       <div class="card">
-        <div class="split-head"><span class="badge betreiber" style="position:static;padding:.22rem .8rem;font-size:.68rem">Betreiber</span></div>
+        <div class="split-head"><span class="badge betreiber inline">Betreiber</span></div>
         <div class="sub">Art. 3 Nr. 4 AI Act</div>
         <ul>
           <li>Verwendet ein KI-System in eigener Verantwortung</li>
@@ -815,27 +1074,27 @@ slides.push(S({
   title:'Was betrifft Sie konkret?',
   lead:'Nicht jede Kennzeichnungspflicht ist für alle Unternehmen gleich relevant. Diese Einschätzung hilft bei der Priorisierung im Workshop.',
   body:`
-    <div class="stats">
+    <div class="stats lg-list">
       <div class="card">
         <div class="stat-top"><span class="stat-pct">95 %</span><h3 style="margin:0">Die meisten Teilnehmer</h3></div>
-        ${ph('Content-Produktion','wide', 'relevanzHoch')}
+        ${ph('Content-Produktion','r169', 'relevanzHoch')}
         <ul style="margin-top:.8rem"><li><b style="color:#fff">Deepfakes</b> (Art. 50 Abs. 4 S. 1–3)</li><li><b style="color:#fff">KI-Texte</b> (Art. 50 Abs. 4 S. 4–5)</li></ul>
       </div>
       <div class="card">
         <div class="stat-top"><span class="stat-pct mid">25 %</span><h3 style="margin:0">Manche Teilnehmer</h3></div>
-        ${ph('Eigene KI-Lösung','wide', 'relevanzMittel')}
+        ${ph('Eigene KI-Lösung','r169', 'relevanzMittel')}
         <ul style="margin-top:.8rem"><li><b style="color:#fff">Interaktion mit KI</b> (Art. 50 Abs. 1)</li><li><b style="color:#fff">Maschinenlesbarkeit</b> (Art. 50 Abs. 2)</li></ul>
       </div>
       <div class="card">
         <div class="stat-top"><span class="stat-pct low">5 %</span><h3 style="margin:0">Nur wenige Teilnehmer</h3></div>
-        ${ph('Biometrie / Kamera','wide', 'relevanzNiedrig')}
+        ${ph('Biometrie / Kamera','r169', 'relevanzNiedrig')}
         <ul style="margin-top:.8rem"><li><b style="color:#fff">Emotionserkennung &amp; biometrische Kategorisierung</b> (Art. 50 Abs. 3)</li></ul>
       </div>
     </div>`
 }));
 
 /* --- 11 SEC Interaktion --- */
-slides.push(SEC({nav:'Interaktion mit KI', num:'TEIL 02 · 1 VON 5', title:'Direkte Interaktion mit KI', art:'Art. 50 Abs. 1 AI Act'}));
+slides.push(SEC({nav:'Interaktion mit KI', k:2, title:'Direkte Interaktion mit KI', art:'Art. 50 Abs. 1 AI Act'}));
 
 /* --- 12 Interaktion Grundsatz --- */
 slides.push(S({
@@ -843,12 +1102,15 @@ slides.push(S({
   title:'Direkte Interaktion mit KI',
   lead:'<b>Grundsatz:</b> Wenn Menschen ohne es zu merken direkt mit einem KI-System interagieren, soll ihnen das bewusst gemacht werden.',
   body:`
-    <div class="tv">
+    <div class="tv" style="grid-template-columns:.62fr 1fr;gap:1.8rem">
       ${ph('Chatbot-Interaktion','tall', 'interaktionChat')}
-      <div class="check">
+      <div class="check lg" style="gap:0">
         <div class="check-i"><div class="k">1</div><div class="t"><b>KI-System</b> — Ein KI-System ist im Einsatz.</div></div>
+        <div class="arw-v">↓</div>
         <div class="check-i"><div class="k">2</div><div class="t"><b>Direkte Interaktion</b> — Eine natürliche Person interagiert unmittelbar mit dem KI-System.</div></div>
+        <div class="arw-v">↓</div>
         <div class="check-i"><div class="k">3</div><div class="t"><b>Keine Ausnahme einschlägig</b> — KI ist weder zur Strafverfolgung zugelassen noch offensichtlich als KI erkennbar.</div></div>
+        <div class="arw-v">↓</div>
         <div class="check-i" style="border-color:rgba(63,178,127,.36);background:rgba(63,178,127,.06)"><div class="k" style="background:rgba(63,178,127,.2);color:#6cd3a4">✓</div><div class="t"><b style="color:#6cd3a4">Transparenzpflicht</b> — Informationspflicht nach Art. 50 Abs. 1 AI Act.</div></div>
       </div>
     </div>`
@@ -889,7 +1151,7 @@ slides.push(S({
   title:'Ausnahme: KI ist „offensichtlich“',
   lead:'Wenn für Nutzer <b>offensichtlich erkennbar</b> ist, dass sie es mit einem KI-System zu tun haben, muss nicht gekennzeichnet werden (Klassiker-Beispiel: humanoider Roboter).',
   body:`
-    <div class="grid g3">
+    <div class="grid g3 lg-list">
       <div class="card ok">
         <div class="split-head"><span class="dot-i g">✓</span> Offensichtlich KI</div>
         ${ph('Chat: "KI-Chatbot"','wide', 'offensichtlichJa')}
@@ -911,7 +1173,7 @@ slides.push(S({
 }));
 
 /* --- 15 SEC Maschinenlesbarkeit --- */
-slides.push(SEC({nav:'Maschinenlesbarkeit', num:'TEIL 03 · 2 VON 5', title:'Maschinenlesbarkeit von KI-Inhalten', art:'Art. 50 Abs. 2 AI Act'}));
+slides.push(SEC({nav:'Maschinenlesbarkeit', k:3, title:'Maschinenlesbarkeit von KI-Inhalten', art:'Art. 50 Abs. 2 AI Act'}));
 
 /* --- 16 Maschinenlesbarkeit --- */
 slides.push(S({
@@ -954,25 +1216,28 @@ slides.push(S({
         ${ph('Bild + eingebettetes Wasserzeichen','wide', 'mlWatermark')}
       </div>
     </div>
-    <div class="grid g4" style="margin-top:.85rem">
-      <div class="card"><h3>Wirksam</h3><p>Für Computer automatisch erkennbar.</p></div>
-      <div class="card"><h3>Interoperabel</h3><p>Breit nutzbar über verschiedene Systeme und Dienste.</p></div>
-      <div class="card"><h3>Belastbar</h3><p>Schwer entfernbar oder manipulierbar.</p></div>
-      <div class="card"><h3>Zuverlässig</h3><p>Genau und verlässlich in der Erkennung.</p></div>
+    <div class="tech" style="margin-top:.95rem">
+      <div class="tech-lbl">Die technische Lösung muss sein:</div>
+      <div class="tech-items">
+        <div class="tech-i">${ico('shield',30,'#6f8fbf')}<h4>Wirksam</h4><p>Für Computer automatisch erkennbar.</p></div>
+        <div class="tech-i">${ico('puzzle',30,'#9083c4')}<h4>Interoperabel</h4><p>Breit nutzbar über verschiedene Systeme und Dienste.</p></div>
+        <div class="tech-i">${ico('chain',30,'#e8863c')}<h4>Belastbar</h4><p>Schwer entfernbar oder manipulierbar.</p></div>
+        <div class="tech-i">${ico('checkc',30,'#6aa886')}<h4>Zuverlässig</h4><p>Genau und verlässlich in der Erkennung.</p></div>
+      </div>
     </div>`,
   foot:'Etablierte Standards: C2PA / Content Credentials, IPTC-Metadaten, SynthID und vergleichbare Verfahren.'
 }));
 
 /* --- 18 Ist das relevant für mich --- */
 slides.push(S({
-  nav:'Maschinenlesbarkeit', eyebrow:'„Ich bin doch nicht OpenAI“', badge:{t:'anbieter',l:'Anbieter'},
+  nav:'Maschinenlesbarkeit', eyebrow:'„Ich bin doch nicht Claude“', badge:{t:'anbieter',l:'Anbieter'},
   title:'Ist all das relevant für mich?',
   lead:'Für „Basisnutzer“ weniger, wohl aber für KI-Fortgeschrittene — speziell bei der <b>Entwicklung einer eigenen KI-Lösung, die ein fremdes KI-Basismodell nutzt</b>.',
   body:`
-    <div class="tv">
+    <div class="tv" style="grid-template-columns:.58fr 1fr;gap:1.8rem">
       ${ph('Vibe Coding / eigene KI-Lösung','tall', 'vibeCoding')}
       <div>
-        <div class="check">
+        <div class="check lg">
           <div class="check-i"><div class="k">✓</div><div class="t"><b>Sie nutzen ChatGPT im Browser</b> — Sie sind Betreiber. Abs. 2 trifft Sie nicht.</div></div>
           <div class="check-i"><div class="k">!</div><div class="t"><b>Sie bauen einen eigenen Assistenten</b> auf API-Basis, gebrandet unter eigener Marke — die Anbieterrolle rückt näher.</div></div>
           <div class="check-i"><div class="k">!</div><div class="t"><b>Automatisierungen mit n8n, Make &amp; Co.</b> die eigenständig Content generieren und veröffentlichen — Rolle sauber prüfen.</div></div>
@@ -983,7 +1248,7 @@ slides.push(S({
 }));
 
 /* --- 19 SEC Emotionserkennung --- */
-slides.push(SEC({nav:'Emotionserkennung', num:'TEIL 04 · 3 VON 5', title:'Emotionserkennung &amp; Biometrie', art:'Art. 50 Abs. 3 AI Act'}));
+slides.push(SEC({nav:'Emotionserkennung', k:4, title:'Emotionserkennung &amp; Biometrie', art:'Art. 50 Abs. 3 AI Act'}));
 
 /* --- 20 Emotionserkennung --- */
 slides.push(S({
@@ -991,20 +1256,20 @@ slides.push(S({
   title:'Emotionserkennung &amp; Biometrie',
   lead:'Betreiber von KI-Systemen, die <b>Emotionen erkennen</b> oder <b>Personen biometrisch kategorisieren</b>, müssen Betroffene über den Einsatz informieren. Am <b>Arbeitsplatz</b> und in <b>Bildungseinrichtungen</b> sind solche Systeme grundsätzlich verboten (Art. 5 Abs. 1 f AI Act).',
   body:`
-    <div class="grid g2">
-      <div class="card">
-        <h3 style="margin-bottom:.8rem">Emotionserkennung</h3>
-        ${ph('Gesicht → KI → Emotionen','tall', 'emotionErkennung')}
-        <p style="margin-top:.8rem;text-align:center">z.&nbsp;B. Freude, Zufriedenheit, Ärger, Traurigkeit</p>
+    <div class="grid g2" style="align-items:stretch">
+      <div class="card" style="justify-content:center">
+        <h3 style="margin-bottom:1rem;font-size:1.15rem;text-align:center">Emotionserkennung</h3>
+        ${ph('Gesicht → KI → Emotionen','r169', 'emotionErkennung')}
+        <p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. Freude, Zufriedenheit, Ärger, Traurigkeit</p>
       </div>
-      <div class="card">
-        <h3 style="margin-bottom:.8rem">Biometrische Kategorisierung</h3>
-        ${ph('Kamera → Merkmalszuordnung','tall', 'emotionBiometrie')}
-        <ul style="margin-top:.8rem"><li>Alter</li><li>Geschlecht</li><li>Hautfarbe</li><li>Weitere biometrische Merkmale</li></ul>
+      <div class="card" style="justify-content:center">
+        <h3 style="margin-bottom:1rem;font-size:1.15rem;text-align:center">Biometrische Kategorisierung</h3>
+        ${ph('Kamera → Merkmalszuordnung','r169', 'emotionBiometrie')}
+        <p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. Alter, Geschlecht, Hautfarbe und weitere biometrische Merkmale</p>
       </div>
     </div>
     <div class="callout red"><strong>Doppelte Hürde:</strong> Neben Art. 50 Abs. 3 greift regelmäßig auch die DSGVO — biometrische Daten sind besondere Kategorien personenbezogener Daten nach Art. 9 DSGVO.</div>`,
-  foot:'* Ausnahme: gesetzlich zugelassene Strafverfolgung.'
+  foot:'<span style="font-size:.88rem">* Ausnahme: gesetzlich zugelassene Strafverfolgung.</span>'
 }));
 
 /* --- 21 Praxisbeispiel --- */
@@ -1029,7 +1294,7 @@ slides.push(S({
 }));
 
 /* --- 22 SEC Deepfakes --- */
-slides.push(SEC({nav:'Deepfakes', num:'TEIL 05 · 4 VON 5', title:'Deepfakes', art:'Art. 50 Abs. 4 S. 1–3 AI Act'}));
+slides.push(SEC({nav:'Deepfakes', k:5, title:'Deepfakes', art:'Art. 50 Abs. 4 S. 1–3 AI Act'}));
 
 /* --- 23 Das sind Deepfakes --- */
 slides.push(S({
@@ -1037,12 +1302,12 @@ slides.push(S({
   title:'Das sind Deepfakes',
   lead:'Ein Deepfake ist ein durch KI erzeugter oder manipulierter Bild-, Ton- oder Videoinhalt, der <b>wirklichen Personen, Gegenständen, Orten, Einrichtungen oder Ereignissen ähnelt</b> und einer Person fälschlicherweise als echt oder wahrheitsgemäß erscheinen könnte (Art. 3 Nr. 60 AI Act).',
   body:`
-    <div class="grid g5">
-      <div class="card"><h3 style="text-align:center;font-size:.85rem">Person</h3>${ph('Person','tall', 'dfPerson')}</div>
-      <div class="card"><h3 style="text-align:center;font-size:.85rem">Gegenstand</h3>${ph('Gegenstand','tall', 'dfGegenstand')}</div>
-      <div class="card"><h3 style="text-align:center;font-size:.85rem">Ort</h3>${ph('Ort','tall', 'dfOrt')}</div>
-      <div class="card"><h3 style="text-align:center;font-size:.85rem">Einrichtung</h3>${ph('Einrichtung','tall', 'dfEinrichtung')}</div>
-      <div class="card"><h3 style="text-align:center;font-size:.85rem">Ereignis</h3>${ph('Ereignis','tall', 'dfEreignis')}</div>
+    <div class="grid g5 dfcat">
+      <div class="card"><div class="ic-top">${ico('facescan',26)}</div><span class="cat-lbl">Person</span>${ph('Person','r34', 'dfPerson')}</div>
+      <div class="card"><div class="ic-top">${ico('imgnote',26)}</div><span class="cat-lbl">Gegenstand</span>${ph('Gegenstand','r34', 'dfGegenstand')}</div>
+      <div class="card"><div class="ic-top">${ico('globe',26)}</div><span class="cat-lbl">Ort</span>${ph('Ort','r34', 'dfOrt')}</div>
+      <div class="card"><div class="ic-top">${ico('shield',26)}</div><span class="cat-lbl">Einrichtung</span>${ph('Einrichtung','r34', 'dfEinrichtung')}</div>
+      <div class="card"><div class="ic-top">${ico('cal',26)}</div><span class="cat-lbl">Ereignis</span>${ph('Ereignis','r34', 'dfEreignis')}</div>
     </div>
     <div class="callout"><strong>Wichtig:</strong> Der Begriff ist deutlich weiter als der Alltagsgebrauch — es geht nicht nur um gefälschte Gesichter von Prominenten.</div>`
 }));
@@ -1053,10 +1318,10 @@ slides.push(S({
   title:'Welche Formate können Deepfakes sein?',
   lead:'Für <b>Texte</b> gelten Spezialregeln (dazu gleich mehr) — sie fallen nicht unter den Deepfake-Begriff.',
   body:`
-    <div class="grid g3">
-      <div class="card"><h3 style="text-align:center">Bild</h3>${ph('Bild-Deepfake','tall', 'dfBild')}<p style="margin-top:.8rem;text-align:center">z.&nbsp;B. für Social-Media-Posts, Newsletter oder eine Printzeitung</p></div>
-      <div class="card"><h3 style="text-align:center">Audio</h3>${ph('Audio-Deepfake','tall', 'dfAudio')}<p style="margin-top:.8rem;text-align:center">z.&nbsp;B. für Podcast-Stimmen, Nachrichtensprecher</p></div>
-      <div class="card"><h3 style="text-align:center">Video</h3>${ph('Video-Deepfake','tall', 'dfVideo')}<p style="margin-top:.8rem;text-align:center">z.&nbsp;B. Katastrophenvideos, Newsvideos</p></div>
+    <div class="grid g3 media-lg">
+      <div class="card"><h3 style="text-align:center;font-size:1.15rem;margin-bottom:.9rem">Bild</h3>${ph('Bild-Deepfake','r11', 'dfBild')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. für Social-Media-Posts, Newsletter oder eine Printzeitung</p></div>
+      <div class="card"><h3 style="text-align:center;font-size:1.15rem;margin-bottom:.9rem">Audio</h3>${ph('Audio-Deepfake','r11', 'dfAudio')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. für Podcast-Stimmen, Nachrichtensprecher</p></div>
+      <div class="card"><h3 style="text-align:center;font-size:1.15rem;margin-bottom:.9rem">Video</h3>${ph('Video-Deepfake','r11', 'dfVideo')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. Katastrophenvideos, Newsvideos</p></div>
     </div>`
 }));
 
@@ -1069,7 +1334,7 @@ slides.push(S({
     <div class="grid g2">
       <div class="card no">
         <div class="split-head"><span class="dot-i r">✕</span> Kein Deepfake</div>
-        <div class="grid g2">${ph('Katze im All', '', 'dfKeinKatze')}${ph('Comic-Held', '', 'dfKeinComic')}</div>
+        <div class="grid g2 media-lg">${ph('Katze im All', 'r11', 'dfKeinKatze')}${ph('Comic-Held', 'r11', 'dfKeinComic')}</div>
         <div style="margin-top:.9rem">
           <h3>Kein Bezug zur Wirklichkeit</h3>
           <p>Keine Ähnlichkeit zu Personen, Gegenständen, Orten, Einrichtungen oder Ereignissen.</p>
@@ -1077,7 +1342,7 @@ slides.push(S({
       </div>
       <div class="card ok">
         <div class="split-head"><span class="dot-i g">✓</span> Deepfake</div>
-        <div class="grid g3">${ph('Person', '', 'dfJaPerson')}${ph('Gebäude', '', 'dfJaGebaeude')}${ph('Voice-Scam', '', 'dfJaScam')}</div>
+        <div class="grid g3 media-lg">${ph('Person', 'r11', 'dfJaPerson')}${ph('Gebäude', 'r11', 'dfJaGebaeude')}${ph('Voice-Scam', 'r11', 'dfJaScam')}</div>
         <div style="margin-top:.9rem">
           <h3>Ähnelt einer wirklichen Person, einem Gegenstand, Ort, einer Einrichtung oder einem Ereignis</h3>
           <p>… und würde einer Person fälschlicherweise als echt oder wahrheitsgemäß erscheinen.</p>
@@ -1092,13 +1357,37 @@ slides.push(S({
   title:'KI-generierte Produktbilder',
   lead:'Der praxisrelevanteste Fall im E-Commerce und Marketing. Maßgeblich ist, ob beim Betrachter ein <b>Authentizitätseindruck</b> entsteht.',
   body:`
-    <div class="grid g4">
-      <div class="card ok">${ph('Originalfoto','wide', 'prodOriginal')}<h3 style="margin-top:.8rem">Originalfoto</h3><p>Echtes Foto des konkreten Produkts.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#6cd3a4">Keine Kennzeichnung erforderlich</div></div>
-      <div class="card no">${ph('KI-Bild wie Foto','wide', 'prodKiFoto')}<h3 style="margin-top:.8rem">KI-Bild wie Foto</h3><p>Wirkt wie eine echte Produktfotografie in realer Umgebung.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#f08b8b">Kennzeichnung erforderlich</div></div>
-      <div class="card ok">${ph('Technische Zeichnung','wide', 'prodTechnisch')}<h3 style="margin-top:.8rem">Technische Visualisierung</h3><p>Offensichtlich eine Visualisierung, kein Foto.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#6cd3a4">Keine Kennzeichnung erforderlich</div></div>
-      <div class="card ok">${ph('Illustration','wide', 'prodIllustration')}<h3 style="margin-top:.8rem">Illustration / Fantasie</h3><p>Stilisiert und erkennbar nicht realistisch.</p><div style="margin-top:.7rem;font-size:.78rem;font-weight:700;color:#6cd3a4">Keine Kennzeichnung erforderlich</div></div>
+    <div class="grid g4 media-lg prod">
+      <div class="card ok">
+        ${ph('Originalfoto','r11', 'prodOriginal')}
+        <div class="ic-top" style="margin-top:.9rem;margin-bottom:.5rem">${ico('lock',24,'#6cd3a4')}</div>
+        <h3>Originalfoto</h3><p>Echtes Foto des konkreten Produkts.</p>
+        <div class="prod-st g">Keine Kennzeichnung erforderlich</div>
+      </div>
+      <div class="card no">
+        ${ph('KI-Bild wie Foto','r11', 'prodKiFoto')}
+        <div class="ic-top" style="margin-top:.9rem;margin-bottom:.5rem">${ico('eye',24,'#f08b8b')}</div>
+        <h3>KI-Bild wie Foto</h3><p>Wirkt wie eine echte Produktfotografie in realer Umgebung.</p>
+        <div class="prod-st r">Kennzeichnung erforderlich</div>
+      </div>
+      <div class="card ok">
+        ${ph('Technische Zeichnung','r11', 'prodTechnisch')}
+        <div class="ic-top" style="margin-top:.9rem;margin-bottom:.5rem">${ico('lock',24,'#6cd3a4')}</div>
+        <h3>Technische Visualisierung</h3><p>Offensichtlich eine Visualisierung, kein Foto.</p>
+        <div class="prod-st g">Keine Kennzeichnung erforderlich</div>
+      </div>
+      <div class="card ok">
+        ${ph('Illustration','r11', 'prodIllustration')}
+        <div class="ic-top" style="margin-top:.9rem;margin-bottom:.5rem">${ico('lock',24,'#6cd3a4')}</div>
+        <h3>Illustration / Fantasie</h3><p>Stilisiert und erkennbar nicht realistisch.</p>
+        <div class="prod-st g">Keine Kennzeichnung erforderlich</div>
+      </div>
     </div>
-    <div class="callout"><strong>Skala:</strong> Kein Authentizitätseindruck → keine Kennzeichnung &nbsp;·&nbsp; Authentizitätseindruck → Kennzeichnung erforderlich.</div>`
+    <div class="scale">
+      <div class="scale-end g">${ico('lock',26,'#3fb27f')}<span>Kein Authentizitäts&shy;eindruck</span></div>
+      <div class="scale-bar"></div>
+      <div class="scale-end r">${ico('eye',26,'#e05252')}<span>Authentizitäts&shy;eindruck</span></div>
+    </div>`
 }));
 
 /* --- 27 So kennzeichnen --- */
@@ -1109,22 +1398,46 @@ slides.push(S({
   body:`
     <div class="grid g3">
       <div class="card">
-        <h3 style="text-align:center;margin-bottom:.7rem">Bilder</h3>
-        ${ph('Bild mit AI-GENERATED-Label','wide', 'kennzBild')}
-        <ul style="margin-top:.7rem"><li><span class="tick">✓</span> Direkt im Bild — EU-Icon oder Textlabel</li><li><span class="cross">✕</span> Nicht in der Bildunterschrift oder daneben</li></ul>
+        <div class="ic-top">${ico('imgnote',34)}</div>
+        <h3 style="text-align:center;margin-bottom:.9rem">Bilder</h3>
+        <div class="mk-img">
+          ${ph('Bild mit AI-GENERATED-Label','r169', 'kennzBild')}
+          <span class="mk-tag mk-lbl w" style="position:absolute">AI GENERATED</span>
+        </div>
+        <div class="chn"><span class="b">AI GENERATED</span><span class="ar">·</span><span class="b ad">KI-generiert</span></div>
+        <ul style="margin-top:.85rem">
+          <li><span class="tick">✓</span> Direkt im Bild — EU-Icon oder Textlabel</li>
+          <li><span class="cross">✕</span> Nicht in der Bildunterschrift oder daneben</li>
+        </ul>
       </div>
       <div class="card">
-        <h3 style="text-align:center;margin-bottom:.7rem">Videos</h3>
-        ${ph('Video mit AI-MODIFIED-Label','wide', 'kennzVideo')}
-        <ul style="margin-top:.7rem"><li><span class="tick">✓</span> Im Video sichtbar platziert</li><li><span class="tick">✓</span> Wiederholung nach Unterbrechungen (z.&nbsp;B. Werbung)</li><li><span class="cross">✕</span> Nicht nur in Beschreibung / Captions</li></ul>
+        <div class="ic-top">${ico('videowave',34)}</div>
+        <h3 style="text-align:center;margin-bottom:.9rem">Videos</h3>
+        <div class="mk-img">
+          ${ph('Video mit AI-MODIFIED-Label','r169', 'kennzVideo')}
+          <span class="mk-play">▶</span>
+          <span class="mk-tag mk-lbl w" style="position:absolute">AI MODIFIED</span>
+        </div>
+        <div class="chn"><span class="b">AI</span><span class="ar">→</span><span class="b ad">Werbung</span><span class="ar">→</span><span class="b">AI</span></div>
+        <ul style="margin-top:.85rem">
+          <li><span class="tick">✓</span> Im Video sichtbar platziert</li>
+          <li><span class="tick">✓</span> Wiederholung nach Unterbrechungen</li>
+          <li><span class="cross">✕</span> Nicht nur in Beschreibung / Captions</li>
+        </ul>
       </div>
       <div class="card">
-        <h3 style="text-align:center;margin-bottom:.7rem">Audio</h3>
-        ${ph('Waveform mit Audiohinweis','wide', 'kennzAudio')}
-        <ul style="margin-top:.7rem"><li><span class="tick">✓</span> Hörbarer Hinweis statt visuellem Icon</li><li><span class="tick">✓</span> Zu Beginn der Aufnahme und nach Unterbrechungen</li></ul>
+        <div class="ic-top">${ico('speech',34)}</div>
+        <h3 style="text-align:center;margin-bottom:.9rem">Audio</h3>
+        <div class="mk-img">${ph('Waveform mit Audiohinweis','r169', 'kennzAudio')}</div>
+        <div class="wave" aria-hidden="true">${[9,17,26,13,30,21,34,19,27,12,23,31,15,24,10].map(h=>`<i style="height:${h}px"></i>`).join('')}</div>
+        <div class="bub">„Diese Aufnahme wurde mit KI erzeugt.“</div>
+        <ul style="margin-top:.85rem">
+          <li><span class="tick">✓</span> Hörbarer Hinweis statt visuellem Icon</li>
+          <li><span class="tick">✓</span> Zu Beginn und nach Unterbrechungen</li>
+        </ul>
       </div>
-    </div>
-    <div class="callout"><strong>Beispielformulierung Audio:</strong> „Diese Aufnahme wurde mit KI erzeugt.“</div>`
+    </div>`,
+  foot:'Beispielformulierung Audio: „Diese Aufnahme wurde mit KI erzeugt.“'
 }));
 
 /* --- 28 AI Icons --- */
@@ -1152,14 +1465,19 @@ slides.push(S({
       <div class="card">
         <h3>Ausnahme: Strafverfolgung</h3>
         <div class="sub">Art. 50 Abs. 4 S. 2 AI Act</div>
-        ${ph('Ermittlungsarbeit','wide', 'ausnahmePolizei')}
+        ${ph('Ermittlungsarbeit','r169', 'ausnahmePolizei')}
         <ul style="margin-top:.8rem"><li>Deepfakes, die zur Aufdeckung, Verhütung, Ermittlung oder Verfolgung von Straftaten eingesetzt werden</li></ul>
         <div style="margin-top:.8rem;font-size:.82rem;font-weight:700;color:#6cd3a4">→ Keine Kennzeichnungspflicht</div>
       </div>
       <div class="card">
         <h3>Eingeschränkte Kennzeichnung</h3>
         <div class="sub">Art. 50 Abs. 4 S. 3 AI Act</div>
-        <div class="grid g4">${ph('Künstlerisch', '', 'ausnahmeKuenstlerisch')}${ph('Kreativ', '', 'ausnahmeKreativ')}${ph('Satirisch', '', 'ausnahmeSatirisch')}${ph('Fiktional', '', 'ausnahmeFiktional')}</div>
+        <div class="grid g4 exc">
+          <div class="exc-i"><span class="exc-lbl">Künstlerisch</span>${ph('Künstlerisch','r34', 'ausnahmeKuenstlerisch')}</div>
+          <div class="exc-i"><span class="exc-lbl">Kreativ</span>${ph('Kreativ','r34', 'ausnahmeKreativ')}</div>
+          <div class="exc-i"><span class="exc-lbl">Satirisch</span>${ph('Satirisch','r34', 'ausnahmeSatirisch')}</div>
+          <div class="exc-i"><span class="exc-lbl">Fiktional</span>${ph('Fiktional','r34', 'ausnahmeFiktional')}</div>
+        </div>
         <ul style="margin-top:.8rem"><li>Teil eines offensichtlich künstlerischen, kreativen, satirischen, fiktionalen oder analogen Werks</li><li>Kennzeichnung nur in geeigneter Weise, die den Genuss des Werks nicht beeinträchtigt</li><li>z.&nbsp;B. dezent im Abspann, in der Beschreibung oder in den Credits</li></ul>
       </div>
     </div>`
@@ -1171,25 +1489,61 @@ slides.push(S({
   title:'Rückwirkende Kennzeichnung?',
   lead:'Grundsätzlich gibt es <b>keine rückwirkende Kennzeichnungspflicht</b>. Bei Bild-, Ton- und Videoinhalten kommt es auf den Zeitpunkt der <b><u>Erzeugung</u></b> an; bei Texten zusätzlich auf die Veröffentlichung.',
   body:`
-    <div class="grid g2">
+    <div class="rw-tl">
+      <div class="rw-seg pre"><span>VOR DEM 02.08.2026</span><span class="ln"></span></div>
+      <div class="rw-mark"><span class="d">02.08.2026</span><span class="s">STICHTAG</span></div>
+      <div class="rw-seg post"><span>AB DEM 02.08.2026</span><span class="ln"></span></div>
+    </div>
+    <div class="grid g2" style="align-items:stretch">
       <div class="card ok">
         <div class="split-head"><span class="dot-i g">✓</span> Bloß weiter öffentlich abrufbar</div>
-        ${ph('Bestehender Post','wide', 'rueckwirkendAlt')}
-        <p style="margin-top:.8rem">Vor dem Stichtag erzeugt und veröffentlicht, bleibt einfach online.</p>
-        <div style="margin-top:.7rem;font-size:.8rem;font-weight:700;color:#6cd3a4">Keine nachträgliche Kennzeichnung erforderlich</div>
+        <div class="mk ok" style="max-width:56%;margin:0 auto">
+          <div class="mk-prof"><span class="mk-av"></span><span class="mk-bar h" style="width:44%"></span></div>
+          <div class="mk-img">${ph('Bestehender Post','r169', 'rueckwirkendAlt')}</div>
+          <div class="mk-bar" style="width:78%"></div>
+          <div class="mk-act"><span>♡ 128</span><span>💬 14</span><span>↗</span></div>
+        </div>
+        <p style="margin-top:.9rem">Vor dem Stichtag erzeugt und veröffentlicht, bleibt einfach online.</p>
+        <div class="rw-cal g">${ico('cal',20,'#3fb27f')}<span>Keine nachträgliche Kennzeichnung erforderlich</span></div>
       </div>
       <div class="card no">
         <div class="split-head"><span class="dot-i r">!</span> Erneut veröffentlicht / gepostet / im Newsletter versendet</div>
-        <div class="grid g3">${ph('Erneut gepostet', '', 'rueckwirkendPost')}${ph('Newsletter', '', 'rueckwirkendNewsletter')}${ph('Neu publiziert', '', 'rueckwirkendNeu')}</div>
-        <p style="margin-top:.8rem">Nach dem Stichtag erneut in den Verkehr gebracht.</p>
-        <div style="margin-top:.7rem;font-size:.8rem;font-weight:700;color:#f08b8b">Kennzeichnung erforderlich</div>
+        <div class="mk-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div>
+            <div class="mk no">
+              <div class="mk-prof"><span class="mk-av"></span><span class="mk-bar h" style="width:50%"></span></div>
+              <div class="mk-img">${ph('Erneut gepostet','r169', 'rueckwirkendAlt')}<span class="mk-tag mk-lbl r" style="position:absolute">KI-generiertes Bild</span></div>
+              <div class="mk-act"><span>♡</span><span>💬</span><span>↗</span></div>
+            </div>
+            <div class="mk-cap">Erneut gepostet</div>
+          </div>
+          <div>
+            <div class="mk no">
+              <div class="mk-bar h" style="width:62%"></div>
+              <div class="mk-img">${ph('Newsletter','r169', 'rueckwirkendAlt')}<span class="mk-tag mk-lbl r" style="position:absolute">KI-generiertes Bild</span></div>
+              <div class="mk-bar" style="width:86%"></div>
+              <div class="mk-bar" style="width:54%"></div>
+            </div>
+            <div class="mk-cap">Newsletter</div>
+          </div>
+          <div>
+            <div class="mk no">
+              <div class="mk-bar h" style="width:40%"></div>
+              <div class="mk-img">${ph('Neu publiziert','r169', 'rueckwirkendAlt')}<span class="mk-tag mk-lbl r" style="position:absolute">KI-generiertes Bild</span></div>
+              <div class="mk-bar" style="width:92%"></div>
+              <div class="mk-bar" style="width:70%"></div>
+            </div>
+            <div class="mk-cap">Erneut veröffentlicht</div>
+          </div>
+        </div>
+        <p style="margin-top:.9rem">Nach dem Stichtag erneut in den Verkehr gebracht.</p>
+        <div class="rw-cal r">${ico('cal',20,'#e05252')}<span>Kennzeichnung erforderlich</span></div>
       </div>
-    </div>
-    <div class="callout"><strong>Stichtag:</strong> 02.08.2026 — davor liegt der Altbestand, danach greift die Pflicht bei jeder Neuveröffentlichung.</div>`
+    </div>`
 }));
 
 /* --- 31 SEC KI-Texte --- */
-slides.push(SEC({nav:'KI-Texte', num:'TEIL 06 · 5 VON 5', title:'KI-Texte', art:'Art. 50 Abs. 4 S. 4–5 AI Act'}));
+slides.push(SEC({nav:'KI-Texte', k:6, title:'KI-Texte', art:'Art. 50 Abs. 4 S. 4–5 AI Act'}));
 
 /* --- 32 Einstiegsbeispiel --- */
 slides.push(S({
@@ -1214,16 +1568,36 @@ slides.push(S({
   nav:'KI-Texte', eyebrow:'Ziel: Sicherung von Authentizität', badge:{t:'betreiber',l:'Betreiber'},
   title:'Wann muss man KI-Texte kennzeichnen?',
   body:`
-    <div class="tree">
-      <div class="tree-row"><div class="tree-q">Erzeugen oder manipulieren Sie Text mit einem <b>KI-System</b>?</div><div class="tree-y">✓ Ja ↓</div><div class="tree-n">✕ Nein → keine Pflicht</div></div>
-      <div class="tree-row"><div class="tree-q">Ist das KI-System für die <b>Strafverfolgung</b> zugelassen?</div><div class="tree-n">✕ Nein ↓</div><div class="tree-y">✓ Ja → keine Pflicht</div></div>
-      <div class="tree-row"><div class="tree-q">Wird der KI-Text im Internet oder offline <b>veröffentlicht</b>?</div><div class="tree-y">✓ Ja ↓</div><div class="tree-n">✕ Nein → keine Pflicht</div></div>
-      <div class="tree-row"><div class="tree-q">Betrifft der KI-Text eine <b>Angelegenheit von öffentlichem Interesse</b>?</div><div class="tree-y">✓ Ja ↓</div><div class="tree-n">✕ Nein → keine Pflicht</div></div>
-      <div class="tree-row"><div class="tree-q">Wurde der Text vorher <b>menschlich überprüft</b> UND übernimmt jemand die <b>inhaltliche Verantwortung</b>?</div><div class="tree-n">✕ Nein ↓</div><div class="tree-y">✓ Ja → keine Pflicht</div></div>
-      <div class="tree-end">
-        <div class="pill red">Kennzeichnungspflicht</div>
-        <div class="pill green">Keine Kennzeichnungspflicht</div>
+    <div class="t2">
+      <div class="t2-main">
+        <div class="t2-row">
+          <div class="t2-q">Erzeugen oder manipulieren Sie Text mit einem <b>KI-System</b>?</div>
+          <div class="t2-out"><span class="t2-dash"></span><span class="t2-bdg r">✕ Nein</span><span class="t2-dash"></span></div>
+        </div>
+        <div class="t2-conn"><span class="ln"></span><span class="t2-bdg g">✓ Ja</span><span class="ln"></span></div>
+        <div class="t2-row">
+          <div class="t2-q">Ist das KI-System für die <b>Strafverfolgung</b> zugelassen?</div>
+          <div class="t2-out"><span class="t2-dash"></span><span class="t2-bdg g">✓ Ja</span><span class="t2-dash"></span></div>
+        </div>
+        <div class="t2-conn"><span class="ln"></span><span class="t2-bdg r">✕ Nein</span><span class="ln"></span></div>
+        <div class="t2-row">
+          <div class="t2-q">Wird der KI-Text im Internet oder offline <b>veröffentlicht</b>?</div>
+          <div class="t2-out"><span class="t2-dash"></span><span class="t2-bdg r">✕ Nein</span><span class="t2-dash"></span></div>
+        </div>
+        <div class="t2-conn"><span class="ln"></span><span class="t2-bdg g">✓ Ja</span><span class="ln"></span></div>
+        <div class="t2-row">
+          <div class="t2-q">Betrifft der KI-Text eine <b>Angelegenheit von öffentlichem Interesse</b>?</div>
+          <div class="t2-out"><span class="t2-dash"></span><span class="t2-bdg r">✕ Nein</span><span class="t2-dash"></span></div>
+        </div>
+        <div class="t2-conn"><span class="ln"></span><span class="t2-bdg g">✓ Ja</span><span class="ln"></span></div>
+        <div class="t2-row">
+          <div class="t2-q">Wurde der Text vorher <b>menschlich überprüft</b> UND übernimmt jemand die <b>inhaltliche Verantwortung</b>?</div>
+          <div class="t2-out"><span class="t2-dash"></span><span class="t2-bdg g">✓ Ja</span><span class="t2-dash"></span></div>
+        </div>
+        <div class="t2-conn"><span class="ln"></span><span class="t2-bdg r">✕ Nein</span><span class="ln"></span></div>
+        <div class="t2-row"><div class="t2-final">Kennzeichnungspflicht</div><div></div></div>
       </div>
+      <div class="t2-side"><div class="t2-end">Keine Kennzeichnungs&shy;pflicht</div></div>
     </div>`
 }));
 
@@ -1233,14 +1607,19 @@ slides.push(S({
   title:'Was ist eine Veröffentlichung?',
   lead:'Der Abdruck in <b>Printmedien</b> (Zeitung, Magazin) stellt stets eine Veröffentlichung dar. Bei Internetbeispielen muss man genauer hinsehen.',
   body:`
-    <div class="tv">
+    <div class="tv" style="grid-template-columns:.55fr 1fr;gap:1.8rem">
       ${ph('Stufen: DM → kleine Gruppe → große Gruppe → öffentlich','tall', 'veroeffStufen')}
-      <div class="check">
+      <div class="check lg">
         <div class="check-i" style="border-left:3px solid #3fb27f"><div class="k" style="background:rgba(63,178,127,.18);color:#6cd3a4">✓</div><div class="t"><b>Private Direktnachricht</b> — keine Veröffentlichung.</div></div>
         <div class="check-i" style="border-left:3px solid #3fb27f"><div class="k" style="background:rgba(63,178,127,.18);color:#6cd3a4">✓</div><div class="t"><b>Kleine Freundesgruppe</b> (5–10 Personen) — regelmäßig keine Veröffentlichung.</div></div>
         <div class="check-i" style="border-left:3px solid #e0a83c"><div class="k" style="background:rgba(224,168,60,.18);color:#e0a83c">!</div><div class="t"><b>Große geschlossene Gruppe</b> — Veröffentlichung möglich. Keine feste Grenze, ab ca. 10 Personen denkbar.</div></div>
         <div class="check-i" style="border-left:3px solid #e05252"><div class="k" style="background:rgba(224,82,82,.18);color:#f08b8b">●</div><div class="t"><b>Öffentliche Posts</b> — Veröffentlichung. Social Media, Onlineforen, auch hinter Paywalls.</div></div>
       </div>
+    </div>
+    <div class="scale">
+      <div class="scale-end g">${ico('lock',26,'#3fb27f')}<span>Nicht an die Öffentlichkeit gerichtet</span></div>
+      <div class="scale-bar"></div>
+      <div class="scale-end r">${ico('globe',26,'#e05252')}<span>An die Öffentlichkeit gerichtet</span></div>
     </div>`
 }));
 
@@ -1272,18 +1651,18 @@ slides.push(S({
   title:'Menschliche Prüfung + Verantwortung',
   lead:'Wenn der KI-Text vor der Veröffentlichung menschlich überprüft oder redaktionell kontrolliert wird <b>UND</b> ein Mensch oder Unternehmen die inhaltliche Verantwortung übernimmt, fällt die Kennzeichnungspflicht weg. <em>Empfehlung: Dokumentation.</em>',
   body:`
-    <div class="grid g2">
+    <div class="grid g2 lg-list">
       <div class="card">
-        <h3>Menschliche Überprüfung / redaktionelle Kontrolle</h3>
+        <h3 style="font-size:1.1rem">Menschliche Überprüfung / redaktionelle Kontrolle</h3>
         ${ph('Person prüft Text am Bildschirm','wide', 'pruefungMensch')}
         <div class="grid g3" style="margin-top:.9rem">
-          <div style="text-align:center;font-size:.74rem;color:#9aa3b2">Inhalt gelesen und verstanden</div>
-          <div style="text-align:center;font-size:.74rem;color:#9aa3b2">Inhalt bewertet und Freigabe erteilt</div>
-          <div style="text-align:center;font-size:.74rem;color:#9aa3b2">Änderungen möglich, aber <b style="color:#fff">nicht erforderlich</b></div>
+          <div style="text-align:center;font-size:.86rem;color:#9aa3b2;line-height:1.55">Inhalt gelesen und verstanden</div>
+          <div style="text-align:center;font-size:.86rem;color:#9aa3b2;line-height:1.55">Inhalt bewertet und Freigabe erteilt</div>
+          <div style="text-align:center;font-size:.86rem;color:#9aa3b2;line-height:1.55">Änderungen möglich, aber <b style="color:#fff">nicht erforderlich</b></div>
         </div>
       </div>
       <div class="card">
-        <h3>Redaktionelle Verantwortung</h3>
+        <h3 style="font-size:1.1rem">Redaktionelle Verantwortung</h3>
         ${ph('Verantwortungsübernahme','wide', 'pruefungVerantwortung')}
         <p style="margin-top:.9rem">Eine natürliche oder juristische Person trägt die redaktionelle Verantwortung für die Veröffentlichung.</p>
       </div>
@@ -1297,18 +1676,85 @@ slides.push(S({
   title:'So sollten Sie KI-Texte kennzeichnen',
   lead:'<b>Direkt zu Beginn des Textes</b> müssen Texthinweise oder die EU-AI-Icons angebracht werden, z.&nbsp;B.: <em>„KI-Hinweis: Dieser Beitrag wurde ganz / teilweise mit Hilfe künstlicher Intelligenz erstellt.“</em>',
   body:`
-    <div class="card ok" style="margin-bottom:.85rem">
+    <div class="card ok" style="margin-bottom:.9rem">
       <div class="split-head"><span class="dot-i g">✓</span> Vertretbare Platzierungen (bei erster Wahrnehmung sichtbar)</div>
-      <div class="grid g3">${ph('Banner oberhalb des Artikels', '', 'platzOk1')}${ph('Hinweis über der Überschrift', '', 'platzOk2')}${ph('Sichtbarer Hinweis im Social Post', '', 'platzOk3')}</div>
+      <div class="mk-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div>
+          <div class="mk ok">
+            <div class="mk-lbl g" style="align-self:stretch;text-align:center">KI-HINWEIS</div>
+            <div class="mk-bar h" style="width:70%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:88%"></div>
+            <div class="mk-bar" style="width:94%"></div>
+          </div>
+          <div class="mk-cap">Banner oberhalb des Artikels</div>
+        </div>
+        <div>
+          <div class="mk ok">
+            <div class="mk-lbl g">KI-Hinweis</div>
+            <div class="mk-bar h" style="width:76%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:82%"></div>
+            <div class="mk-bar" style="width:90%"></div>
+          </div>
+          <div class="mk-cap">Hinweis unmittelbar oberhalb der Überschrift</div>
+        </div>
+        <div>
+          <div class="mk ok" style="max-width:62%;margin:0 auto">
+            <div class="mk-prof"><span class="mk-av"></span><span class="mk-bar h" style="width:52%"></span></div>
+            <div class="mk-lbl g" style="align-self:stretch;text-align:center">KI-generiertes Bild</div>
+            <div class="mk-bar" style="height:34px;border-radius:5px"></div>
+            <div class="mk-act"><span>♡</span><span>💬</span><span>↗</span></div>
+          </div>
+          <div class="mk-cap">Deutlich sichtbarer Hinweis in Social-Media-Posts</div>
+        </div>
+      </div>
     </div>
     <div class="card no">
       <div class="split-head"><span class="dot-i r">✕</span> Problematische Platzierungen</div>
-      <div class="grid g4">${ph('Am Ende des Textes', '', 'platzNo1')}${ph('Im Impressum / AGB', '', 'platzNo2')}${ph('Hinter „Mehr anzeigen“', '', 'platzNo3')}${ph('Nur in Metadaten / Code', '', 'platzNo4')}</div>
+      <div class="mk-grid" style="grid-template-columns:repeat(4,1fr)">
+        <div>
+          <div class="mk no">
+            <div class="mk-bar h" style="width:72%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:90%"></div>
+            <div class="mk-lbl r">KI-Hinweis</div>
+          </div>
+          <div class="mk-cap">Am Ende des Textes</div>
+        </div>
+        <div>
+          <div class="mk no">
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:84%"></div>
+            <div class="mk-bar" style="width:92%"></div>
+            <div class="mk-lbl r" style="align-self:stretch;text-align:center">IMPRESSUM</div>
+          </div>
+          <div class="mk-cap">Im Impressum oder in Nutzungs&shy;bedingungen</div>
+        </div>
+        <div>
+          <div class="mk no">
+            <div class="mk-bar h" style="width:66%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:58%"></div>
+            <div class="mk-lbl r">Mehr anzeigen ▾</div>
+          </div>
+          <div class="mk-cap">Hinter Klick oder „Mehr anzeigen“</div>
+        </div>
+        <div>
+          <div class="mk no">
+            <div class="mk-lbl r" style="font-family:'JetBrains Mono',monospace">&lt;/&gt;</div>
+            <div class="mk-bar" style="width:86%"></div>
+            <div class="mk-bar" style="width:64%"></div>
+            <div class="mk-bar" style="width:78%"></div>
+          </div>
+          <div class="mk-cap">Nur in Metadaten oder im Code</div>
+        </div>
+      </div>
     </div>`
 }));
 
 /* --- 38 SEC Haftung --- */
-slides.push(SEC({nav:'Haftung', num:'TEIL 07', title:'Haftung', art:'Bußgelder · Abmahnungen · Plattformrisiken'}));
+slides.push(SEC({nav:'Haftung', k:7, title:'Haftung', art:'Bußgelder · Abmahnungen · Plattformrisiken'}));
 
 /* --- 39 Bußgelder --- */
 slides.push(S({
@@ -1317,14 +1763,14 @@ slides.push(S({
   lead:'Wer sich nicht an die neuen Vorgaben hält, riskiert Bußgelder. Die Durchsetzung erfolgt durch die nationalen Marktaufsichtsbehörden — in Deutschland u.&nbsp;a. die Bundesnetzagentur.',
   body:`
     <div class="fine">
-      <div class="fine-box hi">
+      <div class="fine-box hi lg">
         <div class="fine-lbl">Verstöße gegen Art. 50</div>
         <div class="fine-amt">bis zu 15 Mio. €</div>
         <div class="fine-or">oder bis zu</div>
         <div class="fine-amt">3 % Weltjahresumsatz *</div>
         <div class="fine-src">Art. 99 Abs. 4 lit. g AI Act</div>
       </div>
-      <div class="fine-box">
+      <div class="fine-box lg">
         <div class="fine-lbl">Falschauskünfte gegenüber Behörden</div>
         <div class="fine-amt">bis zu 7,5 Mio. €</div>
         <div class="fine-or">oder bis zu</div>
@@ -1342,16 +1788,16 @@ slides.push(S({
   title:'Abmahnungen, Strafbarkeit, Sperren',
   lead:'Das Bußgeld ist nur eine von mehreren Risikoebenen. In der Praxis treffen Unternehmen die anderen drei oft schneller.',
   body:`
-    <div class="check">
-      <div class="check-i" style="padding:1.1rem"><div class="k">§</div><div class="t"><b>UWG:</b> Ob die Kennzeichnungspflichten nach Art. 50 AI Act <b style="color:#f59e42">Wettbewerbsrechtsverletzungen</b> darstellen (so z.&nbsp;B. die Wettbewerbszentrale), die von Konkurrenten und Verbänden abgemahnt werden können, ist noch nicht abschließend geklärt, aber denkbar.</div></div>
-      <div class="check-i" style="padding:1.1rem"><div class="k">!</div><div class="t"><b>Deepfakes fremder Personen</b> können <b style="color:#f59e42">Persönlichkeitsrechtsverletzungen</b> und gleichzeitig <b style="color:#f59e42">Datenschutzverletzungen</b> darstellen und abgemahnt werden. Ggf. ist die Veröffentlichung sogar strafbar — dann hilft auch keine korrekte KI-Kennzeichnung.</div></div>
-      <div class="check-i" style="padding:1.1rem"><div class="k">▣</div><div class="t"><b>Social Media:</b> Erfolgen die Rechtsverletzungen auf Plattformen, droht nicht nur eine <b style="color:#f59e42">Löschung des jeweiligen Posts</b>, sondern eine <b style="color:#f59e42">Sperrung des Accounts</b> — jeweils durch die Plattform selbst.</div></div>
-      <div class="check-i" style="padding:1.1rem"><div class="k">◆</div><div class="t"><b>Vertragliche Ebene:</b> Kunden- und Agenturverträge enthalten zunehmend eigene KI-Klauseln. Ein Verstoß kann Gewährleistungs- und Schadensersatzansprüche auslösen, unabhängig vom AI Act.</div></div>
+    <div class="check risk">
+      <div class="check-i"><div class="ik">${ico('scaleico',26)}</div><div class="t"><b>UWG:</b> Ob die Kennzeichnungspflichten nach Art. 50 AI Act <b style="color:#f59e42">Wettbewerbsrechtsverletzungen</b> darstellen (so z.&nbsp;B. die Wettbewerbszentrale), die von Konkurrenten und Verbänden abgemahnt werden können, ist noch nicht abschließend geklärt, aber denkbar.</div></div>
+      <div class="check-i"><div class="ik">${ico('mask',26)}</div><div class="t"><b>Deepfakes fremder Personen</b> können <b style="color:#f59e42">Persönlichkeitsrechtsverletzungen</b> und gleichzeitig <b style="color:#f59e42">Datenschutzverletzungen</b> darstellen und abgemahnt werden. Ggf. ist die Veröffentlichung sogar strafbar — dann hilft auch keine korrekte KI-Kennzeichnung.</div></div>
+      <div class="check-i"><div class="ik">${ico('block',26)}</div><div class="t"><b>Social Media:</b> Erfolgen die Rechtsverletzungen auf Plattformen, droht nicht nur eine <b style="color:#f59e42">Löschung des jeweiligen Posts</b>, sondern eine <b style="color:#f59e42">Sperrung des Accounts</b> — jeweils durch die Plattform selbst.</div></div>
+      <div class="check-i"><div class="ik">${ico('contract',26)}</div><div class="t"><b>Vertragliche Ebene:</b> Kunden- und Agenturverträge enthalten zunehmend eigene KI-Klauseln. Ein Verstoß kann Gewährleistungs- und Schadensersatzansprüche auslösen, unabhängig vom AI Act.</div></div>
     </div>`
 }));
 
 /* --- 41 SEC Umsetzung --- */
-slides.push(SEC({nav:'Umsetzung', num:'TEIL 08', title:'Umsetzung im Unternehmen', art:'Vom Wissen zur Compliance'}));
+slides.push(SEC({nav:'Umsetzung', k:8, title:'Umsetzung im Unternehmen', art:'Vom Wissen zur Compliance'}));
 
 /* --- 42 Umsetzungsplan --- */
 slides.push(S({
@@ -1382,7 +1828,7 @@ slides.push(S({
   title:'Fünf häufige Irrtümer',
   lead:'Diese Aussagen kursieren derzeit in Newslettern und sozialen Netzwerken — und sind so nicht richtig.',
   body:`
-    <div class="grid g2">
+    <div class="grid g2 myth" style="flex:1;align-content:stretch">
       <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ab August muss jeder KI-Text gekennzeichnet werden.“</div><p>Falsch. Nur veröffentlichte Texte zu Angelegenheiten von öffentlichem Interesse — und auch die nur ohne menschliche Prüfung.</p></div>
       <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ein Hinweis im Impressum reicht.“</div><p>Falsch. Der Hinweis muss bei erster Wahrnehmung sichtbar sein — direkt am Inhalt, nicht versteckt.</p></div>
       <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ich bin nur Nutzer, mich betrifft das nicht.“</div><p>Falsch. Als Betreiber treffen Sie die praktisch häufigsten Pflichten: Deepfakes und KI-Texte.</p></div>
@@ -1401,7 +1847,7 @@ slides.push(`
     <h1 class="t-head" style="font-size:clamp(2rem,5vw,4rem)">Fragen &amp; Diskussion</h1>
     <p class="t-sub">Jetzt gemeinsam: Ihr KI-Inventar und Ihre Pflichten</p>
     <div class="t-meta">
-      <div class="nm">KNOWLEDGE AI</div>
+      <div class="nm">KNOWLEDGE</div>
       <div class="rl">Diese Präsentation ersetzt keine Rechtsberatung.<br>Stand: Juli 2026 · Art. 50 EU-KI-Verordnung (EU) 2024/1689</div>
     </div>
   </div>
