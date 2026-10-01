@@ -99,7 +99,7 @@ body{
 .sb-item.on:hover{color:var(--orange-br);}
 
 /* Echte Medien (ersetzen Platzhalter, wenn konfiguriert) */
-.media{width:100%;aspect-ratio:1/1;border-radius:10px;object-fit:cover;display:block;background:rgba(255,255,255,.03);}
+.media{width:100%;aspect-ratio:1/1;border-radius:10px;object-fit:contain;display:block;background:rgba(255,255,255,.03);}
 .media.tall,.media.wide{aspect-ratio:1/1;}
 video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 
@@ -133,7 +133,7 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 /* Quadratisches Medienfenster (1:1), erzwungen */
 .qcard .qmedia{
   display:block;width:100%;height:auto;min-height:0;
-  aspect-ratio:1/1;object-fit:cover;
+  aspect-ratio:1/1;object-fit:contain;
   border-radius:8px;overflow:hidden;
 }
 .qcard .qmedia.ph{
@@ -418,7 +418,7 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .ic-top{display:flex;justify-content:center;margin-bottom:.85rem;}
 
 /* ============ GESTAPELTE KARTENZEILEN (Folie 4) ============ */
-.stack{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:.9rem;}
+.stack{display:flex;flex-direction:column;gap:.7rem;}
 .stack-row{
   position:relative;overflow:hidden;
   display:grid;grid-template-columns:240px 1fr;gap:1.6rem;align-items:center;
@@ -442,29 +442,29 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .brk-i.btr .brk-lbl{background:rgba(63,178,127,.2);color:#9ce6c3;border:1px solid rgba(63,178,127,.58);}
 
 /* ============ TIMELINE V2 (Folie 6) ============ */
-.tl2{display:flex;flex-direction:column;gap:1.5rem;}
+.tl2{display:flex;flex-direction:column;gap:2.4rem;}
 .tl2-row{position:relative;}
-.tl2-line{position:absolute;left:0;right:0;top:7px;height:2px;border-radius:2px;
+.tl2-line{position:absolute;left:0;right:0;top:9px;height:3px;border-radius:2px;
   background:linear-gradient(90deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.2) 100%);}
 .tl2-row.hot .tl2-line{background:linear-gradient(90deg,rgba(232,134,60,.45) 0%,var(--orange) 100%);}
 .tl2-cells{position:relative;display:grid;align-items:start;column-gap:.5rem;}
 .tl2-year{
-  align-self:start;margin-top:-9px;justify-self:center;
-  font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:600;letter-spacing:.06em;
+  align-self:start;margin-top:-11px;justify-self:center;
+  font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:600;letter-spacing:.06em;
   background:var(--panel);border:1px solid var(--line-2);color:#c3cad6;
   border-radius:999px;padding:.28rem .8rem;
 }
-.tl2-pt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.5rem;}
-.tl2-pt .d{width:14px;height:14px;border-radius:50%;background:var(--grey-2);border:3px solid var(--bg);flex-shrink:0;}
-.tl2-pt .dt{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:600;color:var(--white);}
-.tl2-pt .lb{font-size:.72rem;color:var(--grey);line-height:1.4;max-width:19ch;}
+.tl2-pt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.7rem;}
+.tl2-pt .d{width:20px;height:20px;border-radius:50%;background:var(--grey-2);border:3px solid var(--bg);flex-shrink:0;}
+.tl2-pt .dt{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:600;color:var(--white);}
+.tl2-pt .lb{font-size:.92rem;color:var(--grey);line-height:1.4;max-width:20ch;}
 .tl2-pt.hot .d{background:var(--sig);box-shadow:0 0 0 5px rgba(194,29,26,.22);}
 .tl2-pt.hot .dt{color:var(--sig-br);}
 .tl2-pt.hot .lb{color:#d8b3b2;}
 .tl2-pt.dim .d{background:rgba(255,255,255,.22);}
 .tl2-pt.dim .dt,.tl2-pt.dim .lb{opacity:.72;}
 .tl2-brk{display:flex;align-items:center;gap:.7rem;padding-left:.2rem;
-  font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--grey-2);}
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;letter-spacing:.14em;color:var(--grey-2);}
 .tl2-brk::after{content:'';flex:1;border-top:1px dashed rgba(255,255,255,.16);}
 
 /* ============ TECHNIK-BLOCK (Folie 18) ============ */
@@ -587,9 +587,21 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .check.lg .check-i .k{width:26px;height:26px;font-size:.8rem;}
 /* Deepfake-Kategorien (Folie 24) */
 .dfcat .card{align-items:stretch;}
-.cat-lbl{align-self:center;font-size:.72rem;font-weight:700;letter-spacing:.04em;
-  padding:.26rem .85rem;border-radius:999px;margin-bottom:.85rem;
-  background:rgba(232,134,60,.16);color:var(--orange-br);border:1px solid rgba(232,134,60,.42);}
+.cat-lbl{align-self:center;font-size:1.02rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:.45rem 1.4rem;border-radius:999px;margin-bottom:1rem;
+  background:var(--sig);color:#fff;border:1px solid var(--sig-br);box-shadow:0 4px 14px rgba(194,29,26,.35);}
+.dfcat .ic-top .ic{width:34px;height:34px;}
+/* Zoom-Klickschritte */
+.zoom-ov{position:fixed;inset:0;background:rgba(5,7,13,.80);backdrop-filter:blur(3px);z-index:50;opacity:0;transition:opacity .35s ease;}
+.zoom-mark{position:fixed;border-radius:16px;outline:2px dashed rgba(232,134,60,.7);z-index:51;opacity:0;transition:opacity .35s ease;pointer-events:none;}
+.zoom-on .zoom-ov,.zoom-on .zoom-mark{opacity:1;}
+.zoom-card{position:fixed!important;margin:0!important;z-index:52;box-shadow:0 30px 80px rgba(0,0,0,.6);transition:transform .45s cubic-bezier(.2,.8,.2,1);}
+.no-anim .zoom-ov,.no-anim .zoom-mark,.no-anim .zoom-card{transition:none!important;}
+/* KI-Texte Platzierung Detail (37a/b) */
+.plc-big{padding:1.8rem 2rem;}
+.plc-big .split-head{font-size:1.35rem;margin-bottom:1.4rem;}
+.plc-big .mk-grid{zoom:1.55;}
+.plc-big .mk-cap{font-size:.8rem;}
 /* Produktbilder (Folie 27) */
 .prod .ph,.prod .media{max-width:30vh;}
 .prod .card{text-align:center;}
@@ -606,18 +618,40 @@ video.media{object-fit:contain;background:rgba(0,0,0,.35);}
 .fine-box.lg .fine-or{font-size:.9rem;margin:.6rem 0;}
 .fine-box.lg .fine-src{font-size:.74rem;margin-top:1.1rem;}
 /* Irrtuemer (Folie 44) */
-.myth{gap:1.1rem;}
-.myth .card{padding:1.6rem 1.7rem;justify-content:center;}
-.myth .split-head{font-size:1.02rem;line-height:1.35;align-items:flex-start;margin-bottom:.85rem;}
-.myth .card p{font-size:.92rem;line-height:1.65;}
+.myth{gap:1rem;}
+.myth .card{padding:1.2rem 1.5rem;justify-content:center;}
+.myth .split-head{font-size:1rem;line-height:1.35;align-items:flex-start;margin-bottom:.6rem;}
+.myth .card p{font-size:.9rem;line-height:1.6;}
 /* Ausnahmen (Folie 30) */
 .exc-i{display:flex;flex-direction:column;align-items:center;gap:.5rem;}
 .exc-lbl{font-size:.66rem;font-weight:700;letter-spacing:.03em;padding:.2rem .6rem;border-radius:999px;
   background:rgba(63,178,127,.18);color:#9ce6c3;border:1px solid rgba(63,178,127,.5);white-space:nowrap;}
 .exc .ph,.exc .media{max-width:none;}
+/* Bildunterschriften Zielgruppen (Folie 10) */
+.zcap{margin:0;display:flex;flex-direction:column;align-items:center;gap:.7rem;}
+.zcap figcaption{font-size:.92rem;font-weight:600;color:#dfe4ec;text-align:center;letter-spacing:.01em;}
+/* Deepfake-Kennzeichnung (Folie 29) */
+.kz .card li{font-size:1.08rem;line-height:1.5;gap:.6rem;}
+.kz .card ul{gap:.7rem;}
+.kz .card h3{font-size:1.3rem;}
+.kz .bub{font-size:.98rem;padding:.65rem .9rem;}
+.kz .chn .b{font-size:.72rem;padding:.26rem .5rem;}
+/* Disclaimer (Folie 2) */
+.disc{gap:1.4rem;}
+.disc .card{padding:2rem 2.1rem;justify-content:flex-start;}
+.disc .card h3{font-size:1.2rem;margin-bottom:.9rem;}
+.disc .card p{font-size:.95rem;line-height:1.7;color:#c3cad6;}
+.disc .card p+p{margin-top:.8rem;}
+.disc .card p b{color:var(--orange-br);font-weight:600;}
+/* Umsetzungsplan (Folie 43) */
+.plan{gap:1.4rem;}
+.plan .check{gap:1.15rem;}
+.plan .check-i{padding:1rem 1.2rem;}
+.plan .check-i .t{font-size:.86rem;line-height:1.55;}
 /* Abmahnungen (Folie 41) */
 .risk .check-i .ik{width:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.risk .check-i{padding:1.15rem 1.3rem;gap:1.1rem;align-items:center;}
+.check.risk{gap:1.5rem;}
+.risk .check-i{padding:1.35rem 1.5rem;gap:1.1rem;align-items:center;}
 .risk .check-i .t{font-size:.88rem;line-height:1.62;}
 
 @media (max-width:1100px){
@@ -710,15 +744,10 @@ async function hydrateMedia(){
 }
 
 /* ===================== LOGO (Obsidian-Graph-Stil) ===================== */
-function logo(size, word){
-  const s = size || 52;
-  return `
-  <div class="logo">
-    <svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-      <g stroke="#e8863c" stroke-width=".62" opacity=".4"><line x1="31.4" y1="30.0" x2="27.4" y2="24.8"/><line x1="31.4" y1="30.0" x2="30.5" y2="34.3"/><line x1="31.4" y1="30.0" x2="36.3" y2="34.6"/><line x1="27.4" y1="24.8" x2="22.9" y2="26.7"/><line x1="27.4" y1="24.8" x2="26.5" y2="20.6"/><line x1="24.7" y1="31.9" x2="22.9" y2="26.7"/><line x1="24.7" y1="31.9" x2="30.5" y2="34.3"/><line x1="24.7" y1="31.9" x2="19.2" y2="29.0"/><line x1="22.9" y1="26.7" x2="20.7" y2="20.5"/><line x1="22.9" y1="26.7" x2="26.5" y2="20.6"/><line x1="22.9" y1="26.7" x2="19.2" y2="29.0"/><line x1="29.0" y1="13.4" x2="26.5" y2="20.6"/><line x1="29.0" y1="13.4" x2="37.1" y2="9.9"/><line x1="30.5" y1="34.3" x2="36.3" y2="34.6"/><line x1="20.7" y1="20.5" x2="26.5" y2="20.6"/><line x1="20.7" y1="20.5" x2="16.7" y2="24.7"/><line x1="39.8" y1="17.8" x2="43.6" y2="20.7"/><line x1="39.8" y1="17.8" x2="37.1" y2="9.9"/><line x1="39.8" y1="17.8" x2="43.8" y2="14.5"/><line x1="39.8" y1="17.8" x2="47.3" y2="18.1"/><line x1="9.5" y1="32.6" x2="15.0" y2="30.7"/><line x1="9.5" y1="32.6" x2="12.6" y2="26.7"/><line x1="41.8" y1="40.0" x2="43.5" y2="35.6"/><line x1="41.8" y1="40.0" x2="37.2" y2="38.7"/><line x1="41.8" y1="40.0" x2="38.8" y2="43.5"/><line x1="41.8" y1="40.0" x2="50.4" y2="42.6"/><line x1="43.5" y1="35.6" x2="38.8" y2="43.5"/><line x1="43.5" y1="35.6" x2="52.0" y2="38.5"/><line x1="43.5" y1="35.6" x2="41.7" y2="31.0"/><line x1="43.5" y1="35.6" x2="49.4" y2="35.1"/><line x1="37.2" y1="38.7" x2="38.8" y2="43.5"/><line x1="37.2" y1="38.7" x2="36.3" y2="34.6"/><line x1="36.3" y1="34.6" x2="41.7" y2="31.0"/><line x1="52.0" y1="38.5" x2="50.4" y2="42.6"/><line x1="52.0" y1="38.5" x2="49.4" y2="35.1"/><line x1="50.4" y1="42.6" x2="49.4" y2="35.1"/><line x1="14.2" y1="43.0" x2="13.9" y2="38.5"/><line x1="14.2" y1="43.0" x2="16.2" y2="47.1"/><line x1="20.9" y1="39.4" x2="13.9" y2="38.5"/><line x1="20.9" y1="39.4" x2="24.6" y2="41.8"/><line x1="19.5" y1="51.3" x2="22.9" y2="46.7"/><line x1="19.5" y1="51.3" x2="16.2" y2="47.1"/><line x1="22.9" y1="46.7" x2="24.6" y2="41.8"/><line x1="22.9" y1="46.7" x2="16.2" y2="47.1"/><line x1="43.6" y1="20.7" x2="43.8" y2="14.5"/><line x1="43.6" y1="20.7" x2="47.3" y2="18.1"/><line x1="43.6" y1="20.7" x2="48.0" y2="23.0"/><line x1="37.1" y1="9.9" x2="43.8" y2="14.5"/><line x1="43.8" y1="14.5" x2="47.3" y2="18.1"/><line x1="47.3" y1="18.1" x2="48.0" y2="23.0"/><line x1="15.0" y1="30.7" x2="12.6" y2="26.7"/><line x1="15.0" y1="30.7" x2="19.2" y2="29.0"/><line x1="16.7" y1="24.7" x2="12.6" y2="26.7"/><line x1="16.7" y1="24.7" x2="19.2" y2="29.0"/></g><g fill="#e8863c"><circle cx="31.4" cy="30.0" r="1.8"/><circle cx="24.7" cy="31.9" r="1.8"/><circle cx="30.5" cy="34.3" r="1.8"/><circle cx="20.7" cy="20.5" r="1.8"/><circle cx="39.8" cy="17.8" r="1.8"/><circle cx="26.5" cy="20.6" r="2.5"/><circle cx="43.5" cy="35.6" r="3.0"/><circle cx="37.2" cy="38.7" r="1.8"/><circle cx="38.8" cy="43.5" r="2.2"/><circle cx="36.3" cy="34.6" r="1.8"/><circle cx="52.0" cy="38.5" r="3.0"/><circle cx="50.4" cy="42.6" r="2.2"/><circle cx="22.9" cy="46.7" r="2.2"/><circle cx="16.2" cy="47.1" r="3.0"/><circle cx="37.1" cy="9.9" r="3.0"/><circle cx="43.8" cy="14.5" r="2.5"/><circle cx="47.3" cy="18.1" r="2.5"/><circle cx="16.7" cy="24.7" r="3.0"/><circle cx="12.6" cy="26.7" r="1.8"/><circle cx="19.2" cy="29.0" r="1.8"/></g><g fill="#f59e42" opacity=".8"><circle cx="27.4" cy="24.8" r="1.1"/><circle cx="22.9" cy="26.7" r="1.3"/><circle cx="29.0" cy="13.4" r="1.5"/><circle cx="9.5" cy="32.6" r="1.1"/><circle cx="41.8" cy="40.0" r="1.5"/><circle cx="41.7" cy="31.0" r="1.3"/><circle cx="49.4" cy="35.1" r="1.1"/><circle cx="14.2" cy="43.0" r="1.1"/><circle cx="20.9" cy="39.4" r="1.5"/><circle cx="19.5" cy="51.3" r="1.5"/><circle cx="13.9" cy="38.5" r="1.1"/><circle cx="24.6" cy="41.8" r="1.5"/><circle cx="43.6" cy="20.7" r="1.5"/><circle cx="48.0" cy="23.0" r="1.5"/><circle cx="15.0" cy="30.7" r="1.5"/></g>
-    </svg>
-    <div class="logo-word">${word || 'KNOWLEDGE'}</div>
-  </div>`;
+const LOGO_SRC = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAACECAYAAAB2z1VmAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjNhMDVjOWEzLTNhY2QtNDUwYy04NWVmLTczMDY5MTU3OTNlZAAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoWnYg7xVxZQ259uxvf+7bOgAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6ZWQ0YTU2NDItMTQ0Yy00MDBhLWFhOTUtZGQ5MDEwOGJiNDk0bHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaEiuX+wiOOl//t09OTNfNz4AAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIFvgSBi2kCedz1IxnNoAeLZyj57bEPVD2jTouiTLVgWtpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2gWIGivf4QkjrVs6l5lUFgRAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggZOdYY6Pnp3M/p3MfdcxvacjP/GoAfIIbyYsIguO40wFkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTozYTA1YzlhMy0zYWNkLTQ1MGMtODVlZi03MzA2OTE1NzkzZWQvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDo4OTU4NTQ4YS1jMDY3LTQ3NzEtOTRhMi1iZDI3OTg4YmVlNWJyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggW+BIGLaQJ53PUjGc2gB4tnKPntsQ9UPaNOi6JMtWBa2iY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIP9TLxq0d1g1eoqIqRoNYR9Hgl/iJAcUqEIjxD40F56xomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIGf6sf4kPpQKPLVoRkHdRleG8G3DNPL81/pyc64d2OSAdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2WEASy83DG0z7gPgrZ9N+hLW1Vgu+n4HvWKbQwzIFiUSza5LGP/88u0zUlpuF+/hBg5cDzuK1KqB3BtomTcgyFifjVdv4cwAAEABJREFUeAHsXQd8FMX3n9m7AEoURVquhCblh4AiSFMiKio9gFIFFBEiiCKIIGL5i6CAKKIIRKRI04D0jtgooYPSBWm5EhJAUBAlye38922yy95lL3chV3bvXj43O+3Nmzffd/u92dnZDUfwDxFABBCBPASQEPKAwAgRQAQIQULAbwEigAjICCAhyFBgAhHQNwKBsB4JIRAoog5EIEIQQEKIEEfiMBCBQCCAhBAIFFEHIhAhCCAhRIgjcRj6RkAr1iMhaMUTaAcioAEEkBA04AQ0ARHQCgJICFrxBNqBCGgAASQEDTgBTdA3ApFkPRJCJHkzwGMZbra+ttlqYlIYZbaODXAXqE5jCCAhaMwhGjKHtuVcE5X2PMm53uxuMpVRlmE6shBAQogsfwZsNO+Y4serKbuXMySrlWNZZCCAhBAZfgz4KO7k2ANqSm8nrKpauV7L0G53BJAQ3PGI+lyPspZqg+MsPdNcJEUNjLO88Vuo71XeWlutHsv0jQASgr79FzDrB5qsXeFEX3jefmJyun3+pHTb9ASbk6bnPSGfSTkC+fHOM+Ogfl6G7RDIDxLaBcwIVBR2BJAQwu6C8BnQ4Y5Kd8BJ/Xw5c5OpTlsKnOie1nS12amD0eyn0+zUsw7kpwjtnrNYmoMeXHD0REh/eSQE/fmsUBZ/ZrFunm21XOh8l8UsNexXwfIwnMAxsTkcnNSzMh3bpbqbiefY7T+DnhyO+wf0JsVZWkp6gCRmWs3OKWbrHqksUDHqCTwCSAiBx1QzGmH/wH3U1awq4e96+VbePtFUcVmSyZo445z9FziBF9vtfwbSWEHfv6A3Od2+PskU32682frtAAM5X42wuLqcqz7YE8j+UFfgEUBCCDymmtWYTdnVZKdtRSgMTHamrfqHsTOh6Av7CBwCSAiBw1Lzmk7m0NmhNPJUNvkqlP1hX0VHAAmh6BhqVsNy3jBQMg7uEtQyuF6X8qGI6xanE6Ffqa+1zPielMZYmwggIWjTLwGxypZlWCbcKuSEQOEuQQ5Hr39isqwLiHIfSiZYrMuNPCsO/UL/EGw5ZJGPZlgdZgSQEMLsgGB2bzLmtBD0MyGIn+F2W4dQkIJEBkOd9lZix3mHMpS/Py+JkUYRQELQqGMCYdYlRo576gk2KXgjA7DjvItLhRiDdhFAQtCub4pkGewHmHvOvktNSVFJQU0nlBVEBlC/MDPtFNgFaQzaRAAJQZt+KbJVjHD5dhYqlfoihc5lK1UYE2edNtdiuVSekJgFFstfY83Wr3uWtdyt1COlfZGBJJdNabaUxlh7CHDaMwktKioCveKsDT5LT5vnS48aKbxY3tx2udXMnimRnV7byL9YgrI7eIFaYii7/R6O7/10CXYC6pXPMPhLBmAPbJHua4p/ENIYtIcAEoL2fFJki0oTVtNfJRIpfGGx7JtmtuxrWYysukToxUX/0eodbA7aRQjnGcmGGPIL/ouJu8CTMy0M/LczLJaTn1usO+FugucCYkH9xzK+ckH1WBc+BJAQwod90Hp2ZpGfvClXKwdSqExJvWocq7eDGd7rY7OXgace1WQXnz9z7gWHo/KWHJJUmbIq1TlXw8KQAeg8+69xdWeLpTSkMWgLASQEbfmjyNbAot3ii3ZHYRS9ZzZPzSGMZBLKyvF8I3/aljdwrWHmcJ1RMs5iWexPG0lm+eUzl00u0lrKY6wdBJAQtOOLgFhynWeXC6voXo4MOMhzc3vY7Jy4T8FsWa3UYaAkRpkX1wwYM3a3O4rtcRk+qknZ08p6f9LXGLH5I4cyoUUACSG0eAe1t36m+BbTMxxuJ7OvDuGJRJAZ5bA9CzFcPuRQmgM7Gt8zWafAE4oVhNkDxGPMluQJ5vgVRoEMhjrsbUF+tDNtOMSTLdbNEPsb4InLgWZzoYnEX/0od3MIICHcHG5haaXW6atx8f3hZIXQg8v+3tttQbW2UFaD47ueYvQHSEsBSEFYT2j5iMH1klQGcQLH96/N8e0lMoAyCMcY/a4i5ZtB2t8A70noxJHFYDeEESaLSCz+tke54CCAhBAcXEOiFd5/2MmYI78F2UAp6V+CP1HYzo+66EeebUpR5lkk5mMJT+BNS2Im7/A7b5iUl/Q7gvckFBNmHlKDNgZ+PN6OlNAIX4yEED7si9zzw8XIUjUlcDtwmCn+FV8Bpvm3CgrqcuRtpSxsRhKKvX66xmZnKuXvJfw7oGeKxbxLWe4tDbc31ZQnGPnv1cqxLHQIICGEDmvsCRHQPAJICCFyUTC6+SWLdFLT289urzrRmfaZrzDYbku4Jig4wJP3lbK97fY7hWKvn5SrMeWU8r8RbjToGWR3NFSWe0sPcNjvV1O+OYd7XK0cy0KHABJC6LAOeE+weWhpjjFJUuxijHz5H1dNyvsb/8/A8r045S9GVZtfJRyBfQTKyhqca4gy7096mouUzSI3+ljj4kbMdKZt86ctygQPASSE4GEbEs2fpqd9CS8fgbCQj3l8/nn7H4Xp+HeeS6lC2WPKNrDP4ARP1//kMnyhLN/Mc18e4rmVn3jsU4B9CGcZt0Up6yv9jdN5YSlPOoPdEMY77RN8tcH64COAhBB8jEPWwwxn2iZ4OKkwHY5w2LqBPDzJCDGQgbjPwGlv9a7TNghO1nPCLznEbznsScMdaYniPoU8UnjHFC+eyIOFyw9o72+AV8FPdTi+81ce5UKDABKCHzjrSaQ4R+8orL2/8WRaHY7vvdBq4cUHlfI2HUl6XIy4PbIM+xSAFL6xmLMaGFyvwz4ESdbf+FZKrP7KolzoEEBCCB3WIelpcrp9vvKfsvjT6bsOx0CjMAsoRxjN5Lid/rTJcPFry1ISU5wy8obd3tmfNpIM7GNwGshaKY+xdhBAQtCOLwJmiakYeaQwyuAy4TQj+4V1g/2Nqetd+E9PsOlJTQe8OOUrs/l0MyNJPs3oqeO8YRdsc1aT9VZW8ZactosD/E9ivPWF5YVDAAmhcHjpQvpPQo/5ayiQAVwmvGS33w+3A9dnkXZ3EnZXlxLsOLwIZZHVzGAmADHk4cUpZThSaZOL6wa3N1+22xqJD0SZ/H+b81XKnfbXPpQLLQIRTwihhVMbvc1Lt+15JS6+ly9rJDIYKiwgSrLwcJT0IpRDOdz0/xi9zDFCshn9+zDPzf3uP1oN6qc4bSkk709cU/DzFe8DTdaueHsxDzgNRkgIGnRKIEyihBdOY++a1MhAKQ0vQnkr3TYANillCHzwjN1eCp6I9HZb019SiGHM7VFqZZ+YDj8CSAjh90FQLIDFxd4VLA3VlPsiA7U2/pT5IoUe5eKrgF3+6EKZ8CCAhBAe3EPS652UVPfsKFhkIPVTECmUNfBNJTmMtYmApglBm5DpxypnjnGTYC0VgvgJNhmInQgHb6RwgXH7hGr8aBgBJAQNO6eoplmLuTputpp4IbDv4i3MyLPiQxULiEXVX1B7iRSgX+gfgtVIuhTUBuvCjwASQvh9EDQLOnCuqZLycownR1yGfC9CkeqDER+4zoZBv5Lu1jTnXSmNsTYRQELQpl+CYlVVI+sTFMVelFaJ4fp7qcJijSIQNELQ6Hij2qwYRmOTTNbEUICQZIpvV5Ky+FD0hX0EDgEkhMBhqTlN8ITir8yw5SThLn5+jbMMc57tmOy0rYAnDQfHWXoG+p+lCPpuAb1JcZaWyc60VfAkJbz34ASh6Qd4w16wR3MgoUFuCCAhuMEReZlX7LYE+E9Myn/eAq9Ah/0A2VeNPJzAz5czNynKyJ+zWJqDHiPPlwS9yen29ZI+eO9BX5vDNMhhayCVYaxdBJAQtOuboFsGbz6CE3hWpmM7bCmGk9qz0xSrhZkpi4G7BZ51ID/IZO06x27/GfTAye8pg3l9IaBKCPoaAlobCASmOm0pcFLDU45wog+Js74ItwrjCC+qh7sFkB9hqvQG1Pcqb60N8spnGkRBPOgaASQEXbsv8MbDexrhRI83kK5q2ityOd2gfl6G7ZBaPZbpGwEkBH37L2jWX+LpbjXlfxN6Uq0cyyIDASSEyPBjwEcx2pk2Qk3pb7xLfsuzWj2WaQyBQpqDhFBIwKJInK3mDcOU493AGz7AhUMlIpGXRkKIPJ8GbEQTHLaPYe+AFMY6bKMCphwVaRIBJARNugWNQgTCgwASQnhwx14RAd8IhEECCSEMoGOXiIBWEUBC0Kpn0C5EIAwIICGEAXTsEhHQKgJICFr1DNqlbwR0aj0Sgk4dh2YjAsFAAAkhGKiiTkRApwggIejUcWg2IhAMBJAQgoEq6tQ3AlFsPRJCFDsfh44IeCKAhOCJCOYRgShGAAkhip2PQ0cEPBFAQvBEBPP6RgCtLxICSAhFgg8bIwKRhQASQmT5E0eDCBQJASSEIsGHjRGByEIACSGy/Knv0aD1YUcACSHsLkADEAHtIICEoB1foCWIQNgRQEIIuwvQAERAOwggIWjHF/q2BK2PCASQECLCjTgIRCAwCCAhBAZH1IIIRAQCSAgR4UYcBCIQGASQEAKDo761oPWIQB4CUUsIFy5cZJcv/8WOHTvO8rCQo+3bd4l1UL9v/2/56iVBSQfIDR02Kp/cli2psp56DZuPkNp5i0eOGs22bdvBrl69yrKyskTbvpj6FatVq1Yxb22gfM3ajXI/Y8ZOdLMjZdFSuW568my3umnTZ8l1c77+xq0O9EKY9OlUWaZP35dUZUDOM7Rt31VuB/ioBRivZzvIP9H6KXb9ehaT/qBtZuZ59svmrWzU22NY7dqNyoOcv6Fr9z5s1er1DHS4XC525coVtmfvftak6eMLfelQ+hjs8AyAvS8deqqPWkK4667SpFSp24nFaibKvxUr17LGjR8Q6267LZYMHvzGTmW9Mi3pAD0fjn1XWSWmq1SpLOqB+lIlY18SC70cgHg+GPM2adq0ESlZsiSJiYkhNWpUIwMH9CW79+y5XqdOk5pempL0c+fkfp7q1M5NrHWrx+W6Domt3eoS27eW6xxOp1udlKlUySrLVKoYLxX7jEuXvlNuJ45fwNozvvvuyqp6KpQrS4oVi5HroF3ZsmVIQrMHyZjRo8jBgzvODRz0ml/k9OH4SezbhbNI2zZPEtDBcRyJjY0l9e+/j6Ru29h93IRPC9Sj9DHY4RlqCj6SDY2ARNQSgprvxn7wMWvfrpVcJfwiki2b1zWWCwpIwBcYfsEKEPFatXnLNlbvvrpy/aVLl0mazU6EX0ix7NZbbiGpqRuPihmVw7x5KcelYiAhKQ0xfPkhhlBOONEglkKFCuWkJFkwb2ZxORPgxD/XrpFdu/fmC6mpu/zq6Y8/TpHz5y/IeECjKZ99RPr2e7nAkxlmIG8MfxXExSDMOsiRI8eIMAMT83AY8fpg0rnrswXqATnwhdoY1q77HqojJiAh5LmyZ+8k9ubIoXk5Qt4f8xGZO2c6lQv8SMAvWPsO3X1+uZSqHn0ikW/2UFO56Jle/Ynw60orxlup8GtG4WSCSmbP27oAAAh+SURBVDixlyxdkV+3UPnLT2tqZGVlCyki/rLe2yChP2TghIBYCpRS0vu5F0UdiR17MEpzhwcnyJEjR7IkuUDHhw8fJY0aNqCeYeaMz3MNKKBDOAmrVatKBTIT8Vi3PvcEpJSSaV98XEBLQkb/30i5ftHiZaREieL0nnv+R2+77TYqkLdc9+bI1+S0t8S1f/9VHcPLg/r7HIM3nVosR0JgjNSp/1Dn2TOnyP6BL887bw/329HSyQgKvp49DSK/Q/s2LeV+lq9YTRbOnyHnQUlip2cgEkP9+vXEWO1w9NjvcnGXpxKTIdOq5WMQEZ7nxRgOHTu0gYh07NBOjOGwZ++vEOkitG71BLU7ci9v4LLK29pMg8aPjjMajeKYMjIySdcundxwbf5wMypc/xMIe/fpZ/zigIJ4iHpCgKngD+uWLZK+PDBd9/zy+MI/x5VDhGm/KHbHHaXIjJlfi7/CYoGPQ0LCjdnBylXr80n/sGE5lU5osykuX71UsGbNRilJHm/RXExLlyEZGeflaXLjRg+IdQ82bSjGcFiyZCVEQQu1a9civx04xJRh9559fmPkadiOHbvloo7tWo+TM4pEx8Q2I6Ts7j37paRbLKwrUAgvPN/bjSzchPIycNmmtF9KN0totSNPJCKiqCcEmIrDYpPkzeIlCn8pbTQYycMJD8knbt8+vUidOk2bSDoLiqtUriRX7965p4KcUST++utvMQek5U3vgvk31gBq/a+GKA9jg8ThI0fJCeE6HNLly+euG1SsaIWsGKZ8/pHPE0IUvMkDnEx169xDlKFBAbMdX93s//WgLNK4cQM5rUw0ERaGpfyBA4elJIE7K9nZ2UwZsoQ7OrKAlwSl1M1+aSwVK8U38tJEl8VRTwieXoMv7/ebfirUr5fwXRHVzPhqrhhTSsmChTNSs3Nyr+vFQrWDUJYhTGeFSPxUr1n9nJjwOMTGlhRLYDZz8GDqdjHjcYA1AFgLgGK4SzF4yEh5DKtXbyAbNv4IVYRSSpIGDGEw3YaCc+cyIApqEE4+4nSecwtnzqbddJ9Vq94g0aNHj6vqOXnylFxepUpFOV2mTGkCxKoMEhaykEoCsPccA+TTM4KPn4o5QStCQhCg/f33E6RFy45CKvfT4rHmpPszL8gnVG6p7+OLSX0oXHKAZB1hmlzq9tshWWDYsXOvXA/9yhlFQvrCwkq7ojhfUrkW0P+F3nL95E/H0XlfL5YXIF4ZJK45ivVbtwV/xrv/1wPEbI6jylC5UsWbnpUoZxcr1+S/zIKBrVZcQt1f714oEsMnn3zxzatDRhIIYoFwgAVDISrwAzJK+6U0XNIV2FBnlUgIgsNq1qxOwbHfLVkh5HI/s766sciYW+LfUbhbIQvCeoKc8ZJYu26DXNNPOImlOwRS4ekzZ2ViOnDwsFSsGi9RrAXUqpW7beHixT9F2SNHUn+V7lhIdVCxYOFiiHQT3nzrfQbTdTAYfrXBb5D2DCuWLaRQD+XVq99NpI1j21O/7zFZIEgJC6g/evTGgizkozlEPSHAvWnpC9D56Q70ypUrYla4RQULhfLJKBb6cVi7ehH94cdf/JDMFUn5ZjbNzDwvZmAau2vbpmThlhhbtnwVg11y0mYgWFj80McmGrW1gO2KBbhDB4+I/UgH0Ll86QK/f6lbCnctYCOPMvjaCwB9CbMBomwjpeGWK9QXFBo+UJ/MnZfCNv3wMxMub9jY99+SxWfOnien1RLr1m+SiydOeJ8cPnyUzZ6zkAmLkmxG8mS5btnyNXLaW6JYTIzqGPwZvzedWiyPekKAOwRKx3Tr8YKchf0Bfbxt15Wl8ieEqT/NytsXkL82f4mw0CdfasAGJ9jP0CGxLYFdciANv3RduvUhP25c4dNfyjUJaLtk6Y07CCtXu0+vT548DSJ+Bzg5YSOPMnw49h2f7WHRVtlGSj/Xq4dfZNSrZxfy2KMPEwEnua/5C1JIv77PFti+Tesn6M5duZdklFICM6Pnnu1OGjVqIOsBfASSKVAPCMNlm2S3Mn5r1DCojpjg8wsWMSP1NhDmPgmAX/jVa25M46dPneStpVzuoUIsH/6G+1ZmgXhurHKJEu4H2Iz0089biHRHAWqBVA4eOiKsZ/QlSxbP9fmlhTZbtt5YcwQimTNrqtzugzFvy2mQ3ZC30AjpcASYoRSm3z//vEQAo1cGjyC9enZzG4s3PY0bNaDCDENc0AQ8QA5imJV9OnkaefqpRL/0QDu1ALrUyvVaFrWEQPP+hFtz+b4Q7dq2zKultHjxYvnqJWdLQmoykyd9KFWL8dbN63M3B0iNVeJHH0mgwrqDKF+3QbMuoFe4XqZwWaEirloElz2iAuEAOx09hYRi+ePPLruOHdrJ8moJ2EHo2Qfk586ZribuVib8Wqti662tMGOigNHnn01QbQf9qoVne3cTFzQBjwebPbkcYmG2QYe8OtCnHjeDVTLCbWOfOtRs0mpZ1BKCVh0i2XVw71Z9rfZJhms8Tt268cbtJI3bGg7zopMQwoE09okI6AABJAQdOAlNRARChQASQqiQxn4QAR0ggISgAyehiYhAqBDQHyGEChnsBxGIQgSQEKLQ6ThkRMAbAkgI3pDBckQgChFAQohCp+OQEQFvCISWELxZgeWIACKgCQSQEDThBjQCEdAGAkgI2vADWoEIaAIBJARNuAGNQAS0gYD/hKANe9EKRAARCCICSAhBBBdVIwJ6QwAJQW8eQ3sRgSAigIQQRHBRNSKgTQS8W4WE4B0brEEEog4BJISoczkOGBHwjgASgndssAYRiDoEkBCizuU4YH0jEFzrkRCCiy9qRwR0hQASgq7chcYiAsFFAAkhuPiidkRAVwggIejKXWisvhHQvvVICNr3EVqICIQMASSEkEGNHSEC2kfg/wEAAP//YKRacQAAAAZJREFUAwCTxyuQCwjLzAAAAABJRU5ErkJggg==';
+function logo(size){
+  const w = (size||52) >= 50 ? 290 : 150;
+  return `<div class="logo"><img src="${LOGO_SRC}" alt="KNOWLEDGE" style="display:block;width:${w}px;height:auto"></div>`;
 }
 
 /* ===================== NAV STRUCTURE ===================== */
@@ -787,7 +816,7 @@ function ico(name, size, color, sw){
 /* Content slide */
 function S(o){
   return `
-  <section class="slide">
+  <section class="slide"${o.zoom ? ` data-zoom='${JSON.stringify(o.zoom)}'` : ''}>
     <div class="atmos soft"></div>
     ${o.badge ? `<div class="badge ${o.badge.t}">Betrifft: ${o.badge.l}</div>` : ''}
     <div class="chrome">
@@ -834,14 +863,36 @@ slides.push(`
   <div class="title-wrap">
     <div class="t-eyebrow">Art. 50 AI Act</div>
     <h1 class="t-head">KI-Kennzeichnungs&shy;pflichten</h1>
-    <p class="t-sub">Was ab dem 2. August 2026 für Unternehmen gilt</p>
+    <p class="t-sub">Was seit dem 2. August 2026 für Unternehmen gilt</p>
     <div class="t-meta">
-      <div class="nm">Workshop · KNOWLEDGE</div>
-      <div class="rl">Transparenzpflichten der EU-KI-Verordnung<br>Anbieter · Betreiber · Praxis</div>
+      <div class="nm">Deep-Dive Workshop · KNOWLEDGE</div>
+      <div class="rl">Vertiefungsworkshop zum EU AI Act<br>September 2026</div>
     </div>
   </div>
-  <div class="counter">WORKSHOP 2026</div>
+  <div class="counter">DEEP-DIVE WORKSHOP 2026</div>
 </section>`);
+
+/* --- 01b Disclaimer + Haftungsausschluss --- */
+slides.push(S({
+  nav:'Einstieg', eyebrow:'Bevor wir starten',
+  title:'Disclaimer &amp; Haftungsausschluss',
+  lead:'Zwei Hinweise vorab: wie dieser Workshop entstanden ist und was er leisten kann.',
+  body:`
+    <div class="grid g2 disc" style="align-items:stretch">
+      <div class="card acc">
+        <div class="ic-top" style="justify-content:flex-start">${ico('speech',34)}</div>
+        <h3>Disclaimer</h3>
+        <p>Dieser Workshop wurde mit der Hilfe von KI erstellt. Das betrifft aber <b>nicht den eigentlichen Inhalt</b>: Dieser wurde durch uns recherchiert, aufbereitet und geschrieben.</p>
+        <p>KI hilft uns bei der schnellen Umsetzung der Folien und bei der Vertonung.</p>
+      </div>
+      <div class="card">
+        <div class="ic-top" style="justify-content:flex-start">${ico('shield',34)}</div>
+        <h3>Haftungsausschluss</h3>
+        <p>Die durch diesen Kurs und die begleitenden Systeme bereitgestellten Inhalte stellen <b>keine Rechtsberatung</b> dar und ersetzen diese auch nicht. Die Informationen und Empfehlungen basieren auf allgemeinen rechtlichen Rahmenbedingungen, können jedoch keine spezifischen rechtlichen Einschätzungen oder verbindlichen Auskünfte bieten.</p>
+        <p>Für die Beurteilung individueller rechtlicher Fragestellungen oder Sicherheiten wird dringend empfohlen, einen qualifizierten Rechtsanwalt oder eine andere zugelassene Fachperson zu konsultieren. Weder das System noch der Betreiber übernehmen Haftung für Handlungen oder Entscheidungen, die auf den bereitgestellten Inhalten beruhen.</p>
+      </div>
+    </div>`
+}));
 
 /* --- 02 QUIZ: Erkennen Sie den Unterschied? --- */
 function qcard(tag, label, key, isAi){
@@ -864,8 +915,8 @@ function qcard(tag, label, key, isAi){
 
 slides.push(S({
   nav:'Einstieg', eyebrow:'Der Realitätstest',
-  title:'Erkennen Sie den Unterschied?',
-  lead:'Was ist Deepfake und was ist real? Schauen Sie sich jedes Paar kurz an und entscheiden Sie sich — <b>bevor</b> Sie aufdecken.',
+  title:'Erkennst du den Unterschied?',
+  lead:'Was ist Deepfake und was ist real? Schau dir jedes Paar kurz an und entscheide dich — <b>bevor</b> du aufdeckst.',
   body:`
     <div class="quiz" id="quiz">
       <div class="quiz-cols">
@@ -909,7 +960,7 @@ slides.push(S({
   title:'Transparenz',
   lead:'Der Grundgedanke hinter Art. 50 lässt sich in einem Satz zusammenfassen.',
   body:`
-    <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+    <div style="display:flex;flex-direction:column;min-height:0">
       <div class="callout" style="margin-top:0;font-size:1.15rem;padding:1.5rem 1.8rem;line-height:1.45;flex-shrink:0">
         <strong>Der Mensch soll wissen,</strong> wenn er es mit künstlicher Intelligenz zu tun hat — zumindest in bestimmten, klar definierten Bereichen.
       </div>
@@ -920,11 +971,11 @@ slides.push(S({
         </div>
         <div class="stack-row">
           <h3>Situationsbezogen</h3>
-          <p>Die Verordnung regelt vier klar umrissene Situationen — nicht „KI allgemein“.</p>
+          <p>Art. 50 Abs. 1–4 regelt fünf klar umrissene Pflichten — nicht „KI allgemein“.</p>
         </div>
         <div class="stack-row">
           <h3>Rollenabhängig</h3>
-          <p>Wen welche Pflicht trifft, hängt davon ab, ob Sie Anbieter oder Betreiber sind.</p>
+          <p>Wen welche Pflicht trifft, hängt davon ab, ob du Anbieter oder Betreiber bist.</p>
         </div>
       </div>
     </div>`,
@@ -935,7 +986,7 @@ slides.push(S({
 slides.push(S({
   nav:'Einstieg', eyebrow:'Art. 50 AI Act',
   title:'Die neuen KI-Kennzeichnungspflichten',
-  lead:'Die Kennzeichnungspflichten beginnen ab dem <b>2. August 2026</b>. Ausnahme: die maschinenlesbare Kennzeichnung nach Art. 50 Abs. 2 gilt für Systeme, die vor dem Stichtag bereits in Verkehr waren, erst ab dem <b>2. Dezember 2026</b>.',
+  lead:'Die Kennzeichnungspflichten gelten seit dem <b>2. August 2026</b>. Ausnahme: die maschinenlesbare Kennzeichnung nach Art. 50 Abs. 2 gilt für Systeme, die vor dem Stichtag bereits in Verkehr waren, erst ab dem <b>2. Dezember 2026</b>.',
   body:`
     <div class="brk">
       <div class="brk-i anb a2"><span class="brk-lbl">Anbieter</span><div class="brk-line"></div></div>
@@ -952,9 +1003,9 @@ slides.push(S({
 
 /* --- 05 Fristen-Timeline (NEU) --- */
 slides.push(S({
-  nav:'Einstieg', eyebrow:'Stand nach dem Digital Omnibus',
+  nav:'Einstieg', eyebrow:'Stand nach dem AI-Omnibus',
   title:'Die Fristen im Überblick',
-  lead:'Der Digital Omnibus (final angenommen am 29. Juni 2026) hat die Hochrisiko-Fristen verschoben — die <b>Transparenzpflichten aus Art. 50 bleiben beim 2. August 2026</b>. Verschoben wurde nur die technische Watermarking-Pflicht für Bestandssysteme.',
+  lead:'Der AI-Omnibus (Verordnung (EU) 2026/1744, in Kraft seit 27. Juli 2026) hat die Hochrisiko-Fristen verschoben — die <b>Transparenzpflichten aus Art. 50 gelten seit dem 2. August 2026</b>. Verschoben wurde nur die technische Watermarking-Pflicht für Bestandssysteme.',
   body:`
     <div class="tl2">
       <div class="tl2-row">
@@ -979,11 +1030,11 @@ slides.push(S({
           <div class="tl2-year">2028</div>
           <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.08.2028</div><div class="lb">Hochrisiko Anhang I (Omnibus)</div></div>
           <div class="tl2-year">2030</div>
-          <div class="tl2-pt dim"><span class="d"></span><div class="dt">31.12.2030</div><div class="lb">Bestandssysteme von Behörden</div></div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">31.12.2030</div><div class="lb">IT-Großsysteme (Anhang X)</div></div>
         </div>
       </div>
     </div>
-    <div class="callout" style="margin-top:1.5rem"><strong>Wichtig für den Workshop:</strong> Der 2. August 2026 steht fest. Wer heute plant, plant gegen dieses Datum — nicht gegen eine mögliche weitere Verschiebung.</div>`
+    <div class="callout" style="margin-top:2.2rem;font-size:.98rem"><strong>Wichtig:</strong> Die Transparenzpflichten gelten seit dem 2. August 2026. Eine Übergangsfrist gibt es nur für die maschinenlesbare Kennzeichnung von Bestandssystemen.</div>`
 }));
 
 /* --- 06 SEC Grundlagen --- */
@@ -1004,9 +1055,9 @@ slides.push(S({
         </div>
       </div>
       <div class="card no">
-        ${ph('Klassische Software (z.B. Paint)','tall', 'kiSystemNein')}
+        ${ph('Klassische Software ohne KI','tall', 'kiSystemNein')}
         <div style="text-align:center;margin-top:.9rem">
-          <div style="font-size:.8rem;color:#9aa3b2;margin-bottom:.4rem">Microsoft Paint, Taschenrechner, Excel-Formel</div>
+          <div style="font-size:.8rem;color:#9aa3b2;margin-bottom:.4rem">Bildbearbeitung ohne KI-Funktionen, Taschenrechner, Excel-Formel</div>
           <div style="font-size:1.05rem;font-weight:800;color:#f08b8b">Kein KI-System ✕</div>
         </div>
       </div>
@@ -1024,7 +1075,10 @@ slides.push(S({
       <div class="card ok tall-c">
         <div class="split-head ctr"><span class="dot-i g">✓</span> Kennzeichnungspflichten gelten für</div>
         <div class="grid g4" style="align-items:center;flex:1">
-          ${ph('Unternehmen', '', 'zielUnternehmen')}${ph('Behörden', '', 'zielBehoerden')}${ph('Selbstständige', '', 'zielSelbststaendige')}${ph('Sonstige berufl. Nutzer', '', 'zielSonstige')}
+          <figure class="zcap">${ph('Unternehmen', '', 'zielUnternehmen')}<figcaption>Konzerne</figcaption></figure>
+          <figure class="zcap">${ph('Behörden', '', 'zielBehoerden')}<figcaption>Behörden</figcaption></figure>
+          <figure class="zcap">${ph('Selbstständige', '', 'zielSelbststaendige')}<figcaption>KMU-Betriebe</figcaption></figure>
+          <figure class="zcap">${ph('Sonstige berufl. Nutzer', '', 'zielSonstige')}<figcaption>Solo-Selbstständige</figcaption></figure>
         </div>
       </div>
       <div class="card no tall-c">
@@ -1032,14 +1086,14 @@ slides.push(S({
         <div style="flex:1;display:flex;align-items:center">${ph('Private Nutzung','', 'zielPrivat')}</div>
       </div>
     </div>`,
-  foot:'* Aber Vorsicht: Nur bei <u>ausschließlich</u> persönlicher und nicht beruflicher Tätigkeit (Art. 2 Nr. 10 AI Act). Beispiel: KI-generierte Geburtstagseinladung.'
+  foot:'* Aber Vorsicht: Nur bei <u>ausschließlich</u> persönlicher und nicht beruflicher Tätigkeit (Art. 2 Abs. 10 AI Act). Beispiel: KI-generierte Geburtstagseinladung.'
 }));
 
 /* --- 09 Anbieter vs Betreiber --- */
 slides.push(S({
   nav:'Grundlagen', eyebrow:'Die eigene Rolle kennen',
   title:'Anbieter oder Betreiber des KI-Systems?',
-  lead:'Die Rollenzuordnung entscheidet darüber, welche der fünf Pflichten Sie überhaupt treffen. Nach <b>Art. 25 AI Act</b> kann ein Betreiber zum Anbieter werden — etwa beim Rebranding unter eigener Marke.',
+  lead:'Die Rollenzuordnung entscheidet darüber, welche der fünf Pflichten dich überhaupt treffen. Wer ein KI-System unter <b>eigenem Namen oder eigener Marke</b> anbietet, wird zum Anbieter (Art. 3 Nr. 3 AI Act) — etwa beim Rebranding.',
   body:`
     <div class="grid g2 roomy">
       <div class="card">
@@ -1073,7 +1127,7 @@ slides.push(S({
 /* --- 10 Relevanz-Check --- */
 slides.push(S({
   nav:'Grundlagen', eyebrow:'Relevanz-Check',
-  title:'Was betrifft Sie konkret?',
+  title:'Was betrifft dich konkret?',
   lead:'Nicht jede Kennzeichnungspflicht ist für alle Unternehmen gleich relevant. Diese Einschätzung hilft bei der Priorisierung im Workshop.',
   body:`
     <div class="stats lg-list">
@@ -1240,11 +1294,11 @@ slides.push(S({
       ${ph('Vibe Coding / eigene KI-Lösung','tall', 'vibeCoding')}
       <div>
         <div class="check lg">
-          <div class="check-i"><div class="k">✓</div><div class="t"><b>Sie nutzen ChatGPT im Browser</b> — Sie sind Betreiber. Abs. 2 trifft Sie nicht.</div></div>
-          <div class="check-i"><div class="k">!</div><div class="t"><b>Sie bauen einen eigenen Assistenten</b> auf API-Basis, gebrandet unter eigener Marke — die Anbieterrolle rückt näher.</div></div>
-          <div class="check-i"><div class="k">!</div><div class="t"><b>Automatisierungen mit n8n, Make &amp; Co.</b> die eigenständig Content generieren und veröffentlichen — Rolle sauber prüfen.</div></div>
+          <div class="check-i"><div class="k">✓</div><div class="t"><b>Du nutzt ChatGPT im Browser</b> — du bist Betreiber. Abs. 2 trifft dich nicht.</div></div>
+          <div class="check-i"><div class="k">!</div><div class="t"><b>Du baust einen eigenen Assistenten</b> auf API-Basis, gebrandet unter eigener Marke — die Anbieterrolle rückt näher.</div></div>
+          <div class="check-i"><div class="k">!</div><div class="t"><b>Automatisierungen mit n8n, Make &amp; Co.</b>, die eigenständig Content generieren und veröffentlichen — Rolle sauber prüfen.</div></div>
         </div>
-        <div class="callout"><strong>Merksatz:</strong> Je mehr eigenes Branding und eigene Verantwortung, desto eher rutschen Sie in die Anbieterrolle nach Art. 25 AI Act.</div>
+        <div class="callout"><strong>Merksatz:</strong> Je mehr eigenes Branding und eigene Verantwortung, desto eher rutschst du in die Anbieterrolle (Art. 3 Nr. 3 AI Act).</div>
       </div>
     </div>`
 }));
@@ -1256,7 +1310,7 @@ slides.push(SEC({nav:'Emotionserkennung', k:4, title:'Emotionserkennung &amp; Bi
 slides.push(S({
   nav:'Emotionserkennung', eyebrow:'Art. 50 Abs. 3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
   title:'Emotionserkennung &amp; Biometrie',
-  lead:'Betreiber von KI-Systemen, die <b>Emotionen erkennen</b> oder <b>Personen biometrisch kategorisieren</b>, müssen Betroffene über den Einsatz informieren. Am <b>Arbeitsplatz</b> und in <b>Bildungseinrichtungen</b> sind solche Systeme grundsätzlich verboten (Art. 5 Abs. 1 f AI Act).',
+  lead:'Betreiber von KI-Systemen, die <b>Emotionen erkennen</b> oder <b>Personen biometrisch kategorisieren</b>, müssen Betroffene über den Einsatz informieren. <b>Emotionserkennung</b> am Arbeitsplatz und in Bildungseinrichtungen ist verboten (Art. 5 Abs. 1 lit. f, außer aus medizinischen oder Sicherheitsgründen), ebenso biometrische Kategorisierung nach sensiblen Merkmalen wie ethnischer Herkunft (lit. g).',
   body:`
     <div class="grid g2" style="align-items:stretch">
       <div class="card" style="justify-content:center">
@@ -1267,7 +1321,7 @@ slides.push(S({
       <div class="card" style="justify-content:center">
         <h3 style="margin-bottom:1rem;font-size:1.15rem;text-align:center">Biometrische Kategorisierung</h3>
         ${ph('Kamera → Merkmalszuordnung','r169', 'emotionBiometrie')}
-        <p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. Alter, Geschlecht, Hautfarbe und weitere biometrische Merkmale</p>
+        <p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. Alter, Geschlecht, Haar- oder Augenfarbe</p>
       </div>
     </div>
     <div class="callout red"><strong>Doppelte Hürde:</strong> Neben Art. 50 Abs. 3 greift regelmäßig auch die DSGVO — biometrische Daten sind besondere Kategorien personenbezogener Daten nach Art. 9 DSGVO.</div>`,
@@ -1317,13 +1371,13 @@ slides.push(S({
 /* --- 24 Formate --- */
 slides.push(S({
   nav:'Deepfakes', eyebrow:'Art. 50 Abs. 4 S. 1–3 AI Act', badge:{t:'betreiber',l:'Betreiber'},
-  title:'Welche Formate können Deepfakes sein?',
+  title:'Welche Formate können Deepfakes sein?', zoom:[".body > .grid > .card:nth-child(1)", ".body > .grid > .card:nth-child(2)", ".body > .grid > .card:nth-child(3)"],
   lead:'Für <b>Texte</b> gelten Spezialregeln (dazu gleich mehr) — sie fallen nicht unter den Deepfake-Begriff.',
   body:`
     <div class="grid g3 media-lg">
-      <div class="card"><h3 style="text-align:center;font-size:1.15rem;margin-bottom:.9rem">Bild</h3>${ph('Bild-Deepfake','r11', 'dfBild')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. für Social-Media-Posts, Newsletter oder eine Printzeitung</p></div>
-      <div class="card"><h3 style="text-align:center;font-size:1.15rem;margin-bottom:.9rem">Audio</h3>${ph('Audio-Deepfake','r11', 'dfAudio')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. für Podcast-Stimmen, Nachrichtensprecher</p></div>
-      <div class="card"><h3 style="text-align:center;font-size:1.15rem;margin-bottom:.9rem">Video</h3>${ph('Video-Deepfake','r11', 'dfVideo')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. Katastrophenvideos, Newsvideos</p></div>
+      <div class="card" style="align-items:stretch"><span class="cat-lbl">Bild</span>${ph('Bild-Deepfake','r11', 'dfBild')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. für Social-Media-Posts, Newsletter oder eine Printzeitung</p></div>
+      <div class="card" style="align-items:stretch"><span class="cat-lbl">Audio</span>${ph('Audio-Deepfake','r11', 'dfAudio')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. für Podcast-Stimmen, Nachrichtensprecher</p></div>
+      <div class="card" style="align-items:stretch"><span class="cat-lbl">Video</span>${ph('Video-Deepfake','r11', 'dfVideo')}<p style="margin-top:1rem;text-align:center;font-size:.9rem">z.&nbsp;B. Katastrophenvideos, Newsvideos</p></div>
     </div>`
 }));
 
@@ -1356,7 +1410,7 @@ slides.push(S({
 /* --- 26 KI-generierte Produktbilder --- */
 slides.push(S({
   nav:'Deepfakes', eyebrow:'Check: Wirkt das KI-Bild wie ein echtes Foto?', badge:{t:'betreiber',l:'Betreiber'},
-  title:'KI-generierte Produktbilder',
+  title:'KI-generierte Produktbilder', zoom:[".body > .grid > .card:nth-child(1)", ".body > .grid > .card:nth-child(2)", ".body > .grid > .card:nth-child(3)", ".body > .grid > .card:nth-child(4)"],
   lead:'Der praxisrelevanteste Fall im E-Commerce und Marketing. Maßgeblich ist, ob beim Betrachter ein <b>Authentizitätseindruck</b> entsteht.',
   body:`
     <div class="grid g4 media-lg prod">
@@ -1395,10 +1449,10 @@ slides.push(S({
 /* --- 27 So kennzeichnen --- */
 slides.push(S({
   nav:'Deepfakes', eyebrow:'Wann, wie, wo?', badge:{t:'betreiber',l:'Betreiber'},
-  title:'So sollten Sie Deepfakes kennzeichnen',
+  title:'So solltest du Deepfakes kennzeichnen', zoom:[".body > .grid > .card:nth-child(1)", ".body > .grid > .card:nth-child(2)", ".body > .grid > .card:nth-child(3)"],
   lead:'<b>Spätestens bei erster Interaktion</b> müssen Texthinweise oder die <b>EU-AI-Icons</b> klar, verständlich, sichtbar und barrierefrei gezeigt werden. Der rechtlich sicherste Weg: Kennzeichnung <b>direkt im Content</b>.',
   body:`
-    <div class="grid g3">
+    <div class="grid g3 kz">
       <div class="card">
         <div class="ic-top">${ico('imgnote',34)}</div>
         <h3 style="text-align:center;margin-bottom:.9rem">Bilder</h3>
@@ -1488,7 +1542,7 @@ slides.push(S({
 /* --- 30 Rückwirkende Kennzeichnung --- */
 slides.push(S({
   nav:'Deepfakes', eyebrow:'Social-Media-Posts, Blogbeiträge & Co.', badge:{t:'betreiber',l:'Betreiber'},
-  title:'Rückwirkende Kennzeichnung?',
+  title:'Rückwirkende Kennzeichnung?', zoom:[".rw-mark"],
   lead:'Grundsätzlich gibt es <b>keine rückwirkende Kennzeichnungspflicht</b>. Bei Bild-, Ton- und Videoinhalten kommt es auf den Zeitpunkt der <b><u>Erzeugung</u></b> an; bei Texten zusätzlich auf die Veröffentlichung.',
   body:`
     <div class="rw-tl">
@@ -1550,7 +1604,7 @@ slides.push(SEC({nav:'KI-Texte', k:6, title:'KI-Texte', art:'Art. 50 Abs. 4 S. 4
 /* --- 32 Einstiegsbeispiel --- */
 slides.push(S({
   nav:'KI-Texte', eyebrow:'Content, Content, Content', badge:{t:'betreiber',l:'Betreiber'},
-  title:'Einstiegsbeispiel',
+  title:'Einstiegsbeispiel', zoom:[".chain > .card:nth-child(1)", ".chain > .card:nth-child(3)", ".chain > .card:nth-child(5)", ".chain > .card:nth-child(7)"],
   lead:'Ein Unternehmen möchte auf seiner <b>Website</b> täglich einen <b>KI-generierten Blogbeitrag</b> zu aktuellen Wirtschaftsnews veröffentlichen — inkl. Kommentierung und Meinung. Bei Veröffentlichung soll automatisch ein <b>Social-Media-Post</b> generiert und veröffentlicht werden, z.&nbsp;B. bei LinkedIn.',
   body:`
     <div class="chain" style="grid-template-columns:1fr auto 1fr auto 1fr auto 1fr">
@@ -1568,12 +1622,12 @@ slides.push(S({
 /* --- 33 Entscheidungsbaum --- */
 slides.push(S({
   nav:'KI-Texte', eyebrow:'Ziel: Sicherung von Authentizität', badge:{t:'betreiber',l:'Betreiber'},
-  title:'Wann muss man KI-Texte kennzeichnen?',
+  title:'Wann muss man KI-Texte kennzeichnen?', zoom:[".t2-main > .t2-row:nth-child(1)|560|14px", ".t2-main > .t2-row:nth-child(3)|560|14px", ".t2-main > .t2-row:nth-child(5)|560|14px", ".t2-main > .t2-row:nth-child(7)|560|14px", ".t2-main > .t2-row:nth-child(9)|560|14px", ".t2-final|420", ".t2-end"],
   body:`
     <div class="t2">
       <div class="t2-main">
         <div class="t2-row">
-          <div class="t2-q">Erzeugen oder manipulieren Sie Text mit einem <b>KI-System</b>?</div>
+          <div class="t2-q">Erzeugst oder manipulierst du Text mit einem <b>KI-System</b>?</div>
           <div class="t2-out"><span class="t2-dash"></span><span class="t2-bdg r">✕ Nein</span><span class="t2-dash"></span></div>
         </div>
         <div class="t2-conn"><span class="ln"></span><span class="t2-bdg g">✓ Ja</span><span class="ln"></span></div>
@@ -1611,10 +1665,10 @@ slides.push(S({
   body:`
     <div class="tv" style="grid-template-columns:.55fr 1fr;gap:1.8rem">
       ${ph('Stufen: DM → kleine Gruppe → große Gruppe → öffentlich','tall', 'veroeffStufen')}
-      <div class="check lg">
+      <div class="check lg" style="gap:1.5rem">
         <div class="check-i" style="border-left:3px solid #3fb27f"><div class="k" style="background:rgba(63,178,127,.18);color:#6cd3a4">✓</div><div class="t"><b>Private Direktnachricht</b> — keine Veröffentlichung.</div></div>
-        <div class="check-i" style="border-left:3px solid #3fb27f"><div class="k" style="background:rgba(63,178,127,.18);color:#6cd3a4">✓</div><div class="t"><b>Kleine Freundesgruppe</b> (5–10 Personen) — regelmäßig keine Veröffentlichung.</div></div>
-        <div class="check-i" style="border-left:3px solid #e0a83c"><div class="k" style="background:rgba(224,168,60,.18);color:#e0a83c">!</div><div class="t"><b>Große geschlossene Gruppe</b> — Veröffentlichung möglich. Keine feste Grenze, ab ca. 10 Personen denkbar.</div></div>
+        <div class="check-i" style="border-left:3px solid #3fb27f"><div class="k" style="background:rgba(63,178,127,.18);color:#6cd3a4">✓</div><div class="t"><b>Kleine Freundesgruppe</b> (bis etwa 10 Personen) — regelmäßig keine Veröffentlichung.</div></div>
+        <div class="check-i" style="border-left:3px solid #e0a83c"><div class="k" style="background:rgba(224,168,60,.18);color:#e0a83c">!</div><div class="t"><b>Große geschlossene Gruppe</b> — Veröffentlichung möglich. Keine feste Grenze, bei deutlich mehr als 10 Personen denkbar.</div></div>
         <div class="check-i" style="border-left:3px solid #e05252"><div class="k" style="background:rgba(224,82,82,.18);color:#f08b8b">●</div><div class="t"><b>Öffentliche Posts</b> — Veröffentlichung. Social Media, Onlineforen, auch hinter Paywalls.</div></div>
       </div>
     </div>
@@ -1675,10 +1729,10 @@ slides.push(S({
 /* --- 37 So KI-Texte kennzeichnen --- */
 slides.push(S({
   nav:'KI-Texte', eyebrow:'Wann, wie, wo?', badge:{t:'betreiber',l:'Betreiber'},
-  title:'So sollten Sie KI-Texte kennzeichnen',
+  title:'So solltest du KI-Texte kennzeichnen',
   lead:'<b>Direkt zu Beginn des Textes</b> müssen Texthinweise oder die EU-AI-Icons angebracht werden, z.&nbsp;B.: <em>„KI-Hinweis: Dieser Beitrag wurde ganz / teilweise mit Hilfe künstlicher Intelligenz erstellt.“</em>',
   body:`
-    <div class="card ok" style="margin-bottom:.9rem">
+    <div class="card ok" style="margin-bottom:2.2rem">
       <div class="split-head"><span class="dot-i g">✓</span> Vertretbare Platzierungen (bei erster Wahrnehmung sichtbar)</div>
       <div class="mk-grid" style="grid-template-columns:repeat(3,1fr)">
         <div>
@@ -1755,6 +1809,95 @@ slides.push(S({
     </div>`
 }));
 
+/* --- 37a So KI-Texte kennzeichnen – Detail --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Wo platzieren? — Vertretbar', badge:{t:'betreiber',l:'Betreiber'},
+  title:'So solltest du KI-Texte kennzeichnen',
+  body:`
+    <div class="card ok plc-big">
+      <div class="split-head"><span class="dot-i g">✓</span> Vertretbare Platzierungen (bei erster Wahrnehmung sichtbar)</div>
+      <div class="mk-grid" style="grid-template-columns:repeat(3,1fr);gap:2rem">
+        <div>
+          <div class="mk ok">
+            <div class="mk-lbl g" style="align-self:stretch;text-align:center">KI-HINWEIS</div>
+            <div class="mk-bar h" style="width:70%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:88%"></div>
+            <div class="mk-bar" style="width:94%"></div>
+          </div>
+          <div class="mk-cap">Banner oberhalb des Artikels</div>
+        </div>
+        <div>
+          <div class="mk ok">
+            <div class="mk-lbl g">KI-Hinweis</div>
+            <div class="mk-bar h" style="width:76%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:82%"></div>
+            <div class="mk-bar" style="width:90%"></div>
+          </div>
+          <div class="mk-cap">Hinweis unmittelbar oberhalb der Überschrift</div>
+        </div>
+        <div>
+          <div class="mk ok" style="max-width:62%;margin:0 auto">
+            <div class="mk-prof"><span class="mk-av"></span><span class="mk-bar h" style="width:52%"></span></div>
+            <div class="mk-lbl g" style="align-self:stretch;text-align:center">KI-generiertes Bild</div>
+            <div class="mk-bar" style="height:34px;border-radius:5px"></div>
+            <div class="mk-act"><span>♡</span><span>💬</span><span>↗</span></div>
+          </div>
+          <div class="mk-cap">Deutlich sichtbarer Hinweis in Social-Media-Posts</div>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* --- 37b So KI-Texte kennzeichnen – Detail --- */
+slides.push(S({
+  nav:'KI-Texte', eyebrow:'Wo platzieren? — Problematisch', badge:{t:'betreiber',l:'Betreiber'},
+  title:'So solltest du KI-Texte kennzeichnen',
+  body:`
+    <div class="card no plc-big">
+      <div class="split-head"><span class="dot-i r">✕</span> Problematische Platzierungen</div>
+      <div class="mk-grid" style="grid-template-columns:repeat(2,1fr);gap:1.6rem 2.4rem">
+        <div>
+          <div class="mk no">
+            <div class="mk-bar h" style="width:72%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:90%"></div>
+            <div class="mk-lbl r">KI-Hinweis</div>
+          </div>
+          <div class="mk-cap">Am Ende des Textes</div>
+        </div>
+        <div>
+          <div class="mk no">
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:84%"></div>
+            <div class="mk-bar" style="width:92%"></div>
+            <div class="mk-lbl r" style="align-self:stretch;text-align:center">IMPRESSUM</div>
+          </div>
+          <div class="mk-cap">Im Impressum oder in Nutzungs&shy;bedingungen</div>
+        </div>
+        <div>
+          <div class="mk no">
+            <div class="mk-bar h" style="width:66%"></div>
+            <div class="mk-bar" style="width:100%"></div>
+            <div class="mk-bar" style="width:58%"></div>
+            <div class="mk-lbl r">Mehr anzeigen ▾</div>
+          </div>
+          <div class="mk-cap">Hinter Klick oder „Mehr anzeigen“</div>
+        </div>
+        <div>
+          <div class="mk no">
+            <div class="mk-lbl r" style="font-family:'JetBrains Mono',monospace">&lt;/&gt;</div>
+            <div class="mk-bar" style="width:86%"></div>
+            <div class="mk-bar" style="width:64%"></div>
+            <div class="mk-bar" style="width:78%"></div>
+          </div>
+          <div class="mk-cap">Nur in Metadaten oder im Code</div>
+        </div>
+      </div>
+    </div>`
+}));
+
 /* --- 38 SEC Haftung --- */
 slides.push(SEC({nav:'Haftung', k:7, title:'Haftung', art:'Bußgelder · Abmahnungen · Plattformrisiken'}));
 
@@ -1787,7 +1930,7 @@ slides.push(S({
 /* --- 40 Abmahnungen --- */
 slides.push(S({
   nav:'Haftung', eyebrow:'Verstöße gegen die Kennzeichnungspflichten', badge:{t:'beide',l:'Anbieter + Betreiber'},
-  title:'Abmahnungen, Strafbarkeit, Sperren',
+  title:'Abmahnungen, Strafbarkeit, Sperren', zoom:[".check-i:nth-child(1)|820", ".check-i:nth-child(2)|820", ".check-i:nth-child(3)|820", ".check-i:nth-child(4)|820"],
   lead:'Das Bußgeld ist nur eine von mehreren Risikoebenen. In der Praxis treffen Unternehmen die anderen drei oft schneller.',
   body:`
     <div class="check risk">
@@ -1803,21 +1946,21 @@ slides.push(SEC({nav:'Umsetzung', k:8, title:'Umsetzung im Unternehmen', art:'Vo
 
 /* --- 42 Umsetzungsplan --- */
 slides.push(S({
-  nav:'Umsetzung', eyebrow:'Bis zum 2. August 2026', badge:{t:'beide',l:'Anbieter + Betreiber'},
-  title:'Was jetzt konkret zu tun ist',
-  lead:'Ein pragmatischer Fahrplan für die verbleibende Zeit — geeignet als Arbeitsgrundlage für den Workshop-Teil.',
+  nav:'Umsetzung', eyebrow:'Fahrplan für die Umsetzung', badge:{t:'beide',l:'Anbieter + Betreiber'},
+  title:'Was jetzt konkret zu tun ist', zoom:[".plan > .check:nth-child(1) > .check-i:nth-child(1)|720", ".plan > .check:nth-child(1) > .check-i:nth-child(2)|720", ".plan > .check:nth-child(1) > .check-i:nth-child(3)|720", ".plan > .check:nth-child(1) > .check-i:nth-child(4)|720", ".plan > .check:nth-child(2) > .check-i:nth-child(1)|720", ".plan > .check:nth-child(2) > .check-i:nth-child(2)|720", ".plan > .check:nth-child(2) > .check-i:nth-child(3)|720", ".plan > .check:nth-child(2) > .check-i:nth-child(4)|720"],
+  lead:'Ein pragmatischer Fahrplan in acht Schritten — geeignet als Arbeitsgrundlage für den Workshop-Teil.',
   body:`
-    <div class="grid g2">
+    <div class="grid g2 plan">
       <div class="check">
         <div class="check-i"><div class="k">1</div><div class="t"><b>KI-Inventar anlegen</b> — Welche Systeme sind im Einsatz? Wer nutzt sie? Welche Inhalte entstehen daraus?</div></div>
-        <div class="check-i"><div class="k">2</div><div class="t"><b>Rolle je System bestimmen</b> — Anbieter oder Betreiber? Rebranding-Fälle nach Art. 25 gesondert prüfen.</div></div>
+        <div class="check-i"><div class="k">2</div><div class="t"><b>Rolle je System bestimmen</b> — Anbieter oder Betreiber? Rebranding unter eigener Marke gesondert prüfen (Art. 3 Nr. 3).</div></div>
         <div class="check-i"><div class="k">3</div><div class="t"><b>Betroffene Pflichten zuordnen</b> — Welche der fünf Konstellationen trifft welches System?</div></div>
         <div class="check-i"><div class="k">4</div><div class="t"><b>Kennzeichnungsstandard festlegen</b> — Einheitliche Formulierungen und Icons pro Kanal und Format.</div></div>
       </div>
       <div class="check">
         <div class="check-i"><div class="k">5</div><div class="t"><b>Redaktionsprozess dokumentieren</b> — Wer prüft, wer gibt frei, wer trägt die Verantwortung? Nachweisbar festhalten.</div></div>
         <div class="check-i"><div class="k">6</div><div class="t"><b>Verträge und Workflows anpassen</b> — Freelancer- und Agenturklauseln, CMS-Felder, Freigabe-Workflows.</div></div>
-        <div class="check-i"><div class="k">7</div><div class="t"><b>Schulung nachweisen</b> — Art. 4 KI-Kompetenz gilt bereits seit Februar 2025. Datum, Inhalt, Teilnehmer dokumentieren.</div></div>
+        <div class="check-i"><div class="k">7</div><div class="t"><b>KI-Kompetenz sicherstellen</b> — Art. 4 verlangt Maßnahmen für ausreichende KI-Kompetenz. Schulungen mit Datum, Inhalt, Teilnehmern dokumentieren.</div></div>
         <div class="check-i"><div class="k">8</div><div class="t"><b>Verantwortlichkeit benennen</b> — Eine Person, die den Prozess pflegt und bei Änderungen nachsteuert.</div></div>
       </div>
     </div>
@@ -1827,15 +1970,15 @@ slides.push(S({
 /* --- 43 Häufige Irrtümer (NEU) --- */
 slides.push(S({
   nav:'Umsetzung', eyebrow:'Mythen-Check',
-  title:'Fünf häufige Irrtümer',
+  title:'Fünf häufige Irrtümer', zoom:[".myth > .card:nth-child(1)|760", ".myth > .card:nth-child(2)|760", ".myth > .card:nth-child(3)|760", ".myth > .card:nth-child(4)|760", ".myth > .card:nth-child(5)|900"],
   lead:'Diese Aussagen kursieren derzeit in Newslettern und sozialen Netzwerken — und sind so nicht richtig.',
   body:`
-    <div class="grid g2 myth" style="flex:1;align-content:stretch">
+    <div class="grid g2 myth" style="gap:2.8rem 2rem">
       <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ab August muss jeder KI-Text gekennzeichnet werden.“</div><p>Falsch. Nur veröffentlichte Texte zu Angelegenheiten von öffentlichem Interesse — und auch die nur ohne menschliche Prüfung.</p></div>
       <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ein Hinweis im Impressum reicht.“</div><p>Falsch. Der Hinweis muss bei erster Wahrnehmung sichtbar sein — direkt am Inhalt, nicht versteckt.</p></div>
-      <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ich bin nur Nutzer, mich betrifft das nicht.“</div><p>Falsch. Als Betreiber treffen Sie die praktisch häufigsten Pflichten: Deepfakes und KI-Texte.</p></div>
+      <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Ich bin nur Nutzer, mich betrifft das nicht.“</div><p>Falsch. Als Betreiber treffen dich die praktisch häufigsten Pflichten: Deepfakes und KI-Texte.</p></div>
       <div class="card no"><div class="split-head"><span class="dot-i r">✕</span> „Alte Posts muss ich nachkennzeichnen.“</div><p>Falsch. Keine Rückwirkung — aber bei jeder Neuveröffentlichung nach dem Stichtag gilt die Pflicht.</p></div>
-      <div class="card no" style="grid-column:span 2"><div class="split-head"><span class="dot-i r">✕</span> „Der Digital Omnibus hat alles verschoben.“</div><p>Falsch. Verschoben wurden die Hochrisiko-Fristen und — für Bestandssysteme — die technische Watermarking-Pflicht nach Art. 50 Abs. 2. Die Kennzeichnungspflichten aus Art. 50 Abs. 1, 3 und 4 bleiben beim 2. August 2026.</p></div>
+      <div class="card no" style="grid-column:span 2"><div class="split-head"><span class="dot-i r">✕</span> „Der AI-Omnibus hat alles verschoben.“</div><p>Falsch. Verschoben wurden die Hochrisiko-Fristen und — für Bestandssysteme — die technische Watermarking-Pflicht nach Art. 50 Abs. 2. Die Kennzeichnungspflichten aus Art. 50 Abs. 1, 3 und 4 gelten seit dem 2. August 2026.</p></div>
     </div>`
 }));
 
@@ -1847,10 +1990,10 @@ slides.push(`
   <div class="title-wrap">
     <div class="t-eyebrow">Abschluss</div>
     <h1 class="t-head" style="font-size:clamp(2rem,5vw,4rem)">Fragen &amp; Diskussion</h1>
-    <p class="t-sub">Jetzt gemeinsam: Ihr KI-Inventar und Ihre Pflichten</p>
+    <p class="t-sub">Jetzt gemeinsam: dein KI-Inventar und deine Pflichten</p>
     <div class="t-meta">
       <div class="nm">KNOWLEDGE</div>
-      <div class="rl">Diese Präsentation ersetzt keine Rechtsberatung.<br>Stand: Juli 2026 · Art. 50 EU-KI-Verordnung (EU) 2024/1689</div>
+      <div class="rl">Diese Präsentation ersetzt keine Rechtsberatung.<br>Stand: September 2026 · Art. 50 EU-KI-Verordnung (EU) 2024/1689</div>
     </div>
   </div>
   <div class="counter">ENDE</div>
@@ -1864,12 +2007,67 @@ const pos = document.getElementById('pos');
 
 function go(n){
   idx = Math.max(0, Math.min(els.length-1, n));
+  zstep = 0; if(typeof clearZoom === 'function') clearZoom();
   els.forEach((s,i)=>s.classList.toggle('active', i===idx));
   pos.textContent = (idx+1) + ' / ' + els.length;
   if(typeof syncVideos === 'function') syncVideos();
 }
-document.getElementById('next').onclick = ()=>go(idx+1);
-document.getElementById('prev').onclick = ()=>go(idx-1);
+document.getElementById('next').onclick = ()=>step(1);
+document.getElementById('prev').onclick = ()=>step(-1);
+/* ---- Zoom-Klickschritte: Weiter-Klick vergrößert nacheinander einzelne Boxen ---- */
+let zstep = 0;
+function zoomSteps(i){ const d = els[i] && els[i].dataset.zoom; return d ? JSON.parse(d) : []; }
+function clearZoom(){
+  document.querySelectorAll('.zoom-ov,.zoom-mark,.zoom-card').forEach(e=>e.remove());
+  els.forEach(s=>{ s.classList.remove('zoom-on'); s.querySelectorAll('.badge').forEach(b=>b.style.opacity=''); });
+}
+function showZoom(spec){
+  clearZoom();
+  const s = els[idx];
+  let sel = spec, OW = null, PAD = null;
+  if(spec.includes('|')){ const a = spec.split('|'); sel = a[0]; OW = +a[1]; PAD = a[2] || null; }
+  const c = s.querySelector(sel); if(!c) return;
+  const P = c.parentElement, r = c.getBoundingClientRect();
+  const VW = window.innerWidth, VH = window.innerHeight, k = VW/1920;
+  const place = (el,L,T)=>{ P.appendChild(el); const q = el.getBoundingClientRect(); el.style.left = (parseFloat(el.style.left||0)+L-q.left)+'px'; el.style.top = (parseFloat(el.style.top||0)+T-q.top)+'px'; };
+  const ov = document.createElement('div'); ov.className = 'zoom-ov';
+  Object.assign(ov.style,{right:'auto',bottom:'auto',left:'0px',top:'0px',width:VW+'px',height:VH+'px'});
+  place(ov,0,0);
+  const m = document.createElement('div'); m.className = 'zoom-mark';
+  Object.assign(m.style,{left:'0px',top:'0px',width:(r.width+16*k)+'px',height:(r.height+16*k)+'px'});
+  place(m, r.left-8*k, r.top-8*k);
+  const z = c.cloneNode(true); z.classList.add('zoom-card');
+  const W = OW ? OW*k : r.width;
+  const cs = getComputedStyle(c);
+  Object.assign(z.style,{width:W+'px',height:'auto',left:'0px',top:'0px',
+    background:getComputedStyle(document.body).backgroundColor,
+    backgroundImage:'linear-gradient('+cs.backgroundColor+','+cs.backgroundColor+')'});
+  if(PAD){ z.style.padding = PAD; z.style.borderRadius = '12px'; z.style.boxSizing = 'border-box'; }
+  P.appendChild(z);
+  const H = z.getBoundingClientRect().height;
+  const sc = Math.min(sel.startsWith('.body > .grid > .card') ? 1.9 : 4.5, (VH*0.917)/H, (VW*0.885)/W);
+  const zr = z.getBoundingClientRect();
+  z.style.left = (VW/2-(zr.left+zr.width/2))+'px'; z.style.top = (VH/2-(zr.top+zr.height/2))+'px';
+  const dx = (r.left+r.width/2)-VW/2, dy = (r.top+r.height/2)-VH/2, s0 = r.width/W;
+  z.style.transform = `translate(${dx}px,${dy}px) scale(${s0})`;
+  z.style.outline = (2/sc)+'px solid rgba(232,134,60,.9)'; z.style.outlineOffset = (6/sc)+'px';
+  s.querySelectorAll('.badge').forEach(b=>b.style.opacity=.2);
+  z.getBoundingClientRect();
+  requestAnimationFrame(()=>{ s.classList.add('zoom-on'); z.style.transform = `translate(0px,0px) scale(${sc})`; });
+}
+function step(dir){
+  const st = zoomSteps(idx);
+  if(dir>0){
+    if(zstep < st.length){ zstep++; showZoom(st[zstep-1]); }
+    else go(idx+1);
+  } else {
+    if(zstep > 0){ zstep--; if(zstep) showZoom(st[zstep-1]); else clearZoom(); }
+    else go(idx-1);
+  }
+}
+window.addEventListener('resize', ()=>{ const st = zoomSteps(idx); if(zstep) showZoom(st[zstep-1]); });
+document.addEventListener('click', e=>{ if(e.target.closest('.zoom-ov,.zoom-card')) step(1); });
+
 
 /* ---- Agenda: erste Folie je Kapitel finden ---- */
 const chapterStart = {};
@@ -1914,8 +2112,8 @@ function syncVideos(){
 
 document.addEventListener('keydown', e=>{
   if(e.target.classList?.contains('qcard')) return;
-  if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();go(idx+1);}
-  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(idx-1);}
+  if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();step(1);}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();step(-1);}
   if(e.key==='Home'){e.preventDefault();go(0);}
   if(e.key==='End'){e.preventDefault();go(els.length-1);}
   if(e.key==='r'||e.key==='R'){revealQuiz();}
