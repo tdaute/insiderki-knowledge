@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schatten-KI – Ihr Fahrplan zur KI-Governance | KNOWLEDGE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a;
+  --bg-2:#0d1424;
+  --panel:#111a2c;
+  --panel-2:#0f1729;
+  --orange:#e8863c;
+  --orange-br:#f59e42;
+  --white:#ffffff;
+  --grey:#9aa3b2;
+  --grey-2:#6b7280;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --green:#3fb27f;
+  --red:#e05252;
+  --amber:#e0a83c;
+  --blue:#5b8def;
+  --sig:#C21D1A;
+  --sig-br:#e04340;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  background:#05070d;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--white);
+  overflow:hidden;
+}
+
+/* ============ DECK ============ */
+.deck{position:relative;width:100vw;height:100vh;}
+.slide{
+  position:absolute;inset:0;
+  opacity:0;visibility:hidden;
+  transition:opacity .4s ease;
+  background:var(--bg);
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible;}
+
+/* Atmosphere */
+.atmos{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.atmos::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:110px 110px;
+}
+.atmos::after{
+  content:'';position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:120vw;height:90vh;
+  background:radial-gradient(ellipse at center,rgba(232,134,60,.20) 0%,rgba(232,134,60,.06) 34%,transparent 62%);
+}
+.atmos.soft::after{opacity:.4;}
+
+/* ============ LOGO (Netz-/Radsymbol) ============ */
+.logo{display:flex;flex-direction:column;align-items:center;gap:.5rem;}
+.logo svg{display:block;overflow:visible;}
+.logo-word{font-size:.72rem;font-weight:700;letter-spacing:.26em;color:var(--white);white-space:nowrap;}
+.logo-corner{position:absolute;top:1.6rem;right:2.2rem;z-index:6;transform:scale(.75);transform-origin:top right;}
+
+/* ============ CHROME (Sidebar + Header) ============ */
+.chrome{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:230px 1fr;}
+.sidebar{
+  background:rgba(255,255,255,.022);
+  border-right:1px solid var(--line);
+  padding:1.9rem 1.1rem;
+  display:flex;flex-direction:column;
+  backdrop-filter:blur(6px);
+}
+.sb-brand{display:flex;flex-direction:column;align-items:center;gap:.4rem;margin-bottom:2.6rem;}
+.sb-brand .logo-word{font-size:.62rem;letter-spacing:.22em;}
+.sb-nav{display:flex;flex-direction:column;gap:.15rem;}
+.sb-item{
+  font-size:.76rem;font-weight:400;color:var(--grey-2);
+  padding:.42rem .6rem;border-radius:6px;
+  line-height:1.3;text-align:center;
+  transition:color .2s,background .2s;
+  cursor:default;
+}
+.sb-item{
+  font-family:inherit;border:none;background:none;width:100%;
+  cursor:pointer;
+}
+.sb-item:hover{color:#c3cad6;background:rgba(255,255,255,.04);}
+.sb-item:focus-visible{outline:2px solid var(--orange);outline-offset:-2px;}
+.sb-item.on{color:var(--orange);font-weight:600;background:rgba(232,134,60,.09);}
+.sb-item.on:hover{color:var(--orange-br);}
+
+/* Echte Medien (ersetzen Platzhalter, wenn konfiguriert) */
+.media{width:100%;aspect-ratio:1/1;border-radius:10px;object-fit:cover;display:block;background:rgba(255,255,255,.03);}
+.media.tall,.media.wide{aspect-ratio:1/1;}
+video.media{object-fit:contain;background:rgba(0,0,0,.35);}
+.sb-foot{margin-top:auto;font-size:.6rem;color:rgba(255,255,255,.2);letter-spacing:.1em;text-align:center;}
+
+.stage{padding:3.4rem 2.6rem 1.6rem;display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+/* Header-Block: vertikaler Signalrot-Strich links, Eyebrow + Titel eingerueckt */
+.head{position:relative;padding-left:1.15rem;margin-bottom:1.15rem;}
+.head::before{
+  content:'';position:absolute;left:0;top:.12em;bottom:.12em;
+  width:4px;border-radius:2px;background:var(--sig);
+}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.2em;color:var(--orange);text-transform:uppercase;margin-bottom:.5rem;}
+.h1{font-size:clamp(1.6rem,2.9vw,2.5rem);font-weight:700;letter-spacing:-.028em;line-height:1.08;}
+.h1 em{font-style:normal;color:var(--sig-br);}
+.lead{font-size:.92rem;color:#c3cad6;line-height:1.55;max-width:74ch;margin-bottom:1.3rem;}
+.lead b{color:var(--orange-br);font-weight:600;}
+.lead u{text-decoration-color:var(--orange);text-underline-offset:3px;}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;}
+.foot{margin-top:1rem;font-size:.72rem;color:var(--grey-2);font-style:italic;}
+
+/* ============ TITLE SLIDES ============ */
+.title-wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6vw;}
+.t-eyebrow{font-size:clamp(.8rem,1.2vw,1.05rem);font-weight:500;letter-spacing:.42em;color:var(--orange);text-transform:uppercase;margin-bottom:1.5rem;padding-left:.42em;}
+.t-head{font-size:clamp(2.6rem,7vw,6rem);font-weight:800;line-height:.98;letter-spacing:-.038em;}
+.t-sub{margin-top:1.6rem;font-size:clamp(.95rem,1.6vw,1.4rem);color:var(--grey);font-weight:400;}
+.t-meta{margin-top:3.2rem;display:flex;flex-direction:column;gap:.3rem;align-items:center;}
+.t-meta .nm{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;}
+.t-meta .rl{font-size:.82rem;color:var(--grey);line-height:1.6;}
+.counter{
+  position:absolute;bottom:2.6rem;left:50%;transform:translateX(-50%);
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  color:rgba(255,255,255,.28);letter-spacing:.24em;
+}
+
+/* Section divider slides */
+.sec-wrap{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:230px 1fr;}
+.sec-body{display:flex;flex-direction:column;justify-content:center;padding:0 5vw;}
+.sec-num{
+  align-self:flex-start;
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500;
+  letter-spacing:.22em;color:#fff;text-transform:uppercase;
+  background:var(--sig);border-radius:999px;padding:.42rem 1.25rem;
+  margin-bottom:1.5rem;
+}
+.sec-main{position:relative;padding-left:1.6rem;}
+.sec-main::before{
+  content:'';position:absolute;left:0;top:.1em;bottom:.1em;
+  width:5px;border-radius:3px;background:var(--sig);
+}
+.sec-title{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:800;letter-spacing:-.032em;line-height:1.05;}
+.sec-art{font-size:.95rem;color:var(--grey);margin-top:.9rem;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
+
+/* ============ COMPONENTS ============ */
+.grid{display:grid;gap:.85rem;}
+.g2{grid-template-columns:repeat(2,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g4{grid-template-columns:repeat(4,1fr);}
+.g5{grid-template-columns:repeat(5,1fr);}
+
+.card{
+  background:rgba(255,255,255,.026);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:1.35rem 1.35rem 1.45rem;
+  display:flex;flex-direction:column;
+}
+.card.ok{border-color:rgba(63,178,127,.34);background:rgba(63,178,127,.05);}
+.card.no{border-color:rgba(224,82,82,.34);background:rgba(224,82,82,.05);}
+.card.warn{border-color:rgba(224,168,60,.34);background:rgba(224,168,60,.05);}
+.card.acc{border-color:rgba(232,134,60,.32);background:rgba(232,134,60,.05);}
+.card h3{font-size:1rem;font-weight:700;letter-spacing:-.012em;margin-bottom:.45rem;line-height:1.3;}
+.card .sub{font-size:.74rem;color:var(--orange);font-family:'JetBrains Mono',monospace;margin-bottom:.7rem;}
+.card p{font-size:.84rem;color:var(--grey);line-height:1.62;}
+.card ul{list-style:none;margin-top:.8rem;display:flex;flex-direction:column;gap:.6rem;}
+.card li{font-size:.82rem;color:#b6bdc9;display:flex;gap:.55rem;align-items:flex-start;line-height:1.6;}
+.card li::before{content:'—';color:var(--orange);flex-shrink:0;}
+.card ul.bare li::before{content:none;}
+.card ul.bare li{gap:0;}
+
+.num{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--orange);color:#0a0e1a;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:800;margin-bottom:.7rem;flex-shrink:0;
+}
+.tick{color:var(--green);font-weight:700;}
+.cross{color:var(--red);font-weight:700;}
+
+/* Placeholder image */
+.ph{
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.028) 0 10px,rgba(255,255,255,.012) 10px 20px);
+  border:1px dashed rgba(255,255,255,.16);
+  border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.3rem;color:rgba(255,255,255,.3);
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:.4rem;
+  aspect-ratio:1/1;
+}
+.ph .ico{font-size:1.1rem;opacity:.6;}
+.ph.tall,.ph.wide{aspect-ratio:1/1;}
+.g4 .ph,.g4 .media,.g5 .ph,.g5 .media,
+.g3 .ph,.g3 .media{margin-left:auto;margin-right:auto;}
+.g5 .ph,.g5 .media{max-width:22vh;}
+.g4 .ph,.g4 .media{max-width:26vh;}
+.g3 .ph,.g3 .media{max-width:30vh;}
+.g2 .ph,.g2 .media{max-width:38vh;margin-left:auto;margin-right:auto;}
+
+/* Callout */
+.callout{
+  margin-top:1.1rem;
+  background:linear-gradient(90deg,rgba(232,134,60,.15) 0%,rgba(232,134,60,.04) 68%,transparent 100%);
+  border-left:4px solid var(--orange);
+  border-radius:0 9px 9px 0;
+  padding:.9rem 1.3rem;
+  font-size:.84rem;color:#dfe4ec;line-height:1.5;
+}
+.callout strong{color:var(--orange-br);font-weight:700;}
+.callout.green{background:linear-gradient(90deg,rgba(63,178,127,.14) 0%,transparent 70%);border-left-color:var(--green);}
+.callout.green strong{color:#6cd3a4;}
+.callout.red{background:linear-gradient(90deg,rgba(224,82,82,.14) 0%,transparent 70%);border-left-color:var(--red);}
+.callout.red strong{color:#f08b8b;}
+
+/* Split heads */
+.split-head{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.92rem;font-weight:700;margin-bottom:.7rem;
+}
+.dot-i{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;flex-shrink:0;}
+.dot-i.g{background:var(--green);color:#06180f;}
+.dot-i.r{background:var(--red);color:#210606;}
+.dot-i.a{background:var(--amber);color:#1e1503;}
+
+/* Fine boxes */
+.fine{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;}
+.fine-box{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:13px;padding:1.4rem;text-align:center;}
+.fine-box.hi{border-color:rgba(232,134,60,.4);background:rgba(232,134,60,.06);}
+.fine-amt{font-size:clamp(1.4rem,2.5vw,2rem);font-weight:800;letter-spacing:-.03em;color:var(--orange-br);line-height:1.15;}
+.fine-box:not(.hi) .fine-amt{color:var(--white);}
+.fine-or{font-size:.82rem;color:var(--grey);margin:.4rem 0;}
+.fine-src{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--grey-2);margin-top:.8rem;}
+.fine-lbl{font-size:.82rem;font-weight:600;margin-bottom:.9rem;color:#c3cad6;}
+
+/* Checklist */
+.check{display:flex;flex-direction:column;gap:.5rem;}
+.check-i{
+  display:flex;gap:.8rem;align-items:flex-start;
+  background:rgba(255,255,255,.025);border:1px solid var(--line);
+  border-radius:9px;padding:.7rem .95rem;
+}
+.check-i .k{
+  width:22px;height:22px;border-radius:5px;background:rgba(232,134,60,.16);
+  color:var(--orange);font-size:.7rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.check-i .t{font-size:.8rem;line-height:1.45;color:#c3cad6;}
+.check-i .t b{color:var(--white);font-weight:600;}
+
+/* Two-col text+visual */
+.tv{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:center;}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;bottom:1.1rem;left:50%;transform:translateX(-50%);
+  z-index:60;display:flex;align-items:center;gap:.9rem;
+  background:rgba(10,14,26,.82);backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem;
+  opacity:.28;transition:opacity .25s;
+}
+.nav:hover{opacity:1;}
+.nav button{background:none;border:none;color:var(--grey);cursor:pointer;font-size:.95rem;padding:.2rem .35rem;transition:color .2s;}
+.nav button:hover{color:var(--orange);}
+.nav button:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px;}
+.nav .pos{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--grey);min-width:52px;text-align:center;}
+
+/* ============ SEITENVERHAELTNISSE ============ */
+.ph.r169,.media.r169{aspect-ratio:16/9;max-width:none;}
+.ph.r34,.media.r34{aspect-ratio:3/4;max-width:none;}
+.ph.r11,.media.r11{aspect-ratio:1/1;}
+.hero-wrap{width:100%;max-width:112vh;margin:0 auto;}
+
+/* ============ ICONS ============ */
+.ic{display:block;flex-shrink:0;}
+.ic-top{display:flex;justify-content:center;margin-bottom:.85rem;}
+
+/* ============ GESTAPELTE KARTENZEILEN ============ */
+.stack{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:.9rem;}
+.stack-row{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:240px 1fr;gap:1.6rem;align-items:center;
+  background:rgba(255,255,255,.028);border:1px solid var(--line);
+  border-radius:13px;padding:1.25rem 1.5rem 1.25rem 1.7rem;
+}
+.stack-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sig);}
+.stack-row h3{font-size:1.08rem;font-weight:700;letter-spacing:-.012em;line-height:1.25;}
+.stack-row p{font-size:.9rem;color:var(--grey);line-height:1.65;}
+.stack-row .kx{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--orange);letter-spacing:.12em;margin-bottom:.3rem;}
+
+/* ============ TIMELINE V2 ============ */
+.tl2{display:flex;flex-direction:column;gap:1.5rem;}
+.tl2-row{position:relative;}
+.tl2-line{position:absolute;left:0;right:0;top:7px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.2) 100%);}
+.tl2-row.hot .tl2-line{background:linear-gradient(90deg,rgba(232,134,60,.45) 0%,var(--orange) 100%);}
+.tl2-cells{position:relative;display:grid;align-items:start;column-gap:.5rem;}
+.tl2-year{
+  align-self:start;margin-top:-9px;justify-self:center;
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:600;letter-spacing:.06em;
+  background:var(--panel);border:1px solid var(--line-2);color:#c3cad6;
+  border-radius:999px;padding:.28rem .8rem;
+}
+.tl2-pt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.5rem;}
+.tl2-pt .d{width:14px;height:14px;border-radius:50%;background:var(--grey-2);border:3px solid var(--bg);flex-shrink:0;}
+.tl2-pt .dt{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:600;color:var(--white);}
+.tl2-pt .lb{font-size:.72rem;color:var(--grey);line-height:1.4;max-width:19ch;}
+.tl2-pt.hot .d{background:var(--sig);box-shadow:0 0 0 5px rgba(194,29,26,.22);}
+.tl2-pt.hot .dt{color:var(--sig-br);}
+.tl2-pt.hot .lb{color:#d8b3b2;}
+.tl2-pt.dim .d{background:rgba(255,255,255,.22);}
+.tl2-pt.dim .dt,.tl2-pt.dim .lb{opacity:.72;}
+.tl2-brk{display:flex;align-items:center;gap:.7rem;padding-left:.2rem;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--grey-2);}
+.tl2-brk::after{content:'';flex:1;border-top:1px dashed rgba(255,255,255,.16);}
+
+/* ============ TECHNIK-BLOCK ============ */
+.tech{
+  display:grid;grid-template-columns:auto 1fr;gap:1.8rem;align-items:center;
+  background:rgba(255,255,255,.04);border:1px solid var(--line-2);
+  border-radius:14px;padding:1.35rem 1.6rem;
+}
+.tech-lbl{font-size:.92rem;font-weight:700;color:#c3cad6;max-width:13ch;line-height:1.4;}
+.tech-items{display:grid;grid-template-columns:repeat(4,1fr);}
+.tech-i{display:flex;flex-direction:column;align-items:center;gap:.6rem;text-align:center;
+  padding:.2rem 1rem;border-left:1px solid var(--line);}
+.tech-i:first-child{border-left:none;}
+.tech-i h4{font-size:.9rem;font-weight:700;}
+.tech-i p{font-size:.76rem;color:var(--grey);line-height:1.5;}
+
+/* ============ SKALA ============ */
+.scale{display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;margin-top:1.1rem;}
+.scale-end{display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:600;line-height:1.3;max-width:22ch;}
+.scale-end.g{color:#6cd3a4;}
+.scale-end.r{color:#f08b8b;text-align:right;}
+.scale-end.r{flex-direction:row-reverse;}
+.scale-bar{position:relative;height:11px;border-radius:999px;
+  background:linear-gradient(90deg,#3fb27f 0%,#e0a83c 52%,#e05252 100%);}
+.scale-bar::after{content:'';position:absolute;right:-9px;top:50%;transform:translateY(-50%);
+  border-left:12px solid #e05252;border-top:8px solid transparent;border-bottom:8px solid transparent;}
+
+/* ============ HILFSKLASSEN ============ */
+.split-head.ctr{justify-content:center;font-size:1.12rem;margin-bottom:1.1rem;text-align:center;}
+.lg-list .card li{font-size:.9rem;line-height:1.68;}
+.lg-list .card p{font-size:.9rem;line-height:1.68;}
+.roomy .card{padding:1.75rem 1.75rem 1.85rem;}
+.roomy .card li{font-size:.86rem;line-height:1.62;}
+.arw-v{display:flex;justify-content:center;color:var(--orange);font-size:1.2rem;line-height:1;padding:.2rem 0;}
+.check.lg .check-i{padding:.95rem 1.15rem;}
+.check.lg .check-i .t{font-size:.92rem;line-height:1.58;}
+.check.lg .check-i .k{width:26px;height:26px;font-size:.8rem;}
+.cat-lbl{align-self:center;font-size:.72rem;font-weight:700;letter-spacing:.04em;
+  padding:.26rem .85rem;border-radius:999px;margin-bottom:.85rem;
+  background:rgba(232,134,60,.16);color:var(--orange-br);border:1px solid rgba(232,134,60,.42);}
+.fine-box.lg{padding:2.3rem 1.8rem;}
+.fine-box.lg .fine-amt{font-size:clamp(1.8rem,3.4vw,2.7rem);}
+.fine-box.lg .fine-lbl{font-size:.95rem;margin-bottom:1.2rem;}
+
+/* ============ NEU: GROSSZAHLEN ============ */
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+.n-box{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:13px;
+  padding:1.9rem 1.4rem;text-align:center;display:flex;flex-direction:column;}
+.n-box.hi{border-color:rgba(194,29,26,.5);background:rgba(194,29,26,.09);}
+.n-box .n{font-size:clamp(2.2rem,4.8vw,3.8rem);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--white);}
+.n-box.hi .n{color:var(--sig-br);}
+.n-box .nl{font-size:.84rem;color:#c3cad6;line-height:1.5;margin-top:.9rem;}
+.n-box .ns{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--grey-2);
+  margin-top:auto;padding-top:.9rem;letter-spacing:.06em;}
+
+/* ============ NEU: ZITAT ============ */
+.quote{background:rgba(255,255,255,.03);border:1px solid var(--line);border-left:4px solid var(--sig);
+  border-radius:0 12px 12px 0;padding:1.3rem 1.5rem;}
+.quote p{font-size:.92rem;line-height:1.68;color:#dfe4ec;font-style:italic;}
+.quote .who{margin-top:1rem;font-size:.8rem;font-weight:700;color:var(--white);font-style:normal;}
+.quote .who span{display:block;font-weight:400;color:var(--grey);font-size:.74rem;margin-top:.15rem;}
+
+/* ============ NEU: INVENTAR-RASTER ============ */
+.inv{display:grid;gap:.4rem;}
+.inv-r{display:grid;grid-template-columns:1.1fr .85fr 1.25fr .95fr .95fr;gap:.4rem;}
+.inv-h{font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--orange);
+  background:rgba(232,134,60,.1);border:1px solid rgba(232,134,60,.3);border-radius:7px;
+  padding:.55rem .5rem;text-align:center;line-height:1.3;
+  display:flex;align-items:center;justify-content:center;}
+.inv-c{font-size:.78rem;color:#c3cad6;background:rgba(255,255,255,.028);border:1px solid var(--line);
+  border-radius:7px;padding:.6rem .5rem;text-align:center;min-height:2.9rem;
+  display:flex;align-items:center;justify-content:center;line-height:1.35;}
+.inv-c.em{color:rgba(255,255,255,.2);
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.022) 0 9px,rgba(255,255,255,.008) 9px 18px);
+  border-style:dashed;}
+
+/* ============ NEU: PLATZHALTER ANGEBOT ============ */
+.tbd{border:2px dashed rgba(232,134,60,.45);border-radius:14px;background:rgba(232,134,60,.05);padding:1.5rem;}
+.tbd-lbl{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--orange-br);
+  background:rgba(232,134,60,.14);border:1px solid rgba(232,134,60,.42);border-radius:999px;
+  padding:.28rem .85rem;margin-bottom:1.1rem;}
+.tbd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;}
+.tbd-slot{border:1px dashed rgba(255,255,255,.22);border-radius:10px;padding:1.1rem 1.2rem;
+  display:flex;flex-direction:column;gap:.45rem;min-height:15vh;}
+.tbd-slot .st{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--grey-2);}
+.tbd-slot h4{font-size:.95rem;font-weight:700;color:#c3cad6;}
+.tbd-slot p{font-size:.78rem;color:var(--grey-2);line-height:1.55;}
+
+/* ============ NEU: FRAGEN-KARTEN (Live-Einstieg) ============ */
+.qq{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.qq-c{position:relative;background:rgba(255,255,255,.028);border:1px solid var(--line-2);
+  border-radius:14px;padding:1.9rem 1.5rem;display:flex;flex-direction:column;gap:1rem;}
+.qq-c .qn{font-family:'JetBrains Mono',monospace;font-size:2.4rem;font-weight:500;
+  color:rgba(232,134,60,.38);line-height:1;}
+.qq-c .qt{font-size:1.02rem;font-weight:600;line-height:1.45;color:var(--white);}
+.qq-c .qh{font-size:.76rem;color:var(--grey-2);line-height:1.5;margin-top:auto;}
+
+@media (max-width:1100px){
+  .chrome,.sec-wrap{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .stage{padding:1.4rem 1.4rem 1rem;}
+  .g4,.g5{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:1fr;}
+  .tv,.fine,.nums,.qq,.tbd-grid{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){.slide{transition:none;}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck"></div>
+
+<nav class="nav" aria-label="Foliennavigation">
+  <button id="prev" aria-label="Vorherige Folie">←</button>
+  <span class="pos" id="pos">1 / 1</span>
+  <button id="next" aria-label="Nächste Folie">→</button>
+</nav>
+
+<script>
+/* =====================================================================
+   MEDIEN
+   ---------------------------------------------------------------------
+   Bilder werden im Media Manager (media.insiderki.ai) hochgeladen und
+   von dort automatisch geladen. Hier ist nichts einzutragen.
+   ===================================================================== */
+const SB_URL = 'https://nblyvxnahkbvtatathbh.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ibHl2eG5haGtidnRhdGF0aGJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NzA5MTUsImV4cCI6MjA5NjE0NjkxNX0.o9-lp1ILDPFNcLOr_C3RMFsIFxVDkSCA0Zob1X__rB0';
+const PRES_SLUG = 'schatten-ki';
+
+const MEDIA_FALLBACK = {};
+const MEDIA = Object.assign({}, MEDIA_FALLBACK);
+
+function assetUrl(key){
+  const v = MEDIA[key];
+  return v || null;
+}
+
+async function hydrateMedia(){
+  try{
+    const r = await fetch(
+      `${SB_URL}/rest/v1/presentation_slots` +
+      `?select=slot_key,public_url,presentations!inner(slug)` +
+      `&presentations.slug=eq.${PRES_SLUG}` +
+      `&public_url=not.is.null`,
+      { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } }
+    );
+    if(!r.ok) return;
+    const rows = await r.json();
+    if(!Array.isArray(rows) || !rows.length) return;
+
+    rows.forEach(row=>{
+      MEDIA[row.slot_key] = row.public_url;
+      document.querySelectorAll(`[data-slot="${row.slot_key}"]`).forEach(el=>{
+        const label   = el.getAttribute('data-label') || '';
+        const baseCls = 'media';
+        const sizeCls = ['tall','wide','r169','r34','r11'].filter(c=>el.classList.contains(c)).join(' ');
+        const vid     = /\.(mp4|webm|mov)(\?|$)/i.test(row.public_url);
+        const node    = document.createElement(vid ? 'video' : 'img');
+        node.className = [baseCls, sizeCls].filter(Boolean).join(' ');
+        node.setAttribute('data-slot', row.slot_key);
+        node.src = row.public_url;
+        if(vid){
+          node.muted = true; node.loop = true; node.playsInline = true;
+          node.preload = 'metadata';
+          node.setAttribute('playsinline','');
+        } else {
+          node.alt = label; node.loading = 'lazy';
+        }
+        el.replaceWith(node);
+      });
+    });
+    if(typeof syncVideos === 'function') syncVideos();
+  }catch(e){ /* offline: Platzhalter bleiben stehen */ }
+}
+
+/* ===================== LOGO (Netz-/Radsymbol) =====================
+   Rotes Netz-/Radsymbol: Zentrum mit Ring, acht Speichen zu acht
+   Knoten im Achteck. Darunter die Wortmarke KNOWLEDGE in Weiss,
+   weit gesperrt. Kein Zusatz unter der Wortmarke.
+   ================================================================== */
+function logo(size, word){
+  const s = size || 52;
+  return `
+  <div class="logo">
+    <svg width="${s}" height="${s}" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <!-- Achteck-Netz zwischen den Knoten -->
+      <polygon points="32,9 48.26,15.74 55,32 48.26,48.26 32,55 15.74,48.26 9,32 15.74,15.74"
+               stroke="#C21D1A" stroke-width=".9" opacity=".3"/>
+      <!-- Speichen -->
+      <g stroke="#C21D1A" stroke-width="1.5" stroke-linecap="round" opacity=".85">
+        <line x1="32" y1="21.5" x2="32" y2="12.5"/>
+        <line x1="39.42" y1="24.58" x2="45.79" y2="18.21"/>
+        <line x1="42.5" y1="32" x2="51.5" y2="32"/>
+        <line x1="39.42" y1="39.42" x2="45.79" y2="45.79"/>
+        <line x1="32" y1="42.5" x2="32" y2="51.5"/>
+        <line x1="24.58" y1="39.42" x2="18.21" y2="45.79"/>
+        <line x1="21.5" y1="32" x2="12.5" y2="32"/>
+        <line x1="24.58" y1="24.58" x2="18.21" y2="18.21"/>
+      </g>
+      <!-- Zentrum mit Ring -->
+      <circle cx="32" cy="32" r="10" stroke="#C21D1A" stroke-width="2"/>
+      <circle cx="32" cy="32" r="4.6" fill="#C21D1A"/>
+      <!-- Knoten im Achteck -->
+      <g fill="#C21D1A">
+        <circle cx="32" cy="9" r="3"/>
+        <circle cx="48.26" cy="15.74" r="3"/>
+        <circle cx="55" cy="32" r="3"/>
+        <circle cx="48.26" cy="48.26" r="3"/>
+        <circle cx="32" cy="55" r="3"/>
+        <circle cx="15.74" cy="48.26" r="3"/>
+        <circle cx="9" cy="32" r="3"/>
+        <circle cx="15.74" cy="15.74" r="3"/>
+      </g>
+    </svg>
+    <div class="logo-word">${word || 'KNOWLEDGE'}</div>
+  </div>`;
+}
+
+/* ===================== NAV STRUCTURE ===================== */
+const NAV = [
+  'Realität','Was jetzt gilt','Risiko','Der Weg raus','Angebot'
+];
+
+function sidebar(active){
+  return `<aside class="sidebar">
+    <div class="sb-brand">${logo(40)}</div>
+    <nav class="sb-nav">
+      ${NAV.map(n=>`<button class="sb-item${n===active?' on':''}" data-jump="${n}">${n}</button>`).join('')}
+    </nav>
+    <div class="sb-foot">INSIDER.KI · 10/2026</div>
+  </aside>`;
+}
+
+/* Platzhalter ODER echtes Asset */
+function ph(label, cls, key){
+  const url = key ? assetUrl(key) : null;
+  if(url){
+    const isVid = /\.(mp4|webm)(\?|$)/i.test(url);
+    if(isVid){
+      return `<video class="media ${cls||''}" src="${url}" muted loop playsinline autoplay
+                     aria-label="${label}"></video>`;
+    }
+    return `<img class="media ${cls||''}" src="${url}" alt="${label}" loading="lazy">`;
+  }
+  return `<div class="ph ${cls||''}"${key?` data-slot="${key}" data-label="${label}"`:''}><div class="ico">▣</div><div>${label}</div></div>`;
+}
+
+/* ===================== ICONS ===================== */
+const ICONS = {
+  speech:'<path d="M4 7a3 3 0 0 1 3-3h13a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-6l-5 4v-4H7a3 3 0 0 1-3-3z"/><path d="M9 9h9M9 12.5h6"/>',
+  imgnote:'<rect x="3" y="5" width="17" height="14" rx="2.5"/><path d="M3 15.5l4.5-4 4 3.5 3.5-3 5 4.5"/><circle cx="9" cy="9.5" r="1.4"/><path d="M20.5 3.5v5.5"/><circle cx="19" cy="9.5" r="1.6"/>',
+  facescan:'<path d="M3 8V5.5A2.5 2.5 0 0 1 5.5 3H8M16 3h2.5A2.5 2.5 0 0 1 21 5.5V8M21 16v2.5a2.5 2.5 0 0 1-2.5 2.5H16M8 21H5.5A2.5 2.5 0 0 1 3 18.5V16"/><circle cx="12" cy="11" r="3.2"/><path d="M7 18c1-2.2 2.9-3.3 5-3.3S16 15.8 17 18"/>',
+  videowave:'<rect x="2.5" y="5.5" width="14" height="13" rx="2.5"/><path d="M16.5 10.5l5-3v9l-5-3z"/><path d="M6 11v2M8.5 9v6M11 10.5v3M13.5 11.8v.4"/>',
+  doc:'<path d="M6 2.5h7.5L19 8v13.5H6z"/><path d="M13.5 2.5V8H19"/><path d="M9 12.5h7M9 15.5h7M9 18h4.5"/>',
+  shield:'<path d="M12 2.5l8 3v6.2c0 4.7-3.2 8.9-8 10.3-4.8-1.4-8-5.6-8-10.3V5.5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  puzzle:'<path d="M10 3.5h4v2.2a1.8 1.8 0 1 0 3.6 0V3.5h2.9v4.2h-2.2a1.8 1.8 0 1 0 0 3.6h2.2v4.2h-4.2v-2.2a1.8 1.8 0 1 0-3.6 0v2.2H10v-4.2H7.8a1.8 1.8 0 1 1 0-3.6H10z"/>',
+  chain:'<path d="M9.5 14.5l5-5"/><path d="M11.5 6.5l1.8-1.8a3.9 3.9 0 0 1 5.5 5.5L17 12"/><path d="M12.5 17.5l-1.8 1.8a3.9 3.9 0 0 1-5.5-5.5L7 12"/>',
+  checkc:'<circle cx="12" cy="12" r="9"/><path d="M7.8 12.2l3 3 5.4-6"/>',
+  lock:'<rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.4"/>',
+  eye:'<path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 3.9 5.7 3.9 9S14.6 18.4 12 21c-2.6-2.6-3.9-5.7-3.9-9S9.4 5.6 12 3z"/>',
+  scaleico:'<path d="M12 3.5v17"/><path d="M6.5 20.5h11"/><path d="M12 6.5l-6.5 1.8 6.5 1.6 6.5-1.6z"/><path d="M2.5 15c0 1.7 1.3 3 3 3s3-1.3 3-3l-3-6.2z"/><path d="M15.5 15c0 1.7 1.3 3 3 3s3-1.3 3-3l-3-6.2z"/>',
+  mask:'<path d="M3.5 6.5c3-1.2 5.7-1.8 8.5-1.8s5.5.6 8.5 1.8c0 6.5-1.4 10.2-4 12.1-1.6 1.2-3 1.7-4.5 1.7s-2.9-.5-4.5-1.7c-2.6-1.9-4-5.6-4-12.1z"/><path d="M8 10.5c.9-.7 1.9-.7 2.8 0M13.2 10.5c.9-.7 1.9-.7 2.8 0"/><path d="M9.5 15.2c1.7.9 3.3.9 5 0"/>',
+  block:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+  contract:'<path d="M5.5 2.5h9L19 7v14.5H5.5z"/><path d="M14.5 2.5V7H19"/><path d="M8.5 11.5h7M8.5 14.5h7"/><path d="M8.5 18l1.6-1.6a1.4 1.4 0 0 1 2 2L10.5 20"/>',
+  cal:'<rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  police:'<path d="M12 2.5l8 3v6.2c0 4.7-3.2 8.9-8 10.3-4.8-1.4-8-5.6-8-10.3V5.5z"/><path d="M12 8v7M8.5 11.5h7"/>',
+  users:'<circle cx="9" cy="8" r="3.4"/><path d="M2.8 20c0-3.4 2.8-5.6 6.2-5.6s6.2 2.2 6.2 5.6"/><path d="M16.2 5.2a3.4 3.4 0 0 1 0 6.6M18 14.9c2 .8 3.3 2.6 3.3 5.1"/>',
+  gift:'<rect x="3" y="8.5" width="18" height="12.5" rx="2"/><path d="M3 13h18M12 8.5V21"/><path d="M12 8.5S10.5 3 7.8 3.6C5.6 4.1 6.2 8.5 12 8.5zM12 8.5s1.5-5.5 4.2-4.9c2.2.5 1.6 4.9-4.2 4.9z"/>',
+  flow:'<rect x="2.5" y="3.5" width="7" height="5" rx="1.5"/><rect x="14.5" y="3.5" width="7" height="5" rx="1.5"/><rect x="8.5" y="15.5" width="7" height="5" rx="1.5"/><path d="M6 8.5v3h12v-3M12 11.5v4"/>'
+};
+function ico(name, size, color, sw){
+  const s = size || 30;
+  return `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"
+    stroke="${color||'#e8863c'}" stroke-width="${sw||1.5}" stroke-linecap="round"
+    stroke-linejoin="round" aria-hidden="true">${ICONS[name]||''}</svg>`;
+}
+
+/* Content slide */
+function S(o){
+  return `
+  <section class="slide">
+    <div class="atmos soft"></div>
+    ${o.badge ? `<div class="badge ${o.badge.t}">Betrifft: ${o.badge.l}</div>` : ''}
+    <div class="chrome">
+      ${sidebar(o.nav)}
+      <div class="stage">
+        <div class="head">
+          <div class="eyebrow">${o.eyebrow}</div>
+          <h2 class="h1">${o.title}</h2>
+        </div>
+        ${o.lead ? `<p class="lead">${o.lead}</p>` : ''}
+        <div class="body">${o.body}</div>
+        ${o.foot ? `<div class="foot">${o.foot}</div>` : ''}
+      </div>
+    </div>
+  </section>`;
+}
+
+/* Section divider */
+function SEC(o){
+  return `
+  <section class="slide">
+    <div class="atmos"></div>
+    <div class="sec-wrap">
+      ${sidebar(o.nav)}
+      <div class="sec-body">
+        <div class="sec-num">Kapitel ${o.k}</div>
+        <div class="sec-main">
+          <h2 class="sec-title">${o.title}</h2>
+          <div class="sec-art">${o.art}</div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* =====================================================================
+   FOLIEN
+   ===================================================================== */
+const slides = [];
+
+/* ---------- 01 DECKBLATT ---------- */
+slides.push(`
+<section class="slide">
+  <div class="atmos"></div>
+  <div class="logo-corner">${logo(52)}</div>
+  <div class="title-wrap">
+    <div class="t-eyebrow">KI-Governance &amp; Compliance</div>
+    <h1 class="t-head">SCHATTEN-KI</h1>
+    <p class="t-sub">Ihr Fahrplan zur KI-Governance — Rechtsstand Oktober 2026</p>
+    <div class="t-meta">
+      <div class="nm">Tino Daute · INSIDER.KI</div>
+      <div class="rl">Live-Session für Unternehmer<br>www.insider-ki.de</div>
+    </div>
+  </div>
+  <div class="counter">INSIDER.KI · OKTOBER 2026</div>
+</section>`);
+
+/* ---------- 02 LIVE-EINSTIEG ---------- */
+slides.push(S({
+  nav:'Realität', eyebrow:'Einstieg · Live',
+  title:'Drei Fragen an Sie',
+  lead:'Bevor ich etwas erzähle, möchte ich wissen, wo Sie stehen. <b>Hand hoch</b> — ohne Wertung, es geht niemanden etwas an außer Ihnen.',
+  body:`
+    <div class="qq">
+      <div class="qq-c">
+        <div class="qn">01</div>
+        <div class="qt">Wer von Ihnen setzt in seinem Unternehmen KI ein — in irgendeiner Form?</div>
+        <div class="qh">ChatGPT, Übersetzung, Bildgenerierung, Analyse, Telefonassistent.</div>
+      </div>
+      <div class="qq-c">
+        <div class="qn">02</div>
+        <div class="qt">Wer hat dafür eine schriftliche Richtlinie, die seine Mitarbeitenden kennen?</div>
+        <div class="qh">Nicht „wir haben darüber gesprochen". Geschrieben und kommuniziert.</div>
+      </div>
+      <div class="qq-c">
+        <div class="qn">03</div>
+        <div class="qt">Wer kann mir sagen, welche KI-Tools heute in seinem Unternehmen laufen — vollständig?</div>
+        <div class="qh">Vollständig heißt: auch das, was Ihre Leute privat angemeldet haben.</div>
+      </div>
+    </div>
+    <div class="callout"><strong>Was wir gleich sehen werden:</strong> Bei Frage 1 gehen fast alle Hände hoch. Bei Frage 2 ein Viertel. Bei Frage 3 fast keine. Genau diese Lücke ist das Thema der nächsten Stunde.</div>`,
+  foot:'Die Antworten aus dieser Runde sind der rote Faden für alles, was folgt.'
+}));
+
+/* ---------- 03 DIE LÜCKE ---------- */
+slides.push(S({
+  nav:'Realität', eyebrow:'Realität 2026',
+  title:'57 Prozent nutzen. <em>23 Prozent regeln.</em>',
+  lead:'Das sind keine Zahlen aus einem Beratungsprospekt, sondern aus repräsentativen Bitkom-Befragungen deutscher Unternehmen ab 20 Beschäftigten.',
+  body:`
+    <div class="nums">
+      <div class="n-box">
+        <div class="n">57 %</div>
+        <div class="nl">der Unternehmen nutzen KI aktiv. Erstmals die Mehrheit.</div>
+        <div class="ns">BITKOM · 09/2026 · N=603</div>
+      </div>
+      <div class="n-box hi">
+        <div class="n">23 %</div>
+        <div class="nl">haben Regeln für den Umgang mit KI. 16 % verzichten bewusst darauf.</div>
+        <div class="ns">BITKOM · 10/2025 · N=604</div>
+      </div>
+      <div class="n-box">
+        <div class="n">66 %</div>
+        <div class="nl">schätzen die KI-Kompetenz ihrer eigenen Mitarbeitenden als gering ein.</div>
+        <div class="ns">BITKOM · 09/2026 · N=603</div>
+      </div>
+    </div>
+    <div class="callout red"><strong>Die Differenz zwischen 57 und 23 ist kein Statistikproblem.</strong> In dieser Lücke sitzt Ihre Haftung — und zwar persönlich, nicht als Firma.</div>`,
+  foot:'Quellen: Bitkom, „Erstmals nutzt die Mehrheit der Unternehmen KI" (14.09.2026) · Bitkom, „Beschäftigte nutzen vermehrt Schatten-KI" (21.10.2025).'
+}));
+
+/* ---------- 04 WAS SCHATTEN-KI IST ---------- */
+slides.push(S({
+  nav:'Realität', eyebrow:'Begriff',
+  title:'Was Schatten-KI bedeutet',
+  lead:'Schatten-KI ist die Nutzung von KI-Tools durch Mitarbeitende <b>ohne Wissen, Genehmigung oder Kontrolle</b> der Unternehmensverantwortlichen. Sie entsteht nicht aus böser Absicht, sondern aus Arbeitsdruck.',
+  body:`
+    <div class="tv" style="grid-template-columns:.62fr 1fr;gap:1.8rem">
+      ${ph('Schatten-KI am Arbeitsplatz (1:1)','tall','shadowAi')}
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <div class="card no" style="padding:1.1rem 1.25rem">
+          <div class="split-head"><span class="dot-i r">1</span>Vertrauliche Daten verlassen das Haus</div>
+          <p>Kundendaten, Angebote, Verträge, Bewerberunterlagen — eingegeben in Systeme, deren Betreiber Sie nicht kennen und mit denen Sie keinen Vertrag haben.</p>
+        </div>
+        <div class="card no" style="padding:1.1rem 1.25rem">
+          <div class="split-head"><span class="dot-i r">2</span>Keine Dokumentation, kein Nachweis</div>
+          <p>Was Sie nicht kennen, können Sie nicht einstufen, nicht dokumentieren und gegenüber Kunden oder einer Behörde nicht belegen.</p>
+        </div>
+        <div class="card no" style="padding:1.1rem 1.25rem">
+          <div class="split-head"><span class="dot-i r">3</span>Die Verantwortung bleibt bei Ihnen</div>
+          <p>Rechtlich haftet nicht der Mitarbeiter, der ChatGPT geöffnet hat, und nicht der Anbieter. Sondern das Unternehmen — und seine Geschäftsführung.</p>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* ---------- 05 WO ES TÄGLICH PASSIERT ---------- */
+slides.push(S({
+  nav:'Realität', eyebrow:'Aus der täglichen Praxis',
+  title:'Wo es passiert, jeden Tag',
+  lead:'Drei Abteilungen, drei Muster. Alle drei haben wir in dieser Form bei Mandanten vorgefunden.',
+  body:`
+    <div class="grid g3 roomy">
+      <div class="card">
+        ${ph('Personalabteilung (1:1)','r11','prxHr')}
+        <h3 style="margin-top:1.1rem">Personal</h3>
+        <div class="sub">Personenbezogene Daten</div>
+        <p>Bewerberunterlagen werden in KI-Systeme eingespielt, um sie zu sichten, zusammenzufassen oder Eignung einzuschätzen.</p>
+        <div class="cat-lbl" style="margin-top:1rem;margin-bottom:0">Profiling-Risiko</div>
+      </div>
+      <div class="card">
+        ${ph('Marketing / Content (1:1)','r11','prxMarketing')}
+        <h3 style="margin-top:1.1rem">Marketing</h3>
+        <div class="sub">Transparenz &amp; Urheberrecht</div>
+        <p>Ganze Kampagnen entstehen mit KI, Kundendaten landen in Analyse-Tools, Avatare und Stimmen werden generiert.</p>
+        <div class="cat-lbl" style="margin-top:1rem;margin-bottom:0">Kennzeichnungspflicht</div>
+      </div>
+      <div class="card">
+        ${ph('Vertrieb / Telefonie (1:1)','r11','prxVertrieb')}
+        <h3 style="margin-top:1.1rem">Vertrieb</h3>
+        <div class="sub">Personenbezogene Daten</div>
+        <p>Kundenlisten werden zur Auswertung hochgeladen, Gesprächsnotizen verarbeitet, Telefonassistenten übernehmen Erstkontakte.</p>
+        <div class="cat-lbl" style="margin-top:1rem;margin-bottom:0">Auftragsverarbeitung</div>
+      </div>
+    </div>`
+}));
+
+/* ---------- 06 WARUM ---------- */
+slides.push(S({
+  nav:'Realität', eyebrow:'Ursachen',
+  title:'Warum Ihre Leute es trotzdem tun',
+  lead:'Wer Schatten-KI als Disziplinproblem behandelt, verschärft sie. Es sind vier strukturelle Ursachen — und alle vier liegen in der Verantwortung der Führung.',
+  body:`
+    <div class="grid g4">
+      <div class="card">
+        <div class="ic-top">${ico('eye',32,'#e8863c')}</div>
+        <h3>Unwissenheit</h3>
+        <p>Niemand hat gesagt, dass der Einsatz eine Freigabe braucht. Das Tool war da, die Aufgabe drängte.</p>
+      </div>
+      <div class="card">
+        <div class="ic-top">${ico('users',32,'#e8863c')}</div>
+        <h3>Fehlende Kompetenz</h3>
+        <p>Die Mitarbeitenden wissen nicht, was ein Tool mit ihren Eingaben macht und wo die Grenze liegt.</p>
+      </div>
+      <div class="card">
+        <div class="ic-top">${ico('shield',32,'#e8863c')}</div>
+        <h3>Fehlende Alternative</h3>
+        <p>Es gibt keine freigegebene, geschützte Umgebung, in der KI erlaubt ausprobiert werden darf.</p>
+      </div>
+      <div class="card">
+        <div class="ic-top">${ico('flow',32,'#e8863c')}</div>
+        <h3>Fehlende Struktur</h3>
+        <p>Keine Rollen, keine Zuständigkeit, keine Richtlinie. Teils ist die Geschäftsführung selbst nicht KI-ready.</p>
+      </div>
+    </div>
+    <div class="callout red"><strong>Das Paradox:</strong> Je restriktiver die Richtlinie, desto höher die Schatten-KI-Nutzung. Ein Verbot ohne Alternative erzeugt genau das, was es verhindern soll — nur unsichtbar.</div>`
+}));
+
+/* ---------- 07 SEC: WAS JETZT GILT ---------- */
+slides.push(SEC({
+  nav:'Was jetzt gilt', k:2,
+  title:'Was jetzt gilt',
+  art:'Rechtsstand · 1. Oktober 2026'
+}));
+
+/* ---------- 08 ZEITSTRAHL ---------- */
+slides.push(S({
+  nav:'Was jetzt gilt', eyebrow:'Fristen',
+  title:'Was gilt — und was noch kommt',
+  lead:'Der Sommer 2026 hat die Lage verändert. Der <b>AI-Omnibus</b> hat Fristen verschoben, aber nicht alle. Und Deutschland hat seitdem eine Aufsichtsbehörde.',
+  body:`
+    <div class="tl2">
+      <div class="tl2-row">
+        <div class="tl2-line"></div>
+        <div class="tl2-cells" style="grid-template-columns:auto 1fr 1fr">
+          <div class="tl2-year">2025</div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.02.2025</div><div class="lb">Verbotene KI-Praktiken gelten</div></div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.02.2025</div><div class="lb">Art. 4: KI-Kompetenz gefordert</div></div>
+        </div>
+      </div>
+      <div class="tl2-brk">↳ DER SOMMER 2026</div>
+      <div class="tl2-row hot">
+        <div class="tl2-line"></div>
+        <div class="tl2-cells" style="grid-template-columns:auto 1fr 1fr 1fr">
+          <div class="tl2-year">2026</div>
+          <div class="tl2-pt hot"><span class="d"></span><div class="dt">27.07.2026</div><div class="lb">AI-Omnibus in Kraft: Fristen verschoben</div></div>
+          <div class="tl2-pt hot"><span class="d"></span><div class="dt">29.07.2026</div><div class="lb">KI-MIG: Aufsicht in Deutschland steht</div></div>
+          <div class="tl2-pt hot"><span class="d"></span><div class="dt">02.08.2026</div><div class="lb">Art. 50 Transparenzpflichten &amp; Sanktionen</div></div>
+        </div>
+      </div>
+      <div class="tl2-brk">↳ WAS NOCH KOMMT</div>
+      <div class="tl2-row">
+        <div class="tl2-line"></div>
+        <div class="tl2-cells" style="grid-template-columns:auto 1fr 1fr 1fr">
+          <div class="tl2-year">27/28</div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.08.2027</div><div class="lb">GPAI-Altmodelle müssen konform sein</div></div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.12.2027</div><div class="lb">Hochrisiko nach Anhang III</div></div>
+          <div class="tl2-pt dim"><span class="d"></span><div class="dt">02.08.2028</div><div class="lb">Hochrisiko nach Anhang I</div></div>
+        </div>
+      </div>
+    </div>`,
+  foot:'Verordnung (EU) 2026/1744 („AI-Omnibus") · KI-MIG, verkündet im BGBl. am 28.07.2026. Keine Rechtsberatung.'
+}));
+
+/* ---------- 09 KI-MIG / BUNDESNETZAGENTUR ---------- */
+slides.push(S({
+  nav:'Was jetzt gilt', eyebrow:'Neu seit 29. Juli 2026',
+  title:'Deutschland hat jetzt eine KI-Aufsicht',
+  lead:'Das <b>KI-MIG</b> — Gesetz zur Marktüberwachung und Innovationsförderung von künstlicher Intelligenz — bündelt die nationale KI-Aufsicht bei der Bundesnetzagentur.',
+  body:`
+    <div class="tv" style="grid-template-columns:.58fr 1fr;gap:1.8rem">
+      ${ph('Aufsicht / Behörde (1:1)','tall','bnetza')}
+      <div class="check lg" style="gap:.55rem">
+        <div class="check-i"><div class="k">1</div><div class="t"><b>Marktüberwachung</b> — ausdrücklich auch für <b>Personalmanagement</b>, kritische Infrastruktur und Bildung. Also genau dort, wo KMU KI einsetzen.</div></div>
+        <div class="check-i" style="border-color:rgba(224,82,82,.4);background:rgba(224,82,82,.07)">
+          <div class="k" style="background:rgba(224,82,82,.2);color:#f08b8b">2</div>
+          <div class="t"><b style="color:#f08b8b">Beschwerdestelle</b> — jeder kann Verstöße melden: ein abgelehnter Bewerber, ein Wettbewerber, ein ehemaliger Mitarbeiter.</div></div>
+        <div class="check-i"><div class="k">3</div><div class="t"><b>KI-Servicedesk</b> — niedrigschwellige Auskunft und Einordnungshilfe. Nutzen Sie das, es ist für Sie gemacht.</div></div>
+        <div class="check-i"><div class="k">4</div><div class="t"><b>KI-Reallabor</b> — geschützte Umgebung zum Entwickeln und Testen, ausdrücklich für kleine und mittlere Unternehmen.</div></div>
+      </div>
+    </div>
+    <div class="callout red"><strong>Was sich dadurch ändert:</strong> Bis Juli 2026 war unklar, wer in Deutschland überhaupt zuständig ist. Diese Ausrede ist weg — und es gibt jetzt eine Adresse, an die sich andere über Sie wenden können.</div>`,
+  foot:'Weitere Zuständigkeiten bleiben bei den Fachbehörden: BaFin im Finanzsektor, Landesmedienanstalten im Medienbereich.'
+}));
+
+/* ---------- 10 ART. 4 KI-KOMPETENZ ---------- */
+slides.push(S({
+  nav:'Was jetzt gilt', eyebrow:'Artikel 4 KI-VO',
+  title:'KI-Kompetenz ist keine Empfehlung',
+  lead:'Art. 4 verlangt von Betreibern, dass ihr Personal über ausreichende KI-Kompetenz verfügt. Mit dem AI-Omnibus ist daraus eine konkrete <b>Maßnahmenpflicht</b> geworden: Sie müssen handeln und es belegen können.',
+  body:`
+    <div class="grid g2 lg-list">
+      <div class="card acc">
+        <div class="split-head"><span class="dot-i a">!</span>Was von Ihnen erwartet wird</div>
+        <ul>
+          <li>Schulung der Mitarbeitenden, die mit KI arbeiten — passend zu Rolle und Risiko</li>
+          <li>Klare Zuständigkeit: wer entscheidet, wer kontrolliert, wer stoppt</li>
+          <li>Ein Nachweis, der einer Prüfung standhält — nicht die Erinnerung an ein Meeting</li>
+          <li>Wiederholung bei neuen Tools und neuen Mitarbeitenden</li>
+        </ul>
+      </div>
+      <div class="card no">
+        <div class="split-head"><span class="dot-i r">✕</span>Was die Unternehmen selbst sagen</div>
+        <ul>
+          <li><b>66 %</b> halten die KI-Kompetenz ihrer Mitarbeitenden für gering</li>
+          <li><b>25 %</b> bieten überhaupt keine KI-Schulungen an</li>
+          <li>Nur <b>11 %</b> schulen alle Mitarbeitenden, 37 % nur ausgewählte</li>
+        </ul>
+        <p style="margin-top:.9rem">Bitkom, September 2026, 603 Unternehmen ab 20 Beschäftigten.</p>
+      </div>
+    </div>
+    <div class="callout"><strong>Das Unangenehme daran:</strong> Diese Zahlen sind Selbsteinschätzungen. Die Unternehmen sagen selbst zu Protokoll, dass die gesetzlich geforderte Kompetenz fehlt.</div>`
+}));
+
+/* ---------- 11 ART. 50 TRANSPARENZ ---------- */
+slides.push(S({
+  nav:'Was jetzt gilt', eyebrow:'Artikel 50 KI-VO · gilt seit 02.08.2026',
+  title:'Was Sie kennzeichnen müssen',
+  lead:'Die Transparenzpflichten sind die einzigen Pflichten, die den Mittelstand <b>heute schon flächendeckend</b> treffen — unabhängig von Risikoklasse und Anhang III.',
+  body:`
+    <div class="grid g4">
+      <div class="card">
+        <div class="ic-top">${ico('speech',32,'#e8863c')}</div>
+        <h3>Chatbots &amp; Voice Agents</h3>
+        <p>Wer mit einem KI-System interagiert, muss es wissen. Gilt für Website-Chat und Telefonassistent gleichermaßen.</p>
+      </div>
+      <div class="card">
+        <div class="ic-top">${ico('imgnote',32,'#e8863c')}</div>
+        <h3>KI-generierte Inhalte</h3>
+        <p>Bild, Ton, Video, Text: maschinenlesbar als künstlich erzeugt markieren. Das ist Anbieterpflicht — aber Sie wählen die Tools aus.</p>
+      </div>
+      <div class="card no">
+        <div class="ic-top">${ico('facescan',32,'#f08b8b')}</div>
+        <h3>Deepfakes</h3>
+        <p>Realistisch wirkende Bilder und Videos von Personen oder Ereignissen müssen offengelegt werden. Hier wird es für Marketing eng.</p>
+      </div>
+      <div class="card">
+        <div class="ic-top">${ico('doc',32,'#e8863c')}</div>
+        <h3>Texte zum öffentlichen Interesse</h3>
+        <p>KI-generierte Texte, die der Information der Öffentlichkeit dienen, sind offenzulegen — sofern kein Mensch sie geprüft hat.</p>
+      </div>
+    </div>
+    <div class="callout red"><strong>Wichtig für Ihre Rolle:</strong> Als Betreiber treffen Sie die Offenlegungspflichten direkt. Dass Ihr Bildgenerator eine Wasserzeichen-Funktion hat, entlastet Sie nicht — Sie müssen sie auch nutzen.</div>`,
+  foot:'Vereinfachte Darstellung von Art. 50 KI-VO. Keine Rechtsberatung — der konkrete Pflichtenumfang hängt vom Einzelfall ab.'
+}));
+
+/* ---------- 12 SEC: RISIKO ---------- */
+slides.push(SEC({
+  nav:'Risiko', k:3,
+  title:'Was auf dem Spiel steht',
+  art:'DSGVO · KI-VO · Haftung'
+}));
+
+/* ---------- 13 ZWEI VERORDNUNGEN ---------- */
+slides.push(S({
+  nav:'Risiko', eyebrow:'Rechtsgrundlagen',
+  title:'Zwei Verordnungen, ein Sachverhalt',
+  lead:'Der häufigste Denkfehler im Mittelstand: „Wir haben die DSGVO im Griff, also sind wir durch." Beide Verordnungen gelten gleichzeitig und prüfen Unterschiedliches.',
+  body:`
+    <div class="grid g2 lg-list">
+      <div class="card">
+        <div class="split-head">${ico('lock',24,'#5b8def')}DSGVO</div>
+        <div class="sub">Seit 2018 · personenbezogene Daten</div>
+        <p>Fragt: Dürfen diese Daten überhaupt in dieses System?</p>
+        <ul>
+          <li><b>AVV</b> — Auftragsverarbeitungsvertrag mit dem KI-Anbieter. Fehlt er, fehlt die Grundlage.</li>
+          <li><b>SCC</b> — Standardvertragsklauseln bei Anbietern außerhalb der EU.</li>
+          <li><b>DSFA</b> — Datenschutz-Folgenabschätzung, bei neuen KI-Tools mit Personenbezug regelmäßig Pflicht.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="split-head">${ico('scaleico',24,'#e8863c')}KI-Verordnung</div>
+        <div class="sub">Gestaffelt seit 2024 · KI-Systeme</div>
+        <p>Fragt: Was tut dieses System, und welche Pflichten löst das aus?</p>
+        <ul>
+          <li><b>Einstufung</b> — jede Anwendung in eine Risikoklasse, nicht das Tool als Ganzes.</li>
+          <li><b>Pflichten je Klasse</b> — je höher das Risiko, desto umfangreicher.</li>
+          <li><b>Rolle</b> — Anbieter, Betreiber oder Einführer. Entscheidet, was Sie schulden.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout"><strong>Die Verzahnung:</strong> Eine durchgeführte DSFA ersetzt keine Risikoeinstufung nach der KI-VO. Und eine korrekte Einstufung macht einen fehlenden AVV nicht heilbar. Sie brauchen beides.</div>`
+}));
+
+/* ---------- 14 BUSSGELDER ---------- */
+slides.push(S({
+  nav:'Risiko', eyebrow:'Sanktionen',
+  title:'Was Verstöße kosten',
+  lead:'Die Bußgeldrahmen beider Verordnungen stehen nebeneinander, nicht alternativ. Ein Vorfall kann beide auslösen.',
+  body:`
+    <div style="font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:.7rem">KI-Verordnung · Art. 99</div>
+    <div class="grid g3">
+      <div class="fine-box hi">
+        <div class="fine-lbl">Verbotene KI-Praktiken<br><span style="font-weight:400;color:var(--grey-2)">Art. 5</span></div>
+        <div class="fine-amt">35 Mio. €</div>
+        <div class="fine-or">oder</div>
+        <div class="fine-amt">7 %</div>
+        <div class="fine-src">WELTWEITER JAHRESUMSATZ</div>
+      </div>
+      <div class="fine-box">
+        <div class="fine-lbl">Betreiber- und Anbieterpflichten<br><span style="font-weight:400;color:var(--grey-2)">u. a. Art. 50 Transparenz</span></div>
+        <div class="fine-amt">15 Mio. €</div>
+        <div class="fine-or">oder</div>
+        <div class="fine-amt">3 %</div>
+        <div class="fine-src">WELTWEITER JAHRESUMSATZ</div>
+      </div>
+      <div class="fine-box">
+        <div class="fine-lbl">Falsche Angaben<br><span style="font-weight:400;color:var(--grey-2)">gegenüber Behörden</span></div>
+        <div class="fine-amt">7,5 Mio. €</div>
+        <div class="fine-or">oder</div>
+        <div class="fine-amt">1 %</div>
+        <div class="fine-src">WELTWEITER JAHRESUMSATZ</div>
+      </div>
+    </div>
+    <div style="font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:1.2rem 0 .7rem">DSGVO · Art. 83 — gilt zusätzlich</div>
+    <div class="fine-box" style="display:grid;grid-template-columns:1fr auto 1fr auto;align-items:center;gap:1.4rem;text-align:left;padding:1.1rem 1.5rem">
+      <div class="fine-lbl" style="margin:0">Verstöße gegen die Datenschutz-Grundverordnung</div>
+      <div class="fine-amt" style="font-size:1.5rem">20 Mio. €</div>
+      <div class="fine-or" style="margin:0">oder 4 % weltweiter Jahresumsatz</div>
+      <div class="fine-src" style="margin:0">DER JEWEILS HÖHERE WERT</div>
+    </div>
+    <div class="callout green"><strong>Entlastung für den Mittelstand:</strong> Für KMU und Start-ups gilt bei der KI-VO jeweils der <b>niedrigere</b> der beiden Beträge — nicht der höhere.</div>`,
+  foot:'Art. 99 KI-VO, Art. 83 DSGVO. Bußgeldvorschriften der KI-VO anwendbar seit 02.08.2026. Keine Rechtsberatung.'
+}));
+
+/* ---------- 15 WAS WIRKLICH WEHTUT ---------- */
+slides.push(S({
+  nav:'Risiko', eyebrow:'Jenseits der Bußgelder',
+  title:'Was in der Praxis wirklich wehtut',
+  lead:'In zehn Jahren wird über Bußgelder gesprochen. Heute treffen Unternehmen vier andere Dinge sehr viel früher.',
+  body:`
+    <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+      <div class="stack">
+        <div class="stack-row">
+          <div><div class="kx">PERSÖNLICH</div><h3>Managerhaftung</h3></div>
+          <p>Organisations- und Überwachungspflichten treffen die Geschäftsführung persönlich. Wer keine Struktur aufbaut, obwohl KI im Haus genutzt wird, verletzt seine Sorgfaltspflicht — unabhängig davon, ob ein Schaden eintritt.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">UMSATZ</div><h3>Ausschreibungen</h3></div>
+          <p>Nachweisbare KI-Governance wird in Vergabeunterlagen und Lieferantenaudits abgefragt, zuerst bei EU-weiten Ausschreibungen und internationalen Kunden. Kein Nachweis heißt: kein Angebot.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">VERTRAUEN</div><h3>Reputation</h3></div>
+          <p>Ein gekennzeichneter KI-Spot ist modernes Marketing. Derselbe Spot ohne Kennzeichnung, öffentlich aufgedeckt, ist eine Schlagzeile. Der Unterschied kostet eine Zeile im Abspann.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">ZIVILRECHT</div><h3>Schadensersatz</h3></div>
+          <p>Nicht die Behörde ist der häufigste Gegner, sondern der Betroffene: der abgelehnte Bewerber, der Kunde mit offengelegten Daten, der Wettbewerber mit einer Abmahnung.</p>
+        </div>
+      </div>
+    </div>`,
+  foot:'Allgemeine Einordnung, keine Rechtsberatung. Zur konkreten Haftungslage berät Ihr Anwalt.'
+}));
+
+/* ---------- 16 LIVE-ÜBUNG SELBSTCHECK ---------- */
+slides.push(S({
+  nav:'Risiko', eyebrow:'Live-Übung · 5 Minuten',
+  title:'Ihr Selbstcheck',
+  lead:'Sechs Aussagen. Bewerten Sie jede für Ihr Unternehmen: <b style="color:#6cd3a4">grün</b> stimmt, <b style="color:#e0a83c">gelb</b> teilweise, <b style="color:#f08b8b">rot</b> stimmt nicht. Niemand sieht Ihr Blatt.',
+  body:`
+    <div class="grid g2" style="gap:.6rem">
+      <div class="check" style="gap:.5rem">
+        <div class="check-i"><div class="k">1</div><div class="t">Ich kann <b>vollständig benennen</b>, welche KI-Tools in meinem Unternehmen genutzt werden.</div></div>
+        <div class="check-i"><div class="k">2</div><div class="t">Für jedes dieser Tools weiß ich, ob <b>personenbezogene Daten</b> hineinfließen.</div></div>
+        <div class="check-i"><div class="k">3</div><div class="t">Es gibt eine <b>schriftliche KI-Richtlinie</b>, und meine Mitarbeitenden kennen sie.</div></div>
+      </div>
+      <div class="check" style="gap:.5rem">
+        <div class="check-i"><div class="k">4</div><div class="t">Für KI-Tools mit Datenverarbeitung liegt ein <b>gültiger AVV</b> vor.</div></div>
+        <div class="check-i"><div class="k">5</div><div class="t">KI-generierte Inhalte, die wir veröffentlichen, sind <b>gekennzeichnet</b>.</div></div>
+        <div class="check-i"><div class="k">6</div><div class="t">Ich kann die <b>KI-Kompetenz</b> meiner Mitarbeitenden nachweisen.</div></div>
+      </div>
+    </div>
+    <div class="scale">
+      <div class="scale-end g">${ico('checkc',26,'#3fb27f')}<span>Sechs mal grün: Sie sind weiter als 95 % des Mittelstands</span></div>
+      <div class="scale-bar"></div>
+      <div class="scale-end r">${ico('police',26,'#e05252')}<span>Drei oder mehr rot: akuter Handlungsbedarf</span></div>
+    </div>`,
+  foot:'Halten Sie das Blatt fest. Wir kommen am Ende darauf zurück — es ist Ihre persönliche Prioritätenliste.'
+}));
+
+/* ---------- 17 ZWEI PRAXISFÄLLE ---------- */
+slides.push(S({
+  nav:'Risiko', eyebrow:'Praxis im KMU',
+  title:'Zwei Fälle, zwei Dringlichkeiten',
+  lead:'Beide Fälle sind typisch für Unternehmen mit wenigen KI-Tools. Der entscheidende Unterschied liegt im Zeitdruck.',
+  body:`
+    <div class="grid g2 roomy">
+      <div class="card warn">
+        <div class="cat-lbl" style="align-self:flex-start">Fall 1 · Personalbereich</div>
+        <div class="tv" style="grid-template-columns:auto 1fr;gap:1.1rem;align-items:start">
+          <div style="width:15vh">${ph('KI im Bewerbungsprozess (1:1)','r11','caseHr')}</div>
+          <div>
+            <h3>KI-gestütztes Bewerbungstool</h3>
+            <p style="margin-top:.5rem">Einstufung: <b style="color:#e0a83c">Hochrisiko nach Anhang III</b>, zusätzlich voll im Anwendungsbereich der DSGVO.</p>
+          </div>
+        </div>
+        <ul style="margin-top:1rem">
+          <li>Einsatzzweck und Entscheidungslogik dokumentieren: was wird entschieden, von wem, wann</li>
+          <li>Human Oversight festlegen — wer prüft die Vorschläge der KI, bevor sie wirken</li>
+          <li>Protokollierung der Entscheidungen einrichten</li>
+          <li>KI-Kompetenz der Beteiligten nachweisbar aufbauen</li>
+        </ul>
+        <div class="callout" style="margin-top:1rem"><strong>Zeitdruck:</strong> Die Hochrisiko-Pflichten greifen erst ab 02.12.2027. DSGVO und Art. 4 gelten aber heute.</div>
+      </div>
+      <div class="card no">
+        <div class="cat-lbl" style="align-self:flex-start">Fall 2 · Marketing</div>
+        <div class="tv" style="grid-template-columns:auto 1fr;gap:1.1rem;align-items:start">
+          <div style="width:15vh">${ph('KI-Bild- und Videoproduktion (1:1)','r11','caseMarketing')}</div>
+          <div>
+            <h3>KI-Bild- und Videogenerierung</h3>
+            <p style="margin-top:.5rem">Einstufung: <b style="color:#f08b8b">Transparenzpflicht nach Art. 50</b>, bei Personenbezug zusätzlich DSGVO.</p>
+          </div>
+        </div>
+        <ul style="margin-top:1rem">
+          <li>Eingesetzte Tools und Verwendungszwecke dokumentieren</li>
+          <li>Human Oversight: wer gibt veröffentlichte Inhalte frei</li>
+          <li>Kennzeichnung praktisch umsetzen — nicht nur beschließen</li>
+          <li>KI-Kompetenz der Content-Verantwortlichen nachweisen</li>
+        </ul>
+        <div class="callout red" style="margin-top:1rem"><strong>Zeitdruck:</strong> Art. 50 gilt seit 02.08.2026. Hier ist keine Frist offen — es läuft bereits.</div>
+      </div>
+    </div>`
+}));
+
+/* ---------- 18 SEC: DER WEG RAUS ---------- */
+slides.push(SEC({
+  nav:'Der Weg raus', k:4,
+  title:'Der Weg raus',
+  art:'Erkennen · Einordnen · Umsetzen · Aktualisieren'
+}));
+
+/* ---------- 19 PROZESS, KEIN PROJEKT ---------- */
+slides.push(S({
+  nav:'Der Weg raus', eyebrow:'Haltung',
+  title:'Governance ist ein Prozess, kein Projekt',
+  lead:'Der Unterschied ist nicht akademisch. Er entscheidet, ob Ihre Unterlagen in achtzehn Monaten noch etwas wert sind.',
+  body:`
+    <div class="grid g2 lg-list">
+      <div class="card no">
+        <div class="split-head"><span class="dot-i r">✕</span>Was nicht funktioniert</div>
+        <ul>
+          <li>Pauschale Verbote — sie erzeugen Schatten-KI, sie beenden sie nicht</li>
+          <li>Eine Richtlinie, die einmal ins Intranet gestellt und nie wieder erwähnt wird</li>
+          <li>Warten, bis eine Frist greift. Ein Handbuch entsteht nicht in zwei Wochen aus dem Stand</li>
+          <li>Tools sperren, ohne eine erlaubte Alternative anzubieten</li>
+        </ul>
+      </div>
+      <div class="card ok">
+        <div class="split-head"><span class="dot-i g">✓</span>Was funktioniert</div>
+        <ul>
+          <li>Ein Inventar, das gepflegt wird — die Grundlage für alles Weitere</li>
+          <li>Klare Rollen: wer entscheidet, wer kontrolliert, wer stoppt, wer dokumentiert</li>
+          <li>Eine geschützte Umgebung, in der Ausprobieren erlaubt ist</li>
+          <li>Kompetenzaufbau mit Nachweis und festen Audit-Terminen</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:1.1rem">
+      <p>„KI ist zu wichtig, um sie nicht zu regulieren — und zu wichtig, um sie nicht gut zu regulieren."</p>
+      <div class="who">Sundar Pichai<span>CEO, Alphabet / Google</span></div>
+    </div>`
+}));
+
+/* ---------- 20 LIVE-ÜBUNG KI-INVENTAR ---------- */
+slides.push(S({
+  nav:'Der Weg raus', eyebrow:'Live-Übung · 10 Minuten',
+  title:'Ihr KI-Inventar — jetzt, gemeinsam',
+  lead:'Wir machen den ersten Schritt hier im Raum. Fünf Spalten, am Flipchart. Jeder nennt ein Tool, wir füllen die Zeile zusammen aus.',
+  body:`
+    <div class="inv">
+      <div class="inv-r">
+        <div class="inv-h">Tool</div>
+        <div class="inv-h">Abteilung</div>
+        <div class="inv-h">Zweck der Nutzung</div>
+        <div class="inv-h">Personenbezogene Daten?</div>
+        <div class="inv-h">Wer entscheidet?</div>
+      </div>
+      <div class="inv-r">
+        <div class="inv-c">ChatGPT</div>
+        <div class="inv-c">Marketing</div>
+        <div class="inv-c">Texte, Konzepte</div>
+        <div class="inv-c" style="color:#f08b8b;font-weight:600">unklar</div>
+        <div class="inv-c" style="color:#f08b8b;font-weight:600">niemand</div>
+      </div>
+      <div class="inv-r">
+        <div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div>
+      </div>
+      <div class="inv-r">
+        <div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div>
+      </div>
+      <div class="inv-r">
+        <div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div><div class="inv-c em">—</div>
+      </div>
+    </div>
+    <div class="callout"><strong>Das ist keine Fingerübung.</strong> Diese fünf Spalten sind der Kern jeder KI-Dokumentation. Wer sie für seine Tools ausfüllen kann, hat den schwierigsten Teil hinter sich — und merkt sofort, wo es klemmt.</div>`,
+  foot:'Erfahrungswert: Spalte 4 und 5 bleiben bei den meisten Zeilen zunächst leer. Genau das ist der Befund.'
+}));
+
+/* ---------- 21 VIER SCHRITTE ---------- */
+slides.push(S({
+  nav:'Der Weg raus', eyebrow:'INSIDER.ROADMAP',
+  title:'Vier Schritte, ein roter Faden',
+  lead:'Dieselbe Reihenfolge, ob fünf oder fünfzig KI-Systeme. Was sich ändert, ist der Aufwand — nicht die Logik.',
+  body:`
+    <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+      <div class="stack">
+        <div class="stack-row">
+          <div><div class="kx">SCHRITT 01</div><h3>Erkennen</h3></div>
+          <p>Mit Checklisten und Fragebögen erfassen wir alle KI-Systeme im Unternehmen — einschließlich der Schatten-KI. Dazu gehört die Frage, wie es um die KI-Kompetenz Ihrer Mitarbeitenden steht.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">SCHRITT 02</div><h3>Einordnen</h3></div>
+          <p>Jedes System wird in seiner konkreten Verwendung einer Risikoklasse zugeordnet. Daraus ergeben sich die Pflichten — und damit der Umfang dessen, was zu tun ist.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">SCHRITT 03</div><h3>Umsetzen</h3></div>
+          <p>Die Pflichten bestimmen die Dokumentation, die wir erstellen: KI-QM-Handbuch mit Checklisten und Verfahrensanweisungen. Parallel startet der Kompetenzaufbau der Mitarbeitenden.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">SCHRITT 04</div><h3>Aktualisieren</h3></div>
+          <p>Sie erhalten die Hilfsmittel, um die Roadmap selbst aktuell zu halten, feste Audit-Termine und den Weg zur Integration eines KI-Beauftragten im Unternehmen.</p>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* ---------- 22 WAS AM ENDE AUF DEM TISCH LIEGT ---------- */
+slides.push(S({
+  nav:'Der Weg raus', eyebrow:'Ergebnis',
+  title:'Was am Ende auf Ihrem Tisch liegt',
+  lead:'Keine Präsentation und kein Gutachten, sondern Unterlagen, mit denen Ihr Team arbeitet und die einer Prüfung standhalten.',
+  body:`
+    <div class="grid g3">
+      <div class="card"><div class="ic-top">${ico('flow',30,'#e8863c')}</div><h3>KI-Inventar</h3><p>Vollständige Übersicht aller eingesetzten Systeme je Abteilung und Zweck.</p></div>
+      <div class="card"><div class="ic-top">${ico('scaleico',30,'#e8863c')}</div><h3>Risikoeinstufung</h3><p>Klasse und abgeleitete Pflichten für jede einzelne Anwendung, nachvollziehbar begründet.</p></div>
+      <div class="card"><div class="ic-top">${ico('contract',30,'#e8863c')}</div><h3>KI-QM-Handbuch</h3><p>Checklisten, To-dos und Verfahrensanweisungen für den Umgang mit KI-Systemen.</p></div>
+      <div class="card"><div class="ic-top">${ico('eye',30,'#e8863c')}</div><h3>Human Oversight</h3><p>Geregelt, wer kontrolliert, wer freigibt, wer stoppt und wer dokumentiert.</p></div>
+      <div class="card"><div class="ic-top">${ico('checkc',30,'#e8863c')}</div><h3>Kompetenznachweis</h3><p>Schulung der Mitarbeitenden über die INSIDER-Lernplattform, mit Zertifikat, DEKRA-geprüft.</p></div>
+      <div class="card"><div class="ic-top">${ico('cal',30,'#e8863c')}</div><h3>Audit-Rhythmus</h3><p>Feste Termine und die Grundlage, um einen KI-Beauftragten zu integrieren.</p></div>
+    </div>
+    <div class="callout green"><strong>Nebeneffekt, der oft wichtiger wird als die Compliance:</strong> Sie haben damit die Basis, um weitere KI-Systeme einzuführen — konform von Anfang an, ohne jedes Mal von vorn anzufangen.</div>`
+}));
+
+/* ---------- 23 SEC: ANGEBOT ---------- */
+slides.push(SEC({
+  nav:'Angebot', k:5,
+  title:'Ihr Weg mit uns',
+  art:'Referenzen · Angebot · nächster Schritt'
+}));
+
+/* ---------- 24 REFERENZ LEHDE ---------- */
+slides.push(S({
+  nav:'Angebot', eyebrow:'Transformation',
+  title:'J. Lehde GmbH — in 14 Tagen',
+  body:`
+    <div class="tv" style="grid-template-columns:.55fr 1fr;gap:1.8rem">
+      <div>
+        ${ph('J. Lehde GmbH (1:1)','tall','refLehde')}
+        <div class="quote" style="margin-top:1rem;padding:1rem 1.2rem">
+          <p style="font-size:.84rem">„Uns war früh klar, dass wir beim EU AI Act nicht abwarten wollen, bis es Pflicht wird, sondern rechtzeitig und proaktiv handeln müssen."</p>
+          <div class="who">J. Lehde<span>Geschäftsführer, J. Lehde GmbH</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <div class="tech" style="padding:1rem 1.3rem;grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div><div class="kx" style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--orange);letter-spacing:.12em">DAUER</div><div style="font-size:1.3rem;font-weight:800;margin-top:.2rem">14 Tage</div><div style="font-size:.74rem;color:var(--grey)">inkl. Kompetenzschulung</div></div>
+          <div><div class="kx" style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--orange);letter-spacing:.12em">IM EINSATZ</div><div style="font-size:1.3rem;font-weight:800;margin-top:.2rem">10 Systeme</div><div style="font-size:.74rem;color:var(--grey)">Risikoklasse 3 &amp; 4</div></div>
+        </div>
+        <div class="card no" style="padding:1.1rem 1.25rem">
+          <div class="split-head"><span class="dot-i r">✕</span>Ausgangslage</div>
+          <ul><li>Keine Dokumentation der eingesetzten KI-Systeme</li><li>Keine Klarheit über Risikoklassen und Folgen</li><li>Kein Nachweis der KI-Kompetenz der Mitarbeitenden</li></ul>
+        </div>
+        <div class="card ok" style="padding:1.1rem 1.25rem">
+          <div class="split-head"><span class="dot-i g">✓</span>Ergebnis</div>
+          <ul><li>KI-QM-Handbuch mit Checklisten und Verfahrensanweisungen</li><li>Transparenz gegenüber Kunden und Lieferanten</li><li>Nachgewiesene KI-Kompetenz, Audit-Termine gesetzt</li><li>Schnelles Update auf ein AIMS möglich</li></ul>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* ---------- 25 REFERENZ BRANDNER ---------- */
+slides.push(S({
+  nav:'Angebot', eyebrow:'Transformation',
+  title:'Brandner GmbH — vom Handbuch zum AIMS',
+  body:`
+    <div class="tv" style="grid-template-columns:.55fr 1fr;gap:1.8rem">
+      <div>
+        ${ph('Brandner GmbH (1:1)','tall','refBrandner')}
+        <div class="quote" style="margin-top:1rem;padding:1rem 1.2rem">
+          <p style="font-size:.84rem">„Als international agierendes Unternehmen mussten wir uns den Herausforderungen der KI-Governance stellen. Unser erstes KI-QM-Handbuch bedurfte einer Erweiterung."</p>
+          <div class="who">Luise Brandner<span>Vorstand, Brandner GmbH</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <div class="tech" style="padding:1rem 1.3rem;grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--orange);letter-spacing:.12em">DAUER</div><div style="font-size:1.3rem;font-weight:800;margin-top:.2rem">30 Tage</div><div style="font-size:.74rem;color:var(--grey)">inkl. Kompetenzschulung</div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--orange);letter-spacing:.12em">IM EINSATZ</div><div style="font-size:1.3rem;font-weight:800;margin-top:.2rem">18 Systeme</div><div style="font-size:.74rem;color:var(--grey)">Risikoklasse 2, 3 &amp; 4</div></div>
+        </div>
+        <div class="card warn" style="padding:1.1rem 1.25rem">
+          <div class="split-head"><span class="dot-i a">!</span>Ausgangslage</div>
+          <ul><li>Bestehendes KI-QM-Handbuch, seit dem letzten Audit neue Systeme hinzugekommen</li><li>Kein Kompetenznachweis für neue Mitarbeitende</li><li>Handbuch musste reorganisiert und erweitert werden</li></ul>
+        </div>
+        <div class="card ok" style="padding:1.1rem 1.25rem">
+          <div class="split-head"><span class="dot-i g">✓</span>Ergebnis</div>
+          <ul><li>Vollständiges AI Management System: Kontextanalyse, KI-Policy, messbare Ziele, Annex-A-Controls in Light-Version, Kommunikationsplan, NC-Prozess</li><li>Qualifizierter KI-Beauftragter im Unternehmen</li><li>Belastbar bei EU-weiten Ausschreibungen und internationalen Kunden</li></ul>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* ---------- 26 PLATZHALTER ANGEBOT ---------- */
+slides.push(S({
+  nav:'Angebot', eyebrow:'Platzhalter — wird gemeinsam definiert',
+  title:'Unser Angebot',
+  lead:'Diese Folie wird vor dem Termin gefüllt. Die Struktur steht, die Inhalte und Preise definieren wir.',
+  body:`
+    <div class="tbd">
+      <div class="tbd-lbl">Noch zu definieren</div>
+      <div class="tbd-grid">
+        <div class="tbd-slot">
+          <div class="st">Stufe 1 · Einstieg</div>
+          <h4>Niedrigschwelliger Einstieg</h4>
+          <p>Quick-Check oder Pre-Audit — kleiner Schritt mit sofortigem Erkenntnisgewinn. Leistungsumfang, Dauer und Preis offen.</p>
+        </div>
+        <div class="tbd-slot">
+          <div class="st">Stufe 2 · Umsetzung</div>
+          <h4>INSIDER.ROADMAP</h4>
+          <p>Die vier Schritte als Projekt, mit KI-QM-Handbuch und Kompetenzaufbau. Abgrenzung zur Stufe 1 und Preisrahmen offen.</p>
+        </div>
+        <div class="tbd-slot">
+          <div class="st">Stufe 3 · Ausbau</div>
+          <h4>Weiterentwicklung</h4>
+          <p>Ausbau zum AIMS, KI-Beauftragter, Mitgliedschaft für laufende Begleitung. Form und Preis offen.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout"><strong>Offene Punkte für die Abstimmung:</strong> Welche Stufen zeigen wir überhaupt? Nennen wir Preise auf der Folie oder nur im Gespräch? Kommt die Mitgliedschaft hier vor oder bleibt sie dem Termin vorbehalten?</div>`,
+  foot:'Platzhalterfolie — bitte vor dem Live-Termin ersetzen.'
+}));
+
+/* ---------- 27 WARUM JETZT ---------- */
+slides.push(S({
+  nav:'Angebot', eyebrow:'Timing',
+  title:'Warum jetzt und nicht irgendwann',
+  body:`
+    <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+      <div class="stack">
+        <div class="stack-row">
+          <div><div class="kx">GÜNSTIGER</div><h3>Konform bauen statt nachrüsten</h3></div>
+          <p>Wer die Struktur hat, baut neue KI-Anwendungen von Anfang an konform. Wer sie nicht hat, zahlt später zweimal: einmal für die Einführung, einmal für die Korrektur.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">VORSPRUNG</div><h3>Der Nachweis wird schon abgefragt</h3></div>
+          <p>Kunden, Lieferanten und Auftraggeber fragen nachvollziehbare KI-Governance heute bereits ab. Wer sie vorlegen kann, hat einen Vorteil, solange die Mehrheit es nicht kann.</p>
+        </div>
+        <div class="stack-row">
+          <div><div class="kx">PLANBAR</div><h3>Kosten verteilen statt stauen</h3></div>
+          <p>Rechtzeitiger Aufbau verteilt den Aufwand planbar über Monate. Späte Umsetzung führt regelmäßig zu Kostenexplosion, Projektstau, Reputationsschäden — und dann erst zum Bußgeldrisiko.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout red"><strong>Zur Einordnung:</strong> Die Hochrisiko-Pflichten nach Anhang III greifen ab Dezember 2027. Das klingt weit weg. Ein KI-QM-Handbuch, geschultes Personal und ein eingespielter Audit-Zyklus brauchen aber Monate — nicht Tage.</div>`
+}));
+
+/* ---------- 28 GESCHENK & TERMIN ---------- */
+slides.push(S({
+  nav:'Angebot', eyebrow:'Ihr heutiges Geschenk',
+  title:'KI-Praxis-Guide &amp; KI-Unternehmensrichtlinie',
+  lead:'Damit Sie morgen anfangen können, auch ohne uns. Beides als Vorlage, direkt verwendbar.',
+  body:`
+    <div class="tv" style="grid-template-columns:1fr .85fr;gap:1.8rem">
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <div class="card acc" style="padding:1.2rem 1.35rem">
+          <div class="split-head">${ico('gift',24,'#f59e42')}Was Sie mitnehmen</div>
+          <ul>
+            <li><b>KI-Praxis-Guide</b> — die wichtigsten Regeln für den Alltag, in der Sprache Ihrer Mitarbeitenden</li>
+            <li><b>KI-Unternehmensrichtlinie</b> — Vorlage zum Anpassen, nicht zum Neuschreiben</li>
+            <li>Die sechs Fragen des Selbstchecks als Blatt zum Mitnehmen</li>
+          </ul>
+        </div>
+        <div class="card" style="padding:1.2rem 1.35rem">
+          <div class="split-head">${ico('cal',24,'#e8863c')}Der nächste Schritt</div>
+          <p>Ein unverbindlicher Termin, maximal 20 Minuten. Danach haben Sie Antworten auf drei Fragen: <b>Brauche ich das? Wie umfangreich wird es? Was kostet es mich?</b></p>
+          <div class="callout green" style="margin-top:.9rem"><strong>Förderung:</strong> Unter bestimmten Voraussetzungen können wir eine Förderung für Sie erschließen. Fragen Sie im Termin danach.</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1rem">
+        ${ph('QR-Code / Linkseite (16:9)','r169','geschenk')}
+        <div style="text-align:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:500;letter-spacing:.1em;color:var(--orange-br)">links.insider-ki.de</div>
+          <div style="font-size:.76rem;color:var(--grey-2);margin-top:.5rem">Guide, Richtlinie und Terminbuchung an einer Stelle</div>
+        </div>
+      </div>
+    </div>`
+}));
+
+/* ---------- 29 ABSCHLUSS ---------- */
+slides.push(`
+<section class="slide">
+  <div class="atmos"></div>
+  <div class="logo-corner">${logo(52)}</div>
+  <div class="title-wrap">
+    <div class="t-eyebrow">Vielen Dank</div>
+    <h1 class="t-head" style="font-size:clamp(2rem,5vw,4rem)">Fangen Sie klein an.<br>Aber fangen Sie an.</h1>
+    <p class="t-sub">Nehmen Sie Ihr Selbstcheck-Blatt mit — das ist Ihre Prioritätenliste.</p>
+    <div class="t-meta">
+      <div class="nm">links.insider-ki.de</div>
+      <div class="rl">Guide · Richtlinie · Terminbuchung<br>www.insider-ki.de · Rechtsstand Oktober 2026</div>
+    </div>
+  </div>
+  <div class="counter">INSIDER.KI</div>
+</section>`);
+
+/* ===================== RENDER + NAV ===================== */
+document.getElementById('deck').innerHTML = slides.join('');
+const els = Array.from(document.querySelectorAll('.slide'));
+let idx = 0;
+const pos = document.getElementById('pos');
+
+function go(n){
+  idx = Math.max(0, Math.min(els.length-1, n));
+  els.forEach((s,i)=>s.classList.toggle('active', i===idx));
+  pos.textContent = (idx+1) + ' / ' + els.length;
+  if(typeof syncVideos === 'function') syncVideos();
+}
+document.getElementById('next').onclick = ()=>go(idx+1);
+document.getElementById('prev').onclick = ()=>go(idx-1);
+
+/* ---- Agenda: erste Folie je Kapitel finden ---- */
+const chapterStart = {};
+els.forEach((el,i)=>{
+  const on = el.querySelector('.sb-item.on');
+  if(on){
+    const name = on.dataset.jump;
+    if(chapterStart[name] === undefined) chapterStart[name] = i;
+  }
+});
+
+document.querySelectorAll('.sb-item').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const t = chapterStart[btn.dataset.jump];
+    if(t !== undefined) go(t);
+  });
+});
+
+/* ---- Videos nur auf der aktiven Folie laufen lassen ---- */
+function syncVideos(){
+  els.forEach((el,i)=>{
+    el.querySelectorAll('video').forEach(v=>{
+      if(i===idx){ v.play().catch(()=>{}); } else { v.pause(); v.currentTime = 0; }
+    });
+  });
+}
+
+document.addEventListener('keydown', e=>{
+  if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();go(idx+1);}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(idx-1);}
+  if(e.key==='Home'){e.preventDefault();go(0);}
+  if(e.key==='End'){e.preventDefault();go(els.length-1);}
+});
+
+go(0);
+hydrateMedia();
+</script>
+</body>
+</html>
