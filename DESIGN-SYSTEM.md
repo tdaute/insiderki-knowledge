@@ -30,8 +30,9 @@ Signalrot ist Markenfarbe und wird nicht für Statusaussagen benutzt — dafür 
 
 Rollencodierung durchgängig: Anbieter blau, Betreiber grün, beide orange.
 
-**Kontrasthinweis:** `--sig` auf `--bg` liegt bei etwa 3:1. Für die Wortmarke
-ausreichend, für Fließtext nicht. Kleine Schrift in Rot immer `--sig-br`.
+**Kontrasthinweis:** `--sig` auf `--bg` liegt bei etwa 3:1. Für Flächen und das
+Logosymbol ausreichend, für Fließtext nicht. Kleine Schrift in Rot immer `--sig-br`.
+Die Wortmarke steht deshalb in `--white`, nicht in `--sig`.
 
 ## 2. Typografie
 
@@ -53,12 +54,21 @@ Alle Größen sind viewport-relativ. Feste Pixelwerte nur für Strichstärken un
 
 ## 3. Logo
 
-Obsidian-Graph: 35 Knoten, 54 Kanten, prozedural gestreut, bewusst asymmetrisch
-und ohne erkennbares Zentrum. Knoten in `--orange` und `--orange-br`, Kanten
-`--orange` bei 40 % Deckkraft. Wortmarke **KNOWLEDGE** in `--sig`, `letter-spacing .26em`,
-Gewicht 700. **Kein Zusatz unter der Wortmarke.**
+Netz-/Radsymbol in Signalrot: ein Zentrum aus gefuelltem Punkt und Ring, davon
+acht Speichen nach aussen zu acht Knoten, die ein Achteck aufspannen. Die Knoten
+sind durch eine zurueckgenommene Achteckkante verbunden. Streng symmetrisch mit
+klarem Zentrum — das ist der bewusste Gegenentwurf zum abgeloesten Graph-Zeichen.
+
+Alle Elemente in `--sig`. Achteckkante 30 % Deckkraft bei Strichstaerke 0.9,
+Speichen 85 % bei 1.5, Ring 2.0, Zentrumspunkt Radius 4.6, Knoten Radius 3.
+Wortmarke **KNOWLEDGE** in `--white`, `letter-spacing .26em`, Gewicht 700.
+**Kein Zusatz unter der Wortmarke.**
 
 Aufrufe: `logo(40)` in der Sidebar, `logo(52)` auf Titelfolien.
+
+> Abgeloest: der orange Obsidian-Graph mit roter Wortmarke. In neuen Decks nicht
+> mehr verwenden. Bestehende Decks werden nachgezogen, wenn sie ohnehin angefasst
+> werden.
 
 ## 4. Folienraster
 
