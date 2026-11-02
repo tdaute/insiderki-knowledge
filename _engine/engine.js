@@ -2,7 +2,9 @@
 (function () {
   'use strict';
   var cfg = window.DECK_CONFIG || {};
-  var LOGO_HALTEN = 110;   // ms, wie lange das Symbol voll steht
+  var WISCH_MS = 280;      // ms, Dauer des Wischs beim Folienwechsel
+  var WISCH_ALLE = 3;      // nur jeder dritte Folienwechsel wischt, die anderen blenden ueber
+  var BLENDE_MS = 220;     // ms, Dauer der Ueberblendung
   var TIPPEN_MS = 28;
 
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
@@ -13,7 +15,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var elLabel = $('wLabel'), elNum = $('wNum'), rail = $('rail'), fill = $('railFill'),
       knob = $('railKnob'), tip = $('railTip'), prev = $('prev'), next = $('next'),
-      count = $('count'), blende = $('blende');
+      count = $('count'), blendeIn = $('blende').firstElementChild, linie = $('wisch');
 
   var pad = function (n) { return (n < 10 ? '0' : '') + n; };
   var stepsOf = function (i) { return Number(slides[i].dataset.steps) || 0; };
@@ -78,7 +80,7 @@
   /* ---------- Folienwechsel ---------- */
   function swap(to, atStep) {
     slides.forEach(function (s, i) {
-      s.classList.remove('active', 'leaving', 'entering', 'run');
+      s.classList.remove('active', 'leaving');
       s.setAttribute('aria-hidden', i === to ? 'false' : 'true');
     });
     stopSlide(slides[cur]);
@@ -90,36 +92,74 @@
     chrome();
   }
 
+  /* Das kleine Symbol blitzt bei jedem Wechsel kurz in der Mitte auf */
+  function symbol(ms) {
+    return blendeIn.animate({ opacity: [0, 1, 1, 0], transform: ['scale(.9)', 'scale(1)', 'scale(1)', 'scale(1)'], offset: [0, .25, .7, 1] }, { duration: ms, fill: 'both' });
+  }
+  function ueberblenden(alt, neu) {
+    var takt = { duration: BLENDE_MS, fill: 'both' };
+    return [neu.animate({ opacity: [0, 1] }, takt), alt.animate({ opacity: [1, 0] }, takt)];
+  }
+
+  /* Wisch: Ein roter Strich laeuft ueber die Folie, vor ihm steht die alte, hinter ihm die neue.
+     Die Richtung wechselt: mal von unten nach oben, mal von rechts nach links, zurueck gespiegelt. */
+  var wischAnim = null;
+  function wischEnde() {
+    if (wischAnim) wischAnim.forEach(function (a) { a.cancel(); });
+    wischAnim = null;
+    linie.className = 'wisch';
+    slides.forEach(function (s) { s.classList.remove('leaving'); });
+  }
+  function wisch(alt, neu, vor, hoch) {
+    var ganz = 'inset(0 0 0 0)';
+    var w = window.innerWidth, h = window.innerHeight;
+    var k;
+    if (hoch) {
+      k = vor ? { neu: 'inset(100% 0 0 0)', alt: 'inset(0 0 100% 0)', von: 'translateY(' + h + 'px)', nach: 'translateY(0)' }
+              : { neu: 'inset(0 0 100% 0)', alt: 'inset(100% 0 0 0)', von: 'translateY(0)', nach: 'translateY(' + h + 'px)' };
+    } else {
+      k = vor ? { neu: 'inset(0 0 0 100%)', alt: 'inset(0 100% 0 0)', von: 'translateX(' + w + 'px)', nach: 'translateX(0)' }
+              : { neu: 'inset(0 100% 0 0)', alt: 'inset(0 0 0 100%)', von: 'translateX(0)', nach: 'translateX(' + w + 'px)' };
+    }
+    linie.className = 'wisch on ' + (hoch ? 'quer' : 'hochkant');
+    var takt = { duration: WISCH_MS, easing: 'cubic-bezier(.65,0,.35,1)', fill: 'both' };
+    wischAnim = [
+      neu.animate({ clipPath: [k.neu, ganz] }, takt),
+      alt.animate({ clipPath: [ganz, k.alt] }, takt),
+      linie.animate({ transform: [k.von, k.nach] }, takt),
+      symbol(WISCH_MS),
+    ];
+  }
+
   async function goSlide(to, atStep, opts) {
     opts = opts || {};
     to = Math.max(0, Math.min(total - 1, to));
-    var mine = ++token;
     var from = cur;
+    /* Ziel ist die aktuelle Folie: Ein laufender Wisch darf dabei nicht abgebrochen werden */
     if (to === from && !opts.force) { step = atStep; applyStep(cur, step, false); chrome(); return; }
+    var mine = ++token;
 
-    /* Schnelles Blaettern oder Slider: ohne Blende springen */
-    if (moving || opts.quick || still && opts.quick) {
+    /* Schnelles Blaettern oder Slider: ohne Wisch springen */
+    if (moving || opts.quick) {
       moving = false;
-      blende.classList.remove('on');
+      wischEnde();
       swap(to, atStep);
       return;
     }
     moving = true;
-    slides[from].classList.add('leaving');
-    blende.classList.add('on');
-    await wait(100);
-    if (mine !== token) return;
+    var alt = slides[from];
     swap(to, atStep);
-    var s = slides[to];
-    s.classList.add('entering');
-    await wait(still ? 60 : LOGO_HALTEN);
+    var neu = slides[to];
+    alt.classList.add('leaving');
+    /* Vor und zurueck wischt dieselbe Stelle des Decks */
+    var stelle = Math.max(from, to);
+    var wischt = !still && stelle % WISCH_ALLE === 0;
+    if (wischt) wisch(alt, neu, to > from, stelle % (2 * WISCH_ALLE) === 0);
+    else if (still) wischAnim = ueberblenden(alt, neu);
+    else wischAnim = ueberblenden(alt, neu).concat(symbol(BLENDE_MS));
+    await wait(wischt ? WISCH_MS : BLENDE_MS);
     if (mine !== token) return;
-    blende.classList.remove('on');
-    void s.offsetWidth;
-    s.classList.add('run');
-    await wait(240);
-    if (mine !== token) return;
-    s.classList.remove('entering', 'run');
+    wischEnde();
     moving = false;
   }
 

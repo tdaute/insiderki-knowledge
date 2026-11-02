@@ -127,24 +127,24 @@ strong{font-weight:600;color:var(--text)}
 .hint span{margin-left:.3rem}
 
 /* ---------- Logo-Blende beim Folienwechsel ---------- */
-.blende{
-  position:absolute;inset:0;z-index:18;display:grid;place-items:center;pointer-events:none;
-  background:var(--bg);opacity:0;transition:opacity .09s linear;
-}
-.blende.on{opacity:1}
-.blende-in{transform:scale(.9);opacity:0;
-  transition:transform .14s var(--ease-out),opacity .09s linear}
-.blende.on .blende-in{transform:none;opacity:1}
+.blende{position:absolute;inset:0;z-index:18;display:grid;place-items:center;pointer-events:none}
+.blende-in{display:grid;place-items:center;width:6rem;height:6rem;opacity:0;
+  background:radial-gradient(closest-side,rgba(10,10,10,.92) 55%,rgba(10,10,10,0))}
 .blende .sym{width:2.75rem;height:2.75rem}
+
+/* Der Strich des Wischs */
+.wisch{position:absolute;left:0;top:0;z-index:25;display:none;pointer-events:none;background:var(--accent);
+  box-shadow:0 0 .6rem .03rem rgba(229,1,1,.6)}
+.wisch.on{display:block}
+.wisch.quer{width:100%;height:.09375rem}
+.wisch.hochkant{width:.09375rem;height:100%}
 
 /* ---------- Folie ---------- */
 .slide{
   position:absolute;inset:0;z-index:5;visibility:hidden;opacity:0;overflow:hidden;
 }
 .slide.active{visibility:visible;opacity:1}
-.slide.leaving{visibility:visible;opacity:0;transform:translateY(-.5rem);transition:opacity .1s linear,transform .1s linear}
-.slide.entering{opacity:0;transform:translateY(.625rem)}
-.slide.entering.run{opacity:1;transform:none;transition:opacity .22s var(--ease-out),transform .22s var(--ease-out)}
+.slide.leaving{visibility:visible;opacity:1;z-index:4}
 .inner{
   position:relative;z-index:2;height:100%;
   padding:var(--top,23vh) 3rem calc(var(--bar) + 1.5rem);
@@ -169,10 +169,6 @@ strong{font-weight:600;color:var(--text)}
 .eb i{display:block;width:1.5rem;height:1px;background:var(--accent-text)}
 .hl{font-weight:var(--hl-weight);font-size:2.75rem;line-height:1.06;letter-spacing:-.02em;color:var(--text)}
 .hl .ln{display:block}
-.slide.entering .hl .ln{opacity:0;transform:translateY(.5rem)}
-.slide.entering.run .hl .ln{opacity:1;transform:none;transition:opacity .22s var(--ease-out),transform .22s var(--ease-out)}
-.slide.entering.run .hl .ln:nth-child(2){transition-delay:.04s}
-.slide.entering.run .hl .ln:nth-child(3){transition-delay:.08s}
 .hl-sm{font-size:2.25rem}
 .head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3rem;align-items:end}
 .aside{width:24rem;font-size:.875rem;line-height:1.6;color:var(--text-dim);padding-bottom:.4rem}
@@ -462,9 +458,7 @@ strong{font-weight:600;color:var(--text)}
 
 /* Bewegung reduzieren */
 @media (prefers-reduced-motion:reduce){
-  .slide.leaving,.slide.entering,.slide.entering.run{transform:none}
-  .slide.entering .hl .ln,.slide.entering.run .hl .ln{transform:none;opacity:1;transition:none}
-  [data-step],.tl-pane,.tl-pane.past,.blende-in{transform:none}
+  [data-step],.tl-pane,.tl-pane.past{transform:none}
   [data-step].on{transition:opacity .25s linear}
   .tl-st.now .dot,.play,.live::before,.bubble .car,.nametag i{animation:none}
   .tl-st.now .dot{transform:none}

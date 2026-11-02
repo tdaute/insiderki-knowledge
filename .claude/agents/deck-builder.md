@@ -70,8 +70,9 @@ hörst du auf. Sagt Tino im Auftrag ausdrücklich, dass das Material in Ordnung 
 ## Ablauf
 
 ### 1. Grundlagen lesen
-`DESIGN-SYSTEM.md` lesen und `_vorlage/deck.json` als Muster ansehen. Dort ist jeder Folientyp
-vorgeführt. Der Bau lehnt Felder ab, die ein Folientyp nicht darstellt.
+`DESIGN-SYSTEM.md` lesen und `_vorlage/deck.json` als Muster ansehen. Die Vorlage ist inhaltlich leer und
+zeigt jeden Folientyp mit Platzhaltern. Der Bau lehnt Felder ab, die ein Folientyp nicht darstellt, und stoppt,
+wenn noch Platzhaltertext der Vorlage im Deck steht.
 
 ### 2. Quelle einlesen
 ```bash

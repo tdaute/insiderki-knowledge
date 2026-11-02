@@ -1,7 +1,8 @@
 # KNOWLEDGE — Design System v2
 
-Verbindlich für alle neuen Decks. Lauffähiges Muster aller Folientypen:
-`_vorlage/deck.json` und `https://knowledge.insiderki.ai/_vorlage/`.
+Verbindlich für alle neuen Decks. Die Vorlage ist inhaltlich leer und zeigt jeden Folientyp einmal mit
+Platzhaltern: `_vorlage/deck.json` und `https://knowledge.insiderki.ai/_vorlage/`. Der Bau stoppt, wenn in
+einem echten Deck noch ein Platzhaltertext steht.
 Das frühere System (Navy, Inter, Sidebar) liegt in `_archiv/` und gilt nur noch für Decks,
 die noch nicht umgezogen sind.
 
@@ -155,8 +156,9 @@ Pro Folie leuchtet genau eine Karte: die zuletzt aufgedeckte. `highlight: true` 
 | Was | Wie |
 |---|---|
 | Aufbau-Schritt | von `opacity 0, 12px, scale .98` in 420 ms, mehrere gleichzeitig mit 60 ms Versatz. Sichtbares bewegt sich nicht |
-| Folienwechsel | alte Folie aus in 100 ms, Logo-Blende, neue Folie ein in 220 ms, Headline-Zeilen um 40 ms versetzt. Zusammen rund 0,5 s |
-| Logo-Blende | nur das Symbol, klein mittig (44 px bei 1440), rund 0,25 s sichtbar (`LOGO_HALTEN` in `engine.js`). Entfällt beim Springen und schnellen Blättern |
+| Folienwechsel | Überblendung in 220 ms (`BLENDE_MS` in `engine.js`). Entfällt beim Springen und schnellen Blättern |
+| Wisch | nur jeder dritte Folienwechsel (`WISCH_ALLE`), in 280 ms (`WISCH_MS`): Ein dünner roter Strich (1,5 px bei 1440) läuft über die Folie, vor ihm die alte, hinter ihm die neue. Im Wechsel von rechts nach links und von unten nach oben, zurück gespiegelt |
+| Symbol beim Wechsel | nur das Symbol, klein mittig (44 px bei 1440), blendet bei jedem Wechsel kurz auf und wieder aus |
 | Namensfeld | roter Punkt pulsiert dauerhaft, 2 s |
 | Aktiver Punkt | atmet dauerhaft mit `pulse`, 2 s |
 | Verbindungslinie | füllt sich bis zum aktiven Punkt, Rot nach Bernstein, 500 ms |
@@ -164,7 +166,7 @@ Pro Folie leuchtet genau eine Karte: die zuletzt aufgedeckte. `highlight: true` 
 | Chat | Schreibmaschine mit 28 ms je Zeichen, danach die Antwort |
 | Hover | zurückhaltend, Rand wird heller |
 
-`prefers-reduced-motion`: nur Überblendungen, kein Puls.
+`prefers-reduced-motion`: Überblendung statt Wisch, kein Strich, kein Puls.
 
 ## 7. Bedienung
 

@@ -2,27 +2,27 @@
   "slug": "_vorlage",
   "istVorlage": true,
   "title": "KNOWLEDGE Vorlage",
-  "description": "Alle Folientypen der Deck-Engine v2 als lauffähiges Deck.",
+  "description": "Inhaltlich leere Vorlage mit allen Folientypen der Deck-Engine v2.",
   "client": "Vorlage",
   "slides": [
     {
       "type": "title",
       "label": "Start",
-      "eyebrow": "Vorlage · Deck-Engine v2",
-      "headline": "Präsentationen,\n*die sich aufbauen.*",
-      "lead": "Diese Vorlage zeigt jeden Folientyp einmal. Der Inhalt kommt aus einer deck.json, das Design aus der Engine.",
+      "eyebrow": "Oberzeile · Datum",
+      "headline": "Titel der Präsentation,\n*Kernaussage in Rot.*",
+      "lead": "Ein bis zwei Sätze dazu, worum es geht und für wen die Präsentation gedacht ist.",
       "kpis": [
         {
-          "value": "15",
-          "label": "Folientypen"
+          "value": "00",
+          "label": "Kennzahl"
         },
         {
-          "value": "1",
-          "label": "HTML-DATEI"
+          "value": "0",
+          "label": "KENNZAHL"
         },
         {
-          "value": "3",
-          "label": "AGENT-MODI"
+          "value": "0",
+          "label": "KENNZAHL"
         }
       ],
       "live": true,
@@ -37,162 +37,161 @@
     },
     {
       "type": "statement",
-      "label": "Hinweis",
-      "eyebrow": "Einfache Textfolie",
-      "headline": "Eine Aussage,\n*sonst nichts.*",
-      "lead": "Für Hinweise, Thesen und Überleitungen. Zum Beispiel: **Dieses Meeting wird aufgezeichnet.** Weiterer Text bleibt bewusst zurückgenommen."
+      "label": "Aussage",
+      "eyebrow": "Oberzeile",
+      "headline": "Eine Aussage,\n*in einem Satz.*",
+      "lead": "Platz für einen kurzen erläuternden Text in zwei bis drei Zeilen. **Das Wichtigste steht fett.** Der Rest bleibt zurückgenommen."
     },
     {
       "type": "rows",
       "label": "Agenda",
+      "id": "agenda",
       "eyebrow": "Agenda",
-      "headline": "Das erwartet\n*Sie heute.*",
-      "aside": "Jede Zeile erscheint auf Tastendruck. Der gelbe Zähler zeigt, wie viele noch kommen. Zeilen mit Pfeil springen zum Kapitel.",
+      "headline": "Überschrift der Agenda,\n*zweite Zeile in Rot.*",
+      "aside": "Randtext für eine Einordnung, höchstens drei Zeilen.",
       "rows": [
         {
-          "title": "Folien, die sich aufbauen",
-          "text": "Schritt für Schritt statt alles auf einmal",
+          "title": "Punkt eins",
+          "text": "Kurze Unterzeile zum Punkt",
           "icon": "layers"
         },
         {
-          "title": "Zeitleiste mit Puls",
-          "text": "Der aktive Punkt atmet dauerhaft",
+          "title": "Punkt zwei mit Sprung",
+          "text": "Kurze Unterzeile zum Punkt",
           "icon": "route",
-          "to": "zeitleiste"
+          "to": "kapitel-eins"
         },
         {
-          "title": "Video und Bild",
-          "text": "Medien kommen aus dem Media Manager",
+          "title": "Punkt drei",
+          "text": "Kurze Unterzeile zum Punkt",
           "icon": "video"
         },
         {
-          "title": "Zitat und Chat-Demo",
-          "text": "Für Kernaussagen und Live-Beispiele",
+          "title": "Punkt vier",
+          "text": "Kurze Unterzeile zum Punkt",
           "icon": "message-circle"
         },
         {
-          "title": "Tabelle und Vergleich",
-          "text": "Für Regeln, Fristen und Abgrenzungen",
+          "title": "Punkt fünf",
+          "text": "Kurze Unterzeile zum Punkt",
           "icon": "scale"
         },
         {
-          "title": "Offene Fragen",
-          "text": "Der Abschluss führt zurück zur Agenda",
+          "title": "Punkt sechs",
+          "text": "Kurze Unterzeile zum Punkt",
           "icon": "circle-help"
         }
-      ],
-      "id": "agenda"
+      ]
     },
     {
       "type": "section",
       "label": "Kapitel 1",
+      "id": "kapitel-eins",
       "chapter": 1,
-      "headline": "Der *Kern* des Systems",
-      "lead": "Kapitel-Trenner gliedern längere Decks. Sie werden durchnummeriert."
+      "headline": "Titel *des Kapitels*",
+      "lead": "Ein Satz dazu, worum es in diesem Kapitel geht."
     },
     {
       "type": "cards",
-      "label": "Kennzahlen",
-      "eyebrow": "Karten mit Kennzahlen",
-      "headline": "Vier Zahlen,\n*eine Aussage.*",
-      "aside": "Bis zu sechs Karten. Die zuletzt aufgedeckte leuchtet. Mit zoom: true vergrößert ein Klick die Karte für den Raum.",
+      "label": "Karten",
+      "eyebrow": "Oberzeile",
+      "headline": "Überschrift der Folie,\n*zweite Zeile in Rot.*",
+      "aside": "Randtext für eine Einordnung, höchstens drei Zeilen.",
+      "zoom": true,
       "cards": [
         {
           "icon": "layers",
-          "label": "Aufbau",
-          "value": "0–6",
-          "text": "Schritte pro Folie. Erst danach geht es zur nächsten Folie weiter."
+          "label": "Bezeichnung",
+          "value": "00",
+          "text": "Kurzer Text zur Kennzahl, höchstens zwei Zeilen."
         },
         {
           "icon": "timer",
-          "label": "Eintritt",
-          "value": "420 ms",
-          "text": "Bereits sichtbare Karten bleiben stehen, das Layout füllt sich nur."
+          "label": "Bezeichnung",
+          "value": "00",
+          "text": "Kurzer Text zur Kennzahl, höchstens zwei Zeilen."
         },
         {
           "icon": "file-text",
-          "label": "Datei",
-          "value": "1",
-          "sub": "pro **Deck**",
-          "text": "Schriften und Engine stecken im HTML. Läuft auch ohne Netz."
+          "label": "Bezeichnung",
+          "value": "00",
+          "text": "Kurzer Text zur Kennzahl, höchstens zwei Zeilen."
         },
         {
           "icon": "image",
-          "label": "Medien",
-          "value": "Slots",
-          "text": "Bilder und Videos liegen im Supabase-Bucket, nicht im Repo."
+          "label": "Bezeichnung",
+          "value": "00",
+          "text": "Kurzer Text zur Kennzahl, höchstens zwei Zeilen."
         }
-      ],
-      "zoom": true
+      ]
     },
     {
       "type": "quote",
       "label": "Zitat",
-      "text": "Eine gute Folie sagt *eine Sache*. Alles andere gehört in den Vortrag oder ins Handout.",
+      "text": "Hier steht das Zitat in zwei bis drei Zeilen, *der wichtigste Teil in Rot*, der Rest in Weiß.",
       "person": {
-        "name": "Tino Daute",
-        "sub": "Beispiel für die Sprecher-Pille"
+        "name": "Name",
+        "sub": "Rolle oder Firma"
       }
     },
     {
       "type": "timeline",
       "label": "Zeitleiste",
-      "eyebrow": "Vom alten Deck zum neuen",
-      "headline": "Fünf Stationen, *ein Ablauf.*",
+      "eyebrow": "Oberzeile",
+      "headline": "Überschrift *der Zeitleiste.*",
       "badge": {
         "value": "5",
-        "label": "Stationen im Agenten"
+        "label": "Stationen"
       },
       "stations": [
         {
-          "label": "Einlesen",
+          "label": "Station 1",
           "icon": "file-search",
-          "title": "Quelle einlesen",
-          "text": "PPTX, PDF oder altes HTML-Deck. Texte, Notizen und Bilder werden herausgezogen."
+          "title": "Titel der Station",
+          "text": "Kurzer Text zu dieser Station, höchstens zwei Zeilen."
         },
         {
-          "label": "Modus",
+          "label": "Station 2",
           "icon": "route",
-          "title": "Modus festlegen",
-          "text": "Neue Form, verdichten oder neu schreiben. Das entscheiden Sie pro Deck."
+          "title": "Titel der Station",
+          "text": "Kurzer Text zu dieser Station, höchstens zwei Zeilen."
         },
         {
-          "label": "Bauen",
+          "label": "Station 3",
           "icon": "blocks",
-          "title": "Deck bauen",
-          "text": "Der Agent wählt je Inhalt den passenden Folientyp und legt die Aufbau-Schritte fest."
+          "title": "Titel der Station",
+          "text": "Kurzer Text zu dieser Station, höchstens zwei Zeilen."
         },
         {
-          "label": "Prüfen",
+          "label": "Station 4",
           "icon": "clipboard-check",
-          "title": "Im Browser prüfen",
-          "text": "Überlauf, Medien-Slots und Protokoll. Abweichungen werden markiert."
+          "title": "Titel der Station",
+          "text": "Kurzer Text zu dieser Station, höchstens zwei Zeilen."
         },
         {
-          "label": "Freigabe",
+          "label": "Station 5",
           "icon": "badge-check",
-          "title": "Auf Ihr OK warten",
-          "text": "Veröffentlicht wird erst nach Ihrer Freigabe."
+          "title": "Titel der Station",
+          "text": "Kurzer Text zu dieser Station, höchstens zwei Zeilen."
         }
       ],
       "aside": {
-        "title": "Immer dabei",
+        "title": "Merkkasten",
         "items": [
-          "Änderungsprotokoll je Deck",
-          "Handout zum Weitergeben",
-          "Medien-Slots für den Media Manager",
-          "Fakten bleiben geprüft"
+          "Erster Merksatz",
+          "Zweiter Merksatz",
+          "Dritter Merksatz",
+          "Vierter Merksatz"
         ]
-      },
-      "id": "zeitleiste"
+      }
     },
     {
       "type": "video",
       "label": "Video",
-      "kicker": "Video-Folie",
-      "title": "Ein Video aus dem Media Manager, Start per Klick",
+      "kicker": "Oberzeile",
+      "title": "Titel des Videos",
       "media": {
-        "slot": "demoVideo",
+        "slot": "videoEins",
         "label": "Video (16:9)",
         "kind": "video"
       }
@@ -200,47 +199,47 @@
     {
       "type": "image",
       "label": "Bild",
-      "kicker": "Bild-Folie",
-      "title": "Ein großes Bild mit kurzer Zeile darüber",
+      "kicker": "Oberzeile",
+      "title": "Titel des Bildes",
       "media": {
-        "slot": "demoBild",
+        "slot": "bildEins",
         "label": "Bild (16:9)"
       }
     },
     {
       "type": "chat",
-      "label": "Chat-Demo",
-      "eyebrow": "Chat-Demo",
-      "headline": "Sie sagen,\n*was Sie brauchen.*",
-      "lead": "Die Nachricht tippt sich selbst, danach erscheint die Antwort. Der Knopf oben rechts startet die Szene neu.",
+      "label": "Chat",
+      "eyebrow": "Oberzeile",
+      "headline": "Überschrift der Folie,\n*zweite Zeile in Rot.*",
+      "lead": "Ein bis zwei Sätze zur Einordnung des Beispiels.",
       "window": {
-        "title": "Deck-Agent",
-        "user": "Bau aus dieser PPTX ein Deck im neuen Design. Modus: verdichten.",
+        "title": "Name des Werkzeugs",
+        "user": "Hier steht die Eingabe, die sich von selbst tippt.",
         "reply": {
-          "title": "Plan · 24 Folien",
+          "title": "Titel der Antwort",
           "items": [
-            "**Kapitel:** drei Abschnitte mit Trennern",
-            "**Aufbau:** Karten und Zeilen schrittweise",
-            "**Medien:** neun Slots im Media Manager"
+            "**Punkt eins:** Kurzer Text zum Punkt",
+            "**Punkt zwei:** Kurzer Text zum Punkt",
+            "**Punkt drei:** Kurzer Text zum Punkt"
           ],
-          "outro": "Protokoll und Handout liegen bei."
+          "outro": "Abschlusssatz der Antwort."
         },
-        "placeholder": "Thema oder Datei angeben …"
+        "placeholder": "Text im Eingabefeld …"
       }
     },
     {
       "type": "split",
-      "label": "Zweispalter",
-      "eyebrow": "Text und Bild",
-      "headline": "Links die Aussage,\n*rechts das Motiv.*",
-      "lead": "Für Inhalte, die ein Bild brauchen. Punkte erscheinen einzeln.",
+      "label": "Text und Bild",
+      "eyebrow": "Oberzeile",
+      "headline": "Überschrift der Folie,\n*zweite Zeile in Rot.*",
+      "lead": "Ein bis zwei Sätze zum Motiv.",
       "bullets": [
-        "Bild kommt über einen Slot",
-        "Seitenverhältnis je Folie wählbar",
-        "Seite per side: left tauschbar"
+        "Erster Punkt in einer Zeile",
+        "Zweiter Punkt in einer Zeile",
+        "Dritter Punkt in einer Zeile"
       ],
       "media": {
-        "slot": "demoSplit",
+        "slot": "motivEins",
         "label": "Motiv (16:9)",
         "ratio": "16:9"
       }
@@ -248,17 +247,17 @@
     {
       "type": "compare",
       "label": "Vergleich",
-      "eyebrow": "Vergleich",
-      "headline": "Zulässig oder *nicht.*",
-      "aside": "Grün, Rot und Gelb bleiben Statusaussagen. Signalrot bleibt Markenfarbe.",
+      "eyebrow": "Oberzeile",
+      "headline": "Überschrift *des Vergleichs.*",
+      "aside": "Randtext für eine Einordnung, höchstens drei Zeilen.",
       "columns": [
         {
           "title": "Zulässig",
           "tone": "ok",
           "icon": "circle-check",
           "items": [
-            "Erste Bedingung ist erfüllt",
-            "Zweite Bedingung ist erfüllt"
+            "Erster Punkt in einer Zeile",
+            "Zweiter Punkt in einer Zeile"
           ]
         },
         {
@@ -266,8 +265,8 @@
           "tone": "warn",
           "icon": "triangle-alert",
           "items": [
-            "Hängt vom Einzelfall ab",
-            "Dokumentation empfohlen"
+            "Erster Punkt in einer Zeile",
+            "Zweiter Punkt in einer Zeile"
           ]
         },
         {
@@ -275,68 +274,68 @@
           "tone": "no",
           "icon": "shield-alert",
           "items": [
-            "Pflicht wird ausgelöst",
-            "Verstoß kann Folgen haben"
+            "Erster Punkt in einer Zeile",
+            "Zweiter Punkt in einer Zeile"
           ]
         }
       ],
-      "callout": {
-        "text": "Ein Hinweiskasten lässt sich an Karten, Zeilen, Vergleich und Tabelle anhängen."
-      },
       "scale": {
         "from": "{ok:unkritisch}",
         "to": "{no:kritisch}"
+      },
+      "callout": {
+        "text": "Hinweiskasten für einen einzelnen wichtigen Satz."
       }
     },
     {
       "type": "table",
       "label": "Tabelle",
-      "eyebrow": "Tabelle",
-      "headline": "Regeln auf *einen Blick.*",
-      "aside": "Für Fristen, Beträge und Zuständigkeiten. Standardmäßig ohne Aufbau-Schritte.",
+      "eyebrow": "Oberzeile",
+      "headline": "Überschrift *der Tabelle.*",
+      "aside": "Randtext für eine Einordnung, höchstens drei Zeilen.",
       "columns": [
-        "Baustein",
-        "Wann",
-        "Schritte"
+        "Spalte eins",
+        "Spalte zwei",
+        "Spalte drei"
       ],
       "rows": [
         [
-          "Karten",
-          "Kennzahlen und Kurzaussagen",
-          "je Karte einer"
+          "Bezeichnung",
+          "Inhalt der Zelle",
+          "Inhalt der Zelle"
         ],
         [
-          "Zeilen",
-          "Agenda und Aufzählungen",
-          "je Zeile einer"
+          "Bezeichnung",
+          "Inhalt der Zelle",
+          "Inhalt der Zelle"
         ],
         [
-          "Zeitleiste",
-          "Abläufe und Phasen",
-          "je Station einer"
+          "Bezeichnung",
+          "Inhalt der Zelle",
+          "Inhalt der Zelle"
         ],
         [
-          "Tabelle",
-          "Vergleichbare Einzelwerte",
-          "keine"
+          "Bezeichnung",
+          "Inhalt der Zelle",
+          "Inhalt der Zelle"
         ]
       ],
-      "source": "Feld source: Quellen, Stand und Hinweise stehen klein am Fuß der Folie. Stand: November 2026."
+      "source": "Quelle und Stand: Monat Jahr. Hinweise stehen klein am Fuß der Folie."
     },
     {
       "type": "custom",
       "label": "Sonderfall",
-      "eyebrow": "Eigenes HTML",
-      "headline": "Wenn kein Baustein *passt.*",
-      "aside": "Für Entscheidungsbäume oder Quiz. Bestehende CSS-Klassen nutzen, Schritte per data-step setzen.",
-      "html": "<div class=\"cards c2\"><article class=\"card\" data-step=\"1\"><div class=\"card-t\">Erster Baustein</div><p class=\"card-x\">Frei gesetztes HTML mit data-step=\"1\".</p></article><article class=\"card\" data-step=\"2\"><div class=\"card-t\">Zweiter Baustein</div><p class=\"card-x\">Sparsam verwenden, die Prüfung greift hier nur begrenzt.</p></article></div>"
+      "eyebrow": "Oberzeile",
+      "headline": "Überschrift *für eigenes HTML.*",
+      "aside": "Randtext für eine Einordnung, höchstens drei Zeilen.",
+      "html": "<div class=\"cards c2\"><article class=\"card\" data-step=\"1\"><div class=\"card-t\">Erster Baustein</div><p class=\"card-x\">Inhalt des ersten Bausteins.</p></article><article class=\"card\" data-step=\"2\"><div class=\"card-t\">Zweiter Baustein</div><p class=\"card-x\">Inhalt des zweiten Bausteins.</p></article></div>"
     },
     {
       "type": "closing",
       "label": "Abschluss",
-      "eyebrow": "Fragen und Austausch",
-      "headline": "Gibt es noch\n*Fragen?*",
-      "lead": "Der Knopf führt zurück zur Agenda.",
+      "eyebrow": "Oberzeile",
+      "headline": "Letzte Aussage,\n*zweite Zeile in Rot.*",
+      "lead": "Ein Satz zum Abschluss.",
       "cta": {
         "label": "Zur Agenda",
         "to": "agenda"
@@ -347,7 +346,7 @@
       },
       "media": {
         "slot": "abschlussVisual",
-        "label": "Porträt, freigestellt (PNG)"
+        "label": "Bild (PNG)"
       }
     }
   ]

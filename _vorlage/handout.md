@@ -1,31 +1,31 @@
 ---
 stil: editorial
 brand: INSIDER.KI
-ausgabe: HANDOUT · VORLAGE
-datum: November 2026
-titel: So sieht ein Handout aus
-thema: Das Muster, das der deck-builder zu jedem Deck befüllt
+ausgabe: HANDOUT · THEMA
+datum: Monat Jahr
+titel: Titel des Handouts
+thema: Untertitel des Handouts
 footer_titel: INSIDER.KI KNOWLEDGE
 footer_link: knowledge.insiderki.ai
 footer_sub: KI-Governance & Compliance
 ---
 
-::: DAS WICHTIGSTE :::
+::: ABSCHNITT :::
 
-## Worum es geht
+## Überschrift des Abschnitts
 
-Ein Handout fasst ein Deck für Menschen zusammen, die nicht dabei waren oder später nachschlagen wollen. Es ist kein Abdruck der Folien, sondern der Vortrag in kurzer, lesbarer Form.
+Fließtext des Abschnitts.
 
-### Aufbau
+### Unterüberschrift
 
-Pro Kapitel des Decks ein Abschnitt. Dazu Fristen, Checklisten und Warnungen in abgesetzten Kästen.
+Fließtext des Unterabschnitts.
 
-> Eine gute Folie sagt eine Sache. Das Handout darf den Rest erklären.
+> Zitat oder Merksatz.
 
 ---
 
-::: CHECKLISTE :::
+::: ABSCHNITT :::
 
 :::box
-**Vor der Weitergabe prüfen:** Stimmen Fakten und Stand mit dem Deck überein? Sind Fristen datiert? Steht bei Rechtsthemen der Hinweis, dass das Handout keine Rechtsberatung ersetzt?
+Kasten für Fristen, Checklisten und Warnungen.
 :::

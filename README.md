@@ -10,7 +10,7 @@ index.html                  Übersicht, lädt live aus Supabase
 DESIGN-SYSTEM.md            Verbindliche Gestaltungsgrundlage
 .claude/agents/deck-builder.md   Agent für den Umbau alter Präsentationen
 _engine/                    Design und Technik für alle Decks
-_vorlage/                   Alle Folientypen als lauffähiges Deck
+_vorlage/                   Inhaltlich leere Vorlage mit allen Folientypen
 <slug>/deck.json            Inhalt eines Decks
 <slug>/index.html           Fertiges Deck, wird gebaut
 <slug>/handout.md, .html    Handout, wird gebaut
@@ -48,7 +48,8 @@ Das Repo ist öffentlich. Auch ein Entwurf ist nach dem Push per URL erreichbar.
 
 ## Deck von Hand anlegen oder ändern
 
-1. `_vorlage/deck.json` nach `<slug>/deck.json` kopieren, `istVorlage` entfernen, Inhalt schreiben
+1. `_vorlage/deck.json` nach `<slug>/deck.json` kopieren, `slug` setzen, `istVorlage` entfernen, nicht benötigte
+   Folien löschen und den Inhalt schreiben. Bleibt Platzhaltertext stehen, stoppt der Bau
 2. `node _engine/build.mjs <slug>`
 3. Lokal ansehen: `python3 -m http.server 4173`, dann `http://127.0.0.1:4173/<slug>/`
 4. `_arbeit/<slug>/supabase.sql` in Supabase (`ai-governance`) ausführen. Das SQL legt Deck und
@@ -68,6 +69,11 @@ gebaute Deck ebenfalls.
 Bilder und Videos werden **nicht** in diesem Repo abgelegt, sondern über den Media Manager
 (media.insiderki.ai) in den Supabase-Bucket `workshop-assets` geladen. Die Decks holen sie beim
 Laden automatisch.
+
+Am Medienordner ändert ein neues Deck nichts: Der Media Manager legt jede Datei im Bucket unter
+`<slug>/<slot_key>-<Zeit>.<Endung>` ab und zeigt das Deck, sobald es in `presentations` steht. Wird ein Deck
+neu gebaut, bleiben die Medien erhalten, solange die `slot_key` gleich bleiben. Erlaubt sind PNG, JPEG, WebP,
+SVG, MP4 und WebM bis 50 MB.
 
 `media_kind` in `presentation_slots` ist nur `image`, `video` oder `any`. Das gewünschte Format
 gehört deshalb ins `label`.

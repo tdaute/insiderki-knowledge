@@ -57,6 +57,26 @@ function fontFaces() {
   ].join('\n');
 }
 
+// Platzhaltertexte der Vorlage duerfen in keinem echten Deck stehen bleiben.
+const KEIN_TEXT = new Set(['type', 'id', 'slot', 'ratio', 'kind', 'icon', 'tone', 'side', 'fit', 'glow', 'label', 'name', 'sub', 'notes', 'slug']);
+function texte(wert, schluessel, out = []) {
+  if (KEIN_TEXT.has(schluessel)) return out;
+  if (Array.isArray(wert)) wert.forEach((v) => texte(v, schluessel, out));
+  else if (wert && typeof wert === 'object') Object.entries(wert).forEach(([k, v]) => texte(v, k, out));
+  else if (typeof wert === 'string' && wert.length >= 12) out.push(wert);
+  return out;
+}
+function platzhalter(deck) {
+  const datei = path.join(ROOT, '_vorlage', 'deck.json');
+  if (deck.istVorlage || !fs.existsSync(datei)) return [];
+  const vorlage = new Set(texte(JSON.parse(fs.readFileSync(datei, 'utf8')).slides));
+  const out = [];
+  deck.slides.forEach((s, i) => {
+    texte(s).filter((t) => vorlage.has(t)).forEach((t) => out.push(`Folie ${i + 1}: noch Platzhaltertext der Vorlage: "${t.replace(/\n/g, ' ').slice(0, 60)}"`));
+  });
+  return out;
+}
+
 // Prueft eine deck.json. Fehler stoppen den Bau, Hinweise nicht.
 export function check(deck) {
   const err = [], warn = [];
@@ -114,6 +134,8 @@ export function check(deck) {
     if (s.type !== 'custom' && JSON.stringify(s).includes('{{') && !deck.istVorlage) warn.push(`${wo}: offener Platzhalter`);
   });
 
+  err.push(...platzhalter(deck));
+
   const slots = collectSlots(deck).map((x) => x.slot_key);
   const dupes = slots.filter((k, i) => slots.indexOf(k) !== i);
   if (dupes.length) err.push(`Slot doppelt: ${[...new Set(dupes)].join(', ')}`);
@@ -151,6 +173,7 @@ ${slidesHtml}
   </main>
   <div class="footfade"></div>
   <div class="blende" id="blende" aria-hidden="true"><div class="blende-in"><span class="sym"></span></div></div>
+  <div class="wisch" id="wisch" aria-hidden="true"></div>
   <nav class="navbar" aria-label="Navigation">
     <button class="nbtn" id="prev" aria-label="Zurueck">${icon('chevron-left')}</button>
     <div class="rail" id="rail" role="slider" tabindex="0" aria-label="Folie waehlen" aria-valuemin="1"><div class="rail-fill" id="railFill"></div><div class="rail-knob" id="railKnob"></div><div class="rail-tip" id="railTip"></div></div>
