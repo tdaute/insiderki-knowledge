@@ -1,0 +1,354 @@
+{
+  "slug": "_vorlage",
+  "istVorlage": true,
+  "title": "KNOWLEDGE Vorlage",
+  "description": "Alle Folientypen der Deck-Engine v2 als lauffähiges Deck.",
+  "client": "Vorlage",
+  "slides": [
+    {
+      "type": "title",
+      "label": "Start",
+      "eyebrow": "Vorlage · Deck-Engine v2",
+      "headline": "Präsentationen,\n*die sich aufbauen.*",
+      "lead": "Diese Vorlage zeigt jeden Folientyp einmal. Der Inhalt kommt aus einer deck.json, das Design aus der Engine.",
+      "kpis": [
+        {
+          "value": "15",
+          "label": "Folientypen"
+        },
+        {
+          "value": "1",
+          "label": "HTML-DATEI"
+        },
+        {
+          "value": "3",
+          "label": "AGENT-MODI"
+        }
+      ],
+      "live": true,
+      "nametag": {
+        "name": "Tino Daute",
+        "sub": "INSIDER.KI"
+      },
+      "media": {
+        "asset": "portrait",
+        "label": "Porträt Tino Daute"
+      }
+    },
+    {
+      "type": "statement",
+      "label": "Hinweis",
+      "eyebrow": "Einfache Textfolie",
+      "headline": "Eine Aussage,\n*sonst nichts.*",
+      "lead": "Für Hinweise, Thesen und Überleitungen. Zum Beispiel: **Dieses Meeting wird aufgezeichnet.** Weiterer Text bleibt bewusst zurückgenommen."
+    },
+    {
+      "type": "rows",
+      "label": "Agenda",
+      "eyebrow": "Agenda",
+      "headline": "Das erwartet\n*Sie heute.*",
+      "aside": "Jede Zeile erscheint auf Tastendruck. Der gelbe Zähler zeigt, wie viele noch kommen. Zeilen mit Pfeil springen zum Kapitel.",
+      "rows": [
+        {
+          "title": "Folien, die sich aufbauen",
+          "text": "Schritt für Schritt statt alles auf einmal",
+          "icon": "layers"
+        },
+        {
+          "title": "Zeitleiste mit Puls",
+          "text": "Der aktive Punkt atmet dauerhaft",
+          "icon": "route",
+          "to": "zeitleiste"
+        },
+        {
+          "title": "Video und Bild",
+          "text": "Medien kommen aus dem Media Manager",
+          "icon": "video"
+        },
+        {
+          "title": "Zitat und Chat-Demo",
+          "text": "Für Kernaussagen und Live-Beispiele",
+          "icon": "message-circle"
+        },
+        {
+          "title": "Tabelle und Vergleich",
+          "text": "Für Regeln, Fristen und Abgrenzungen",
+          "icon": "scale"
+        },
+        {
+          "title": "Offene Fragen",
+          "text": "Der Abschluss führt zurück zur Agenda",
+          "icon": "circle-help"
+        }
+      ],
+      "id": "agenda"
+    },
+    {
+      "type": "section",
+      "label": "Kapitel 1",
+      "chapter": 1,
+      "headline": "Der *Kern* des Systems",
+      "lead": "Kapitel-Trenner gliedern längere Decks. Sie werden durchnummeriert."
+    },
+    {
+      "type": "cards",
+      "label": "Kennzahlen",
+      "eyebrow": "Karten mit Kennzahlen",
+      "headline": "Vier Zahlen,\n*eine Aussage.*",
+      "aside": "Bis zu sechs Karten. Die zuletzt aufgedeckte leuchtet. Mit zoom: true vergrößert ein Klick die Karte für den Raum.",
+      "cards": [
+        {
+          "icon": "layers",
+          "label": "Aufbau",
+          "value": "0–6",
+          "text": "Schritte pro Folie. Erst danach geht es zur nächsten Folie weiter."
+        },
+        {
+          "icon": "timer",
+          "label": "Eintritt",
+          "value": "420 ms",
+          "text": "Bereits sichtbare Karten bleiben stehen, das Layout füllt sich nur."
+        },
+        {
+          "icon": "file-text",
+          "label": "Datei",
+          "value": "1",
+          "sub": "pro **Deck**",
+          "text": "Schriften und Engine stecken im HTML. Läuft auch ohne Netz."
+        },
+        {
+          "icon": "image",
+          "label": "Medien",
+          "value": "Slots",
+          "text": "Bilder und Videos liegen im Supabase-Bucket, nicht im Repo."
+        }
+      ],
+      "zoom": true
+    },
+    {
+      "type": "quote",
+      "label": "Zitat",
+      "text": "Eine gute Folie sagt *eine Sache*. Alles andere gehört in den Vortrag oder ins Handout.",
+      "person": {
+        "name": "Tino Daute",
+        "sub": "Beispiel für die Sprecher-Pille"
+      }
+    },
+    {
+      "type": "timeline",
+      "label": "Zeitleiste",
+      "eyebrow": "Vom alten Deck zum neuen",
+      "headline": "Fünf Stationen, *ein Ablauf.*",
+      "badge": {
+        "value": "5",
+        "label": "Stationen im Agenten"
+      },
+      "stations": [
+        {
+          "label": "Einlesen",
+          "icon": "file-search",
+          "title": "Quelle einlesen",
+          "text": "PPTX, PDF oder altes HTML-Deck. Texte, Notizen und Bilder werden herausgezogen."
+        },
+        {
+          "label": "Modus",
+          "icon": "route",
+          "title": "Modus festlegen",
+          "text": "Neue Form, verdichten oder neu schreiben. Das entscheiden Sie pro Deck."
+        },
+        {
+          "label": "Bauen",
+          "icon": "blocks",
+          "title": "Deck bauen",
+          "text": "Der Agent wählt je Inhalt den passenden Folientyp und legt die Aufbau-Schritte fest."
+        },
+        {
+          "label": "Prüfen",
+          "icon": "clipboard-check",
+          "title": "Im Browser prüfen",
+          "text": "Überlauf, Medien-Slots und Protokoll. Abweichungen werden markiert."
+        },
+        {
+          "label": "Freigabe",
+          "icon": "badge-check",
+          "title": "Auf Ihr OK warten",
+          "text": "Veröffentlicht wird erst nach Ihrer Freigabe."
+        }
+      ],
+      "aside": {
+        "title": "Immer dabei",
+        "items": [
+          "Änderungsprotokoll je Deck",
+          "Handout zum Weitergeben",
+          "Medien-Slots für den Media Manager",
+          "Fakten bleiben geprüft"
+        ]
+      },
+      "id": "zeitleiste"
+    },
+    {
+      "type": "video",
+      "label": "Video",
+      "kicker": "Video-Folie",
+      "title": "Ein Video aus dem Media Manager, Start per Klick",
+      "media": {
+        "slot": "demoVideo",
+        "label": "Video (16:9)",
+        "kind": "video"
+      }
+    },
+    {
+      "type": "image",
+      "label": "Bild",
+      "kicker": "Bild-Folie",
+      "title": "Ein großes Bild mit kurzer Zeile darüber",
+      "media": {
+        "slot": "demoBild",
+        "label": "Bild (16:9)"
+      }
+    },
+    {
+      "type": "chat",
+      "label": "Chat-Demo",
+      "eyebrow": "Chat-Demo",
+      "headline": "Sie sagen,\n*was Sie brauchen.*",
+      "lead": "Die Nachricht tippt sich selbst, danach erscheint die Antwort. Der Knopf oben rechts startet die Szene neu.",
+      "window": {
+        "title": "Deck-Agent",
+        "user": "Bau aus dieser PPTX ein Deck im neuen Design. Modus: verdichten.",
+        "reply": {
+          "title": "Plan · 24 Folien",
+          "items": [
+            "**Kapitel:** drei Abschnitte mit Trennern",
+            "**Aufbau:** Karten und Zeilen schrittweise",
+            "**Medien:** neun Slots im Media Manager"
+          ],
+          "outro": "Protokoll und Handout liegen bei."
+        },
+        "placeholder": "Thema oder Datei angeben …"
+      }
+    },
+    {
+      "type": "split",
+      "label": "Zweispalter",
+      "eyebrow": "Text und Bild",
+      "headline": "Links die Aussage,\n*rechts das Motiv.*",
+      "lead": "Für Inhalte, die ein Bild brauchen. Punkte erscheinen einzeln.",
+      "bullets": [
+        "Bild kommt über einen Slot",
+        "Seitenverhältnis je Folie wählbar",
+        "Seite per side: left tauschbar"
+      ],
+      "media": {
+        "slot": "demoSplit",
+        "label": "Motiv (16:9)",
+        "ratio": "16:9"
+      }
+    },
+    {
+      "type": "compare",
+      "label": "Vergleich",
+      "eyebrow": "Vergleich",
+      "headline": "Zulässig oder *nicht.*",
+      "aside": "Grün, Rot und Gelb bleiben Statusaussagen. Signalrot bleibt Markenfarbe.",
+      "columns": [
+        {
+          "title": "Zulässig",
+          "tone": "ok",
+          "icon": "circle-check",
+          "items": [
+            "Erste Bedingung ist erfüllt",
+            "Zweite Bedingung ist erfüllt"
+          ]
+        },
+        {
+          "title": "Grenzfall",
+          "tone": "warn",
+          "icon": "triangle-alert",
+          "items": [
+            "Hängt vom Einzelfall ab",
+            "Dokumentation empfohlen"
+          ]
+        },
+        {
+          "title": "Unzulässig",
+          "tone": "no",
+          "icon": "shield-alert",
+          "items": [
+            "Pflicht wird ausgelöst",
+            "Verstoß kann Folgen haben"
+          ]
+        }
+      ],
+      "callout": {
+        "text": "Ein Hinweiskasten lässt sich an Karten, Zeilen, Vergleich und Tabelle anhängen."
+      },
+      "scale": {
+        "from": "{ok:unkritisch}",
+        "to": "{no:kritisch}"
+      }
+    },
+    {
+      "type": "table",
+      "label": "Tabelle",
+      "eyebrow": "Tabelle",
+      "headline": "Regeln auf *einen Blick.*",
+      "aside": "Für Fristen, Beträge und Zuständigkeiten. Standardmäßig ohne Aufbau-Schritte.",
+      "columns": [
+        "Baustein",
+        "Wann",
+        "Schritte"
+      ],
+      "rows": [
+        [
+          "Karten",
+          "Kennzahlen und Kurzaussagen",
+          "je Karte einer"
+        ],
+        [
+          "Zeilen",
+          "Agenda und Aufzählungen",
+          "je Zeile einer"
+        ],
+        [
+          "Zeitleiste",
+          "Abläufe und Phasen",
+          "je Station einer"
+        ],
+        [
+          "Tabelle",
+          "Vergleichbare Einzelwerte",
+          "keine"
+        ]
+      ],
+      "source": "Feld source: Quellen, Stand und Hinweise stehen klein am Fuß der Folie. Stand: November 2026."
+    },
+    {
+      "type": "custom",
+      "label": "Sonderfall",
+      "eyebrow": "Eigenes HTML",
+      "headline": "Wenn kein Baustein *passt.*",
+      "aside": "Für Entscheidungsbäume oder Quiz. Bestehende CSS-Klassen nutzen, Schritte per data-step setzen.",
+      "html": "<div class=\"cards c2\"><article class=\"card\" data-step=\"1\"><div class=\"card-t\">Erster Baustein</div><p class=\"card-x\">Frei gesetztes HTML mit data-step=\"1\".</p></article><article class=\"card\" data-step=\"2\"><div class=\"card-t\">Zweiter Baustein</div><p class=\"card-x\">Sparsam verwenden, die Prüfung greift hier nur begrenzt.</p></article></div>"
+    },
+    {
+      "type": "closing",
+      "label": "Abschluss",
+      "eyebrow": "Fragen und Austausch",
+      "headline": "Gibt es noch\n*Fragen?*",
+      "lead": "Der Knopf führt zurück zur Agenda.",
+      "cta": {
+        "label": "Zur Agenda",
+        "to": "agenda"
+      },
+      "person": {
+        "name": "Tino Daute",
+        "sub": "INSIDER.KI · KI-Governance und Compliance"
+      },
+      "media": {
+        "slot": "abschlussVisual",
+        "label": "Porträt, freigestellt (PNG)"
+      }
+    }
+  ]
+}

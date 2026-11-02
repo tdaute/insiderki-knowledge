@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSIDER.KI Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<style>
+  :root{
+    --signal:#C21D1A;--schwarz:#0A0A0A;--dunkel:#161616;--linie-d:#2C2C2C;
+    --offwhite:#F2F2F2;--hellgrau:#E6E6E6;--beton:#B9B5AE;--grau:#9A9A9A;
+    --mittelgrau:#6A6A6A;--helltext:#D8D8D8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Montserrat',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;padding:40px 20px;}
+
+  /* Bühnenfarbe je Stil */
+  body.editorial{background:#3A3A3A;}
+  body.newsletter{background:var(--beton);}
+
+  /* Editor-Leiste (nicht im Druck) */
+  .editor-bar{max-width:680px;margin:0 auto 32px;background:var(--schwarz);border-radius:6px;padding:20px 24px;}
+  .editor-bar h2{font-family:'Bebas Neue',sans-serif;color:var(--offwhite);font-size:22px;letter-spacing:0.08em;font-weight:400;margin-bottom:4px;}
+  .editor-bar p{color:var(--grau);font-size:12px;margin-bottom:14px;}
+  .editor-bar textarea{width:100%;height:220px;background:#1A1A1A;color:var(--offwhite);border:1px solid #333;border-radius:4px;padding:14px;font-family:'SF Mono',Menlo,monospace;font-size:12px;line-height:1.6;resize:vertical;}
+  .editor-bar .row{display:flex;gap:12px;margin-top:12px;align-items:center;flex-wrap:wrap;}
+  .editor-bar button{background:var(--signal);color:#fff;border:none;border-radius:4px;padding:9px 18px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:0.03em;}
+  .editor-bar button.ghost{background:transparent;border:1px solid var(--grau);color:var(--grau);}
+  .editor-bar .hint{color:var(--grau);font-size:11px;line-height:1.5;flex:1;min-width:180px;}
+  .editor-bar code{color:var(--beton);}
+
+  .sheet{max-width:680px;margin:0 auto;box-shadow:0 1px 4px rgba(0,0,0,0.3);}
+
+  /* ============ MASTHEAD ============ */
+  .masthead{padding:32px 44px 38px;}
+  .masthead .brandrow{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .masthead .brand{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.24em;}
+  .masthead .meta-date{margin-left:auto;font-size:11px;letter-spacing:0.05em;}
+  .masthead .rule{width:54px;height:3px;background:var(--signal);margin-bottom:14px;}
+  .masthead .eyebrow{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.28em;margin-bottom:10px;}
+  .masthead h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:48px;line-height:0.98;letter-spacing:0.01em;margin-bottom:18px;}
+  .masthead .topiclabel{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;}
+  .masthead .topic{font-family:'Fraunces',serif;font-style:italic;font-size:17px;margin-top:4px;line-height:1.4;}
+
+  /* ============ BODY ============ */
+  .body{padding:38px 44px;}
+  .body > *{margin-bottom:16px;}
+  .body h2{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:28px;letter-spacing:0.02em;line-height:1.05;margin-top:32px;margin-bottom:12px;}
+  .body h3{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:21px;letter-spacing:0.03em;color:var(--signal);margin-top:22px;margin-bottom:8px;}
+  .body p{font-size:15px;line-height:1.75;}
+  .body a{color:var(--signal);text-decoration:none;}
+  .body strong{font-weight:600;}
+  .body em{font-style:italic;}
+  .body ul{margin-left:20px;font-size:15px;line-height:1.7;}
+  .body li{margin-bottom:5px;}
+  .eyebrow-label{display:flex;align-items:center;gap:10px;margin-top:36px;margin-bottom:16px;}
+  .eyebrow-label::before{content:"";width:22px;height:2px;background:var(--signal);flex:none;}
+  .eyebrow-label span{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:0.24em;color:var(--signal);}
+  .body blockquote{border-left:3px solid var(--signal);padding:4px 0 4px 20px;margin:8px 0 16px;}
+  .body blockquote p{font-family:'Fraunces',serif;font-style:italic;font-size:17px;line-height:1.55;}
+  .callout{border-radius:5px;padding:20px 24px;margin:22px 0;}
+  .callout p:first-child{margin-top:0;}.callout p:last-child{margin-bottom:0;}
+
+  /* ============ FOOTER ============ */
+  .footer{padding:26px 44px;}
+  .footer .ftitle{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.1em;}
+  .footer .flink{color:var(--signal);font-size:12px;margin-top:5px;}
+  .footer .funsub{font-size:11px;margin-top:12px;}
+
+  /* ====================================================== */
+  /* STIL EDITORIAL (C): heller Header+Footer, dunkler Body */
+  /* ====================================================== */
+  .editorial .sheet{background:var(--schwarz);}
+  .editorial .masthead{background:var(--offwhite);}
+  .editorial .masthead .brand{color:var(--schwarz);}
+  .editorial .masthead .meta-date{color:var(--grau);}
+  .editorial .masthead .eyebrow{color:var(--signal);}
+  .editorial .masthead h1{color:var(--schwarz);}
+  .editorial .masthead .topiclabel{color:var(--grau);}
+  .editorial .masthead .topic{color:#333;}
+  .editorial .body{background:var(--schwarz);}
+  .editorial .body h2{color:var(--offwhite);}
+  .editorial .body p,.editorial .body li{color:var(--helltext);}
+  .editorial .body strong{color:var(--offwhite);}
+  .editorial .body a{border-bottom:1px solid var(--grau);}
+  .editorial .body hr{border:none;border-top:1px solid var(--linie-d);margin:28px 0;}
+  .editorial .body blockquote p{color:var(--offwhite);}
+  .editorial .callout{background:var(--dunkel);border:1px solid var(--linie-d);}
+  .editorial .footer{background:var(--offwhite);}
+  .editorial .footer .ftitle{color:var(--schwarz);}
+  .editorial .footer .funsub{color:var(--grau);}
+
+  /* ====================================================== */
+  /* STIL NEWSLETTER (B): dunkler Header+Footer, heller Body */
+  /* ====================================================== */
+  .newsletter .sheet{background:var(--offwhite);}
+  .newsletter .masthead{background:var(--schwarz);}
+  .newsletter .masthead .brand{color:var(--offwhite);}
+  .newsletter .masthead .meta-date{color:var(--grau);}
+  .newsletter .masthead .eyebrow{color:var(--grau);}
+  .newsletter .masthead h1{color:var(--offwhite);}
+  .newsletter .masthead .topiclabel{color:var(--grau);}
+  .newsletter .masthead .topic{color:var(--hellgrau);}
+  .newsletter .body{background:var(--offwhite);}
+  .newsletter .body h2{color:var(--schwarz);}
+  .newsletter .body p,.newsletter .body li{color:var(--schwarz);}
+  .newsletter .body a{border-bottom:1px solid var(--beton);}
+  .newsletter .body hr{border:none;border-top:1px solid var(--beton);margin:28px 0;}
+  .newsletter .body blockquote p{color:var(--schwarz);}
+  .newsletter .callout{background:var(--hellgrau);}
+  .newsletter .footer{background:var(--schwarz);}
+  .newsletter .footer .ftitle{color:var(--offwhite);}
+  .newsletter .footer .funsub{color:var(--grau);}
+
+  @media print{body{background:#fff!important;padding:0;}.editor-bar{display:none;}.sheet{box-shadow:none;max-width:100%;}}
+  @media(max-width:560px){.masthead,.body,.footer{padding-left:26px;padding-right:26px;}.masthead h1{font-size:38px;}}
+</style>
+</head>
+<body>
+
+<div class="editor-bar">
+  <h2>INSIDER.KI Editorial</h2>
+  <p>Markdown eintragen → das Blatt rendert live. Speichern: „Als PDF drucken". Stil oben im Frontmatter umschalten.</p>
+  <textarea id="md" spellcheck="false"></textarea>
+  <div class="row">
+    <button onclick="render()">Aktualisieren</button>
+    <button class="ghost" onclick="window.print()">Als PDF drucken</button>
+    <span class="hint">Sektionen: <code>::: LABEL :::</code> · <code>&gt; Zitat</code> · <code>:::box … :::</code> · <code>---</code></span>
+  </div>
+</div>
+
+<div class="sheet">
+  <div class="masthead" id="masthead"></div>
+  <div class="body" id="body"></div>
+  <div class="footer" id="footer"></div>
+</div>
+
+<script>
+/* ============================================================
+   INHALT
+   Manuell: ins Textfeld oben pasten.
+   /recherche: den String unten zwischen den Backticks ersetzen.
+   ============================================================ */
+const MARKDOWN = `---
+stil: editorial
+brand: INSIDER.KI
+ausgabe: EDITORIAL · KI-PRAXIS
+datum: Juni 2026
+titel: Claude verstehen: Die Nutzungslimits
+thema: Wie die Limits wirklich funktionieren — und was das für deinen Plan heißt.
+footer_titel: INSIDER.KI EDITORIAL
+footer_link: insiderki.ai
+footer_sub: KI-Governance & Compliance
+---
+
+::: DAS WICHTIGSTE ZUERST :::
+
+Vergiss die Vorstellung von „X Token pro Tag" oder „pro Monat". So funktioniert Claude **nicht**. Stattdessen gibt es ein zweistufiges System aus rollierenden Zeitfenstern – und das gilt für **alle** Pläne gleich. Nur die Größe der Kontingente unterscheidet sich.
+
+Wenn du das einmal verstanden hast, weißt du jederzeit, woran du bist.
+
+::: DIE ZWEI STUFEN :::
+
+### Stufe 1 · Das 5-Stunden-Fenster (Session)
+Dein Hauptkontingent läuft in einem **rollierenden 5-Stunden-Fenster**. Alle fünf Stunden setzt es sich zurück. Kein Tagesbudget, das um Mitternacht leer ist, sondern eines, das sich **mehrmals täglich von selbst auffrischt**.
+
+### Stufe 2 · Die Wochenlimits (der Deckel)
+Zusätzlich gibt es **zwei wöchentliche Obergrenzen**: eine über **alle Modelle**, eine nur für **Sonnet**. Sie sind die harte Grenze über dem Session-Fenster – im Alltag stößt man eher ans Session-Limit.
+
+::: ZWEI DINGE, DIE FAST ALLE ÜBERSEHEN :::
+
+**1 · Alles zählt auf denselben Topf.** Browser, Desktop-App, Claude Code – alles läuft über **dasselbe gemeinsame Limit**.
+
+**2 · Was ein „Prompt" kostet, schwankt stark.** Abhängig von Länge, Dateien, Gesprächslänge, Modell und Feature.
+
+:::box
+**Tipp:** Mit **/usage** siehst du in Claude Code alle Balken – Session, Woche (alle Modelle), Woche (Sonnet). Dein Tacho.
+:::
+
+::: PRO ODER MAX :::
+
+> Max rechtfertigt sich über deine Produktivität, nicht über Token-Mathematik.
+
+**Pro reicht**, wenn deine Arbeit interaktiv ist. **Max lohnt sich**, wenn du intensiv über den Tag arbeitest. Unsicher? Starte mit Pro – regelmäßiges Anstoßen ist das Signal zum Upgrade.
+
+---
+
+Stand Juni 2026. Verlässlichste Quellen: **support.claude.com**, **anthropic.com/pricing**, dein eigenes **/usage**.`;
+
+function parseFrontmatter(text){
+  const fm={};let body=text;
+  const m=text.match(/^---\n([\s\S]*?)\n---\n?/);
+  if(m){
+    m[1].split('\n').forEach(line=>{
+      const i=line.indexOf(':');
+      if(i>0){fm[line.slice(0,i).trim()]=line.slice(i+1).trim();}
+    });
+    body=text.slice(m[0].length);
+  }
+  return {fm,body};
+}
+function preprocess(md){
+  md=md.replace(/^:::[ \t]+(.+?)[ \t]+:::[ \t]*$/gm,(_,l)=>`\n<div class="eyebrow-label"><span>${l.trim()}</span></div>\n`);
+  md=md.replace(/^:::box[ \t]*\n([\s\S]*?)\n:::[ \t]*$/gm,(_,c)=>`\n<div class="callout">\n\n${c}\n\n</div>\n`);
+  return md;
+}
+function render(){
+  const raw=document.getElementById('md').value;
+  const {fm,body}=parseFrontmatter(raw);
+  const stil=(fm.stil||'editorial').toLowerCase()==='newsletter'?'newsletter':'editorial';
+  document.body.className=stil;
+
+  let head=`<div class="brandrow"><span class="brand">${fm.brand||'INSIDER.KI'}</span>`;
+  if(fm.datum) head+=`<span class="meta-date">${fm.datum}</span>`;
+  head+=`</div><div class="rule"></div>`;
+  if(fm.ausgabe) head+=`<div class="eyebrow">${fm.ausgabe}</div>`;
+  if(fm.titel) head+=`<h1>${fm.titel}</h1>`;
+  if(fm.thema) head+=`<div class="topic">${fm.thema}</div>`;
+  document.getElementById('masthead').innerHTML=head;
+
+  marked.setOptions({breaks:true});
+  document.getElementById('body').innerHTML=marked.parse(preprocess(body));
+
+  let ft='';
+  if(fm.footer_titel) ft+=`<div class="ftitle">${fm.footer_titel}</div>`;
+  if(fm.footer_link) ft+=`<div class="flink">${fm.footer_link}</div>`;
+  ft+=`<div class="funsub">${fm.footer_sub||''}</div>`;
+  const f=document.getElementById('footer');
+  f.innerHTML=ft;
+  f.style.display=(fm.footer_titel||fm.footer_link)?'block':'none';
+}
+document.getElementById('md').value=MARKDOWN;
+render();
+</script>
+</body>
+</html>

@@ -1,168 +1,233 @@
-# KNOWLEDGE — Design System für Präsentationen
+# KNOWLEDGE — Design System v2
 
-Verbindliche Grundlage für alle Decks der Marke KNOWLEDGE. Referenzimplementierung:
-`KNOWLEDGE-praesentation-master.html`. Produktivbeispiel:
-`ki-kennzeichnungspflichten/index.html`.
+Verbindlich für alle neuen Decks. Lauffähiges Muster aller Folientypen:
+`_vorlage/deck.json` und `https://knowledge.insiderki.ai/_vorlage/`.
+Das frühere System (Navy, Inter, Sidebar) liegt in `_archiv/` und gilt nur noch für Decks,
+die noch nicht umgezogen sind.
 
 ---
 
-## 1. Farben
+## 1. Aufbau
 
-| Token | Hex | Verwendung |
+```
+<slug>/deck.json      Inhalt, das einzige, was ein Deck ausmacht
+_engine/              Design und Technik für alle Decks
+node _engine/build.mjs <slug>
+<slug>/index.html     fertige Einzeldatei, läuft auch ohne Netz
+```
+
+Inhalte stehen nur in `deck.json`, Gestaltung nur in `_engine/`. Eine Design-Änderung erreicht
+ein Deck, sobald es neu gebaut wird (`node _engine/build.mjs --alle`). Die `index.html` wird nie
+von Hand bearbeitet.
+
+## 2. Farben
+
+| Token | Wert | Verwendung |
 |---|---|---|
-| `--bg` | `#0a0e1a` | Folienhintergrund |
-| `--bg-2` | `#0d1424` | Abgesetzte Flächen |
-| `--panel` | `#111a2c` | Chips, Karten auf Karten |
-| `--sig` | `#C21D1A` | **Signalrot.** Vertikalstriche, Kapitel-Pills, Stichtagsmarken |
-| `--sig-br` | `#e04340` | Aufgehelltes Signalrot für Text auf dunklem Grund |
-| `--orange` | `#e8863c` | Primärakzent: Eyebrow, Icons, Listenzeichen, Graph-Knoten |
-| `--orange-br` | `#f59e42` | Hover, Hervorhebung im Fließtext |
-| `--white` | `#ffffff` | Überschriften |
-| `--grey` | `#9aa3b2` | Fließtext |
-| `--grey-2` | `#6b7280` | Fußnoten, inaktive Navigation |
-| `--green` | `#3fb27f` | Zulässig, erfüllt, „kein Handlungsbedarf" |
-| `--red` | `#e05252` | Unzulässig, Risiko, Pflicht ausgelöst |
-| `--amber` | `#e0a83c` | Grenzfall |
-| `--blue` | `#5b8def` | Rolle „Anbieter" |
+| `--bg` | `#0A0A0A` | Hintergrund |
+| `--surface` | `#141414` | Karten |
+| `--surface-hi` | `#1B1B1B` | Felder, erhöhte Flächen |
+| `--line` | `rgba(255,255,255,.06)` | Raster, Kartenrand |
+| `--line-hi` | `rgba(255,255,255,.14)` | Knöpfe, Hover |
+| `--text` | `#F2F1ED` | Headlines, Titel |
+| `--text-dim` | `#A8A8A3` | Fließtext |
+| `--text-faint` | `#85857F` | Labels, Fußzeile |
+| `--accent` | `#E50101` | **Rot** für Flächen, Ringe, Linien |
+| `--accent-text` | `#E50101` | Rot als Schrift, immer im Schnitt 600 |
+| `--warm` | `#F2B53A` | **Nur** Fortschritt und Zähler |
+| `--ok` `--no` `--warn` | `#3FB27F` `#E05252` `#E0A83C` | **Nur** Statusaussagen: zulässig, unzulässig, Grenzfall |
 
-Semantische Regel: **Grün = zulässig, Rot = Pflicht/Risiko, Gelb = Grenzfall.**
-Signalrot ist Markenfarbe und wird nicht für Statusaussagen benutzt — dafür `--red`.
+Rot ist Markenfarbe und macht keine Statusaussage.
 
-Rollencodierung durchgängig: Anbieter blau, Betreiber grün, beide orange.
+**Abweichung von der INSIDER.KI-Guideline:** Die Guideline nennt `#C21D1A`. Decks stehen seit November 2026
+in `#E50101`, das Handout im Editorial-Layout bleibt bei `#C21D1A`.
 
-**Kontrasthinweis:** `--sig` auf `--bg` liegt bei etwa 3:1. Für Flächen und das
-Logosymbol ausreichend, für Fließtext nicht. Kleine Schrift in Rot immer `--sig-br`.
-Die Wortmarke steht deshalb in `--white`, nicht in `--sig`.
+**Bewusste Abweichung von der INSIDER.KI-Guideline:** Die Guideline verbietet Glow und Schatten.
+Decks nutzen beides gezielt, weil die Bewegung und das Leuchten den Vortrag führen. Alles andere
+folgt der Guideline: Schwarz, ein Akzent, viel Negativraum.
 
-## 2. Typografie
+## 3. Typografie
 
-- **Inter** (300–800) für alles Gesetzte
-- **JetBrains Mono** (400/500) für Daten, Aktenzeichen, Kapitel-Untertitel, Zähler
+- **Switzer** für alles Gesetzte. Headlines im dünnen Schnitt 200, Fließtext 300, Titel 500.
+  **Rote Schrift steht immer im kräftigen Schnitt 600.**
+- **Bebas Neue** für große Ziffern und das Wasserzeichen.
 
-| Rolle | Größe | Gewicht |
+Beide stecken im Deck (`_engine/fonts/`), es gibt keine Abrufe bei Google Fonts. Gleiche
+Kombination wie auf `check.kodex-insider.com`. Den Headline-Schnitt ändert ein Token: `--hl-weight`.
+
+| Rolle | Größe bei 1440×810 | Schnitt |
 |---|---|---|
-| Deckblatt-Titel | `clamp(2.6rem, 7vw, 6rem)` | 800 |
-| Kapitel-Titel | `clamp(2.2rem, 4.6vw, 3.6rem)` | 800 |
-| Folientitel `.h1` | `clamp(1.6rem, 2.9vw, 2.5rem)` | 700 |
-| Lead | `.92rem` / Zeilenhöhe 1.55 | 400 |
-| Karten-Überschrift | `1rem` | 700 |
-| Karten-Text | `.84rem` / 1.62 | 400 |
-| Listenpunkt | `.82rem` / 1.6 | 400 |
-| Eyebrow | `.72rem`, `letter-spacing .2em`, Versalien | 600 |
+| Titel und Abschluss | 52 px | 200 |
+| Kapitel | 56 px | 200 |
+| Headline | 44 px, Zeilenhöhe 1.06, Laufweite -0.02em | 200 |
+| Headline Zeitleiste, Zweispalter, Chat | 36 px | 200 |
+| Zitat | 32 px | 200 |
+| Kennzahl | 36 px | 200 |
+| Lead | 15 px | 300 |
+| Randtext | 14 px | 300 |
+| Karten-Titel | 15 px | 500 |
+| Zeilen-Titel | 14 px | 500 |
+| Karten- und Zeilen-Text | 12 px | 300 |
+| Eyebrow | 10 px, Versalien, +0.18em, mit rotem Strich davor | 500 |
+| Sektionslabel und Seitenzahl oben rechts | 9 px, Versalien, +0.18em | 500 |
 
-Alle Größen sind viewport-relativ. Feste Pixelwerte nur für Strichstärken und Icons.
+1rem entspricht 16 px bei 1440×810. Alles skaliert mit dem Fenster, Beamer wie 4K: Bei 1920×1080 sind
+alle Werte ein Drittel größer. Das Hintergrundraster hat 36 px Kantenlänge.
 
-## 3. Logo
-
-Netz-/Radsymbol in Signalrot: ein Zentrum aus gefuelltem Punkt und Ring, davon
-acht Speichen nach aussen zu acht Knoten, die ein Achteck aufspannen. Die Knoten
-sind durch eine zurueckgenommene Achteckkante verbunden. Streng symmetrisch mit
-klarem Zentrum — das ist der bewusste Gegenentwurf zum abgeloesten Graph-Zeichen.
-
-Alle Elemente in `--sig`. Achteckkante 30 % Deckkraft bei Strichstaerke 0.9,
-Speichen 85 % bei 1.5, Ring 2.0, Zentrumspunkt Radius 4.6, Knoten Radius 3.
-Wortmarke **KNOWLEDGE** in `--white`, `letter-spacing .26em`, Gewicht 700.
-**Kein Zusatz unter der Wortmarke.**
-
-Aufrufe: `logo(40)` in der Sidebar, `logo(52)` auf Titelfolien.
-
-> Abgeloest: der orange Obsidian-Graph mit roter Wortmarke. In neuen Decks nicht
-> mehr verwenden. Bestehende Decks werden nachgezogen, wenn sie ohnehin angefasst
-> werden.
+**Signatur:** Headline zweizeilig, zweite Zeile oder ein Teilsatz in Rot. Einzeilig ist in Ordnung
+bei `section`, `compare`, `table`, `timeline` und wenn es kurz genug ist. Höchstens eine rote Stelle
+je Headline.
 
 ## 4. Folienraster
 
-Inhaltsfolien bestehen aus Sidebar (230 px) und Bühne.
+```
+┌──────────────────────────────────────────────────────────┐
+│ Logo                             SEKTIONSLABEL  07 / 31  │  Kopfzeile
+│                                                          │
+│   —— EYEBROW                      Randtext,              │  Inhalt ab 23 %
+│   Headline weiß                   höchstens 3 Zeilen     │
+│   Headline rot.                                          │
+│                                                          │
+│   [Karte] [Karte] [Karte] [Karte]                    07  │  Wasserzeichen
+│ ‹  ▬▬▬▬▬▬▬▬▬▬───────────────  ›³   ← → navigieren        │  Slider, Zähler
+└──────────────────────────────────────────────────────────┘
+```
 
-- **Bühne:** `padding: 3.4rem 2.6rem 1.6rem`
-- **Header-Block:** Eyebrow und Titel hinter einem 4 px breiten vertikalen
-  Signalrot-Strich, `padding-left: 1.15rem`
-- **Body:** füllt den Rest, vertikal zentriert
+Passt der Inhalt nicht, rückt die Engine ihn automatisch nach oben und enger zusammen.
+`__deck.audit()` im Browser misst den tiefsten Inhalt gegen die Fußzeile und meldet unter `ueberlauf`, was
+trotzdem nicht passt. `umbrueche` nennt Headlines, die mehr Zeilen brauchen als vorgesehen.
 
-**Kein horizontaler Strich unter dem Titel.** Die Trennung erfolgt ausschließlich
-über den vertikalen Strich links.
+## 5. Folientypen
 
-**Kapitel-Trenner:** Pill in Signalrot mit `Kapitel N`, darunter Titel und
-Monospace-Untertitel hinter einem 5 px breiten vertikalen Strich. Durchgehende
-Nummerierung, keine „N von M"-Zählung.
+Alle Felder im Muster `_vorlage/deck.json`. Jede Folie braucht ein `label` für die Kopfzeile: das
+Thema in ein bis drei Wörtern.
 
-## 5. Komponenten
+| `type` | Für | Aufbau-Schritte | Eigene Felder |
+|---|---|---|---|
+| `title` | Einstieg mit Kennzahlen und Bild rechts | keine | `eyebrow` `headline` `lead` `kpis` `live` `nametag` `media` |
+| `statement` | Eine Aussage, ein Hinweis | keine | `eyebrow` `headline` `lead` `callout` |
+| `section` | Kapitelanfang, durchnummeriert | keine | `chapter` `headline` `lead` |
+| `cards` | 1 bis 6 Karten | je Karte | Kopf, `cards` `columns` `callout` `scale` `zoom` |
+| `rows` | 1 bis 6 Zeilen, ab 4 zweispaltig | je Zeile | Kopf, `rows` `columns` `ordinal` `callout` `zoom` |
+| `quote` | Zitat mit Sprecher-Pille | keine | `text` `person` |
+| `timeline` | 2 bis 7 Stationen mit Detailkarte | je Station | Kopf, `stations` `stepWord` `callout`, `aside` als `{ title, items }` |
+| `video` | Video mit Play-Knopf, Start per Klick | keine | `kicker` `title` `media` |
+| `image` | Großes Bild | keine | `kicker` `title` `media` `fit` |
+| `split` | Text und Bild | je Punkt | `eyebrow` `headline` `lead` `bullets` `media` `side` `callout` |
+| `compare` | Spalten mit `tone` | je Spalte | Kopf, `columns` `callout` `scale` |
+| `table` | Tabelle, `steps: true` deckt zeilenweise auf | optional | Kopf, `columns` `rows` `callout` |
+| `chat` | Fenster mit Schreibmaschine und Antwort | läuft automatisch | `eyebrow` `headline` `lead` `window` |
+| `closing` | Abschluss mit Knopf und Person | keine | `eyebrow` `headline` `lead` `cta` `person` `media` |
+| `custom` | Eigenes HTML, Schritte per `data-step="n"` | frei | Kopf, `html` |
 
-| Klasse | Zweck |
+**Kopf** heißt: `eyebrow` `headline` `lead` `aside` `badge`.
+
+**Auf jeder Folie möglich:** `label`, `id` (Sprungziel), `source` (Quelle, Stand, Hinweis klein am
+Fuß), `notes` (Sprechernotizen, nur als Daten), `glow` (`br` `bl` `c` `none`), `watermark: false`,
+`steps: false` (alles sofort zeigen).
+
+Der Bau lehnt Felder ab, die ein Folientyp nicht darstellt. So geht nichts still verloren.
+
+**Einzelne Elemente:**
+- Karte: `icon` `label` `value` `sub` `title` `text` `media` `highlight` `tone`
+- Zeile: `title` `text` `icon` `highlight` `to`, dazu `ordinal` (eigener Text, oder `false` für eine
+  leere Spalte). `ordinal: false` an der Folie nimmt die Spalte ganz weg
+- Spalte in `compare`: `title` `icon` `items` `tone`
+- Station: `label` `icon` `title` `text`. `stepWord` ersetzt „Schritt", `stepWord: ""` nimmt die Zeile weg
+- `scale`: `{ from, to }`, Verlaufsskala von Grün nach Rot
+- `callout`: Text oder `{ text, tone }`
+- `tone`: `ok` `no` `warn` `accent`
+
+**Im Text:** `*rot*`, `**fett**`, `\n` für einen Zeilenumbruch, `{ok:…}` `{warn:…}` `{no:…}` für
+farbige Statuswörter.
+
+**Sprünge:** `"id": "agenda"` an der Zielfolie, `"to": "agenda"` an `cta` oder an einer Zeile. Sprünge
+landen voll aufgebaut. Mit `zoom: true` vergrößert ein Klick eine Karte oder Zeile für den Raum.
+
+**Richtwerte in Zeichen:** Headline 70, Lead 260, Randtext 220, Zeile 110, Zeilentitel 60, Karte 130,
+Kartentitel 60, Station 150, Zitat 170, Punkt 120, Tabellenzelle 160, Hinweiskasten 240, Quelle 200.
+Der Bau meldet Überschreitungen als Hinweis.
+
+Pro Folie leuchtet genau eine Karte: die zuletzt aufgedeckte. `highlight: true` legt sie fest.
+
+## 6. Bewegung
+
+| Was | Wie |
 |---|---|
-| `.grid.g2` – `.g5` | Kartenraster, 2 bis 5 Spalten |
-| `.card` | Grundkarte. Varianten `ok` `no` `warn` `acc` |
-| `.card ul.bare` | Aufzählung ohne Listenzeichen |
-| `.callout` | Hervorgehobener Kasten. Varianten `green` `red` |
-| `.check` / `.check-i` | Nummerierte Schrittfolge. Variante `lg` größer |
-| `.arw-v` | Vertikaler Pfeil zwischen Schritten |
-| `.stack` / `.stack-row` | Gestapelte Zeilen, Titelspalte links |
-| `.tl2` | Zeitstrahl mit mehreren Ästen |
-| `.tech` | Merkmalsblock mit Label links |
-| `.scale` | Verlaufsskala grün → gelb → rot mit Polbeschriftung |
-| `.mk` | Wireframe-Mockup. Varianten `ok` `no` |
-| `.t2` | Entscheidungsbaum mit seitlichen Abzweigen |
-| `.brk` | Klammern über Kartengruppen |
-| `.badge` | Rollenmarkierung oben rechts. Variante `inline` für Karten |
-| `.fine` / `.fine-box` | Betragskästen |
-| `.aiicons` | Icon-Reihe mit Beschriftung |
+| Aufbau-Schritt | von `opacity 0, 12px, scale .98` in 420 ms, mehrere gleichzeitig mit 60 ms Versatz. Sichtbares bewegt sich nicht |
+| Folienwechsel | alte Folie aus in 100 ms, Logo-Blende, neue Folie ein in 220 ms, Headline-Zeilen um 40 ms versetzt. Zusammen rund 0,5 s |
+| Logo-Blende | nur das Symbol, klein mittig (44 px bei 1440), rund 0,25 s sichtbar (`LOGO_HALTEN` in `engine.js`). Entfällt beim Springen und schnellen Blättern |
+| Namensfeld | roter Punkt pulsiert dauerhaft, 2 s |
+| Aktiver Punkt | atmet dauerhaft mit `pulse`, 2 s |
+| Verbindungslinie | füllt sich bis zum aktiven Punkt, Rot nach Bernstein, 500 ms |
+| Play-Knopf | Schein atmet in 3 s, beim Hover größer |
+| Chat | Schreibmaschine mit 28 ms je Zeichen, danach die Antwort |
+| Hover | zurückhaltend, Rand wird heller |
 
-Icons über `ico(name, größe, farbe, strichstärke)`. Verfügbar: `speech`, `imgnote`,
-`facescan`, `videowave`, `doc`, `shield`, `puzzle`, `chain`, `checkc`, `lock`, `eye`,
-`globe`, `scaleico`, `mask`, `block`, `contract`, `cal`, `police`. Alle als Outline,
-Strichstärke 1.5, Endkappen rund.
-
-## 6. Bilder
-
-Platzhalter und echte Bilder laufen über `ph(label, klasse, slotKey)`.
-
-| Klasse | Verhältnis |
-|---|---|
-| keine / `tall` / `wide` | 1:1 |
-| `r169` | 16:9 |
-| `r34` | 3:4 Hochformat |
-| `r11` | 1:1 explizit |
-
-Die Deckelung erfolgt über `vh`-Werte, damit Bilder relativ zur Folienhöhe
-skalieren und nie überlaufen. Neue Verhältnisklassen müssen in `hydrateMedia()`
-in die Liste der erhaltenen Klassen aufgenommen werden.
+`prefers-reduced-motion`: nur Überblendungen, kein Puls.
 
 ## 7. Bedienung
 
-Pfeiltasten, Leertaste, Bild auf/ab, Pos1, Ende. `R` löst das Quiz aus.
-Sidebar-Einträge springen auf die erste Folie des Kapitels. Videos laufen nur
-auf der aktiven Folie.
+| Eingabe | Wirkung |
+|---|---|
+| `→` `Leertaste` `Bild ab` | nächster Schritt, sonst nächste Folie |
+| `←` `Bild auf` | ein Schritt zurück, sonst vorherige Folie, voll aufgebaut |
+| `Pos1` `Ende` | erste und letzte Folie |
+| `F` | Vollbild |
+| Slider | klicken oder ziehen springt zur Folie |
+| ‹ › in der Detailkarte, Punkte der Zeitleiste | blättern in der Zeitleiste |
+| `#7` oder `#7.2` | Link auf Folie 7, Schritt 2 |
+| Wischen | auf dem Handy links und rechts |
+| Klick auf Zeile mit Pfeil | springt zum Kapitel |
+| Klick auf Karte mit `zoom` | vergrößert sie, `Esc` oder Klick schließt |
 
-## 8. Medienanbindung
+Der gelbe Zähler am Weiter-Knopf zeigt die verbleibenden Schritte der Folie.
 
-Supabase-Projekt **ai-governance** (`nblyvxnahkbvtatathbh`).
+## 8. Logo
 
-- `presentations` — eine Zeile je Deck, identifiziert über `slug`
-- `presentation_slots` — eine Zeile je Bildplatz, verknüpft über `presentation_id`
-- Bucket `workshop-assets`
+**Das Standardlogo seit November 2026:** Symbol und „KNOW" im Verlauf von Rot nach Orange, „LEDGE" in Weiß.
+Das Gesamtlogo steht oben links. Das Symbol allein steht klein in der Blende, in der Chat-Demo, bei der Person
+im Abschluss und blass als Platzhalter, wenn es kein Titelbild gibt.
 
-`hydrateMedia()` liest beim Laden alle Slots mit gesetzter `public_url` und
-ersetzt die Platzhalter. Ohne Netz bleiben die Platzhalter stehen — das Deck ist
-offline vorführbar.
+| Datei in `_engine/logo/` | Zweck |
+|---|---|
+| `knowledge-logo-original.webp` | Original auf Schwarz, die Quelle |
+| `logo-voll.png` | Gesamtlogo, freigestellt, wird eingebettet |
+| `logo-symbol.png` | Nur das Symbol, freigestellt, wird eingebettet |
 
-**`media_kind` ist kein Seitenverhältnis**, sondern nur `image` / `video` / `any`.
-Der Zuschnitt steckt allein in den CSS-Klassen. Damit im Media Manager sichtbar
-ist, was gebraucht wird, gehört das Format ins `label`, etwa „Strafverfolgung (16:9)".
+Neues Logo einsetzen: `swift _engine/tools/logo-aufbereiten.swift <original> _engine/logo`, danach alle Decks
+neu bauen. Das Original muss auf schwarzem Grund stehen, die Helligkeit wird zur Deckkraft.
 
-## 9. Neues Deck anlegen
+## 9. Medien
 
-1. `KNOWLEDGE-praesentation-master.html` kopieren
-2. `{{PLATZHALTER}}` ersetzen, `PRES_SLUG` und `NAV` setzen
-3. Demo-Folien durch echte ersetzen, Bausteine aus Abschnitt 5 kombinieren
-4. Zeile in `presentations` anlegen, Slots in `presentation_slots`
-5. Mit jsdom prüfen: Folienzahl, keine JS-Fehler, alle Slots vorhanden
-6. Ausliefern nach `tdaute/insiderki-knowledge`
+Supabase-Projekt `ai-governance`, Tabellen `presentations` und `presentation_slots`, Bucket
+`workshop-assets`. Im Deck steht nur der Slot:
+
+```json
+"media": { "slot": "motivKurzname", "label": "Was zu sehen ist (16:9)", "ratio": "16:9" }
+```
+
+**Ausnahme Porträt:** Tinos Porträt gehört wie das Logo zur Engine und steckt im Deck, sobald es genutzt wird:
+
+```json
+"media": { "asset": "portrait", "label": "Porträt Tino Daute" },
+"nametag": { "name": "Tino Daute", "sub": "INSIDER.KI" }
+```
+
+Das geht auf `title` und `closing`. Die Dateien liegen in `_engine/portrait/`, ein neues Foto auf hellem Grund
+stellt `swift _engine/tools/portrait-freistellen.swift <original> _engine/portrait/tino-daute 1100` frei. Es
+läuft lokal mit der Motiv-Erkennung von macOS.
+
+Bei Videos zusätzlich `"kind": "video"`. Die Engine fragt beim Laden die Tabelle ab und ersetzt
+jeden Platzhalter, zu dem eine URL hinterlegt ist. Ohne Netz bleiben die Platzhalter stehen, das
+Deck bleibt vorführbar. Das Format gehört ins `label`, damit es im Media Manager sichtbar ist.
 
 ## 10. Harte Regeln
 
-- HTML-Dateien **immer** per Drag-and-drop über „Upload files" nach GitHub,
-  **nie** über den Web-Editor — der zerschießt die UTF-8-Kodierung
-- Ein Deck ist **eine** Datei. Keine externen CSS- oder JS-Dateien
-- Externe Abhängigkeiten: nur Google Fonts und Supabase REST
+- Inhaltliche Bilder und Videos nie ins Repo und nie als Base64 ins Deck. Ausnahmen sind nur Logo und Porträt
 - Kein `localStorage`, kein `sessionStorage`
-- Änderungen bündeln, dann einmal bauen
+- Externe Abrufe nur zu Supabase. Das Handout lädt zusätzlich Google Fonts
+- `index.html` und `handout.html` nie von Hand ändern, immer neu bauen
+- Das Repo ist öffentlich, auch `deck.json` und `notes`. Interne Fragen und Abstimmungen gehören
+  nie in ein Deck
+- Decks mit Git pushen. Der GitHub-Web-Editor zerschießt die Umlaute

@@ -21,3 +21,13 @@
   for = "/_vorlage/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/_engine/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/_archiv/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
