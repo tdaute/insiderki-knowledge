@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Liest eine alte Praesentation fuer den deck-builder ein.
+"""Liest eine alte Praesentation fuer den präsentation_agent ein.
 
 Aufruf:  python3 -I _engine/tools/quelle-lesen.py <datei> <ausgabeordner>
 

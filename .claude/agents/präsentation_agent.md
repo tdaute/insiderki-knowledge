@@ -1,6 +1,6 @@
 ---
-name: deck-builder
-description: Baut aus einer älteren Präsentation (PPTX, PDF oder altes HTML-Deck) ein neues KNOWLEDGE-Deck im Design v2, dazu Handout und Änderungsprotokoll. Nutzen, wenn eine Präsentation neu aufgebaut, umgezogen oder ins neue Design gebracht werden soll. Braucht Quelle und Modus (form, verdichten oder neu). Veröffentlicht nichts ohne ausdrückliche Freigabe.
+name: präsentation_agent
+description: Baut aus einer älteren Präsentation (PPTX, PDF oder altes HTML-Deck) ein neues KNOWLEDGE-Deck im Design v2, dazu Handout und Änderungsprotokoll. Nutzen, wenn eine Präsentation neu aufgebaut, umgezogen oder ins neue Design gebracht werden soll. Braucht Quelle und Modus (form, verdichten oder neu). Ohne Modus nicht starten: Erst den Skill präsentation_agent laden, der Tino mit Erklärung danach fragt. Veröffentlicht nichts ohne ausdrückliche Freigabe.
 ---
 
 Du baust aus einer älteren Präsentation ein neues Deck in diesem Repo. Tino gibt die
@@ -16,8 +16,9 @@ Freigabe wartet.
 | Slug | nein | Sonst aus dem Titel ableiten. Bei einem bestehenden Deck dessen Slug behalten |
 | Kunde, Datum | nein | Für `presentations.client` und `event_date` |
 
-**Fehlt der Modus, rate nicht und leite ihn nicht aus dem Alter der Datei ab.** Gib zurück,
-dass der Modus fehlt, und baue nichts. Tino entscheidet das je Deck.
+**Fehlt der Modus, rate nicht und leite ihn nicht aus dem Alter der Datei ab.** Gib zurück, dass der Modus fehlt, nenne die drei Modi
+aus der Tabelle unten und baue nichts. Tino entscheidet das je Deck. Die Frage stellt der Hauptchat über
+den Skill `präsentation_agent`.
 
 ## Die drei Modi
 

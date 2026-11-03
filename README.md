@@ -8,7 +8,8 @@ Live: **https://knowledge.insiderki.ai**
 ```
 index.html                  Übersicht, lädt live aus Supabase
 DESIGN-SYSTEM.md            Verbindliche Gestaltungsgrundlage
-.claude/agents/deck-builder.md   Agent für den Umbau alter Präsentationen
+.claude/agents/präsentation_agent.md   Agent für den Umbau alter Präsentationen
+.claude/skills/präsentation_agent/    Aufruf des Agenten, fragt zuerst nach dem Modus
 _engine/                    Design und Technik für alle Decks
 _vorlage/                   Inhaltlich leere Vorlage mit allen Folientypen
 <slug>/deck.json            Inhalt eines Decks
@@ -24,11 +25,19 @@ Decks mit `deck.json` nutzen die neue Engine. `ki-kennzeichnungspflichten`, `eu-
 
 ## Alte Präsentation neu aufbauen
 
-In Claude Code in diesem Ordner sagen:
+In Claude Code eingeben:
 
-> Bau aus `~/Downloads/alte-praesentation.pptx` ein neues Deck. Modus: verdichten.
+> /präsentation_agent
 
-Der Agent `deck-builder` nimmt PPTX, PDF und alte HTML-Decks an. Den Modus gibst du je Deck vor:
+Er fragt zuerst nach dem Modus und erklärt die drei zur Wahl, danach nach der Datei. Weißt du beides
+schon, geht es direkt:
+
+> /präsentation_agent ~/Downloads/alte-praesentation.pptx verdichten
+
+Der Aufruf geht aus jedem Ordner, weil `~/.claude/skills/präsentation_agent` auf den Skill hier im Repo
+zeigt. Auf einem neuen Rechner legst du diese Verknüpfung einmal an.
+
+Der Agent `präsentation_agent` nimmt PPTX, PDF und alte HTML-Decks an. Den Modus gibst du je Deck vor:
 
 | Modus | Für | Was passiert |
 |---|---|---|
