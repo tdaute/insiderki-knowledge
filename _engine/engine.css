@@ -374,7 +374,8 @@ strong{font-weight:600;color:var(--text)}
 .ph-in{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.75rem;font-size:.6875rem;letter-spacing:.06em;text-align:center}
 .ph-in .ic{font-size:1.4rem}
 .media{display:block;width:100%;border-radius:.75rem;object-fit:cover}
-.r169{aspect-ratio:16/9}.r43{aspect-ratio:4/3}.r11{aspect-ratio:1/1}.r34{aspect-ratio:3/4}
+.media.fit{object-fit:contain;background:rgba(255,255,255,.03)}
+.r169{aspect-ratio:16/9}.r32{aspect-ratio:3/2}.r43{aspect-ratio:4/3}.r11{aspect-ratio:1/1}.r34{aspect-ratio:3/4}
 
 /* Zweispalter: das Bild bleibt in jedem Fenster im richtigen Verhaeltnis */
 .split{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-rows:minmax(0,1fr);gap:3rem;align-items:center}
@@ -383,6 +384,7 @@ strong{font-weight:600;color:var(--text)}
 .split-m{align-self:stretch;container-type:size;min-height:0;display:flex;align-items:center;justify-content:center}
 .split-m .ph,.split-m .media{flex:none;height:auto}
 .split-m .r169{width:min(100cqw,177.78cqh)}
+.split-m .r32{width:min(100cqw,150cqh)}
 .split-m .r43{width:min(100cqw,133.33cqh)}
 .split-m .r11{width:min(100cqw,100cqh)}
 .split-m .r34{width:min(100cqw,75cqh)}
@@ -400,6 +402,110 @@ strong{font-weight:600;color:var(--text)}
 .col li{position:relative;padding-left:1rem;font-size:.8125rem;line-height:1.5;color:var(--text-dim)}
 .col li::before{content:"";position:absolute;left:0;top:.62em;width:.35rem;height:.35rem;border-radius:50%;background:var(--tone,var(--accent-text))}
 .tone-ok{--tone:var(--ok)}.tone-no{--tone:var(--no)}.tone-warn{--tone:var(--warn)}.tone-accent{--tone:var(--accent-text)}
+
+/* Bewegtes Bild: Abdeckungen geben Nachrichten frei, die Tonspur schwingt */
+.ax{position:relative;flex:none;width:100%;aspect-ratio:var(--ar);overflow:hidden;border-radius:.75rem}
+.split-m .ax{width:min(100cqw,calc(100cqh*var(--ar)))}
+.card .ax{margin-bottom:.9rem}
+.ax>.ph,.ax>.media{position:absolute;inset:0;width:100%;height:100%;margin:0}
+.ax-m,.ax-c,.ax-l{position:absolute;inset:0;pointer-events:none}
+.ax-c{transition:opacity .22s var(--ease-out)}
+.ax-c.off{opacity:0}
+.ax-l{-webkit-mask-image:linear-gradient(var(--dir,to right),transparent var(--p,0%),#000 var(--p,0%));mask-image:linear-gradient(var(--dir,to right),transparent var(--p,0%),#000 var(--p,0%))}
+.ax-d{position:absolute;display:none;align-items:center;justify-content:center;gap:9%;border-radius:.5rem}
+.ax-d.on{display:flex}
+.ax-d i{width:11%;aspect-ratio:1;border-radius:50%;background:currentColor;animation:ax-punkt 1s ease-in-out infinite}
+.ax-d i:nth-child(2){animation-delay:.16s}
+.ax-d i:nth-child(3){animation-delay:.32s}
+@keyframes ax-punkt{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-25%)}}
+.ax-w{position:absolute}
+.ax-w>div{display:flex;align-items:center;justify-content:space-between;width:100%;height:100%;padding:0 1%}
+.ax-w i{display:block;width:.5%;min-width:1px;height:var(--h);border-radius:2px;background:currentColor;transform:scaleY(.25);transform-origin:center}
+.slide.active .ax-w i{animation:ax-ton var(--t) ease-in-out var(--v) infinite alternate}
+.slide.active .ax-w>div{animation:ax-rede 5.2s ease-in-out infinite}
+@keyframes ax-ton{from{transform:scaleY(.18)}to{transform:scaleY(1)}}
+@keyframes ax-rede{0%,100%{opacity:1}42%{opacity:1}50%{opacity:.45}58%{opacity:1}}
+.ax-re{position:absolute;right:.5rem;top:.5rem;display:grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;font-size:.8rem;color:#fff;background:rgba(10,10,10,.55);opacity:.55;transition:opacity .18s}
+.ax-re:hover{opacity:1}
+.ax-fr{display:flex;justify-content:center;width:100%;background:rgba(255,255,255,.03);border-radius:.75rem}
+.card .ax-fr{margin-bottom:.9rem}
+.ax-fr>.ax{width:auto;height:100%;margin:0}
+/* Gesichtserkennung: Raster und Schleier, darueber scharfe Ausschnitte des Bildes und der Suchrahmen */
+.ax-v,.ax-z,.ax-a,.ax-r,.ax-sl,.ax-k{position:absolute;pointer-events:none}
+.ax-v,.ax-z,.ax-a,.ax-r{inset:0}
+.ax-v{background:radial-gradient(circle,color-mix(in srgb,var(--scan) 40%,transparent) 1px,transparent 1.5px) 0 0/2.5% calc(2.5% * var(--ar)),rgba(4,7,11,.66);-webkit-backdrop-filter:blur(2px) saturate(.45);backdrop-filter:blur(2px) saturate(.45);transition:opacity .8s var(--ease-out)}
+.ax-v.off{opacity:0}
+.ax-r{background:var(--img) 0 0/100% 100% no-repeat;opacity:0;transition:opacity .45s var(--ease-out)}
+.ax-z.on .ax-r,.ax-r.on{opacity:1}
+.ax-sl{left:0;right:0;top:0;height:2px;opacity:0;background:linear-gradient(90deg,transparent,var(--scan),transparent);box-shadow:0 0 .75rem var(--scan)}
+.ax-sl.on{animation:ax-scan 1.9s ease-in-out forwards}
+@keyframes ax-scan{0%{top:0;opacity:0}12%{opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}
+.ax-k{--l:22%;--t:2px;opacity:0;color:var(--scan);filter:drop-shadow(0 0 .3rem currentColor);
+  background:linear-gradient(currentColor,currentColor) 0 0/var(--l) var(--t),linear-gradient(currentColor,currentColor) 0 0/var(--t) var(--l),
+    linear-gradient(currentColor,currentColor) 100% 0/var(--l) var(--t),linear-gradient(currentColor,currentColor) 100% 0/var(--t) var(--l),
+    linear-gradient(currentColor,currentColor) 0 100%/var(--l) var(--t),linear-gradient(currentColor,currentColor) 0 100%/var(--t) var(--l),
+    linear-gradient(currentColor,currentColor) 100% 100%/var(--l) var(--t),linear-gradient(currentColor,currentColor) 100% 100%/var(--t) var(--l);
+  background-repeat:no-repeat;
+  transition:left .5s var(--ease-out),top .5s var(--ease-out),width .5s var(--ease-out),height .5s var(--ease-out),opacity .3s,color .3s}
+.ax-k.on{opacity:1}
+.ax-k.jump{transition:none}
+.ax-k.lock{animation:ax-fang .55s ease-out}
+@keyframes ax-fang{0%{transform:scale(1.14);background-color:transparent}35%{transform:scale(.96);background-color:color-mix(in srgb,currentColor 18%,transparent)}100%{transform:none;background-color:transparent}}
+.ax:not(.ready) .ax-m,.ax:not(.ready) .ax-w,.ax:not(.ready) .ax-re,.ax:not(.ready) :is(.ax-v,.ax-z,.ax-a,.ax-sl,.ax-k){display:none}
+/* Leichte Bewegung im Bild: langsamer Zoom, je Bild in eine andere Richtung */
+.kb{position:relative;overflow:hidden;border-radius:.75rem}
+.kb>.ph{margin:0}
+.slide.active .kb>.media{animation:kb 11s ease-in-out infinite alternate}
+.kb:nth-child(odd)>.media,[data-step]:nth-child(odd) .kb>.media{transform-origin:30% 35%}
+[data-step]:nth-child(even) .kb>.media{transform-origin:70% 60%;animation-duration:13s}
+[data-step]:nth-child(3n) .kb>.media{transform-origin:50% 20%;animation-delay:-4s}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.09)}}
+@media (prefers-reduced-motion:reduce){.ax-d i,.slide.active .ax-w i,.slide.active .ax-w>div,.slide.active .kb>.media{animation:none}.ax-w i{transform:none}}
+
+/* Karten-Effekte: Zahl laeuft hoch, Linie laeuft mit (gleiche Dauer wie ZAEHL_MS), Geldscheine flattern ein */
+.cnt{font-variant-numeric:tabular-nums}
+.card.fx>:not(.fx-geld,.fx-linie){position:relative;z-index:1}
+.fx-linie{position:absolute;right:2.5rem;top:1.6rem;width:46%;height:3.2rem;overflow:visible;pointer-events:none}
+.fx-linie path{fill:none;stroke:var(--accent);stroke-width:2;opacity:.75;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+[data-step].on .fx-linie path{animation:fx-linie 2.2s cubic-bezier(.33,1,.68,1) forwards}
+[data-step].on.fertig .fx-linie path{animation:none;stroke-dashoffset:0}
+@keyframes fx-linie{to{stroke-dashoffset:0}}
+.fx-geld{position:absolute;inset:0;pointer-events:none;perspective:40rem}
+.fx-geld i{position:absolute;width:6.5rem;opacity:0;transform:rotate(var(--r));filter:drop-shadow(0 .4rem .6rem rgba(0,0,0,.45))}
+.fx-geld svg{display:block;width:100%;height:auto}
+[data-step].on .fx-geld i{animation:fx-geld var(--t) cubic-bezier(.35,.2,.4,1) var(--d) forwards}
+[data-step].on.fertig .fx-geld i{animation:none;opacity:1}
+@keyframes fx-geld{
+  0%{opacity:0;transform:translate(var(--sx),-330%) rotate(calc(var(--r) - 40deg)) rotateX(65deg)}
+  10%{opacity:1}
+  30%{transform:translate(calc(var(--sx) * -.6),-210%) rotate(calc(var(--r) + 22deg)) rotateX(-45deg) rotateY(20deg)}
+  55%{transform:translate(calc(var(--sx) * .4),-105%) rotate(calc(var(--r) - 14deg)) rotateX(38deg) rotateY(-15deg)}
+  80%{transform:translate(calc(var(--sx) * -.15),-25%) rotate(calc(var(--r) + 6deg)) rotateX(-14deg)}
+  100%{opacity:1;transform:rotate(var(--r))}}
+/* Fluss: gestrichelte Linie zeichnet sich beim Aufdecken und stroemt dann weiter. .v laeuft nach unten, .pfeil endet mit Spitze */
+.fluss{position:relative;display:block;flex:1;height:2px;color:var(--line-hi);background:repeating-linear-gradient(90deg,currentColor 0 .45rem,transparent .45rem .8rem);transform:scaleX(0);transform-origin:left}
+.fluss.v{flex:none;width:2px;height:1.1rem;background:repeating-linear-gradient(180deg,currentColor 0 .3rem,transparent .3rem .55rem);transform:scaleY(0);transform-origin:top}
+.fluss.ok{color:rgba(63,178,127,.75)}
+.fluss.no{color:rgba(224,82,82,.75)}
+.fluss.pfeil::after{content:'';position:absolute;right:-.4rem;top:50%;margin-top:-.28rem;border-top:.28rem solid transparent;border-bottom:.28rem solid transparent;border-left:.42rem solid currentColor}
+.fluss.v.pfeil::after{right:auto;top:auto;left:50%;bottom:-.4rem;margin:0 0 0 -.28rem;border:.28rem solid transparent;border-bottom:0;border-top:.42rem solid currentColor}
+[data-step].on .fluss{animation:fl-zieh .55s var(--ease-out) var(--fd,0s) forwards,fl-strom 1s linear infinite}
+[data-step].on .fluss.v{animation:fl-zieh .45s var(--ease-out) var(--fd,0s) forwards,fl-strom-v .8s linear infinite}
+[data-step].on.fertig .fluss{animation:fl-strom 1s linear infinite;transform:none}
+[data-step].on.fertig .fluss.v{animation:fl-strom-v .8s linear infinite}
+@keyframes fl-zieh{to{transform:none}}
+@keyframes fl-strom{from{background-position:0 0}to{background-position:.8rem 0}}
+@keyframes fl-strom-v{from{background-position:0 0}to{background-position:0 .55rem}}
+/* Marke zoomt gross herein und setzt sich, .sanft fuer grosse Bloecke */
+.pz{display:inline-block}
+[data-step].on .pz,.pz[data-step].on{animation:pz .9s cubic-bezier(.3,1.35,.5,1) var(--pd,.35s) both}
+[data-step].on .pz.sanft,.pz.sanft[data-step].on{animation-name:pz-sanft}
+[data-step].on.fertig .pz,.pz[data-step].on.fertig{animation:none}
+@keyframes pz{from{opacity:0;transform:scale(.25)}55%{opacity:1;transform:scale(1.22)}to{opacity:1;transform:none}}
+@keyframes pz-sanft{from{opacity:0;transform:scale(.8)}60%{opacity:1;transform:scale(1.04)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  [data-step].on .fx-linie path,[data-step].on .fx-geld i,[data-step].on .fluss,[data-step].on .pz,.pz[data-step].on{animation:none}
+  .fx-linie path{stroke-dashoffset:0}.fx-geld i{opacity:1}.fluss{transform:none}}
 
 /* Tabelle */
 .tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:.8125rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}

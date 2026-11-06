@@ -6,6 +6,7 @@
   var WISCH_ALLE = 3;      // nur jeder dritte Folienwechsel wischt, die anderen blenden ueber
   var BLENDE_MS = 220;     // ms, Dauer der Ueberblendung
   var TIPPEN_MS = 28;
+  var ZAEHL_MS = 2200;     // ms, Zahl laeuft hoch, gleich lang wie die Linie in engine.css (fx-linie)
 
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var total = slides.length;
@@ -35,12 +36,50 @@
       var k = Number(el.dataset.step);
       var was = el.classList.contains('on');
       var show = k <= n;
-      if (show && !was && animate) { el.style.setProperty('--d', (stagger++ * 60) + 'ms'); }
+      if (show && !was && animate) {
+        el.style.setProperty('--d', (stagger++ * 60) + 'ms');
+        if (s.dataset.enter === 'zoom' && !still && el.classList.contains('card')) zoomIn(el, s);
+        el.querySelectorAll('.cnt').forEach(zaehle);
+      } else if (show && !animate) el.querySelectorAll('.cnt').forEach(function (c) { zaehle(c, true); });
       if (!animate) el.style.removeProperty('--d');
       el.classList.toggle('on', show);
+      /* Schon Aufgedecktes laeuft nicht noch einmal an, wenn der naechste Schritt kommt */
+      el.classList.toggle('fertig', show && (was || !animate));
       /* Genau eine Karte leuchtet: die zuletzt aufgedeckte */
       el.classList.toggle('current', !fest && k === n && (el.classList.contains('card') || el.classList.contains('row')));
     });
+    axTick(s);
+  }
+
+  /* Zahl laeuft von 0 hoch, im selben Takt wie die Linie daneben */
+  function zaehle(el, sofort) {
+    var bis = Number(el.dataset.to), dez = Number(el.dataset.dec) || 0, t0 = performance.now();
+    var run = el._run = (el._run || 0) + 1;
+    var fmt = function (v) { return v.toFixed(dez).replace('.', ','); };
+    if (sofort || still) { el.textContent = fmt(bis); return; }
+    (function tick(t) {
+      if (run !== el._run) return;
+      var p = Math.min(1, Math.max(0, (t - t0) / ZAEHL_MS));
+      el.textContent = fmt(bis * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* Karte erscheint gross in der Folienmitte und zieht sich auf ihren Platz zurueck */
+  function zoomIn(el, s) {
+    var r = el.getBoundingClientRect(), f = s.getBoundingClientRect();
+    if (!r.width) return;
+    var k = Math.min(2.2, f.width * 0.5 / r.width, f.height * 0.62 / r.height);
+    var dx = f.left + f.width / 2 - (r.left + r.width / 2), dy = f.top + f.height / 2 - (r.top + r.height / 2);
+    var gross = 'translate(' + dx + 'px,' + dy + 'px) scale(' + k + ')';
+    el.style.zIndex = 5;
+    var an = el.animate([
+      { transform: gross, opacity: 0 },
+      { transform: gross, opacity: 1, offset: 0.14 },
+      { transform: gross, opacity: 1, offset: 0.5 },
+      { transform: 'none', opacity: 1 }
+    ], { duration: 1500, easing: 'cubic-bezier(.3,.7,.2,1)' });
+    an.onfinish = an.oncancel = function () { el.style.zIndex = ''; };
   }
 
   function applyStation(s, n) {
@@ -184,6 +223,7 @@
     s.querySelectorAll('[data-player].playing').forEach(function (f) { f.classList.remove('playing'); var v = f.querySelector('video'); if (v) { v.controls = false; v.currentTime = 0; } });
     var chat = s.querySelector('[data-chat]');
     if (chat) chat._run = (chat._run || 0) + 1;
+    s.querySelectorAll('.ax').forEach(axStop);
   }
 
   /* ---------- Chat-Demo ---------- */
@@ -208,6 +248,107 @@
     await wait(still ? 0 : 450);
     if (run !== win._run) return;
     reply.classList.add('on');
+  }
+
+  /* ---------- Bewegte Bilder ----------
+     Abdeckungen liegen ueber dem Bild. Nachricht fuer Nachricht fallen sie weg: erst das Avatar,
+     dann die Tipp-Punkte, dann die Blase, zuletzt laeuft der Text frei. */
+  function axLeer(a) {
+    a.querySelectorAll('.ax-c').forEach(function (c) { c.classList.remove('off'); });
+    a.querySelectorAll('.ax-d').forEach(function (d) { d.classList.remove('on'); });
+    a.querySelectorAll('.ax-l').forEach(function (l) { l.style.display = ''; l.style.setProperty('--p', l.dataset.a + '%'); });
+    a.querySelectorAll('.ax-v').forEach(function (v) { v.classList.remove('off'); });
+    a.querySelectorAll('.ax-z,.ax-r,.ax-k,.ax-sl').forEach(function (e) { e.classList.remove('on', 'lock'); });
+  }
+  function axStop(a) { a._run = (a._run || 0) + 1; a._played = false; axLeer(a); }
+  async function axWipe(l, a, run) {
+    var ms = Number(l.dataset.ms) || 800, von = Number(l.dataset.a), bis = Number(l.dataset.b), t0 = Date.now(), p = 0;
+    while (p < 1) {
+      p = Math.min(1, (Date.now() - t0) / ms);
+      l.style.setProperty('--p', (von + (bis - von) * p) + '%');
+      await wait(16);
+      if (run !== a._run) return;
+    }
+    l.style.display = 'none';
+  }
+  /* Suchrahmen in Prozent des Bildes */
+  function axRahmen(k, b, sofort) {
+    k.classList.toggle('jump', !!sofort);
+    k.style.left = b[0] + '%'; k.style.top = b[1] + '%'; k.style.width = b[2] + '%'; k.style.height = b[3] + '%';
+    if (sofort) { void k.offsetWidth; k.classList.remove('jump'); }
+  }
+  /* Feste Suchwege rund um das erste Ziel, damit jeder Lauf gleich aussieht */
+  function axUmwege(b) {
+    var feld = function (x, y, f) {
+      var w = Math.min(90, b[2] * f), h = Math.min(90, b[3] * f);
+      return [Math.max(2, Math.min(98 - w, x)), Math.max(2, Math.min(98 - h, y)), w, h];
+    };
+    return [feld(b[0] + b[2] * 0.9, b[1] - b[3] * 0.35, 1.5), feld(b[0] - b[2] * 0.5, b[1] + b[3] * 0.45, 0.8), feld(b[0] + b[2] * 0.25, b[1] + b[3] * 0.15, 1.2)];
+  }
+  async function axScan(a, run) {
+    var k = a.querySelector('.ax-k'), v = a.querySelector('.ax-v'), ziele = a.querySelectorAll('.ax-z');
+    var nachher = a.querySelectorAll('.ax-a .ax-r');
+    var halt = function () { return run !== a._run; };
+    if (still) { v.classList.add('off'); return; }
+    await wait(400); if (halt()) return;
+    a.querySelector('.ax-sl').classList.add('on');
+    axRahmen(k, [25, 20, 50, 60], true);
+    k.classList.add('on');
+    for (var i = 0; i < ziele.length; i++) {
+      var z = ziele[i], b = z.dataset.box.split(',').map(Number);
+      k.style.color = z.dataset.c;
+      var wege = i === 0 ? axUmwege(b) : [];
+      for (var w = 0; w < wege.length; w++) { axRahmen(k, wege[w]); await wait(520); if (halt()) return; }
+      axRahmen(k, b); await wait(560); if (halt()) return;
+      k.classList.add('lock'); z.classList.add('on');
+      await wait(i === 0 ? 800 : 600); if (halt()) return;
+      k.classList.remove('lock');
+    }
+    k.classList.remove('on');
+    for (var n = 0; n < nachher.length; n++) { await wait(380); if (halt()) return; nachher[n].classList.add('on'); }
+    await wait(500); if (halt()) return;
+    v.classList.add('off');
+  }
+  async function axPlay(a) {
+    var run = a._run = (a._run || 0) + 1;
+    a._played = true;
+    axLeer(a);
+    if (a.classList.contains('scan')) return axScan(a, run);
+    var msgs = a.querySelectorAll('.ax-m');
+    if (still) {
+      a.querySelectorAll('.ax-c').forEach(function (c) { c.classList.add('off'); });
+      a.querySelectorAll('.ax-l').forEach(function (l) { l.style.display = 'none'; });
+      return;
+    }
+    for (var i = 0; i < msgs.length; i++) {
+      var m = msgs[i], dots = m.querySelector('.ax-d'), av = m.querySelector('.av');
+      await wait(Number(m.dataset.wait) || 500);
+      if (run !== a._run) return;
+      if (dots) {
+        if (av) av.classList.add('off');
+        dots.classList.add('on');
+        await wait(1000);
+        if (run !== a._run) return;
+        dots.classList.remove('on');
+      }
+      m.querySelectorAll('.ax-c').forEach(function (c) { c.classList.add('off'); });
+      var lines = m.querySelectorAll('.ax-l');
+      if (!lines.length) await wait(220);
+      for (var k = 0; k < lines.length; k++) {
+        await axWipe(lines[k], a, run);
+        if (run !== a._run) return;
+      }
+    }
+  }
+  /* Laeuft, sobald das Bild da ist und seine Karte aufgedeckt wurde */
+  function axTick(s) {
+    if (s !== slides[cur]) return;
+    s.querySelectorAll('.ax.ready').forEach(function (a) {
+      var host = a.closest('[data-step]');
+      var sichtbar = !host || host.classList.contains('on');
+      if (sichtbar && !a._played) axPlay(a);
+      else if (!sichtbar && a._played) axStop(a);
+    });
   }
 
   /* ---------- Platz pruefen ----------
@@ -279,6 +420,8 @@
       step = Math.max(0, Math.min(stepsOf(cur), step + Number(tl.dataset.tl)));
       applyStep(cur, step, true); chrome(); return;
     }
+    var axre = e.target.closest('.ax-re');
+    if (axre) { axPlay(axre.closest('.ax')); return; }
     var re = e.target.closest('.win-re');
     if (re) { playChat(re.closest('[data-chat]')); return; }
     var play = e.target.closest('.play');
@@ -347,7 +490,7 @@
   function mount(el, url) {
     var isVid = /\.(mp4|webm|mov)(\?|$)/i.test(url);
     var player = el.parentElement && el.parentElement.hasAttribute('data-player');
-    var keep = ['r169', 'r43', 'r11', 'r34'].filter(function (c) { return el.classList.contains(c); }).join(' ');
+    var keep = ['r169', 'r32', 'r43', 'r11', 'r34', 'fit'].filter(function (c) { return el.classList.contains(c); }).join(' ');
     var node = document.createElement(isVid ? 'video' : 'img');
     node.className = ('media ' + keep).trim();
     node.setAttribute('data-slot', el.getAttribute('data-slot'));
@@ -357,6 +500,12 @@
       if (!player) { node.muted = true; node.loop = true; node.setAttribute('data-loop', ''); }
     } else { node.alt = el.getAttribute('data-label') || ''; }
     el.replaceWith(node);
+    /* Abdeckungen passen nur zu genau diesem Bild. Wird es im Media Manager getauscht, steht es still. */
+    var ax = node.closest('.ax');
+    if (ax && url.indexOf(ax.dataset.src) >= 0) {
+      ax.style.setProperty('--img', 'url("' + url + '")');
+      node.addEventListener('load', function () { ax.classList.add('ready'); axStop(ax); axTick(node.closest('.slide')); });
+    }
     if (isVid && !player && node.closest('.slide') === slides[cur]) node.play().catch(function () {});
   }
   async function hydrate() {

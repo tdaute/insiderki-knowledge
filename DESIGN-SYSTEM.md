@@ -111,7 +111,7 @@ Thema in ein bis drei Wörtern.
 | `cards` | 1 bis 6 Karten | je Karte | Kopf, `cards` `columns` `callout` `scale` `zoom` |
 | `rows` | 1 bis 6 Zeilen, ab 4 zweispaltig | je Zeile | Kopf, `rows` `columns` `ordinal` `callout` `zoom` |
 | `quote` | Zitat mit Sprecher-Pille | keine | `text` `person` |
-| `timeline` | 2 bis 7 Stationen mit Detailkarte | je Station | Kopf, `stations` `stepWord` `callout`, `aside` als `{ title, items }` |
+| `timeline` | 2 bis 8 Stationen mit Detailkarte | je Station | Kopf, `stations` `stepWord` `callout`, `aside` als `{ title, items }` |
 | `video` | Video mit Play-Knopf, Start per Klick | keine | `kicker` `title` `media` |
 | `image` | Großes Bild | keine | `kicker` `title` `media` `fit` |
 | `split` | Text und Bild | je Punkt | `eyebrow` `headline` `lead` `bullets` `media` `side` `callout` |
@@ -164,6 +164,14 @@ Pro Folie leuchtet genau eine Karte: die zuletzt aufgedeckte. `highlight: true` 
 | Verbindungslinie | füllt sich bis zum aktiven Punkt, Rot nach Bernstein, 500 ms |
 | Play-Knopf | Schein atmet in 3 s, beim Hover größer |
 | Chat | Schreibmaschine mit 28 ms je Zeichen, danach die Antwort |
+| Bildformat | `media.ratio` passend zur Datei wählen, auch `3:2`. Passt ein Bild nicht zum Format seiner Reihe: `media.fit: true`, in `custom` die Klasse `fit`. Dann bleibt der Rahmen und das ganze Bild ist darin zu sehen |
+| Bewegtes Bild | `media.anim` an `split` und `cards`: Abdeckungen in Bildpixeln geben Chat-Nachrichten frei, `wave` lässt eine Tonspur schwingen. `src` nennt die Bilddatei, bei einem anderen Bild steht es still. Farben im Browser messen (Canvas), nicht aus der Datei |
+| Gesichtserkennung | `media.anim.scan`: Das Bild liegt abgedunkelt unter einem Punktraster, ein Suchrahmen springt umher und rastet auf `targets[].box` ein (Bildpixel), dabei werden `reveal` scharf, danach die Felder aus `after`, zuletzt das ganze Bild. Mit `fit` bleibt der Rahmen der Reihe |
+| Leichte Bewegung | In `custom` das Bild in `<div class="kb">` legen: langsamer Zoom um 9 %, je Karte in eine andere Richtung |
+| Einzoomen | `enter: "zoom"` an der Folie: Jede aufgedeckte Karte erscheint groß in der Folienmitte und zieht sich auf ihren Platz zurück (1,5 s) |
+| Zahl hochzählen | Karte mit `count: true`: Die erste Zahl im `value` läuft beim Aufdecken in 2,2 s von 0 hoch, Komma wird übernommen (7,5) |
+| Karten-Effekt | Karte mit `fx: "linie"` (rote Kurve läuft mit der Zahl mit) oder `fx: "geld"` (100-Euro-Scheine flattern in die rechte Kartenhälfte). Inhalt bleibt links lesbar |
+| Fluss und Marken | In `custom`: `<i class="fluss ok pfeil">` gestrichelte Linie, die sich zeichnet und dann strömt (`.v` senkrecht, `.ok`/`.no` Farbe, `--fd` Verzögerung). `class="pz"` lässt Ja/Nein-Marken groß hereinzoomen (`--pd` Verzögerung, `.sanft` für große Blöcke). Schon Aufgedecktes läuft beim nächsten Schritt nicht neu an |
 | Hover | zurückhaltend, Rand wird heller |
 
 `prefers-reduced-motion`: Überblendung statt Wisch, kein Strich, kein Puls.

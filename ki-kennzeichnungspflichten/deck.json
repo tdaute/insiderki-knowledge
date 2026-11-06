@@ -1,0 +1,1980 @@
+{
+  "slug": "ki-kennzeichnungspflichten",
+  "title": "KI-Kennzeichnungspflichten — Art. 50 AI Act",
+  "description": "Workshop-Praesentation zu den Transparenzpflichten der EU-KI-Verordnung",
+  "client": "Workshop",
+  "event_date": null,
+  "slides": [
+    {
+      "type": "title",
+      "label": "Einstieg",
+      "eyebrow": "Art. 50 AI Act · WORKSHOP 2026",
+      "headline": "KI-*Kennzeichnungspflichten*",
+      "lead": "**Was ab dem 2. August 2026 für Unternehmen gilt**\n\nWorkshop · KNOWLEDGE\nTransparenzpflichten der EU-KI-Verordnung\nAnbieter · Betreiber · Praxis",
+      "nametag": {
+        "name": "Tino Daute",
+        "sub": "INSIDER.KI"
+      },
+      "media": {
+        "asset": "portrait",
+        "label": "Porträt Tino Daute"
+      }
+    },
+    {
+      "type": "custom",
+      "label": "Einstieg",
+      "eyebrow": "Der Realitätstest",
+      "headline": "Erkennen Sie\n*den Unterschied?*",
+      "aside": "Was ist Deepfake und was ist real? Schauen Sie sich jedes Paar kurz an und entscheiden Sie sich — **bevor** Sie aufdecken.",
+      "html": "<div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.75rem\">\n<div><div class=\"card-t\" style=\"margin-bottom:.5rem\">Zwei Bilder</div><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.6rem;\"><div data-qz tabindex=\"0\" role=\"button\" aria-label=\"A aufdecken\" style=\"position:relative;cursor:pointer\"><div class=\"ph r169\" data-slot=\"quizImageA\" data-label=\"Bild A\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bild A</span></div></div><span style=\"position:absolute;left:.4rem;top:.4rem;display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:.35rem;background:rgba(10,10,10,.8);font-size:.75rem;font-weight:500;color:var(--text)\">A</span><div data-step=\"1\" style=\"position:absolute;left:.4rem;right:.4rem;bottom:.4rem;padding:.3rem .5rem;border-radius:.35rem;text-align:center;font-size:.75rem;font-weight:600;color:#fff;background:rgba(63,178,127,.92)\">Echte Aufnahme</div></div><div data-qz tabindex=\"0\" role=\"button\" aria-label=\"B aufdecken\" style=\"position:relative;cursor:pointer\"><div class=\"ph r169 fit\" data-slot=\"quizImageB\" data-label=\"Bild B\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bild B</span></div></div><span style=\"position:absolute;left:.4rem;top:.4rem;display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:.35rem;background:rgba(10,10,10,.8);font-size:.75rem;font-weight:500;color:var(--text)\">B</span><div data-step=\"1\" style=\"position:absolute;left:.4rem;right:.4rem;bottom:.4rem;padding:.3rem .5rem;border-radius:.35rem;text-align:center;font-size:.75rem;font-weight:600;color:#fff;background:rgba(224,82,82,.92)\">KI-generiert</div></div></div></div>\n<div><div class=\"card-t\" style=\"margin-bottom:.5rem\">Zwei Videos · je 4 Sekunden</div><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.6rem;\"><div data-qz tabindex=\"0\" role=\"button\" aria-label=\"C aufdecken\" style=\"position:relative;cursor:pointer\"><div class=\"ph r169\" data-slot=\"quizVideoA\" data-label=\"Video A (max. 4 Sek.)\" data-kind=\"video\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5\" /><rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\" /></svg><span>Video A (max. 4 Sek.)</span></div></div><span style=\"position:absolute;left:.4rem;top:.4rem;display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:.35rem;background:rgba(10,10,10,.8);font-size:.75rem;font-weight:500;color:var(--text)\">C</span><div data-step=\"1\" style=\"position:absolute;left:.4rem;right:.4rem;bottom:.4rem;padding:.3rem .5rem;border-radius:.35rem;text-align:center;font-size:.75rem;font-weight:600;color:#fff;background:rgba(224,82,82,.92)\">KI-generiert</div></div><div data-qz tabindex=\"0\" role=\"button\" aria-label=\"D aufdecken\" style=\"position:relative;cursor:pointer\"><div class=\"ph r169\" data-slot=\"quizVideoB\" data-label=\"Video B (max. 4 Sek.)\" data-kind=\"video\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5\" /><rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\" /></svg><span>Video B (max. 4 Sek.)</span></div></div><span style=\"position:absolute;left:.4rem;top:.4rem;display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:.35rem;background:rgba(10,10,10,.8);font-size:.75rem;font-weight:500;color:var(--text)\">D</span><div data-step=\"1\" style=\"position:absolute;left:.4rem;right:.4rem;bottom:.4rem;padding:.3rem .5rem;border-radius:.35rem;text-align:center;font-size:.75rem;font-weight:600;color:#fff;background:rgba(63,178,127,.92)\">Echte Aufnahme</div></div></div></div>\n</div>\n<div style=\"display:flex;align-items:center;gap:1rem\"><button data-qz class=\"cta\" style=\"margin:0;border:0;cursor:pointer;font-family:inherit\">Auflösen</button><span style=\"font-size:.8125rem;color:var(--text-dim)\">Taste <b style=\"font-weight:500;color:var(--text)\">R</b> oder Klick auf eine Kachel</span></div>\n<script>(function(){function auf(s){if(s&&window.__deck)window.__deck.go(+s.dataset.n,1);}document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-qz]');if(t)auf(t.closest('.slide'));});document.addEventListener('keydown',function(e){if(e.key==='r'||e.key==='R'){var q=document.querySelector('.slide.active [data-qz]');if(q)auf(q.closest('.slide'));}if((e.key==='Enter')&&document.activeElement&&document.activeElement.hasAttribute('data-qz')){auf(document.activeElement.closest('.slide'));}});})();</script>",
+      "source": "Genau hier setzt Art. 50 an: Wenn das Auge nicht mehr unterscheiden kann, muss die Kennzeichnung es tun."
+    },
+    {
+      "type": "split",
+      "label": "Einstieg",
+      "eyebrow": "Fluch und Segen",
+      "headline": "KI wird immer besser —\n*und weniger erkennbar*",
+      "lead": "Es droht **Täuschungsgefahr** und Vertrauensverlust. Synthetische Inhalte sind in fast jedem Kanal angekommen — und mit bloßem Auge kaum noch von echten zu unterscheiden.",
+      "media": {
+        "slot": "einstiegHero",
+        "label": "Synthetische Inhalte im Alltag (3:2)",
+        "ratio": "3:2"
+      }
+    },
+    {
+      "type": "rows",
+      "label": "Einstieg",
+      "eyebrow": "Das Leitmotiv der Verordnung",
+      "headline": "*Transparenz*",
+      "lead": "Der Grundgedanke hinter Art. 50 lässt sich in einem Satz zusammenfassen.",
+      "ordinal": false,
+      "rows": [
+        {
+          "title": "Kein Generalverdacht",
+          "text": "Art. 50 führt **keine** pauschale Kennzeichnungspflicht für jeden KI-Output ein.",
+          "icon": "shield-check"
+        },
+        {
+          "title": "Situationsbezogen",
+          "text": "Die Verordnung regelt vier klar umrissene Situationen — nicht „KI allgemein“.",
+          "icon": "target"
+        },
+        {
+          "title": "Rollenabhängig",
+          "text": "Wen welche Pflicht trifft, hängt davon ab, ob Sie Anbieter oder Betreiber sind.",
+          "icon": "users"
+        }
+      ],
+      "callout": "**Der Mensch soll wissen,** wenn er es mit künstlicher Intelligenz zu tun hat — zumindest in bestimmten, klar definierten Bereichen.",
+      "source": "* Die Pflichten greifen nur in den in Art. 50 Abs. 1–4 genannten Konstellationen."
+    },
+    {
+      "type": "custom",
+      "label": "Einstieg",
+      "eyebrow": "Art. 50 AI Act",
+      "headline": "Die neuen\n*KI-Kennzeichnungspflichten*",
+      "lead": "Die Kennzeichnungspflichten beginnen ab dem **2. August 2026**. Ausnahme: die maschinenlesbare Kennzeichnung nach Art. 50 Abs. 2 gilt für Systeme, die vor dem Stichtag bereits in Verkehr waren, erst ab dem **2. Dezember 2026**.",
+      "html": "<div style=\"display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem .75rem\">\n<div style=\"grid-column:1 / span 2;display:flex;align-items:center;gap:.6rem;font-size:.75rem;font-weight:500;color:var(--text)\"><span>Anbieter</span><i style=\"flex:1;height:2px;background:var(--accent)\"></i></div><div style=\"grid-column:3 / span 3;display:flex;align-items:center;gap:.6rem;font-size:.75rem;font-weight:500;color:var(--text)\"><span>Betreiber</span><i style=\"flex:1;height:2px;background:var(--warm)\"></i></div>\n<article class=\"card\" data-step=\"1\"><div style=\"display:flex;justify-content:space-between;align-items:flex-start\"><div class=\"tile\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\" /></svg></div><span style=\"font-family:var(--brand);font-size:1.75rem;line-height:1;color:var(--warm)\">1</span></div><div class=\"card-t\">Direkte Interaktion mit KI</div><div class=\"card-sub\" style=\"margin-top:.15rem\">Art. 50 Abs. 1</div><p class=\"card-x\">Chatbot<br>Voicebot<br>KI-Assistent</p></article>\n<article class=\"card\" data-step=\"2\"><div style=\"display:flex;justify-content:space-between;align-items:flex-start\"><div class=\"tile\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg></div><span style=\"font-family:var(--brand);font-size:1.75rem;line-height:1;color:var(--warm)\">2</span></div><div class=\"card-t\">Maschinenlesbarkeit von KI-Content</div><div class=\"card-sub\" style=\"margin-top:.15rem\">Art. 50 Abs. 2</div><p class=\"card-x\">Bild · Video<br>Audio · Text</p></article>\n<article class=\"card\" data-step=\"3\"><div style=\"display:flex;justify-content:space-between;align-items:flex-start\"><div class=\"tile\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 7V5a2 2 0 0 1 2-2h2\" /><path d=\"M17 3h2a2 2 0 0 1 2 2v2\" /><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\" /><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\" /><path d=\"M8 14s1.5 2 4 2 4-2 4-2\" /><path d=\"M9 9h.01\" /><path d=\"M15 9h.01\" /></svg></div><span style=\"font-family:var(--brand);font-size:1.75rem;line-height:1;color:var(--warm)\">3</span></div><div class=\"card-t\">Emotionserkennung &amp; Biometrie</div><div class=\"card-sub\" style=\"margin-top:.15rem\">Art. 50 Abs. 3</div><p class=\"card-x\">Betroffene informieren</p></article>\n<article class=\"card\" data-step=\"4\"><div style=\"display:flex;justify-content:space-between;align-items:flex-start\"><div class=\"tile\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5\" /><rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\" /></svg></div><span style=\"font-family:var(--brand);font-size:1.75rem;line-height:1;color:var(--warm)\">4</span></div><div class=\"card-t\">Deepfakes</div><div class=\"card-sub\" style=\"margin-top:.15rem\">Art. 50 Abs. 4 S. 1–3</div><p class=\"card-x\">Bild<br>Audio (Ton)<br>Video</p></article>\n<article class=\"card\" data-step=\"5\"><div style=\"display:flex;justify-content:space-between;align-items:flex-start\"><div class=\"tile\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z\" /><path d=\"M14 2v4a2 2 0 0 0 2 2h4\" /><path d=\"M10 9H8\" /><path d=\"M16 13H8\" /><path d=\"M16 17H8\" /></svg></div><span style=\"font-family:var(--brand);font-size:1.75rem;line-height:1;color:var(--warm)\">5</span></div><div class=\"card-t\">KI-Texte</div><div class=\"card-sub\" style=\"margin-top:.15rem\">Art. 50 Abs. 4 S. 4–5</div><p class=\"card-x\">Öffentliches Interesse</p></article>\n</div>"
+    },
+    {
+      "type": "timeline",
+      "label": "Einstieg",
+      "eyebrow": "Stand nach dem Digital Omnibus",
+      "headline": "Die Fristen *im Überblick*",
+      "lead": "Der Digital Omnibus (final angenommen am 29. Juni 2026) hat die Hochrisiko-Fristen verschoben — die **Transparenzpflichten aus Art. 50 bleiben beim 2. August 2026**. Verschoben wurde nur die technische Watermarking-Pflicht für Bestandssysteme.",
+      "stations": [
+        {
+          "label": "01.08.2024",
+          "title": "AI Act tritt in Kraft",
+          "icon": "flag"
+        },
+        {
+          "label": "02.02.2025",
+          "title": "Art. 5 Verbote & Art. 4 KI-Kompetenz",
+          "icon": "shield-alert"
+        },
+        {
+          "label": "02.08.2025",
+          "title": "GPAI, Governance & Sanktionen",
+          "icon": "cpu"
+        },
+        {
+          "label": "02.08.2026",
+          "title": "**Art. 50 Kennzeichnungspflichten**",
+          "icon": "badge-check"
+        },
+        {
+          "label": "02.12.2026",
+          "title": "**Art. 50 Abs. 2 für Bestandssysteme**",
+          "icon": "server"
+        },
+        {
+          "label": "02.12.2027",
+          "title": "Hochrisiko Anhang III (Omnibus)",
+          "icon": "triangle-alert"
+        },
+        {
+          "label": "02.08.2028",
+          "title": "Hochrisiko Anhang I (Omnibus)",
+          "icon": "gauge"
+        },
+        {
+          "label": "31.12.2030",
+          "title": "Bestandssysteme von Behörden",
+          "icon": "landmark"
+        }
+      ],
+      "aside": {
+        "title": "Wichtig für den Workshop",
+        "items": [
+          "Der 2. August 2026 steht fest.",
+          "Wer heute plant, plant gegen dieses Datum — nicht gegen eine mögliche weitere Verschiebung."
+        ]
+      }
+    },
+    {
+      "type": "statement",
+      "label": "Grundlagen",
+      "eyebrow": "Kapitel 1",
+      "headline": "*Grundlagen*",
+      "lead": "Begriffe · Rollen · Anwendungsbereich"
+    },
+    {
+      "type": "custom",
+      "label": "Grundlagen",
+      "eyebrow": "Art. 3 Nr. 1 AI Act",
+      "headline": "Was ist *ein KI-System?*",
+      "aside": "Ein KI-System ist eine **Software**, die aus Eingaben **eigenständig** Ergebnisse ableitet — z. B. Texte, Bilder, Videos, Ton, aber auch Empfehlungen oder Entscheidungen.",
+      "html": "<div class=\"cards c2\">\n<article class=\"card tone-ok\" data-step=\"1\"><div style=\"display:grid;grid-template-columns:17rem minmax(0,1fr);gap:1rem;align-items:center\"><div class=\"ph r11\" style=\"margin:0\" data-slot=\"kiSystemJa\" data-label=\"Generative KI (KI-System)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Generative KI (KI-System)</span></div></div><div><div class=\"card-sub\" style=\"margin-top:.15rem\">ChatGPT, Gemini, Claude &amp; Co.</div><div class=\"card-t\" style=\"margin-top:.4rem;font-size:1.25rem\"><span class=\"c-ok\">KI-System ✓</span></div></div></div></article>\n<article class=\"card tone-no\" data-step=\"2\"><div style=\"display:grid;grid-template-columns:17rem minmax(0,1fr);gap:1rem;align-items:center\"><div class=\"ph r11 fit\" style=\"margin:0\" data-slot=\"kiSystemNein\" data-label=\"Klassische Software (kein KI-System)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Klassische Software (kein KI-System)</span></div></div><div><div class=\"card-sub\" style=\"margin-top:.15rem\">Microsoft Paint, Taschenrechner, Excel-Formel</div><div class=\"card-t\" style=\"margin-top:.4rem;font-size:1.25rem\"><span class=\"c-no\">Kein KI-System ✕</span></div></div></div></article>\n</div>\n<aside class=\"callout\" data-step=\"3\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 16v-4\" /><path d=\"M12 8h.01\" /></svg><div><strong>Abgrenzungskriterium:</strong> Entscheidend ist die <strong>Ableitungsfähigkeit</strong> — ein System, das nur feste Regeln abarbeitet, ist kein KI-System im Sinne der Verordnung.</div></aside>"
+    },
+    {
+      "type": "custom",
+      "label": "Grundlagen",
+      "eyebrow": "Persönlicher Anwendungsbereich",
+      "headline": "Für wen gelten\n*die Kennzeichnungspflichten?*",
+      "aside": "Vom Solo-Selbstständigen bis zum Konzern: entscheidend ist die **berufliche Tätigkeit** — auf die Größe kommt es nicht an.",
+      "html": "<div style=\"display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);gap:.75rem;align-items:stretch\">\n<article class=\"card tone-ok\" data-step=\"1\"><div class=\"card-t\" style=\"margin-bottom:.75rem\"><span class=\"c-ok\">✓</span> Kennzeichnungspflichten gelten für</div><div style=\"display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin:auto 0\"><figure style=\"margin:0\"><div class=\"ph r32\" data-slot=\"zielUnternehmen\" data-label=\"Unternehmen\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Unternehmen</span></div></div><figcaption style=\"margin-top:.5rem;text-align:center;font-size:.8125rem;color:var(--text-dim)\">Konzerne</figcaption></figure><figure style=\"margin:0\"><div class=\"ph r32\" data-slot=\"zielBehoerden\" data-label=\"Behörden\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Behörden</span></div></div><figcaption style=\"margin-top:.5rem;text-align:center;font-size:.8125rem;color:var(--text-dim)\">Behörden</figcaption></figure><figure style=\"margin:0\"><div class=\"ph r32\" data-slot=\"zielSelbststaendige\" data-label=\"Selbstständige\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Selbstständige</span></div></div><figcaption style=\"margin-top:.5rem;text-align:center;font-size:.8125rem;color:var(--text-dim)\">Unternehmen</figcaption></figure><figure style=\"margin:0\"><div class=\"ph r32\" data-slot=\"zielSonstige\" data-label=\"Sonstige berufliche Nutzer\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Sonstige berufliche Nutzer</span></div></div><figcaption style=\"margin-top:.5rem;text-align:center;font-size:.8125rem;color:var(--text-dim)\">Soloselbständige</figcaption></figure></div></article>\n<article class=\"card tone-no\" data-step=\"2\"><div class=\"card-t\" style=\"margin-bottom:.75rem\"><span class=\"c-no\">✕</span> Gilt nicht für Privatpersonen</div><div class=\"ph r43 fit\" data-slot=\"zielPrivat\" data-label=\"Privatpersonen (Ausnahme)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Privatpersonen (Ausnahme)</span></div></div></article>\n</div>",
+      "source": "* Aber Vorsicht: Nur bei **ausschließlich** persönlicher und nicht beruflicher Tätigkeit (Art. 2 Nr. 10 AI Act). Beispiel: KI-generierte Geburtstagseinladung."
+    },
+    {
+      "type": "compare",
+      "label": "Grundlagen",
+      "eyebrow": "Die eigene Rolle kennen",
+      "headline": "Anbieter oder Betreiber\n*des KI-Systems?*",
+      "aside": "Die Rollenzuordnung entscheidet darüber, welche der fünf Pflichten Sie überhaupt treffen. Nach **Art. 25 AI Act** kann ein Betreiber zum Anbieter werden — etwa beim Rebranding unter eigener Marke.",
+      "columns": [
+        {
+          "title": "Anbieter · Art. 3 Nr. 3 AI Act",
+          "tone": "accent",
+          "icon": "cpu",
+          "items": [
+            "Entwickelt ein KI-System selbst oder lässt es entwickeln",
+            "Bringt es unter eigenem Namen oder eigener Marke auf den Markt oder nimmt es selbst in Betrieb",
+            "**Typische Beispiele**",
+            "OpenAI (ChatGPT), Anthropic (Claude)",
+            "Unternehmen mit eigener KI-Lösung auf Basis eines fremden Basismodells",
+            "Website-Chatbot eines Drittanbieters, gebrandet unter eigener Marke *"
+          ]
+        },
+        {
+          "title": "Betreiber · Art. 3 Nr. 4 AI Act",
+          "tone": "ok",
+          "icon": "briefcase",
+          "items": [
+            "Verwendet ein KI-System in eigener Verantwortung",
+            "Rein private Nutzung fällt nicht unter den Betreiberbegriff",
+            "**Typische Beispiele**",
+            "Unternehmen, das KI für Bilder, Videos und Texte nutzt",
+            "Onlineshop, der einen erkennbar fremden Chatbot einbindet",
+            "Agentur, die KI-Assets für Kunden produziert"
+          ]
+        }
+      ],
+      "source": "* Die Einordnung hängt von der konkreten technischen und gestalterischen Umsetzung ab. Die meisten KMU sind Betreiber."
+    },
+    {
+      "type": "cards",
+      "label": "Grundlagen",
+      "eyebrow": "Relevanz-Check",
+      "headline": "Was betrifft *Sie konkret?*",
+      "aside": "Nicht jede Kennzeichnungspflicht ist für alle Unternehmen gleich relevant. Diese Einschätzung hilft bei der Priorisierung im Workshop.",
+      "cards": [
+        {
+          "media": {
+            "slot": "relevanzHoch",
+            "label": "95 % — Content-Produktion (16:9)",
+            "ratio": "3:2"
+          },
+          "value": "95 %",
+          "title": "Die meisten Teilnehmer",
+          "text": "**Deepfakes** (Art. 50 Abs. 4 S. 1–3)\n**KI-Texte** (Art. 50 Abs. 4 S. 4–5)"
+        },
+        {
+          "media": {
+            "slot": "relevanzMittel",
+            "label": "25 % — Eigene KI-Lösung (16:9)",
+            "ratio": "3:2"
+          },
+          "value": "25 %",
+          "title": "Manche Teilnehmer",
+          "text": "**Interaktion mit KI** (Art. 50 Abs. 1)\n**Maschinenlesbarkeit** (Art. 50 Abs. 2)"
+        },
+        {
+          "media": {
+            "slot": "relevanzNiedrig",
+            "label": "5 % — Biometrie / Kamera (16:9)",
+            "ratio": "3:2",
+            "fit": true
+          },
+          "value": "5 %",
+          "title": "Nur wenige Teilnehmer",
+          "text": "**Emotionserkennung & biometrische Kategorisierung** (Art. 50 Abs. 3)"
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "label": "Interaktion mit KI",
+      "eyebrow": "Kapitel 2",
+      "headline": "Direkte Interaktion\n*mit KI*",
+      "lead": "Art. 50 Abs. 1 AI Act"
+    },
+    {
+      "type": "split",
+      "label": "Interaktion mit KI",
+      "eyebrow": "Art. 50 Abs. 1 AI Act · Betrifft: Anbieter",
+      "side": "left",
+      "headline": "Direkte Interaktion\n*mit KI*",
+      "lead": "**Grundsatz:** Wenn Menschen ohne es zu merken direkt mit einem KI-System interagieren, soll ihnen das bewusst gemacht werden.",
+      "bullets": [
+        "**1 · KI-System** — Ein KI-System ist im Einsatz.",
+        "**2 · Direkte Interaktion** — Eine natürliche Person interagiert unmittelbar mit dem KI-System.",
+        "**3 · Keine Ausnahme einschlägig** — KI ist weder zur Strafverfolgung zugelassen noch offensichtlich als KI erkennbar."
+      ],
+      "callout": {
+        "text": "**Transparenzpflicht** — Informationspflicht nach Art. 50 Abs. 1 AI Act.",
+        "tone": "ok"
+      },
+      "media": {
+        "slot": "interaktionChat",
+        "label": "Chatbot-Interaktion",
+        "ratio": "4:3",
+        "anim": {
+          "src": "interaktionChat-1785172081532",
+          "w": 1433,
+          "h": 1098,
+          "bg": "linear-gradient(90deg,#101722 45%,#0D141D 85%)",
+          "msgs": [
+            {
+              "wait": 600,
+              "avatar": [
+                [
+                  1234,
+                  186
+                ],
+                [
+                  1292,
+                  186
+                ],
+                [
+                  1292,
+                  246
+                ],
+                [
+                  1234,
+                  246
+                ]
+              ],
+              "shell": [
+                [
+                  843,
+                  182
+                ],
+                [
+                  1234,
+                  180
+                ],
+                [
+                  1234,
+                  258
+                ],
+                [
+                  843,
+                  256
+                ]
+              ],
+              "color": "#2B4464",
+              "lines": [
+                {
+                  "poly": [
+                    [
+                      860,
+                      198
+                    ],
+                    [
+                      1040,
+                      196
+                    ],
+                    [
+                      1040,
+                      219
+                    ],
+                    [
+                      860,
+                      220
+                    ]
+                  ],
+                  "ms": 780
+                },
+                {
+                  "poly": [
+                    [
+                      858,
+                      219
+                    ],
+                    [
+                      1112,
+                      217
+                    ],
+                    [
+                      1112,
+                      240
+                    ],
+                    [
+                      858,
+                      241
+                    ]
+                  ],
+                  "ms": 1060
+                }
+              ]
+            },
+            {
+              "avatar": [
+                [
+                  624,
+                  272
+                ],
+                [
+                  678,
+                  272
+                ],
+                [
+                  678,
+                  324
+                ],
+                [
+                  624,
+                  324
+                ]
+              ],
+              "shell": [
+                [
+                  678,
+                  262
+                ],
+                [
+                  1062,
+                  262
+                ],
+                [
+                  1044,
+                  436
+                ],
+                [
+                  660,
+                  424
+                ]
+              ],
+              "color": "#1D2731",
+              "dots": {
+                "bg": "#1D2731",
+                "fg": "#8E9BA9",
+                "box": [
+                  692,
+                  274,
+                  92,
+                  42
+                ]
+              },
+              "inner": [
+                [
+                  692,
+                  272
+                ],
+                [
+                  1050,
+                  272
+                ],
+                [
+                  1034,
+                  425
+                ],
+                [
+                  676,
+                  412
+                ]
+              ],
+              "ms": 1300
+            },
+            {
+              "wait": 700,
+              "avatar": [
+                [
+                  1206,
+                  462
+                ],
+                [
+                  1264,
+                  462
+                ],
+                [
+                  1264,
+                  520
+                ],
+                [
+                  1206,
+                  520
+                ]
+              ],
+              "shell": [
+                [
+                  822,
+                  431
+                ],
+                [
+                  1206,
+                  445
+                ],
+                [
+                  1202,
+                  540
+                ],
+                [
+                  816,
+                  524
+                ]
+              ],
+              "color": "#2A4363",
+              "lines": [
+                {
+                  "poly": [
+                    [
+                      838,
+                      449
+                    ],
+                    [
+                      1120,
+                      457
+                    ],
+                    [
+                      1120,
+                      478
+                    ],
+                    [
+                      838,
+                      470
+                    ]
+                  ],
+                  "ms": 1200
+                },
+                {
+                  "poly": [
+                    [
+                      834,
+                      470
+                    ],
+                    [
+                      1160,
+                      479
+                    ],
+                    [
+                      1160,
+                      500
+                    ],
+                    [
+                      834,
+                      491
+                    ]
+                  ],
+                  "ms": 1320
+                },
+                {
+                  "poly": [
+                    [
+                      832,
+                      491
+                    ],
+                    [
+                      1060,
+                      497
+                    ],
+                    [
+                      1060,
+                      518
+                    ],
+                    [
+                      832,
+                      512
+                    ]
+                  ],
+                  "ms": 920
+                }
+              ]
+            },
+            {
+              "avatar": [
+                [
+                  594,
+                  534
+                ],
+                [
+                  642,
+                  534
+                ],
+                [
+                  642,
+                  582
+                ],
+                [
+                  594,
+                  582
+                ]
+              ],
+              "shell": [
+                [
+                  644,
+                  521
+                ],
+                [
+                  1032,
+                  536
+                ],
+                [
+                  1008,
+                  790
+                ],
+                [
+                  620,
+                  758
+                ]
+              ],
+              "color": "#1F2832",
+              "dots": {
+                "bg": "#1F2832",
+                "fg": "#8E9BA9",
+                "box": [
+                  660,
+                  533,
+                  92,
+                  42
+                ]
+              },
+              "inner": [
+                [
+                  658,
+                  530
+                ],
+                [
+                  1022,
+                  545
+                ],
+                [
+                  998,
+                  778
+                ],
+                [
+                  634,
+                  747
+                ]
+              ],
+              "ms": 1800
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "split",
+      "label": "Interaktion mit KI",
+      "eyebrow": "Art. 50 Abs. 1, 5 AI Act · Betrifft: Anbieter",
+      "headline": "Wann und wie\n*kennzeichnet man richtig?*",
+      "lead": "Nutzer müssen **spätestens zum Zeitpunkt der ersten Interaktion** barrierefrei sowie in klarer und eindeutiger Weise informiert werden. Feste Textvorgaben gibt es nicht.\n\n**Beispiel: KI-Chatbot**",
+      "bullets": [
+        "Der Hinweis ist sofort sichtbar",
+        "Klar und allgemeinverständlich formuliert",
+        "Gute Lesbarkeit durch Schriftgröße, Farbe und Kontrast"
+      ],
+      "media": {
+        "slot": "chatbotBeispiel",
+        "label": "Beispiel KI-Chatbot",
+        "ratio": "3:4",
+        "anim": {
+          "src": "chatbotBeispiel-1785172778917",
+          "w": 1150,
+          "h": 1368,
+          "bg": "#FDFDFD",
+          "msgs": [
+            {
+              "wait": 500,
+              "avatar": [
+                [
+                  338,
+                  156
+                ],
+                [
+                  400,
+                  156
+                ],
+                [
+                  400,
+                  220
+                ],
+                [
+                  338,
+                  220
+                ]
+              ],
+              "shell": [
+                [
+                  404,
+                  156
+                ],
+                [
+                  910,
+                  156
+                ],
+                [
+                  910,
+                  464
+                ],
+                [
+                  404,
+                  464
+                ]
+              ],
+              "color": "#FEFEFE",
+              "dots": {
+                "bg": "#FFFFFF",
+                "fg": "#8B93A1",
+                "line": "#E3E6EB",
+                "box": [
+                  411,
+                  161,
+                  92,
+                  44
+                ]
+              },
+              "inner": [
+                [
+                  420,
+                  206
+                ],
+                [
+                  898,
+                  206
+                ],
+                [
+                  898,
+                  452
+                ],
+                [
+                  420,
+                  452
+                ]
+              ],
+              "ms": 1300
+            },
+            {
+              "wait": 700,
+              "shell": [
+                [
+                  584,
+                  477
+                ],
+                [
+                  1118,
+                  477
+                ],
+                [
+                  1118,
+                  598
+                ],
+                [
+                  584,
+                  598
+                ]
+              ],
+              "color": "#E5EFFC",
+              "lines": [
+                {
+                  "poly": [
+                    [
+                      604,
+                      529
+                    ],
+                    [
+                      1030,
+                      529
+                    ],
+                    [
+                      1030,
+                      553
+                    ],
+                    [
+                      604,
+                      553
+                    ]
+                  ],
+                  "ms": 1400
+                },
+                {
+                  "poly": [
+                    [
+                      604,
+                      555
+                    ],
+                    [
+                      738,
+                      555
+                    ],
+                    [
+                      738,
+                      579
+                    ],
+                    [
+                      604,
+                      579
+                    ]
+                  ],
+                  "ms": 420
+                }
+              ]
+            },
+            {
+              "avatar": [
+                [
+                  338,
+                  610
+                ],
+                [
+                  400,
+                  610
+                ],
+                [
+                  400,
+                  672
+                ],
+                [
+                  338,
+                  672
+                ]
+              ],
+              "shell": [
+                [
+                  404,
+                  610
+                ],
+                [
+                  910,
+                  610
+                ],
+                [
+                  910,
+                  731
+                ],
+                [
+                  404,
+                  731
+                ]
+              ],
+              "color": "#FEFEFE",
+              "dots": {
+                "bg": "#FFFFFF",
+                "fg": "#8B93A1",
+                "line": "#E3E6EB",
+                "box": [
+                  411,
+                  615,
+                  92,
+                  44
+                ]
+              },
+              "inner": [
+                [
+                  420,
+                  660
+                ],
+                [
+                  898,
+                  660
+                ],
+                [
+                  898,
+                  716
+                ],
+                [
+                  420,
+                  716
+                ]
+              ],
+              "ms": 600
+            },
+            {
+              "wait": 800,
+              "shell": [
+                [
+                  594,
+                  743
+                ],
+                [
+                  1118,
+                  743
+                ],
+                [
+                  1118,
+                  872
+                ],
+                [
+                  594,
+                  872
+                ]
+              ]
+            },
+            {
+              "avatar": [
+                [
+                  338,
+                  884
+                ],
+                [
+                  400,
+                  884
+                ],
+                [
+                  400,
+                  946
+                ],
+                [
+                  338,
+                  946
+                ]
+              ],
+              "shell": [
+                [
+                  404,
+                  884
+                ],
+                [
+                  908,
+                  884
+                ],
+                [
+                  908,
+                  1172
+                ],
+                [
+                  404,
+                  1172
+                ]
+              ],
+              "color": "#FEFEFE",
+              "dots": {
+                "bg": "#FFFFFF",
+                "fg": "#8B93A1",
+                "line": "#E3E6EB",
+                "box": [
+                  411,
+                  889,
+                  92,
+                  44
+                ]
+              },
+              "inner": [
+                [
+                  420,
+                  936
+                ],
+                [
+                  896,
+                  936
+                ],
+                [
+                  896,
+                  1158
+                ],
+                [
+                  420,
+                  1158
+                ]
+              ],
+              "ms": 1500
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "split",
+      "label": "Interaktion mit KI",
+      "side": "left",
+      "headline": "Beispiel: Voice-KI\n*(z. B. Kundenhotline)*",
+      "bullets": [
+        "Der Hinweis erfolgt zu Beginn des Gesprächs",
+        "Klar und allgemeinverständlich formuliert",
+        "Deutlich verständlich gesprochen"
+      ],
+      "callout": "**Formulierungsbeispiel:** „Sie sprechen mit einem KI-gestützten Sprachassistenten. Antworten können Fehler enthalten.“",
+      "media": {
+        "slot": "voiceBeispiel",
+        "label": "Beispiel Voice-KI",
+        "ratio": "3:4",
+        "anim": {
+          "src": "voiceBeispiel-1785174538985",
+          "w": 1122,
+          "h": 1402,
+          "wave": {
+            "rect": [
+              126,
+              802,
+              392,
+              88
+            ],
+            "bg": "radial-gradient(ellipse 60% 130% at 50% 0%,#101D2A,#0E1722 70%,#0C131C)",
+            "color": "#5C93D6",
+            "n": 64
+          }
+        }
+      }
+    },
+    {
+      "type": "cards",
+      "label": "Interaktion mit KI",
+      "eyebrow": "Art. 50 Abs. 1 AI Act · Betrifft: Anbieter",
+      "headline": "Ausnahme: *KI ist „offensichtlich“*",
+      "aside": "Wenn für Nutzer **offensichtlich erkennbar** ist, dass sie es mit einem KI-System zu tun haben, muss nicht gekennzeichnet werden (Klassiker-Beispiel: humanoider Roboter).",
+      "cards": [
+        {
+          "tone": "ok",
+          "media": {
+            "slot": "offensichtlichJa",
+            "label": "Offensichtlich KI",
+            "ratio": "16:9",
+            "anim": {
+              "src": "offensichtlichJa-1785175307667",
+              "w": 1477,
+              "h": 1065,
+              "bg": "#F6F7F9",
+              "msgs": [
+                {
+                  "wait": 450,
+                  "avatar": [
+                    [
+                      92,
+                      305
+                    ],
+                    [
+                      252,
+                      305
+                    ],
+                    [
+                      252,
+                      465
+                    ],
+                    [
+                      92,
+                      465
+                    ]
+                  ],
+                  "shell": [
+                    [
+                      252,
+                      292
+                    ],
+                    [
+                      886,
+                      292
+                    ],
+                    [
+                      886,
+                      746
+                    ],
+                    [
+                      252,
+                      746
+                    ]
+                  ],
+                  "dots": {
+                    "bg": "#FFFFFF",
+                    "fg": "#8B93A1",
+                    "box": [
+                      297,
+                      302,
+                      134,
+                      72
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "title": "{ok:✓} Offensichtlich KI",
+          "text": "Klare Bezeichnung („KI-Chatbot“)\nBot-Icon / KI-Symbol\nBegrüßung mit Hinweis auf KI"
+        },
+        {
+          "tone": "warn",
+          "media": {
+            "slot": "offensichtlichGrenz",
+            "label": "Grenzfall",
+            "ratio": "16:9",
+            "anim": {
+              "src": "offensichtlichGrenz-1785175402269",
+              "w": 1508,
+              "h": 1043,
+              "bg": "#F6F6F7",
+              "msgs": [
+                {
+                  "wait": 450,
+                  "avatar": [
+                    [
+                      105,
+                      345
+                    ],
+                    [
+                      300,
+                      345
+                    ],
+                    [
+                      300,
+                      542
+                    ],
+                    [
+                      105,
+                      542
+                    ]
+                  ],
+                  "shell": [
+                    [
+                      300,
+                      322
+                    ],
+                    [
+                      862,
+                      322
+                    ],
+                    [
+                      862,
+                      646
+                    ],
+                    [
+                      300,
+                      646
+                    ]
+                  ],
+                  "dots": {
+                    "bg": "#FFFFFF",
+                    "fg": "#8B93A1",
+                    "box": [
+                      346,
+                      332,
+                      134,
+                      72
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "title": "{warn:?} Grenzfall",
+          "text": "Bezeichnung eher neutral („Support“)\nBot-Icon vorhanden\nKein ausdrücklicher Hinweis auf KI\n{warn:**Reicht das aus? → Wohl nicht.**}"
+        },
+        {
+          "tone": "no",
+          "media": {
+            "slot": "offensichtlichNein",
+            "label": "Nicht offensichtlich",
+            "ratio": "16:9",
+            "anim": {
+              "src": "offensichtlichNein-1785175622299",
+              "w": 1511,
+              "h": 1041,
+              "bg": "#F6F7F8",
+              "msgs": [
+                {
+                  "wait": 450,
+                  "avatar": [
+                    [
+                      108,
+                      328
+                    ],
+                    [
+                      316,
+                      328
+                    ],
+                    [
+                      316,
+                      536
+                    ],
+                    [
+                      108,
+                      536
+                    ]
+                  ],
+                  "shell": [
+                    [
+                      316,
+                      328
+                    ],
+                    [
+                      1006,
+                      328
+                    ],
+                    [
+                      1006,
+                      702
+                    ],
+                    [
+                      316,
+                      702
+                    ]
+                  ],
+                  "dots": {
+                    "bg": "#FFFFFF",
+                    "fg": "#8B93A1",
+                    "box": [
+                      360,
+                      337,
+                      134,
+                      72
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "title": "{no:✕} Nicht offensichtlich",
+          "text": "Menschlicher Name und Foto\nKein Hinweis auf KI\nFür den Nutzer nicht erkennbar, dass KI im Spiel ist"
+        }
+      ],
+      "callout": {
+        "text": "**Compliance-Empfehlung:** KI-Chatbots und KI-Voicebots sollten grundsätzlich als solche gekennzeichnet werden. Das schafft Transparenz, erfüllt die Pflicht sicher und vermeidet rechtliche Unsicherheiten.",
+        "tone": "ok"
+      }
+    },
+    {
+      "type": "statement",
+      "label": "Maschinenlesbarkeit",
+      "eyebrow": "Kapitel 3",
+      "headline": "Maschinenlesbarkeit\n*von KI-Inhalten*",
+      "lead": "Art. 50 Abs. 2 AI Act"
+    },
+    {
+      "type": "custom",
+      "label": "Maschinenlesbarkeit",
+      "eyebrow": "Art. 50 Abs. 2 AI Act · Betrifft: Anbieter",
+      "headline": "Maschinenlesbarkeit\n*von KI-Content*",
+      "aside": "Anbieter von KI-Systemen müssen **technisch** sicherstellen, dass KI-generierte sowie KI-manipulierte Inhalte nach aktuellem Stand der Technik **maschinenlesbar gekennzeichnet** werden.",
+      "html": "<div style=\"display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:.4rem;align-items:stretch\">\n<article class=\"card\" data-step=\"1\"><div class=\"card-t\">KI-System</div><p class=\"card-x\" style=\"margin-bottom:.5rem\">z. B. ChatGPT, Claude, Gemini</p><div class=\"ph r169 fit\" data-slot=\"mlSystem\" data-label=\"KI-System\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>KI-System</span></div></div></article><div style=\"display:grid;place-items:center;color:var(--accent-text);font-size:1.25rem\">→</div>\n<article class=\"card\" data-step=\"2\"><div class=\"card-t\">Generiert oder manipuliert Inhalte</div><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.5rem;gap:.3rem\"><div class=\"ph r169 fit\" data-slot=\"mlBild\" data-label=\"Bild\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bild</span></div></div><div class=\"ph r169 fit\" data-slot=\"mlVideo\" data-label=\"Video\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Video</span></div></div><div class=\"ph r169 fit\" data-slot=\"mlAudio\" data-label=\"Audio\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Audio</span></div></div><div class=\"ph r169 fit\" data-slot=\"mlText\" data-label=\"Text\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Text</span></div></div></div></article><div style=\"display:grid;place-items:center;color:var(--accent-text);font-size:1.25rem\">→</div>\n<article class=\"card\" data-step=\"3\" style=\"border-color:rgba(229,1,1,.5)\"><div class=\"card-t\">Maschinenlesbare Kennzeichnung</div><p class=\"card-x\" style=\"margin-bottom:.5rem\">Das KI-System muss die Inhalte bei Generierung maschinenlesbar kennzeichnen.</p><div class=\"ph r169 fit\" data-slot=\"mlKennzeichnung\" data-label=\"Maschinenlesbare Kennzeichnung\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Maschinenlesbare Kennzeichnung</span></div></div></article><div style=\"display:grid;place-items:center;color:var(--accent-text);font-size:1.25rem\">→</div>\n<article class=\"card\" data-step=\"4\"><div class=\"card-t\">Dritte erkennen technisch</div><p class=\"card-x\" style=\"margin-bottom:.5rem\">„KI-generiert“ — z. B. Plattformen, Suchmaschinen, CMS</p><div class=\"ph r169 fit\" data-slot=\"mlErkennung\" data-label=\"Erkennung durch Dritte\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Erkennung durch Dritte</span></div></div></article>\n</div>\n<div class=\"cards c2\">\n<article class=\"card\" data-step=\"5\" style=\"min-height:0\"><div class=\"card-t\">Ausnahme: Unterstützende Standardbearbeitung</div><p class=\"card-x\">z. B. Helligkeit, Kontrast, Farbkorrektur, Zuschnitt.</p></article>\n<article class=\"card\" data-step=\"6\" style=\"min-height:0\"><div class=\"card-t\">Ausnahme: Strafverfolgung</div><p class=\"card-x\">Wenn gesetzlich zur Aufdeckung, Verhütung, Ermittlung oder Verfolgung von Straftaten zugelassen.</p></article>\n</div>"
+    },
+    {
+      "type": "custom",
+      "label": "Maschinenlesbarkeit",
+      "eyebrow": "Art. 50 Abs. 2, 5 AI Act · Betrifft: Anbieter",
+      "headline": "Wie kennzeichnet man\n*maschinenlesbar?*",
+      "aside": "Ziel ist eine möglichst feste Verbindung zwischen Content und Kennzeichnung. Auf **visuelle Sichtbarkeit** der Kennzeichnung für die Nutzer kommt es dabei nicht an.",
+      "html": "<div class=\"cards c2\">\n<article class=\"card\" data-step=\"1\"><div style=\"display:grid;grid-template-columns:17rem minmax(0,1fr);gap:1rem;align-items:center\"><div class=\"ph r11\" style=\"margin:0\" data-slot=\"mlMetadaten\" data-label=\"Metadaten\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Metadaten</span></div></div><div><div style=\"font-family:var(--brand);font-size:2rem;line-height:1;color:var(--warm);margin-bottom:.4rem\">1</div><div class=\"card-t\">In Metadaten</div><p class=\"card-x\">Die Kennzeichnung wird in den Metadaten des Inhalts hinterlegt und kann von Systemen ausgelesen werden.</p></div></div></article>\n<article class=\"card\" data-step=\"2\"><div style=\"display:grid;grid-template-columns:17rem minmax(0,1fr);gap:1rem;align-items:center\"><div class=\"ph r11\" style=\"margin:0\" data-slot=\"mlWatermark\" data-label=\"Wasserzeichen\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Wasserzeichen</span></div></div><div><div style=\"font-family:var(--brand);font-size:2rem;line-height:1;color:var(--warm);margin-bottom:.4rem\">2</div><div class=\"card-t\">Wasserzeichen oder vergleichbare technische Informationen</div><p class=\"card-x\">Die Kennzeichnung ist im Inhalt selbst eingebettet und kann automatisch erkannt werden.</p></div></div></article>\n</div>"
+    },
+    {
+      "type": "cards",
+      "label": "Maschinenlesbarkeit",
+      "headline": "Die technische Lösung\n*muss sein:*",
+      "cards": [
+        {
+          "icon": "shield-check",
+          "title": "Wirksam",
+          "text": "Für Computer automatisch erkennbar."
+        },
+        {
+          "icon": "puzzle",
+          "title": "Interoperabel",
+          "text": "Breit nutzbar über verschiedene Systeme und Dienste."
+        },
+        {
+          "icon": "link",
+          "title": "Belastbar",
+          "text": "Schwer entfernbar oder manipulierbar."
+        },
+        {
+          "icon": "circle-check",
+          "title": "Zuverlässig",
+          "text": "Genau und verlässlich in der Erkennung."
+        }
+      ],
+      "source": "Etablierte Standards: C2PA / Content Credentials, IPTC-Metadaten, SynthID und vergleichbare Verfahren."
+    },
+    {
+      "type": "split",
+      "label": "Maschinenlesbarkeit",
+      "eyebrow": "„Ich bin doch nicht Claude“ · Betrifft: Anbieter",
+      "side": "left",
+      "headline": "Ist all das\n*relevant für mich?*",
+      "lead": "Für „Basisnutzer“ weniger, wohl aber für KI-Fortgeschrittene — speziell bei der **Entwicklung einer eigenen KI-Lösung, die ein fremdes KI-Basismodell nutzt**.",
+      "bullets": [
+        "**Sie nutzen ChatGPT im Browser** — Sie sind Betreiber. Abs. 2 trifft Sie nicht.",
+        "{warn:!} **Sie bauen einen eigenen Assistenten** auf API-Basis, gebrandet unter eigener Marke — die Anbieterrolle rückt näher.",
+        "{warn:!} **Automatisierungen mit n8n, Make & Co.** die eigenständig Content generieren und veröffentlichen — Rolle sauber prüfen."
+      ],
+      "callout": "**Merksatz:** Je mehr eigenes Branding und eigene Verantwortung, desto eher rutschen Sie in die Anbieterrolle nach Art. 25 AI Act.",
+      "media": {
+        "slot": "vibeCoding",
+        "label": "Eigene KI-Lösung / Vibe Coding",
+        "ratio": "3:2"
+      }
+    },
+    {
+      "type": "statement",
+      "label": "Emotionserkennung",
+      "eyebrow": "Kapitel 4",
+      "headline": "Emotionserkennung\n*& Biometrie*",
+      "lead": "Art. 50 Abs. 3 AI Act"
+    },
+    {
+      "type": "cards",
+      "label": "Emotionserkennung",
+      "eyebrow": "Art. 50 Abs. 3 AI Act · Betrifft: Betreiber",
+      "headline": "Emotionserkennung\n*& Biometrie*",
+      "aside": "Betreiber von KI-Systemen, die **Emotionen erkennen** oder **Personen biometrisch kategorisieren**, müssen Betroffene über den Einsatz informieren. Am **Arbeitsplatz** und in **Bildungseinrichtungen** sind solche Systeme grundsätzlich verboten (Art. 5 Abs. 1 f AI Act).",
+      "columns": 2,
+      "cards": [
+        {
+          "media": {
+            "slot": "emotionErkennung",
+            "label": "Emotionserkennung (16:9)",
+            "ratio": "16:9",
+            "fit": true,
+            "anim": {
+              "src": "emotionErkennung-1785481642926",
+              "w": 1536,
+              "h": 1024,
+              "scan": {
+                "color": "#3fc3ff",
+                "targets": [
+                  {
+                    "box": [
+                      143,
+                      153,
+                      424,
+                      512
+                    ],
+                    "reveal": [
+                      [
+                        110,
+                        120,
+                        490,
+                        580
+                      ]
+                    ]
+                  }
+                ],
+                "after": [
+                  [
+                    625,
+                    95,
+                    400,
+                    105
+                  ],
+                  [
+                    618,
+                    200,
+                    420,
+                    305
+                  ],
+                  [
+                    1048,
+                    182,
+                    462,
+                    328
+                  ],
+                  [
+                    625,
+                    525,
+                    880,
+                    276
+                  ]
+                ]
+              }
+            }
+          },
+          "title": "Emotionserkennung",
+          "text": "z. B. Freude, Zufriedenheit, Ärger, Traurigkeit"
+        },
+        {
+          "media": {
+            "slot": "emotionBiometrie",
+            "label": "Biometrische Kategorisierung (16:9)",
+            "ratio": "16:9",
+            "fit": true,
+            "anim": {
+              "src": "emotionBiometrie-1785481745286",
+              "w": 1536,
+              "h": 1024,
+              "scan": {
+                "color": "#3fd0f0",
+                "targets": [
+                  {
+                    "box": [
+                      40,
+                      320,
+                      168,
+                      246
+                    ],
+                    "color": "#86e06e",
+                    "reveal": [
+                      [
+                        30,
+                        310,
+                        188,
+                        266
+                      ],
+                      [
+                        220,
+                        392,
+                        102,
+                        216
+                      ]
+                    ]
+                  },
+                  {
+                    "box": [
+                      296,
+                      152,
+                      136,
+                      197
+                    ],
+                    "color": "#f2d64b",
+                    "reveal": [
+                      [
+                        286,
+                        142,
+                        156,
+                        217
+                      ],
+                      [
+                        437,
+                        145,
+                        100,
+                        205
+                      ]
+                    ]
+                  },
+                  {
+                    "box": [
+                      491,
+                      381,
+                      177,
+                      259
+                    ],
+                    "color": "#3fd0f0",
+                    "reveal": [
+                      [
+                        481,
+                        371,
+                        197,
+                        279
+                      ],
+                      [
+                        678,
+                        420,
+                        110,
+                        221
+                      ]
+                    ]
+                  },
+                  {
+                    "box": [
+                      619,
+                      177,
+                      122,
+                      166
+                    ],
+                    "color": "#b77cf2",
+                    "reveal": [
+                      [
+                        609,
+                        167,
+                        142,
+                        186
+                      ],
+                      [
+                        760,
+                        145,
+                        103,
+                        204
+                      ]
+                    ]
+                  },
+                  {
+                    "box": [
+                      847,
+                      366,
+                      150,
+                      211
+                    ],
+                    "color": "#8ee06d",
+                    "reveal": [
+                      [
+                        837,
+                        356,
+                        170,
+                        231
+                      ],
+                      [
+                        840,
+                        585,
+                        103,
+                        211
+                      ]
+                    ]
+                  }
+                ],
+                "after": [
+                  [
+                    8,
+                    16,
+                    676,
+                    98
+                  ],
+                  [
+                    1053,
+                    18,
+                    472,
+                    442
+                  ],
+                  [
+                    1053,
+                    465,
+                    472,
+                    412
+                  ],
+                  [
+                    8,
+                    854,
+                    1037,
+                    152
+                  ]
+                ]
+              }
+            }
+          },
+          "title": "Biometrische Kategorisierung",
+          "text": "z. B. Alter, Geschlecht, Hautfarbe und weitere biometrische Merkmale"
+        }
+      ],
+      "source": "* Ausnahme: gesetzlich zugelassene Strafverfolgung."
+    },
+    {
+      "type": "statement",
+      "label": "Emotionserkennung",
+      "headline": "*Doppelte Hürde:*",
+      "lead": "Neben Art. 50 Abs. 3 greift regelmäßig auch die DSGVO — biometrische Daten sind besondere Kategorien personenbezogener Daten nach Art. 9 DSGVO."
+    },
+    {
+      "type": "split",
+      "label": "Emotionserkennung",
+      "eyebrow": "Art. 50 Abs. 3 AI Act · Betrifft: Betreiber",
+      "side": "left",
+      "headline": "*Praxisbeispiel*",
+      "lead": "Vor einem Einkaufszentrum wird ein digitales Werbedisplay mit Kamera aufgestellt. Eine KI erkennt die Emotionen von Passanten, die das Display betrachten, und passt die Werbung entsprechend an.",
+      "bullets": [
+        "**1 ·** Hinweis **vor** dem Erfassungsbereich anbringen — nicht erst daneben.",
+        "**2 ·** Klar, verständlich, gut lesbar — kein Kleingedrucktes.",
+        "**3 ·** Parallel DSGVO-Informationspflichten nach Art. 13 erfüllen."
+      ],
+      "callout": "**Ergebnis:** Die Passanten müssen über den Betrieb des Emotionserkennungssystems informiert werden.",
+      "media": {
+        "slot": "emotionDisplay",
+        "label": "Digital-Signage mit Kamera",
+        "ratio": "3:2",
+        "anim": {
+          "src": "emotionDisplay-1785482102804",
+          "w": 1536,
+          "h": 1024,
+          "scan": {
+            "color": "#5ab8ff",
+            "targets": [
+              {
+                "box": [
+                  661,
+                  284,
+                  297,
+                  224
+                ],
+                "reveal": [
+                  [
+                    560,
+                    15,
+                    420,
+                    565
+                  ]
+                ]
+              }
+            ],
+            "after": [
+              [
+                88,
+                76,
+                530,
+                110
+              ],
+              [
+                88,
+                270,
+                585,
+                181
+              ],
+              [
+                88,
+                474,
+                346,
+                191
+              ],
+              [
+                1013,
+                196,
+                396,
+                244
+              ],
+              [
+                1130,
+                479,
+                305,
+                280
+              ],
+              [
+                953,
+                832,
+                482,
+                112
+              ]
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "statement",
+      "label": "Deepfakes",
+      "eyebrow": "Kapitel 5",
+      "headline": "*Deepfakes*",
+      "lead": "Art. 50 Abs. 4 S. 1–3 AI Act"
+    },
+    {
+      "type": "custom",
+      "label": "Deepfakes",
+      "eyebrow": "Art. 50 Abs. 4 S. 1–3 AI Act · Betrifft: Betreiber",
+      "headline": "Das sind *Deepfakes*",
+      "aside": "Ein Deepfake ist ein durch KI erzeugter oder manipulierter Bild-, Ton- oder Videoinhalt, der **wirklichen Personen, Gegenständen, Orten, Einrichtungen oder Ereignissen ähnelt** und einer Person fälschlicherweise als echt oder wahrheitsgemäß erscheinen könnte (Art. 3 Nr. 60 AI Act).",
+      "html": "<div style=\"display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem\">\n<article class=\"card\" data-step=\"1\" style=\"min-height:0;padding:.75rem\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\" /><circle cx=\"12\" cy=\"7\" r=\"4\" /></svg></div><div class=\"card-t\">Person</div></div><div class=\"kb\"><div class=\"ph r11 fit\" data-slot=\"dfPerson\" data-label=\"Person (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Person (Hochformat 3:4)</span></div></div></div></article><article class=\"card\" data-step=\"2\" style=\"min-height:0;padding:.75rem\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg></div><div class=\"card-t\">Gegenstand</div></div><div class=\"kb\"><div class=\"ph r11 fit\" data-slot=\"dfGegenstand\" data-label=\"Gegenstand (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Gegenstand (Hochformat 3:4)</span></div></div></div></article><article class=\"card\" data-step=\"3\" style=\"min-height:0;padding:.75rem\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20\" /><path d=\"M2 12h20\" /></svg></div><div class=\"card-t\">Ort</div></div><div class=\"kb\"><div class=\"ph r11 fit\" data-slot=\"dfOrt\" data-label=\"Ort (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Ort (Hochformat 3:4)</span></div></div></div></article><article class=\"card\" data-step=\"4\" style=\"min-height:0;padding:.75rem\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /></svg></div><div class=\"card-t\">Einrichtung</div></div><div class=\"kb\"><div class=\"ph r11 fit\" data-slot=\"dfEinrichtung\" data-label=\"Einrichtung (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Einrichtung (Hochformat 3:4)</span></div></div></div></article><article class=\"card\" data-step=\"5\" style=\"min-height:0;padding:.75rem\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M8 2v4\" /><path d=\"M16 2v4\" /><rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\" /><path d=\"M3 10h18\" /></svg></div><div class=\"card-t\">Ereignis</div></div><div class=\"kb\"><div class=\"ph r11 fit\" data-slot=\"dfEreignis\" data-label=\"Ereignis (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Ereignis (Hochformat 3:4)</span></div></div></div></article>\n</div>\n<aside class=\"callout\" data-step=\"6\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 16v-4\" /><path d=\"M12 8h.01\" /></svg><div><strong>Wichtig:</strong> Der Begriff ist deutlich weiter als der Alltagsgebrauch — es geht nicht nur um gefälschte Gesichter von Prominenten.</div></aside>"
+    },
+    {
+      "type": "cards",
+      "label": "Deepfakes",
+      "eyebrow": "Art. 50 Abs. 4 S. 1–3 AI Act · Betrifft: Betreiber",
+      "headline": "Welche Formate\n*können Deepfakes sein?*",
+      "aside": "Für **Texte** gelten Spezialregeln (dazu gleich mehr) — sie fallen nicht unter den Deepfake-Begriff.",
+      "cards": [
+        {
+          "media": {
+            "slot": "dfBild",
+            "label": "Bild-Deepfake",
+            "ratio": "4:3",
+            "fit": true
+          },
+          "title": "Bild",
+          "text": "z. B. für Social-Media-Posts, Newsletter oder eine Printzeitung"
+        },
+        {
+          "media": {
+            "slot": "dfAudio",
+            "label": "Audio-Deepfake",
+            "ratio": "4:3",
+            "fit": true
+          },
+          "title": "Audio",
+          "text": "z. B. für Podcast-Stimmen, Nachrichtensprecher"
+        },
+        {
+          "media": {
+            "slot": "dfVideo",
+            "label": "Video-Deepfake",
+            "ratio": "4:3",
+            "kind": "any",
+            "fit": true
+          },
+          "title": "Video",
+          "text": "z. B. Katastrophenvideos, Newsvideos"
+        }
+      ]
+    },
+    {
+      "type": "custom",
+      "label": "Deepfakes",
+      "eyebrow": "Art. 50 Abs. 4 S. 1–3 AI Act · Betrifft: Betreiber",
+      "headline": "Wann liegt *(k)ein Deepfake* vor?",
+      "aside": "Entscheidend ist die **Ähnlichkeit zur Wirklichkeit**.",
+      "html": "<div class=\"cards c2\">\n<article class=\"card tone-no\" data-step=\"1\"><div class=\"card-t\" style=\"margin-bottom:.6rem\"><span class=\"c-no\">✕</span> Kein Deepfake</div><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.6rem;\"><div class=\"ph r32\" data-slot=\"dfKeinKatze\" data-label=\"Kein Deepfake: Fantasie\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Kein Deepfake: Fantasie</span></div></div><div class=\"ph r32\" data-slot=\"dfKeinComic\" data-label=\"Kein Deepfake: Comic\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Kein Deepfake: Comic</span></div></div></div><div class=\"card-t\" style=\"margin-top:.75rem\">Kein Bezug zur Wirklichkeit</div><p class=\"card-x\">Keine Ähnlichkeit zu Personen, Gegenständen, Orten, Einrichtungen oder Ereignissen.</p></article>\n<article class=\"card tone-ok\" data-step=\"2\"><div class=\"card-t\" style=\"margin-bottom:.6rem\"><span class=\"c-ok\">✓</span> Deepfake</div><div style=\"display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;\"><div class=\"ph r169\" data-slot=\"dfJaPerson\" data-label=\"Deepfake: Person\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Deepfake: Person</span></div></div><div class=\"ph r169 fit\" data-slot=\"dfJaGebaeude\" data-label=\"Deepfake: Gebäude\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Deepfake: Gebäude</span></div></div><div class=\"ph r169\" data-slot=\"dfJaScam\" data-label=\"Deepfake: Voice-Scam\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Deepfake: Voice-Scam</span></div></div></div><div class=\"card-t\" style=\"margin-top:.75rem\">Ähnelt einer wirklichen Person, einem Gegenstand, Ort, einer Einrichtung oder einem Ereignis</div><p class=\"card-x\">… und würde einer Person fälschlicherweise als echt oder wahrheitsgemäß erscheinen.</p></article>\n</div>"
+    },
+    {
+      "type": "cards",
+      "label": "Deepfakes",
+      "eyebrow": "Check: Wirkt das KI-Bild wie ein echtes Foto? · Betrifft: Betreiber",
+      "headline": "KI-generierte *Produktbilder*",
+      "aside": "Der praxisrelevanteste Fall im E-Commerce und Marketing. Maßgeblich ist, ob beim Betrachter ein **Authentizitätseindruck** entsteht.",
+      "columns": 4,
+      "cards": [
+        {
+          "tone": "ok",
+          "media": {
+            "slot": "prodOriginal",
+            "label": "Originalfoto",
+            "ratio": "3:2",
+            "fit": true
+          },
+          "title": "Originalfoto",
+          "text": "Echtes Foto des konkreten Produkts.\n{ok:**Keine Kennzeichnung erforderlich**}"
+        },
+        {
+          "tone": "no",
+          "media": {
+            "slot": "prodKiFoto",
+            "label": "KI-Bild wie Foto",
+            "ratio": "3:2",
+            "fit": true
+          },
+          "title": "KI-Bild wie Foto",
+          "text": "Wirkt wie eine echte Produktfotografie in realer Umgebung.\n{no:**Kennzeichnung erforderlich**}"
+        },
+        {
+          "tone": "ok",
+          "media": {
+            "slot": "prodTechnisch",
+            "label": "Technische Visualisierung",
+            "ratio": "3:2"
+          },
+          "title": "Technische Visualisierung",
+          "text": "Offensichtlich eine Visualisierung, kein Foto.\n{ok:**Keine Kennzeichnung erforderlich**}"
+        },
+        {
+          "tone": "ok",
+          "media": {
+            "slot": "prodIllustration",
+            "label": "Illustration / Fantasie",
+            "ratio": "3:2"
+          },
+          "title": "Illustration / Fantasie",
+          "text": "Stilisiert und erkennbar nicht realistisch.\n{ok:**Keine Kennzeichnung erforderlich**}"
+        }
+      ],
+      "scale": {
+        "from": "{ok:Kein Authentizitätseindruck}",
+        "to": "{no:Authentizitätseindruck}"
+      },
+      "enter": "zoom"
+    },
+    {
+      "type": "custom",
+      "label": "Deepfakes",
+      "eyebrow": "Wann, wie, wo? · Betrifft: Betreiber",
+      "headline": "So sollten Sie\n*Deepfakes kennzeichnen*",
+      "aside": "**Spätestens bei erster Interaktion** müssen Texthinweise oder die **EU-AI-Icons** klar, verständlich, sichtbar und barrierefrei gezeigt werden. Der rechtlich sicherste Weg: Kennzeichnung **direkt im Content**.",
+      "html": "<div class=\"cards c3\">\n<article class=\"card\" data-step=\"1\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg></div><div class=\"card-t\">Bilder</div></div><div style=\"display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.75rem;align-items:center\"><div style=\"position:relative\"><div class=\"ph r34\" style=\"margin:0\" data-slot=\"kennzBild\" data-label=\"Bild mit Label (16:9)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bild mit Label (16:9)</span></div></div><div style=\"position:absolute;right:.4rem;top:.4rem;padding:.12rem .45rem;border-radius:.25rem;background:rgba(10,10,10,.82);border:1px solid var(--line-hi);font-size:.5625rem;font-weight:600;letter-spacing:.06em;color:var(--text)\">AI GENERATED</div></div><div><div style=\"display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;margin:.5rem 0\"><span style=\"padding:.1rem .45rem;border:1px solid var(--line-hi);border-radius:.3rem;font-size:.625rem;font-weight:500;color:var(--text)\">AI GENERATED</span><span style=\"color:var(--text-faint);font-size:.75rem\">·</span><span style=\"padding:.1rem .45rem;border:1px solid var(--line-hi);border-radius:.3rem;font-size:.625rem;font-weight:500;color:var(--text)\">KI-generiert</span></div><div style=\"display:flex;gap:.4rem;font-size:.75rem;line-height:1.45;color:var(--text-dim)\"><span class=\"c-ok\">✓</span><span>Direkt im Bild — EU-Icon oder Textlabel</span></div><div style=\"display:flex;gap:.4rem;font-size:.75rem;line-height:1.45;color:var(--text-dim)\"><span class=\"c-no\">✕</span><span>Nicht in der Bildunterschrift oder daneben</span></div></div></div></article>\n<article class=\"card\" data-step=\"2\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5\" /><rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\" /></svg></div><div class=\"card-t\">Videos</div></div><div style=\"display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.75rem;align-items:center\"><div style=\"position:relative\"><div class=\"ph r34 fit\" style=\"margin:0\" data-slot=\"kennzVideo\" data-label=\"Video mit Label (16:9)\" data-kind=\"any\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Video mit Label (16:9)</span></div></div><span style=\"position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#fff\">▶</span><div style=\"position:absolute;right:.4rem;top:.4rem;padding:.12rem .45rem;border-radius:.25rem;background:rgba(10,10,10,.82);border:1px solid var(--line-hi);font-size:.5625rem;font-weight:600;letter-spacing:.06em;color:var(--text)\">AI MODIFIED</div></div><div><div style=\"display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;margin:.5rem 0\"><span style=\"padding:.1rem .45rem;border:1px solid var(--line-hi);border-radius:.3rem;font-size:.625rem;font-weight:500;color:var(--text)\">AI</span><span style=\"color:var(--text-faint);font-size:.75rem\">→</span><span style=\"padding:.1rem .45rem;border:1px solid var(--line-hi);border-radius:.3rem;font-size:.625rem;font-weight:500;color:var(--text)\">Werbung</span><span style=\"color:var(--text-faint);font-size:.75rem\">→</span><span style=\"padding:.1rem .45rem;border:1px solid var(--line-hi);border-radius:.3rem;font-size:.625rem;font-weight:500;color:var(--text)\">AI</span></div><div style=\"display:flex;gap:.4rem;font-size:.75rem;line-height:1.45;color:var(--text-dim)\"><span class=\"c-ok\">✓</span><span>Im Video sichtbar platziert</span></div><div style=\"display:flex;gap:.4rem;font-size:.75rem;line-height:1.45;color:var(--text-dim)\"><span class=\"c-ok\">✓</span><span>Wiederholung nach Unterbrechungen</span></div><div style=\"display:flex;gap:.4rem;font-size:.75rem;line-height:1.45;color:var(--text-dim)\"><span class=\"c-no\">✕</span><span>Nicht nur in Beschreibung / Captions</span></div></div></div></article>\n<article class=\"card\" data-step=\"3\"><div style=\"display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem\"><div class=\"tile\" style=\"margin:0\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z\" /><path d=\"M19 10v2a7 7 0 0 1-14 0v-2\" /><line x1=\"12\" x2=\"12\" y1=\"19\" y2=\"22\" /></svg></div><div class=\"card-t\">Audio</div></div><div style=\"display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.75rem;align-items:center\"><div class=\"ph r34 fit\" style=\"margin:0\" data-slot=\"kennzAudio\" data-label=\"Audio-Hinweis (16:9)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Audio-Hinweis (16:9)</span></div></div><div><div style=\"margin:0 0 .5rem;padding:.3rem .6rem;border-radius:.5rem;background:var(--surface-hi);font-size:.75rem;color:var(--text)\">„Diese Aufnahme wurde mit KI erzeugt.“</div><div style=\"display:flex;gap:.4rem;font-size:.75rem;line-height:1.45;color:var(--text-dim)\"><span class=\"c-ok\">✓</span><span>Hörbarer Hinweis statt visuellem Icon</span></div><div style=\"display:flex;gap:.4rem;font-size:.75rem;line-height:1.45;color:var(--text-dim)\"><span class=\"c-ok\">✓</span><span>Zu Beginn und nach Unterbrechungen</span></div></div></div></article>\n</div>",
+      "source": "Beispielformulierung Audio: „Diese Aufnahme wurde mit KI erzeugt.“"
+    },
+    {
+      "type": "cards",
+      "label": "Deepfakes",
+      "eyebrow": "Code of Practice on Transparency of AI-Generated Content · Betrifft: Betreiber",
+      "headline": "AI-Icons\n*der EU*",
+      "lead": "Die Verwendung der AI-Icons der EU ist **freiwillig**. Man kann auch **eigene KI-Kennzeichnungsicons** nutzen oder **reine Texthinweise** wie „KI-manipuliert“ (bzw. entsprechende sprachliche Hinweise bei Audioinhalten).",
+      "cards": [
+        {
+          "value": "AI",
+          "text": "Grundlegendes\nIcon"
+        },
+        {
+          "value": "AI GENERATED",
+          "text": "Icon für vollständig\nKI-generierte Inhalte"
+        },
+        {
+          "value": "AI MODIFIED",
+          "text": "Icon für\nKI-manipulierte Inhalte"
+        }
+      ],
+      "callout": "**Hinweis:** Der Code of Practice ist freiwillig — die Pflichten aus Art. 50 AI Act selbst sind verbindlich.",
+      "source": "Download: digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content"
+    },
+    {
+      "type": "split",
+      "label": "Deepfakes",
+      "eyebrow": "Art. 50 Abs. 4 S. 2–3 AI Act · Betrifft: Betreiber",
+      "headline": "*Ausnahmen*",
+      "lead": "Zwei Konstellationen lockern die Deepfake-Kennzeichnung — eine vollständig, eine nur in der Ausgestaltung.\n\n**Ausnahme: Strafverfolgung**\nArt. 50 Abs. 4 S. 2 AI Act",
+      "bullets": [
+        "Deepfakes, die zur Aufdeckung, Verhütung, Ermittlung oder Verfolgung von Straftaten eingesetzt werden"
+      ],
+      "callout": {
+        "text": "→ Keine Kennzeichnungspflicht",
+        "tone": "ok"
+      },
+      "media": {
+        "slot": "ausnahmePolizei",
+        "label": "Strafverfolgung (16:9)",
+        "ratio": "3:2"
+      }
+    },
+    {
+      "type": "custom",
+      "label": "Deepfakes",
+      "eyebrow": "Art. 50 Abs. 4 S. 3 AI Act",
+      "headline": "Eingeschränkte\n*Kennzeichnung*",
+      "html": "<div style=\"display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.5rem;align-items:center\">\n<div style=\"display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;\"><div><div class=\"card-t\" style=\"margin-bottom:.4rem;font-size:.8125rem\">Künstlerisch</div><div class=\"ph r34 fit\" data-slot=\"ausnahmeKuenstlerisch\" data-label=\"Künstlerisch (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Künstlerisch (Hochformat 3:4)</span></div></div></div><div><div class=\"card-t\" style=\"margin-bottom:.4rem;font-size:.8125rem\">Kreativ</div><div class=\"ph r34 fit\" data-slot=\"ausnahmeKreativ\" data-label=\"Kreativ (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Kreativ (Hochformat 3:4)</span></div></div></div><div><div class=\"card-t\" style=\"margin-bottom:.4rem;font-size:.8125rem\">Satirisch</div><div class=\"ph r34 fit\" data-slot=\"ausnahmeSatirisch\" data-label=\"Satirisch (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Satirisch (Hochformat 3:4)</span></div></div></div><div><div class=\"card-t\" style=\"margin-bottom:.4rem;font-size:.8125rem\">Fiktional</div><div class=\"ph r34 fit\" data-slot=\"ausnahmeFiktional\" data-label=\"Fiktional (Hochformat 3:4)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Fiktional (Hochformat 3:4)</span></div></div></div></div>\n<ul class=\"checks bullets\">\n<li data-step=\"1\"><span class=\"tick\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\" /></svg></span><span>Teil eines offensichtlich künstlerischen, kreativen, satirischen, fiktionalen oder analogen Werks</span></li>\n<li data-step=\"2\"><span class=\"tick\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\" /></svg></span><span>Kennzeichnung nur in geeigneter Weise, die den Genuss des Werks nicht beeinträchtigt</span></li>\n<li data-step=\"3\"><span class=\"tick\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\" /></svg></span><span>z. B. dezent im Abspann, in der Beschreibung oder in den Credits</span></li>\n</ul>\n</div>"
+    },
+    {
+      "type": "custom",
+      "label": "Deepfakes",
+      "eyebrow": "Social-Media-Posts, Blogbeiträge & Co. · Betrifft: Betreiber",
+      "headline": "Rückwirkende *Kennzeichnung?*",
+      "aside": "Grundsätzlich gibt es **keine rückwirkende Kennzeichnungspflicht**. Bei Bild-, Ton- und Videoinhalten kommt es auf den Zeitpunkt der **Erzeugung** an; bei Texten zusätzlich auf die Veröffentlichung.",
+      "html": "<div style=\"display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);column-gap:.75rem;align-items:center;font-size:.6875rem;font-weight:500;letter-spacing:.12em;color:var(--text-faint)\">\n<div style=\"position:relative;display:flex;align-items:center;gap:.6rem;margin-right:-.375rem\"><span>VOR DEM 02.08.2026</span><i style=\"flex:1;height:2px;background:var(--ok)\"></i><div style=\"position:absolute;right:0;top:50%;z-index:1;transform:translate(50%,-50%);padding:.3rem .85rem;text-align:center;color:var(--warm);background:var(--bg);border:1px solid var(--line-hi);border-radius:.5rem\"><span style=\"display:block;font-size:.9375rem;letter-spacing:.02em\">02.08.2026</span><span style=\"display:block\">STICHTAG</span></div></div>\n<div style=\"display:flex;align-items:center;gap:.6rem;margin-left:-.375rem\"><i style=\"flex:1;height:2px;background:var(--no)\"></i><span>AB DEM 02.08.2026</span></div>\n</div>\n<div class=\"cards c2\" style=\"grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)\">\n<article class=\"card tone-ok\" data-step=\"1\"><div class=\"card-t\" style=\"margin-bottom:.6rem\"><span class=\"c-ok\">✓</span> Bloß weiter öffentlich abrufbar</div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(63,178,127,.4);max-width:15rem;margin:0 auto\"><div style=\"display:flex;align-items:center;gap:.3rem\"><span style=\"width:.75rem;height:.75rem;border-radius:50%;background:rgba(255,255,255,.25)\"></span><div style=\"height:.5rem;width:44%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div></div><div class=\"ph r169\" data-slot=\"rueckwirkendAlt\" data-label=\"Bestehender Post — erscheint in allen vier Mockups (16:9)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bestehender Post — erscheint in allen vier Mockups (16:9)</span></div></div><div style=\"height:.3rem;width:78%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"display:flex;gap:.6rem;font-size:.5625rem;color:var(--text-faint)\"><span>♡ 128</span><span>💬 14</span><span>↗</span></div></div><p class=\"card-x\" style=\"margin-top:.6rem\">Vor dem Stichtag erzeugt und veröffentlicht, bleibt einfach online.</p><p class=\"card-x\" style=\"margin-top:.3rem\"><span class=\"c-ok\"><strong>Keine nachträgliche Kennzeichnung erforderlich</strong></span></p></article>\n<article class=\"card tone-no\" data-step=\"2\"><div class=\"card-t\" style=\"margin-bottom:.6rem\"><span class=\"c-no\">!</span> Erneut veröffentlicht / gepostet / im Newsletter versendet</div><div style=\"display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;\"><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(224,82,82,.4);\"><div style=\"display:flex;align-items:center;gap:.3rem\"><span style=\"width:.75rem;height:.75rem;border-radius:50%;background:rgba(255,255,255,.25)\"></span><div style=\"height:.5rem;width:50%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div></div><div style=\"position:relative\"><div class=\"ph r169\" data-slot=\"rueckwirkendAlt\" data-label=\"Bestehender Post — erscheint in allen vier Mockups (16:9)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bestehender Post — erscheint in allen vier Mockups (16:9)</span></div></div><div style=\"position:absolute;left:.3rem;top:.3rem\"><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(224,82,82,.9);\">KI-generiertes Bild</div></div></div><div style=\"display:flex;gap:.6rem;font-size:.5625rem;color:var(--text-faint)\"><span>♡</span><span>💬</span><span>↗</span></div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Erneut gepostet</div></div><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(224,82,82,.4);\"><div style=\"height:.5rem;width:62%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div><div style=\"position:relative\"><div class=\"ph r169\" data-slot=\"rueckwirkendAlt\" data-label=\"Bestehender Post — erscheint in allen vier Mockups (16:9)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bestehender Post — erscheint in allen vier Mockups (16:9)</span></div></div><div style=\"position:absolute;left:.3rem;top:.3rem\"><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(224,82,82,.9);\">KI-generiertes Bild</div></div></div><div style=\"height:.3rem;width:86%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:54%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Newsletter</div></div><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(224,82,82,.4);\"><div style=\"height:.5rem;width:40%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div><div style=\"position:relative\"><div class=\"ph r169\" data-slot=\"rueckwirkendAlt\" data-label=\"Bestehender Post — erscheint in allen vier Mockups (16:9)\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Bestehender Post — erscheint in allen vier Mockups (16:9)</span></div></div><div style=\"position:absolute;left:.3rem;top:.3rem\"><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(224,82,82,.9);\">KI-generiertes Bild</div></div></div><div style=\"height:.3rem;width:92%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:70%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Erneut veröffentlicht</div></div></div><p class=\"card-x\" style=\"margin-top:.6rem\">Nach dem Stichtag erneut in den Verkehr gebracht.</p><p class=\"card-x\" style=\"margin-top:.3rem\"><span class=\"c-no\"><strong>Kennzeichnung erforderlich</strong></span></p></article>\n</div>"
+    },
+    {
+      "type": "statement",
+      "label": "KI-Texte",
+      "eyebrow": "Kapitel 6",
+      "headline": "*KI-Texte*",
+      "lead": "Art. 50 Abs. 4 S. 4–5 AI Act"
+    },
+    {
+      "type": "cards",
+      "label": "KI-Texte",
+      "eyebrow": "Content, Content, Content · Betrifft: Betreiber",
+      "headline": "*Einstiegsbeispiel*",
+      "lead": "Ein Unternehmen möchte auf seiner **Website** täglich einen **KI-generierten Blogbeitrag** zu aktuellen Wirtschaftsnews veröffentlichen — inkl. Kommentierung und Meinung. Bei Veröffentlichung soll automatisch ein **Social-Media-Post** generiert und veröffentlicht werden, z. B. bei LinkedIn.",
+      "columns": 4,
+      "cards": [
+        {
+          "media": {
+            "slot": "textNews",
+            "label": "Branchennews-Quelle",
+            "ratio": "16:9"
+          },
+          "title": "Täglich: Branchennews"
+        },
+        {
+          "media": {
+            "slot": "textKiGen",
+            "label": "KI-Generierung",
+            "ratio": "16:9"
+          },
+          "title": "KI generiert Blogbeitrag"
+        },
+        {
+          "media": {
+            "slot": "textCms",
+            "label": "CMS / WordPress",
+            "ratio": "16:9",
+            "fit": true
+          },
+          "title": "Automatisch im Blog veröffentlicht"
+        },
+        {
+          "media": {
+            "slot": "textLinkedin",
+            "label": "LinkedIn-Post",
+            "ratio": "16:9"
+          },
+          "title": "Automatisch auf Social Media"
+        }
+      ],
+      "callout": "**Die Frage für den Workshop:** Muss dieser Beitrag gekennzeichnet werden? Die nächste Folie liefert den Entscheidungspfad."
+    },
+    {
+      "type": "custom",
+      "label": "KI-Texte",
+      "eyebrow": "Ziel: Sicherung von Authentizität · Betrifft: Betreiber",
+      "headline": "Wann muss man *KI-Texte kennzeichnen?*",
+      "html": "<div style=\"display:grid;grid-template-columns:minmax(0,1fr) 11rem;gap:0;align-items:stretch\">\n<div>\n<div data-step=\"1\" style=\"display:grid;grid-template-columns:minmax(0,1fr) 7.5rem;align-items:center\"><div style=\"padding:.5rem .9rem;background:var(--surface);border:1px solid var(--line-hi);border-radius:.6rem;font-size:.875rem;line-height:1.35;color:var(--text-dim)\">Erzeugen oder manipulieren Sie Text mit einem <strong style=\"color:var(--text);font-weight:500\">KI-System</strong>?</div><div style=\"display:flex;align-items:center;gap:.3rem\"><i class=\"fluss ok\"></i><span class=\"pz\" style=\"flex:none;padding:.08rem .5rem;border:1px solid rgba(224,82,82,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--no)\">✕ Nein</span><i class=\"fluss ok pfeil\" style=\"--fd:.9s\"></i></div></div><div data-step=\"1\" style=\"display:flex;align-items:center;gap:.5rem;padding:.2rem 0 .2rem 2rem\"><i class=\"fluss v no pfeil\" style=\"--fd:.5s\"></i><span class=\"pz\" style=\"--pd:.85s;flex:none;padding:.08rem .5rem;border:1px solid rgba(63,178,127,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--ok)\">✓ Ja</span></div>\n<div data-step=\"2\" style=\"display:grid;grid-template-columns:minmax(0,1fr) 7.5rem;align-items:center\"><div style=\"padding:.5rem .9rem;background:var(--surface);border:1px solid var(--line-hi);border-radius:.6rem;font-size:.875rem;line-height:1.35;color:var(--text-dim)\">Ist das KI-System für die <strong style=\"color:var(--text);font-weight:500\">Strafverfolgung</strong> zugelassen?</div><div style=\"display:flex;align-items:center;gap:.3rem\"><i class=\"fluss ok\"></i><span class=\"pz\" style=\"flex:none;padding:.08rem .5rem;border:1px solid rgba(63,178,127,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--ok)\">✓ Ja</span><i class=\"fluss ok pfeil\" style=\"--fd:.9s\"></i></div></div><div data-step=\"2\" style=\"display:flex;align-items:center;gap:.5rem;padding:.2rem 0 .2rem 2rem\"><i class=\"fluss v no pfeil\" style=\"--fd:.5s\"></i><span class=\"pz\" style=\"--pd:.85s;flex:none;padding:.08rem .5rem;border:1px solid rgba(224,82,82,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--no)\">✕ Nein</span></div>\n<div data-step=\"3\" style=\"display:grid;grid-template-columns:minmax(0,1fr) 7.5rem;align-items:center\"><div style=\"padding:.5rem .9rem;background:var(--surface);border:1px solid var(--line-hi);border-radius:.6rem;font-size:.875rem;line-height:1.35;color:var(--text-dim)\">Wird der KI-Text im Internet oder offline <strong style=\"color:var(--text);font-weight:500\">veröffentlicht</strong>?</div><div style=\"display:flex;align-items:center;gap:.3rem\"><i class=\"fluss ok\"></i><span class=\"pz\" style=\"flex:none;padding:.08rem .5rem;border:1px solid rgba(224,82,82,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--no)\">✕ Nein</span><i class=\"fluss ok pfeil\" style=\"--fd:.9s\"></i></div></div><div data-step=\"3\" style=\"display:flex;align-items:center;gap:.5rem;padding:.2rem 0 .2rem 2rem\"><i class=\"fluss v no pfeil\" style=\"--fd:.5s\"></i><span class=\"pz\" style=\"--pd:.85s;flex:none;padding:.08rem .5rem;border:1px solid rgba(63,178,127,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--ok)\">✓ Ja</span></div>\n<div data-step=\"4\" style=\"display:grid;grid-template-columns:minmax(0,1fr) 7.5rem;align-items:center\"><div style=\"padding:.5rem .9rem;background:var(--surface);border:1px solid var(--line-hi);border-radius:.6rem;font-size:.875rem;line-height:1.35;color:var(--text-dim)\">Betrifft der KI-Text eine <strong style=\"color:var(--text);font-weight:500\">Angelegenheit von öffentlichem Interesse</strong>?</div><div style=\"display:flex;align-items:center;gap:.3rem\"><i class=\"fluss ok\"></i><span class=\"pz\" style=\"flex:none;padding:.08rem .5rem;border:1px solid rgba(224,82,82,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--no)\">✕ Nein</span><i class=\"fluss ok pfeil\" style=\"--fd:.9s\"></i></div></div><div data-step=\"4\" style=\"display:flex;align-items:center;gap:.5rem;padding:.2rem 0 .2rem 2rem\"><i class=\"fluss v no pfeil\" style=\"--fd:.5s\"></i><span class=\"pz\" style=\"--pd:.85s;flex:none;padding:.08rem .5rem;border:1px solid rgba(63,178,127,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--ok)\">✓ Ja</span></div>\n<div data-step=\"5\" style=\"display:grid;grid-template-columns:minmax(0,1fr) 7.5rem;align-items:center\"><div style=\"padding:.5rem .9rem;background:var(--surface);border:1px solid var(--line-hi);border-radius:.6rem;font-size:.875rem;line-height:1.35;color:var(--text-dim)\">Wurde der Text vorher <strong style=\"color:var(--text);font-weight:500\">menschlich überprüft</strong> UND übernimmt jemand die <strong style=\"color:var(--text);font-weight:500\">inhaltliche Verantwortung</strong>?</div><div style=\"display:flex;align-items:center;gap:.3rem\"><i class=\"fluss ok\"></i><span class=\"pz\" style=\"flex:none;padding:.08rem .5rem;border:1px solid rgba(63,178,127,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--ok)\">✓ Ja</span><i class=\"fluss ok pfeil\" style=\"--fd:.9s\"></i></div></div><div data-step=\"5\" style=\"display:flex;align-items:center;gap:.5rem;padding:.2rem 0 .2rem 2rem\"><i class=\"fluss v no pfeil\" style=\"--fd:.5s\"></i><span class=\"pz\" style=\"--pd:.85s;flex:none;padding:.08rem .5rem;border:1px solid rgba(224,82,82,.5);border-radius:var(--r-pill);font-size:.6875rem;font-weight:500;color:var(--no)\">✕ Nein</span></div>\n<div data-step=\"6\" class=\"pz\" style=\"--pd:.1s;display:inline-block;padding:.5rem 1.25rem;border-radius:.6rem;background:var(--accent);color:#fff;font-size:.9375rem;font-weight:500\">Kennzeichnungspflicht</div>\n</div>\n<div style=\"display:grid;align-items:stretch;margin-bottom:3rem\"><div data-step=\"6\" class=\"pz sanft\" style=\"--pd:.3s;display:grid;place-items:center;padding:1rem;text-align:center;border:1px solid rgba(63,178,127,.4);border-radius:.75rem;background:rgba(63,178,127,.09);font-size:.9375rem;font-weight:500;color:var(--ok)\">Keine Kennzeichnungspflicht</div></div>\n</div>"
+    },
+    {
+      "type": "custom",
+      "label": "KI-Texte",
+      "eyebrow": "Art. 50 Abs. 4 S. 4 AI Act · Betrifft: Betreiber",
+      "headline": "Was ist eine *Veröffentlichung?*",
+      "aside": "Der Abdruck in **Printmedien** (Zeitung, Magazin) stellt stets eine Veröffentlichung dar. Bei Internetbeispielen muss man genauer hinsehen.",
+      "html": "<div style=\"display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.5rem;align-items:center\">\n<div class=\"ph r169\" data-slot=\"veroeffStufen\" data-label=\"Stufen der Öffentlichkeit\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Stufen der Öffentlichkeit</span></div></div>\n<div class=\"rows\">\n<div class=\"row no-ord\" data-step=\"1\" style=\"min-height:0\"><div><div class=\"row-t\"><span class=\"c-ok\">✓</span> Private Direktnachricht</div><div class=\"row-x\">— keine Veröffentlichung.</div></div></div>\n<div class=\"row no-ord\" data-step=\"2\" style=\"min-height:0\"><div><div class=\"row-t\"><span class=\"c-ok\">✓</span> Kleine Freundesgruppe</div><div class=\"row-x\">(5–10 Personen) — regelmäßig keine Veröffentlichung.</div></div></div>\n<div class=\"row no-ord\" data-step=\"3\" style=\"min-height:0\"><div><div class=\"row-t\"><span class=\"c-warn\">!</span> Große geschlossene Gruppe</div><div class=\"row-x\">— Veröffentlichung möglich. Keine feste Grenze, ab ca. 10 Personen denkbar.</div></div></div>\n<div class=\"row no-ord\" data-step=\"4\" style=\"min-height:0\"><div><div class=\"row-t\"><span class=\"c-no\">●</span> Öffentliche Posts</div><div class=\"row-x\">— Veröffentlichung. Social Media, Onlineforen, auch hinter Paywalls.</div></div></div>\n</div>\n</div>\n<div class=\"scale\" data-step=\"5\"><span><span class=\"c-ok\">Nicht an die Öffentlichkeit gerichtet</span></span><i></i><span><span class=\"c-no\">An die Öffentlichkeit gerichtet</span></span></div>"
+    },
+    {
+      "type": "custom",
+      "label": "KI-Texte",
+      "eyebrow": "Art. 50 Abs. 4 S. 4 AI Act · Betrifft: Betreiber",
+      "headline": "Angelegenheit von\n*öffentlichem Interesse*",
+      "aside": "Entscheidend ist die **Veröffentlichungsintention** — nicht das Thema allein.",
+      "html": "<div class=\"cards c2\">\n<article class=\"card tone-ok\" data-step=\"1\"><div class=\"card-t\"><span class=\"c-ok\">✓</span> Fällt darunter</div><p class=\"card-x\">Texte zu Themen, die für die Öffentlichkeit relevant sind und darauf abzielen, am <span class=\"c-ok\"><strong>Meinungsbildungsprozess</strong></span> mitzuwirken.</p><div style=\"display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:.6rem;align-items:center;margin-top:.6rem\"><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.6rem;gap:.4rem\"><div class=\"ph r11\" data-slot=\"interessePolitik\" data-label=\"Politik\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Politik</span></div></div><div class=\"ph r11\" data-slot=\"interesseGesellschaft\" data-label=\"Gesellschaft\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Gesellschaft</span></div></div><div class=\"ph r11\" data-slot=\"interesseWirtschaft\" data-label=\"Wirtschaft\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Wirtschaft</span></div></div><div class=\"ph r11\" data-slot=\"interesseKultur\" data-label=\"Kultur\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Kultur</span></div></div></div><div class=\"ph r32\" data-slot=\"interesseBeispiel\" data-label=\"Beispiel: Nachrichtenbeitrag\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Beispiel: Nachrichtenbeitrag</span></div></div></div></article>\n<article class=\"card tone-no\" data-step=\"2\"><div class=\"card-t\"><span class=\"c-no\">✕</span> Fällt nicht darunter</div><p class=\"card-x\">Texte, die primär werben, verkaufen oder rein produktbezogen informieren.</p><div style=\"display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:.6rem;align-items:center;margin-top:.6rem\"><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.6rem;gap:.4rem\"><div class=\"ph r11\" data-slot=\"werbungProdukt\" data-label=\"Produkttexte\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Produkttexte</span></div></div><div class=\"ph r11\" data-slot=\"werbungWerbe\" data-label=\"Werbetexte\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Werbetexte</span></div></div><div class=\"ph r11\" data-slot=\"werbungSocial\" data-label=\"Social Posts\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Social Posts</span></div></div><div class=\"ph r11\" data-slot=\"werbungNews\" data-label=\"Newsletter\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Newsletter</span></div></div></div><div class=\"ph r32\" data-slot=\"werbungBeispiel\" data-label=\"Beispiel: Werbeanzeige\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Beispiel: Werbeanzeige</span></div></div></div></article>\n</div>"
+    },
+    {
+      "type": "custom",
+      "label": "KI-Texte",
+      "eyebrow": "Art. 50 Abs. 4 S. 5 AI Act · Betrifft: Betreiber",
+      "headline": "Menschliche Prüfung\n*+ Verantwortung*",
+      "aside": "Wenn der KI-Text vor der Veröffentlichung menschlich überprüft oder redaktionell kontrolliert wird **UND** ein Mensch oder Unternehmen die inhaltliche Verantwortung übernimmt, fällt die Kennzeichnungspflicht weg. **Empfehlung: Dokumentation.**",
+      "html": "<div class=\"cards c2\">\n<article class=\"card\" data-step=\"1\"><div style=\"display:grid;grid-template-columns:18rem minmax(0,1fr);gap:1rem;align-items:center\"><div class=\"ph r11\" style=\"margin:0\" data-slot=\"pruefungMensch\" data-label=\"Person prüft Text\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Person prüft Text</span></div></div><div><div class=\"card-t\">Menschliche Überprüfung / redaktionelle Kontrolle</div><p class=\"card-x\">Inhalt gelesen und verstanden<br>Inhalt bewertet und Freigabe erteilt<br>Änderungen möglich, aber <strong>nicht erforderlich</strong></p></div></div></article>\n<article class=\"card\" data-step=\"2\"><div style=\"display:grid;grid-template-columns:18rem minmax(0,1fr);gap:1rem;align-items:center\"><div class=\"ph r11\" style=\"margin:0\" data-slot=\"pruefungVerantwortung\" data-label=\"Verantwortungsübernahme\" data-kind=\"image\"><div class=\"ph-in\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\" /><circle cx=\"9\" cy=\"9\" r=\"2\" /><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\" /></svg><span>Verantwortungsübernahme</span></div></div><div><div class=\"card-t\">Redaktionelle Verantwortung</div><p class=\"card-x\">Eine natürliche oder juristische Person trägt die redaktionelle Verantwortung für die Veröffentlichung.</p></div></div></article>\n</div>"
+    },
+    {
+      "type": "statement",
+      "label": "KI-Texte",
+      "headline": "*Achtung:*",
+      "lead": "Reine Rechtschreib- oder Formalprüfung genügt nicht. Verlangt ist eine bewusste inhaltliche Prüfung auf Richtigkeit, Plausibilität und Quellen — mit echter Möglichkeit, den Text zu ändern oder abzulehnen."
+    },
+    {
+      "type": "custom",
+      "label": "KI-Texte",
+      "eyebrow": "Wann, wie, wo? · Betrifft: Betreiber",
+      "headline": "So sollten Sie *KI-Texte kennzeichnen*",
+      "lead": "**Direkt zu Beginn des Textes** müssen Texthinweise oder die EU-AI-Icons angebracht werden, z. B.: **„KI-Hinweis: Dieser Beitrag wurde ganz / teilweise mit Hilfe künstlicher Intelligenz erstellt.“**",
+      "html": "<article class=\"card tone-ok\" data-step=\"1\" style=\"min-height:0;padding:.75rem 1rem\"><div class=\"card-t\" style=\"margin-bottom:.6rem\"><span class=\"c-ok\">✓</span> Vertretbare Platzierungen (bei erster Wahrnehmung sichtbar)</div><div style=\"display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;gap:.75rem\"><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(63,178,127,.4);\"><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(63,178,127,.85);align-self:stretch;text-align:center\">KI-HINWEIS</div><div style=\"height:.5rem;width:70%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div><div style=\"height:.3rem;width:100%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:88%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Banner oberhalb des Artikels</div></div><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(63,178,127,.4);\"><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(63,178,127,.85);\">KI-Hinweis</div><div style=\"height:.5rem;width:76%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div><div style=\"height:.3rem;width:100%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:82%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Hinweis unmittelbar oberhalb der Überschrift</div></div><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(63,178,127,.4);max-width:62%;margin:0 auto\"><div style=\"display:flex;align-items:center;gap:.3rem\"><span style=\"width:.75rem;height:.75rem;border-radius:50%;background:rgba(255,255,255,.25)\"></span><div style=\"height:.5rem;width:52%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div></div><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(63,178,127,.85);align-self:stretch;text-align:center\">KI-generiertes Bild</div><div style=\"display:flex;gap:.6rem;font-size:.5625rem;color:var(--text-faint)\"><span>♡</span><span>💬</span><span>↗</span></div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Deutlich sichtbarer Hinweis in Social-Media-Posts</div></div></div></article>\n<article class=\"card tone-no\" data-step=\"2\" style=\"min-height:0;padding:.75rem 1rem\"><div class=\"card-t\" style=\"margin-bottom:.6rem\"><span class=\"c-no\">✕</span> Problematische Platzierungen</div><div style=\"display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;gap:.75rem\"><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(224,82,82,.4);\"><div style=\"height:.5rem;width:72%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div><div style=\"height:.3rem;width:100%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:90%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(224,82,82,.9);\">KI-Hinweis</div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Am Ende des Textes</div></div><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(224,82,82,.4);\"><div style=\"height:.3rem;width:100%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:84%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:92%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(224,82,82,.9);align-self:stretch;text-align:center\">IMPRESSUM</div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Im Impressum oder in Nutzungsbedingungen</div></div><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(224,82,82,.4);\"><div style=\"height:.5rem;width:66%;border-radius:.2rem;background:rgba(255,255,255,.3)\"></div><div style=\"height:.3rem;width:100%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:58%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(224,82,82,.9);\">Mehr anzeigen ▾</div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Hinter Klick oder „Mehr anzeigen“</div></div><div><div style=\"display:flex;flex-direction:column;gap:.3rem;padding:.55rem;border-radius:.5rem;background:#101010;border:1px solid rgba(224,82,82,.4);\"><div style=\"align-self:flex-start;padding:.1rem .4rem;border-radius:.25rem;font-size:.5625rem;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(224,82,82,.9);\">&lt;/&gt;</div><div style=\"height:.3rem;width:86%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:64%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div><div style=\"height:.3rem;width:78%;border-radius:.2rem;background:rgba(255,255,255,.13)\"></div></div><div style=\"margin-top:.35rem;font-size:.6875rem;line-height:1.35;text-align:center;color:var(--text-dim)\">Nur in Metadaten oder im Code</div></div></div></article>"
+    },
+    {
+      "type": "statement",
+      "label": "Haftung",
+      "eyebrow": "Kapitel 7",
+      "headline": "*Haftung*",
+      "lead": "Bußgelder · Abmahnungen · Plattformrisiken"
+    },
+    {
+      "type": "cards",
+      "label": "Haftung",
+      "eyebrow": "Verstöße gegen die Kennzeichnungspflichten · Betrifft: Anbieter + Betreiber",
+      "headline": "Bußgelder:\n*Ein Fass ohne Boden*",
+      "aside": "Wer sich nicht an die neuen Vorgaben hält, riskiert Bußgelder. Die Durchsetzung erfolgt durch die nationalen Marktaufsichtsbehörden — in Deutschland u. a. die Bundesnetzagentur.",
+      "cards": [
+        {
+          "icon": "gavel",
+          "label": "Verstöße gegen Art. 50",
+          "value": "bis zu 15 Mio. €",
+          "sub": "oder bis zu",
+          "title": "3 % Weltjahresumsatz *",
+          "text": "Art. 99 Abs. 4 lit. g AI Act",
+          "highlight": true,
+          "count": true,
+          "fx": "geld"
+        },
+        {
+          "icon": "file-warning",
+          "label": "Falschauskünfte gegenüber Behörden",
+          "value": "bis zu 7,5 Mio. €",
+          "sub": "oder bis zu",
+          "title": "1 % Weltjahresumsatz *",
+          "text": "Art. 99 Abs. 5 AI Act",
+          "count": true,
+          "fx": "linie"
+        }
+      ],
+      "callout": "**Größenvergleich:** Bei einem Konzernumsatz von rund 400 Mrd. USD entsprächen 3 % etwa 12 Mrd. USD — die Prozentgrenze ist bei Großkonzernen der maßgebliche Wert.",
+      "source": "* Je nachdem, was höher ist. Für KMU und Start-ups gilt nach Art. 99 Abs. 6 AI Act der jeweils **niedrigere** Betrag."
+    },
+    {
+      "type": "rows",
+      "label": "Haftung",
+      "eyebrow": "Verstöße gegen die Kennzeichnungspflichten · Betrifft: Anbieter + Betreiber",
+      "headline": "Abmahnungen,\n*Strafbarkeit, Sperren*",
+      "aside": "Das Bußgeld ist nur eine von mehreren Risikoebenen. In der Praxis treffen Unternehmen die anderen drei oft schneller.",
+      "ordinal": false,
+      "zoom": true,
+      "rows": [
+        {
+          "title": "UWG:",
+          "text": "Ob die Kennzeichnungspflichten nach Art. 50 AI Act **Wettbewerbsrechtsverletzungen** darstellen (so z. B. die Wettbewerbszentrale), die von Konkurrenten und Verbänden abgemahnt werden können, ist noch nicht abschließend geklärt, aber denkbar."
+        },
+        {
+          "title": "Deepfakes fremder Personen",
+          "text": "können **Persönlichkeitsrechtsverletzungen** und gleichzeitig **Datenschutzverletzungen** darstellen und abgemahnt werden. Ggf. ist die Veröffentlichung sogar strafbar — dann hilft auch keine korrekte KI-Kennzeichnung."
+        },
+        {
+          "title": "Social Media:",
+          "text": "Erfolgen die Rechtsverletzungen auf Plattformen, droht nicht nur eine **Löschung des jeweiligen Posts**, sondern eine **Sperrung des Accounts** — jeweils durch die Plattform selbst."
+        },
+        {
+          "title": "Vertragliche Ebene:",
+          "text": "Kunden- und Agenturverträge enthalten zunehmend eigene KI-Klauseln. Ein Verstoß kann Gewährleistungs- und Schadensersatzansprüche auslösen, unabhängig vom AI Act."
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "label": "Umsetzung",
+      "eyebrow": "Kapitel 8",
+      "headline": "Umsetzung\n*im Unternehmen*",
+      "lead": "Vom Wissen zur Compliance"
+    },
+    {
+      "type": "custom",
+      "label": "Umsetzung",
+      "eyebrow": "Bis zum 2. August 2026 · Betrifft: Anbieter + Betreiber",
+      "headline": "Was jetzt konkret\n*zu tun ist*",
+      "aside": "Ein pragmatischer Fahrplan für die verbleibende Zeit — geeignet als Arbeitsgrundlage für den Workshop-Teil.",
+      "html": "<div class=\"rows two\" style=\"grid-template-rows:repeat(4,auto)\">\n<div class=\"row\" data-step=\"1\" style=\"min-height:0\"><div class=\"ord\">1</div><div><div class=\"row-t\">KI-Inventar anlegen</div><div class=\"row-x\">— Welche Systeme sind im Einsatz? Wer nutzt sie? Welche Inhalte entstehen daraus?</div></div></div>\n<div class=\"row\" data-step=\"2\" style=\"min-height:0\"><div class=\"ord\">2</div><div><div class=\"row-t\">Rolle je System bestimmen</div><div class=\"row-x\">— Anbieter oder Betreiber? Rebranding-Fälle nach Art. 25 gesondert prüfen.</div></div></div>\n<div class=\"row\" data-step=\"3\" style=\"min-height:0\"><div class=\"ord\">3</div><div><div class=\"row-t\">Betroffene Pflichten zuordnen</div><div class=\"row-x\">— Welche der fünf Konstellationen trifft welches System?</div></div></div>\n<div class=\"row\" data-step=\"4\" style=\"min-height:0\"><div class=\"ord\">4</div><div><div class=\"row-t\">Kennzeichnungsstandard festlegen</div><div class=\"row-x\">— Einheitliche Formulierungen und Icons pro Kanal und Format.</div></div></div>\n<div class=\"row\" data-step=\"5\" style=\"min-height:0\"><div class=\"ord\">5</div><div><div class=\"row-t\">Redaktionsprozess dokumentieren</div><div class=\"row-x\">— Wer prüft, wer gibt frei, wer trägt die Verantwortung? Nachweisbar festhalten.</div></div></div>\n<div class=\"row\" data-step=\"6\" style=\"min-height:0\"><div class=\"ord\">6</div><div><div class=\"row-t\">Verträge und Workflows anpassen</div><div class=\"row-x\">— Freelancer- und Agenturklauseln, CMS-Felder, Freigabe-Workflows.</div></div></div>\n<div class=\"row\" data-step=\"7\" style=\"min-height:0\"><div class=\"ord\">7</div><div><div class=\"row-t\">Schulung nachweisen</div><div class=\"row-x\">— Art. 4 KI-Kompetenz gilt bereits seit Februar 2025. Datum, Inhalt, Teilnehmer dokumentieren.</div></div></div>\n<div class=\"row\" data-step=\"8\" style=\"min-height:0\"><div class=\"ord\">8</div><div><div class=\"row-t\">Verantwortlichkeit benennen</div><div class=\"row-x\">— Eine Person, die den Prozess pflegt und bei Änderungen nachsteuert.</div></div></div>\n</div>\n<aside class=\"callout tone-ok\" data-step=\"9\"><svg class=\"ic\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"m9 12 2 2 4-4\" /></svg><div><strong>Faustregel:</strong> Wer im Zweifel kennzeichnet, macht selten etwas falsch. Die Kennzeichnung kostet wenig — ihr Fehlen kann teuer werden.</div></aside>"
+    },
+    {
+      "type": "cards",
+      "label": "Umsetzung",
+      "eyebrow": "Mythen-Check",
+      "headline": "Fünf häufige *Irrtümer*",
+      "aside": "Diese Aussagen kursieren derzeit in Newslettern und sozialen Netzwerken — und sind so nicht richtig.",
+      "columns": 3,
+      "zoom": true,
+      "cards": [
+        {
+          "tone": "no",
+          "title": "{no:✕} „Ab August muss jeder KI-Text gekennzeichnet werden.“",
+          "text": "Falsch. Nur veröffentlichte Texte zu Angelegenheiten von öffentlichem Interesse — und auch die nur ohne menschliche Prüfung."
+        },
+        {
+          "tone": "no",
+          "title": "{no:✕} „Ein Hinweis im Impressum reicht.“",
+          "text": "Falsch. Der Hinweis muss bei erster Wahrnehmung sichtbar sein — direkt am Inhalt, nicht versteckt."
+        },
+        {
+          "tone": "no",
+          "title": "{no:✕} „Ich bin nur Nutzer, mich betrifft das nicht.“",
+          "text": "Falsch. Als Betreiber treffen Sie die praktisch häufigsten Pflichten: Deepfakes und KI-Texte."
+        },
+        {
+          "tone": "no",
+          "title": "{no:✕} „Alte Posts muss ich nachkennzeichnen.“",
+          "text": "Falsch. Keine Rückwirkung — aber bei jeder Neuveröffentlichung nach dem Stichtag gilt die Pflicht."
+        },
+        {
+          "tone": "no",
+          "title": "{no:✕} „Der Digital Omnibus hat alles verschoben.“",
+          "text": "Falsch. Verschoben wurden die Hochrisiko-Fristen und — für Bestandssysteme — die technische Watermarking-Pflicht nach Art. 50 Abs. 2. Die Kennzeichnungspflichten aus Art. 50 Abs. 1, 3 und 4 bleiben beim 2. August 2026."
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "label": "Abschluss",
+      "eyebrow": "Abschluss · ENDE",
+      "headline": "*Fragen & Diskussion*",
+      "lead": "Jetzt gemeinsam: Ihr KI-Inventar und Ihre Pflichten",
+      "person": {
+        "name": "KNOWLEDGE",
+        "sub": ""
+      },
+      "media": {
+        "asset": "portrait",
+        "label": "Porträt Tino Daute"
+      },
+      "source": "Diese Präsentation ersetzt keine Rechtsberatung.\nStand: Juli 2026 · Art. 50 EU-KI-Verordnung (EU) 2024/1689"
+    }
+  ]
+}

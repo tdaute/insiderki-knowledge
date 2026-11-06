@@ -14,12 +14,75 @@ export const inl = (s) => esc(s)
 export const pad = (n) => String(n).padStart(2, '0');
 export const icon = (name) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.info}</svg>`;
 
-const RATIO = { '16:9': 'r169', '4:3': 'r43', '1:1': 'r11', '3:4': 'r34' };
+const RATIO = { '16:9': 'r169', '3:2': 'r32', '4:3': 'r43', '1:1': 'r11', '3:4': 'r34' };
 
 function ph(m, cls = '') {
   if (!m) return '';
   return `<div class="ph ${cls}" data-slot="${esc(m.slot)}" data-label="${esc(m.label)}" data-kind="${esc(m.kind || 'image')}"><div class="ph-in">${icon(m.kind === 'video' ? 'video' : 'image')}<span>${esc(m.label)}</span></div></div>`;
 }
+
+// Bewegtes Bild: Abdeckungen in Bildpixeln liegen ueber dem Bild und geben Nachrichten nacheinander frei.
+// media.anim: { src, w, h, msgs: [{ kind, shell, avatar, bg, dots, inner, lines, color, ms, wait }], wave }
+function anim(m, cls) {
+  const a = m.anim;
+  const pc = (v, g) => +(v / g * 100).toFixed(3);
+  const clip = (p) => `clip-path:polygon(${p.map(([x, y]) => `${pc(x, a.w)}% ${pc(y, a.h)}%`).join(',')})`;
+  const box = ([x, y, w, h]) => `left:${pc(x, a.w)}%;top:${pc(y, a.h)}%;width:${pc(w, a.w)}%;height:${pc(h, a.h)}%`;
+  const wipe = (p, color, ms, down) => {
+    const k = p.map((q) => q[down ? 1 : 0]);
+    const g = down ? a.h : a.w;
+    return `<div class="ax-l" data-ms="${ms}" data-a="${pc(Math.min(...k), g)}" data-b="${pc(Math.max(...k), g)}" style="${clip(p)};background:${esc(color)}${down ? ';--dir:to bottom' : ''}"></div>`;
+  };
+  const msgs = (a.msgs || []).map((n) => {
+    const bg = esc(n.bg || a.bg);
+    const parts = [];
+    // Der Text liegt unter der Blasen-Abdeckung: Erst wenn sie weg ist, laeuft er frei
+    (n.lines || []).forEach((l) => parts.push(wipe(l.poly, n.color, l.ms, false)));
+    if (n.inner) parts.push(wipe(n.inner, n.color, n.ms || 1200, true));
+    if (n.avatar) parts.push(`<div class="ax-c av" style="${clip(n.avatar)};background:${bg}"></div>`);
+    parts.push(`<div class="ax-c" style="${clip(n.shell)};background:${bg}"></div>`);
+    if (n.dots) parts.push(`<div class="ax-d" style="${box(n.dots.box)};background:${esc(n.dots.bg)};color:${esc(n.dots.fg)}${n.dots.line ? `;box-shadow:inset 0 0 0 1px ${esc(n.dots.line)}` : ''}"><i></i><i></i><i></i></div>`);
+    return `<div class="ax-m"${n.wait ? ` data-wait="${n.wait}"` : ''}>${parts.join('')}</div>`;
+  }).join('');
+  let wave = '';
+  if (a.wave) {
+    const w = a.wave;
+    // Feste Folge statt Zufall: Jeder Bau ergibt dieselbe Tonspur
+    const bars = Array.from({ length: w.n }, (_, i) => {
+      const x = i / (w.n - 1);
+      const huelle = 0.25 + 0.75 * Math.abs(Math.sin(i * 0.37) * Math.cos(i * 0.11 + 1)) * (1 - 0.55 * Math.abs(x - 0.5) * 2);
+      return `<i style="--h:${(huelle * 100).toFixed(0)}%;--t:${(420 + (i * 137) % 480)}ms;--v:-${(i * 97) % 700}ms"></i>`;
+    }).join('');
+    wave = `<div class="ax-w" style="${box(w.rect)};background:${esc(w.bg)};color:${esc(w.color)}"><div>${bars}</div></div>`;
+  }
+  // Gesichtserkennung: Das Bild liegt abgedunkelt unter einem Raster. Ein Suchrahmen faengt Ziel fuer Ziel ein,
+  // dabei werden die Ausschnitte (reveal) scharf, danach die Felder aus after, zuletzt das ganze Bild.
+  // scan: { color, targets: [{ box, color, reveal: [[x, y, w, h]] }], after: [[x, y, w, h]] }
+  let scan = '';
+  if (a.scan) {
+    const sc = a.scan;
+    const r = ([x, y, w, h]) => `<i class="ax-r" style="clip-path:inset(${pc(y, a.h)}% ${pc(a.w - x - w, a.w)}% ${pc(a.h - y - h, a.h)}% ${pc(x, a.w)}%)"></i>`;
+    const ziele = (sc.targets || []).map((t) => `<div class="ax-z" data-box="${[pc(t.box[0], a.w), pc(t.box[1], a.h), pc(t.box[2], a.w), pc(t.box[3], a.h)].join(',')}" data-c="${esc(t.color || sc.color)}">${(t.reveal || [t.box]).map(r).join('')}</div>`).join('');
+    scan = `<div class="ax-v"></div>${ziele}<div class="ax-a">${(sc.after || []).map(r).join('')}</div><div class="ax-sl"></div><div class="ax-k"></div>`;
+  }
+  const re = (a.msgs || []).length > 1 || a.scan ? `<button class="ax-re" aria-label="Noch einmal abspielen">${icon('refresh-cw')}</button>` : '';
+  const ax = `<div class="ax${a.scan ? ' scan' : ''} ${cls}" data-src="${esc(a.src)}" style="--ar:${(a.w / a.h).toFixed(4)}${a.scan ? `;--scan:${esc(a.scan.color)}` : ''}">${ph(m)}${msgs}${wave}${scan}${re}</div>`;
+  // Passt das Bild nicht zum Format der Reihe, steht es ganz im Rahmen
+  return m.fit && RATIO[m.ratio] ? `<div class="ax-fr ${RATIO[m.ratio]}">${ax}</div>` : ax;
+}
+
+// Effekte hinter dem Karteninhalt. linie: steigende Kurve, die mit der Zahl mitlaeuft. geld: 100-Euro-Scheine flattern ein
+const SCHEIN = '<svg viewBox="0 0 120 62" aria-hidden="true"><rect x=".5" y=".5" width="119" height="61" rx="4" fill="#5f9160" stroke="#a6cd9c"/><rect x="5" y="5" width="110" height="52" rx="2" fill="none" stroke="#9cc493" stroke-width=".8" opacity=".6"/><circle cx="87" cy="31" r="15" fill="#7aab74" stroke="#b5d8ab" stroke-width=".8"/><text x="87" y="37" font-size="17" text-anchor="middle" fill="#eef8ea" font-weight="600">€</text><text x="10" y="24" font-size="15" font-weight="700" fill="#eef8ea">100</text><path d="M10 34h44M10 40h34M10 46h40" stroke="#c4e2bb" stroke-width="1.2" opacity=".55"/><text x="112" y="55" font-size="7" text-anchor="end" fill="#e2f2dc">100</text></svg>';
+const FX = {
+  linie: '<svg class="fx-linie" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 54 30 44 60 42 90 47 120 40 150 31 180 33 210 34 240 25 270 19 300 22"/></svg>',
+  // Feste Lagen statt Zufall: Jeder Bau ergibt dieselben Scheine
+  geld: `<div class="fx-geld" aria-hidden="true">${[[50, 56, -8, 0, 1900, -40], [62, 14, 12, 260, 2100, 50], [72, 48, -16, 520, 1800, -30], [80, 10, 7, 760, 2200, 40], [56, 28, 20, 1000, 2000, -50], [76, 66, 6, 1240, 1900, 30], [66, 36, -22, 1480, 2100, -40], [82, 40, 14, 1720, 1800, 50], [59, 66, 3, 1960, 2000, -30]]
+    .map(([x, y, r, d, t, sx]) => `<i style="left:${x}%;top:${y}%;--r:${r}deg;--d:${d}ms;--t:${t}ms;--sx:${sx}%">${SCHEIN}</i>`).join('')}</div>`,
+};
+
+// Bild-Slot im Seitenverhaeltnis oder, wenn es Bewegung hat, samt Abdeckungen
+// fit zeigt das ganze Bild im Rahmen, wenn es nicht zum Format der Reihe passt
+const medium = (m) => (m && m.anim ? anim(m, '') : ph(m, `${RATIO[m?.ratio] || 'r169'}${m?.fit ? ' fit' : ''}`));
 
 // Grosses Bild auf Titel und Abschluss: das feste Porträt oder ein Medien-Slot
 const visual = (m) => (m && m.asset === 'portrait'
@@ -91,11 +154,17 @@ const T = {
 
   cards(s) {
     const st = stepper(s);
+    // count laesst die erste Zahl im Wert hochlaufen, fx legt Linie oder Geldscheine in die Karte
+    const wert = (c) => {
+      const h = inl(c.value);
+      if (!c.count) return h;
+      return h.replace(/\d+(?:,\d+)?/, (z) => `<span class="cnt" data-to="${z.replace(',', '.')}" data-dec="${(z.split(',')[1] || '').length}">${z}</span>`);
+    };
     const n = s.cards.length;
     const cols = s.columns || (n <= 4 ? n : 3);
     const html = s.cards.map((c) => {
-      const cls = [c.highlight ? 'hi' : '', c.tone ? `tone-${c.tone}` : ''].filter(Boolean).join(' ');
-      return `<article class="card ${cls}"${s.zoom ? ' data-zoom' : ''}${st.next()}>${c.icon ? `<div class="tile">${icon(c.icon)}</div>` : ''}${c.media ? ph(c.media, RATIO[c.media.ratio] || 'r169') : ''}${c.label ? `<div class="card-lbl">${esc(c.label)}</div>` : ''}${c.value ? `<div class="kpi">${inl(c.value)}</div>` : ''}${c.sub ? `<div class="card-sub">${inl(c.sub)}</div>` : ''}${c.title ? `<div class="card-t">${inl(c.title)}</div>` : ''}${c.text ? `<p class="card-x">${inl(c.text)}</p>` : ''}</article>`;
+      const cls = [c.highlight ? 'hi' : '', c.tone ? `tone-${c.tone}` : '', c.fx ? 'fx' : ''].filter(Boolean).join(' ');
+      return `<article class="card ${cls}"${s.zoom ? ' data-zoom' : ''}${st.next()}>${FX[c.fx] || ''}${c.icon ? `<div class="tile">${icon(c.icon)}</div>` : ''}${c.media ? medium(c.media) : ''}${c.label ? `<div class="card-lbl">${esc(c.label)}</div>` : ''}${c.value ? `<div class="kpi">${wert(c)}</div>` : ''}${c.sub ? `<div class="card-sub">${inl(c.sub)}</div>` : ''}${c.title ? `<div class="card-t">${inl(c.title)}</div>` : ''}${c.text ? `<p class="card-x">${inl(c.text)}</p>` : ''}</article>`;
     }).join('');
     const co = callout(s, st);
     const sc = scale(s, st);
@@ -158,7 +227,7 @@ const T = {
     const co = callout(s, st);
     return {
       steps: st.count,
-      html: `<div class="split${s.side === 'left' ? ' flip' : ''}"><div class="split-t">${eyebrow(s.eyebrow)}${headline(s.headline)}${s.lead ? `<p class="lead">${inl(s.lead)}</p>` : ''}${bullets ? `<ul class="checks bullets">${bullets}</ul>` : ''}${co ? `<div style="margin-top:1.25rem">${co}</div>` : ''}</div><div class="split-m">${ph(s.media, RATIO[s.media?.ratio] || 'r169')}</div></div>`,
+      html: `<div class="split${s.side === 'left' ? ' flip' : ''}"><div class="split-t">${eyebrow(s.eyebrow)}${headline(s.headline)}${s.lead ? `<p class="lead">${inl(s.lead)}</p>` : ''}${bullets ? `<ul class="checks bullets">${bullets}</ul>` : ''}${co ? `<div style="margin-top:1.25rem">${co}</div>` : ''}</div><div class="split-m">${medium(s.media)}</div></div>`,
     };
   },
 
@@ -208,7 +277,7 @@ export function renderDeck(deck) {
     const label = s.label || s.eyebrow || s.kicker || '';
     const source = s.source ? `<p class="source">${inl(s.source)}</p>` : '';
     const html = r.html + source;
-    return `<section class="slide t-${s.type}" id="f${n}" data-n="${n}" data-label="${esc(label)}" data-steps="${r.steps}" aria-label="Folie ${n} von ${total}"><div class="glow glow-${glow}"></div>${wm}${r.outer || ''}<div class="inner">${html}</div></section>`;
+    return `<section class="slide t-${s.type}" id="f${n}" data-n="${n}" data-label="${esc(label)}" data-steps="${r.steps}"${s.enter ? ` data-enter="${esc(s.enter)}"` : ''} aria-label="Folie ${n} von ${total}"><div class="glow glow-${glow}"></div>${wm}${r.outer || ''}<div class="inner">${html}</div></section>`;
   }).join('\n');
 }
 

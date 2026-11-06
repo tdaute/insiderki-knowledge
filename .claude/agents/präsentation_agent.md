@@ -114,7 +114,7 @@ Für jede Folie: Kernaussage und passender Folientyp.
 | 1 bis 6 Kennzahlen oder Kurzaussagen | `cards` |
 | Agenda, Aufzählung, Schritte | `rows` |
 | Kernsatz, fremdes Zitat | `quote` |
-| Phasen, Fristen, Ablauf | `timeline`, 2 bis 7 Stationen |
+| Phasen, Fristen, Ablauf | `timeline`, 2 bis 8 Stationen |
 | Video | `video` |
 | Großes Bild, Screenshot | `image` |
 | Text mit Bild | `split` |
@@ -130,7 +130,7 @@ Alte Bausteine übersetzt du so (Dokumentation in `_archiv/DESIGN-SYSTEM-v1.md`)
 |---|---|
 | `.check` | `rows` |
 | `.stack` | `rows` bei kurzen Texten, sonst `table` |
-| `.tl2` | `timeline`, bei mehr als 7 Punkten `table` |
+| `.tl2` | `timeline`, bei mehr als 8 Punkten `table` |
 | `.fine` einzelne Beträge | `cards` mit `value` und `sub` |
 | `.fine` viele Beträge | `table` |
 | `.scale` | Feld `scale`, farbige Wörter mit `{ok:…}`, `{warn:…}`, `{no:…}` |

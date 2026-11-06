@@ -16,7 +16,7 @@ const b64 = (p) => fs.readFileSync(path.join(ENGINE, p)).toString('base64');
 const LIMITS = { headline: 70, lead: 260, aside: 220, row: 110, rowTitle: 60, card: 130, cardTitle: 60, station: 150, quote: 170, bullet: 120, item: 130, cell: 160, callout: 240, source: 200 };
 
 // Welche Felder welcher Folientyp darstellt. Alles andere waere still verloren und ist ein Fehler.
-const COMMON = ['type', 'label', 'id', 'glow', 'watermark', 'notes', 'source', 'steps'];
+const COMMON = ['type', 'label', 'id', 'glow', 'watermark', 'notes', 'source', 'steps', 'enter'];
 const HEAD = ['eyebrow', 'headline', 'lead', 'aside', 'badge'];
 const FIELDS = {
   title: ['eyebrow', 'headline', 'lead', 'kpis', 'live', 'nametag', 'media'],
@@ -129,7 +129,7 @@ export function check(deck) {
     if (s.type === 'table' && s.rows) s.rows.forEach((r, k) => { if (r.length !== s.columns.length) err.push(`${wo}: Zeile ${k + 1} hat ${r.length} statt ${s.columns.length} Zellen`); });
     if (s.type === 'cards' && s.cards && s.cards.length > 6) err.push(`${wo}: mehr als 6 Karten`);
     if (s.type === 'rows' && s.rows && s.rows.length > 6) err.push(`${wo}: mehr als 6 Zeilen`);
-    if (s.stations && s.stations.length > 7) err.push(`${wo}: mehr als 7 Stationen`);
+    if (s.stations && s.stations.length > 8) err.push(`${wo}: mehr als 8 Stationen`);
     if (s.type === 'cards' && s.cards && s.cards.filter((c) => c.highlight).length > 1) warn.push(`${wo}: mehr als eine hervorgehobene Karte`);
     if (s.type !== 'custom' && JSON.stringify(s).includes('{{') && !deck.istVorlage) warn.push(`${wo}: offener Platzhalter`);
   });
