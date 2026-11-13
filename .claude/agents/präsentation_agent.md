@@ -240,7 +240,7 @@ Berichte kurz: Pfad, Folienzahl, Modus, Prüfergebnis, offene Punkte, Hinweis au
 
 Erst wenn Tino ausdrücklich freigibt und der Auftrag das so sagt:
 1. `_arbeit/<slug>/supabase.sql` über das Supabase-MCP ausführen (Projekt `ai-governance`,
-   `nblyvxnahkbvtatathbh`). Neue Decks starten als `draft`, bei bestehenden bleibt der Status. Die
+   `egaemrtidvkzovfvzqaz`). Neue Decks starten als `draft`, bei bestehenden bleibt der Status. Die
    letzte Abfrage zeigt Slots, die das Deck nicht mehr nutzt: berichten, nicht löschen.
 2. Nur die Dateien dieses Decks stagen, committen und pushen. Netlify deployt dann automatisch.
 3. `status = 'published'` setzt du nur, wenn Tino „veröffentlichen" sagt.
